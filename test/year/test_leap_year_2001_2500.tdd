@@ -1,0 +1,629 @@
+TEST_CASE("List Leap Years: 2001 to 2500", "[J5C_Date]")
+{
+    REQUIRE(isLeapYear(2001) == false);
+    REQUIRE(isLeapYear(2002) == false);
+    REQUIRE(isLeapYear(2003) == false);
+    REQUIRE(isLeapYear(2004) == true);
+
+    REQUIRE(isLeapYear(2005) == false);
+    REQUIRE(isLeapYear(2006) == false);
+    REQUIRE(isLeapYear(2007) == false);
+    REQUIRE(isLeapYear(2008) == true);
+
+    REQUIRE(isLeapYear(2009) == false);
+    REQUIRE(isLeapYear(2010) == false);
+    REQUIRE(isLeapYear(2011) == false);
+    REQUIRE(isLeapYear(2012) == true);
+
+    REQUIRE(isLeapYear(2013) == false);
+    REQUIRE(isLeapYear(2014) == false);
+    REQUIRE(isLeapYear(2015) == false);
+    REQUIRE(isLeapYear(2016) == true);
+
+    REQUIRE(isLeapYear(2017) == false);
+    REQUIRE(isLeapYear(2018) == false);
+    REQUIRE(isLeapYear(2019) == false);
+    REQUIRE(isLeapYear(2020) == true);
+
+    REQUIRE(isLeapYear(2021) == false);
+    REQUIRE(isLeapYear(2022) == false);
+    REQUIRE(isLeapYear(2023) == false);
+    REQUIRE(isLeapYear(2024) == true);
+
+    REQUIRE(isLeapYear(2025) == false);
+    REQUIRE(isLeapYear(2026) == false);
+    REQUIRE(isLeapYear(2027) == false);
+    REQUIRE(isLeapYear(2028) == true);
+
+    REQUIRE(isLeapYear(2029) == false);
+    REQUIRE(isLeapYear(2030) == false);
+    REQUIRE(isLeapYear(2031) == false);
+    REQUIRE(isLeapYear(2032) == true);
+
+    REQUIRE(isLeapYear(2033) == false);
+    REQUIRE(isLeapYear(2034) == false);
+    REQUIRE(isLeapYear(2035) == false);
+    REQUIRE(isLeapYear(2036) == true);
+
+    REQUIRE(isLeapYear(2037) == false);
+    REQUIRE(isLeapYear(2038) == false);
+    REQUIRE(isLeapYear(2039) == false);
+    REQUIRE(isLeapYear(2040) == true);
+
+    REQUIRE(isLeapYear(2041) == false);
+    REQUIRE(isLeapYear(2042) == false);
+    REQUIRE(isLeapYear(2043) == false);
+    REQUIRE(isLeapYear(2044) == true);
+
+    REQUIRE(isLeapYear(2045) == false);
+    REQUIRE(isLeapYear(2046) == false);
+    REQUIRE(isLeapYear(2047) == false);
+    REQUIRE(isLeapYear(2048) == true);
+
+    REQUIRE(isLeapYear(2049) == false);
+    REQUIRE(isLeapYear(2050) == false);
+    REQUIRE(isLeapYear(2051) == false);
+    REQUIRE(isLeapYear(2052) == true);
+
+    REQUIRE(isLeapYear(2053) == false);
+    REQUIRE(isLeapYear(2054) == false);
+    REQUIRE(isLeapYear(2055) == false);
+    REQUIRE(isLeapYear(2056) == true);
+
+    REQUIRE(isLeapYear(2057) == false);
+    REQUIRE(isLeapYear(2058) == false);
+    REQUIRE(isLeapYear(2059) == false);
+    REQUIRE(isLeapYear(2060) == true);
+
+    REQUIRE(isLeapYear(2061) == false);
+    REQUIRE(isLeapYear(2062) == false);
+    REQUIRE(isLeapYear(2063) == false);
+    REQUIRE(isLeapYear(2064) == true);
+
+    REQUIRE(isLeapYear(2065) == false);
+    REQUIRE(isLeapYear(2066) == false);
+    REQUIRE(isLeapYear(2067) == false);
+    REQUIRE(isLeapYear(2068) == true);
+
+    REQUIRE(isLeapYear(2069) == false);
+    REQUIRE(isLeapYear(2070) == false);
+    REQUIRE(isLeapYear(2071) == false);
+    REQUIRE(isLeapYear(2072) == true);
+
+    REQUIRE(isLeapYear(2073) == false);
+    REQUIRE(isLeapYear(2074) == false);
+    REQUIRE(isLeapYear(2075) == false);
+    REQUIRE(isLeapYear(2076) == true);
+
+    REQUIRE(isLeapYear(2077) == false);
+    REQUIRE(isLeapYear(2078) == false);
+    REQUIRE(isLeapYear(2079) == false);
+    REQUIRE(isLeapYear(2080) == true);
+
+    REQUIRE(isLeapYear(2081) == false);
+    REQUIRE(isLeapYear(2082) == false);
+    REQUIRE(isLeapYear(2083) == false);
+    REQUIRE(isLeapYear(2084) == true);
+
+    REQUIRE(isLeapYear(2085) == false);
+    REQUIRE(isLeapYear(2086) == false);
+    REQUIRE(isLeapYear(2087) == false);
+    REQUIRE(isLeapYear(2088) == true);
+
+    REQUIRE(isLeapYear(2089) == false);
+    REQUIRE(isLeapYear(2090) == false);
+    REQUIRE(isLeapYear(2091) == false);
+    REQUIRE(isLeapYear(2092) == true);
+
+    REQUIRE(isLeapYear(2093) == false);
+    REQUIRE(isLeapYear(2094) == false);
+    REQUIRE(isLeapYear(2095) == false);
+    REQUIRE(isLeapYear(2096) == true);
+
+    REQUIRE(isLeapYear(2097) == false);
+    REQUIRE(isLeapYear(2098) == false);
+    REQUIRE(isLeapYear(2099) == false);
+    REQUIRE(isLeapYear(2100) == false);
+
+    REQUIRE(isLeapYear(2101) == false);
+    REQUIRE(isLeapYear(2102) == false);
+    REQUIRE(isLeapYear(2103) == false);
+    REQUIRE(isLeapYear(2104) == true);
+
+    REQUIRE(isLeapYear(2105) == false);
+    REQUIRE(isLeapYear(2106) == false);
+    REQUIRE(isLeapYear(2107) == false);
+    REQUIRE(isLeapYear(2108) == true);
+
+    REQUIRE(isLeapYear(2109) == false);
+    REQUIRE(isLeapYear(2110) == false);
+    REQUIRE(isLeapYear(2111) == false);
+    REQUIRE(isLeapYear(2112) == true);
+
+    REQUIRE(isLeapYear(2113) == false);
+    REQUIRE(isLeapYear(2114) == false);
+    REQUIRE(isLeapYear(2115) == false);
+    REQUIRE(isLeapYear(2116) == true);
+
+    REQUIRE(isLeapYear(2117) == false);
+    REQUIRE(isLeapYear(2118) == false);
+    REQUIRE(isLeapYear(2119) == false);
+    REQUIRE(isLeapYear(2120) == true);
+
+    REQUIRE(isLeapYear(2121) == false);
+    REQUIRE(isLeapYear(2122) == false);
+    REQUIRE(isLeapYear(2123) == false);
+    REQUIRE(isLeapYear(2124) == true);
+
+    REQUIRE(isLeapYear(2125) == false);
+    REQUIRE(isLeapYear(2126) == false);
+    REQUIRE(isLeapYear(2127) == false);
+    REQUIRE(isLeapYear(2128) == true);
+
+    REQUIRE(isLeapYear(2129) == false);
+    REQUIRE(isLeapYear(2130) == false);
+    REQUIRE(isLeapYear(2131) == false);
+    REQUIRE(isLeapYear(2132) == true);
+
+    REQUIRE(isLeapYear(2133) == false);
+    REQUIRE(isLeapYear(2134) == false);
+    REQUIRE(isLeapYear(2135) == false);
+    REQUIRE(isLeapYear(2136) == true);
+
+    REQUIRE(isLeapYear(2137) == false);
+    REQUIRE(isLeapYear(2138) == false);
+    REQUIRE(isLeapYear(2139) == false);
+    REQUIRE(isLeapYear(2140) == true);
+
+    REQUIRE(isLeapYear(2141) == false);
+    REQUIRE(isLeapYear(2142) == false);
+    REQUIRE(isLeapYear(2143) == false);
+    REQUIRE(isLeapYear(2144) == true);
+
+    REQUIRE(isLeapYear(2145) == false);
+    REQUIRE(isLeapYear(2146) == false);
+    REQUIRE(isLeapYear(2147) == false);
+    REQUIRE(isLeapYear(2148) == true);
+
+    REQUIRE(isLeapYear(2149) == false);
+    REQUIRE(isLeapYear(2150) == false);
+    REQUIRE(isLeapYear(2151) == false);
+    REQUIRE(isLeapYear(2152) == true);
+
+    REQUIRE(isLeapYear(2153) == false);
+    REQUIRE(isLeapYear(2154) == false);
+    REQUIRE(isLeapYear(2155) == false);
+    REQUIRE(isLeapYear(2156) == true);
+
+    REQUIRE(isLeapYear(2157) == false);
+    REQUIRE(isLeapYear(2158) == false);
+    REQUIRE(isLeapYear(2159) == false);
+    REQUIRE(isLeapYear(2160) == true);
+
+    REQUIRE(isLeapYear(2161) == false);
+    REQUIRE(isLeapYear(2162) == false);
+    REQUIRE(isLeapYear(2163) == false);
+    REQUIRE(isLeapYear(2164) == true);
+
+    REQUIRE(isLeapYear(2165) == false);
+    REQUIRE(isLeapYear(2166) == false);
+    REQUIRE(isLeapYear(2167) == false);
+    REQUIRE(isLeapYear(2168) == true);
+
+    REQUIRE(isLeapYear(2169) == false);
+    REQUIRE(isLeapYear(2170) == false);
+    REQUIRE(isLeapYear(2171) == false);
+    REQUIRE(isLeapYear(2172) == true);
+
+    REQUIRE(isLeapYear(2173) == false);
+    REQUIRE(isLeapYear(2174) == false);
+    REQUIRE(isLeapYear(2175) == false);
+    REQUIRE(isLeapYear(2176) == true);
+
+    REQUIRE(isLeapYear(2177) == false);
+    REQUIRE(isLeapYear(2178) == false);
+    REQUIRE(isLeapYear(2179) == false);
+    REQUIRE(isLeapYear(2180) == true);
+
+    REQUIRE(isLeapYear(2181) == false);
+    REQUIRE(isLeapYear(2182) == false);
+    REQUIRE(isLeapYear(2183) == false);
+    REQUIRE(isLeapYear(2184) == true);
+
+    REQUIRE(isLeapYear(2185) == false);
+    REQUIRE(isLeapYear(2186) == false);
+    REQUIRE(isLeapYear(2187) == false);
+    REQUIRE(isLeapYear(2188) == true);
+
+    REQUIRE(isLeapYear(2189) == false);
+    REQUIRE(isLeapYear(2190) == false);
+    REQUIRE(isLeapYear(2191) == false);
+    REQUIRE(isLeapYear(2192) == true);
+
+    REQUIRE(isLeapYear(2193) == false);
+    REQUIRE(isLeapYear(2194) == false);
+    REQUIRE(isLeapYear(2195) == false);
+    REQUIRE(isLeapYear(2196) == true);
+
+    REQUIRE(isLeapYear(2197) == false);
+    REQUIRE(isLeapYear(2198) == false);
+    REQUIRE(isLeapYear(2199) == false);
+    REQUIRE(isLeapYear(2200) == false);
+
+    REQUIRE(isLeapYear(2201) == false);
+    REQUIRE(isLeapYear(2202) == false);
+    REQUIRE(isLeapYear(2203) == false);
+    REQUIRE(isLeapYear(2204) == true);
+
+    REQUIRE(isLeapYear(2205) == false);
+    REQUIRE(isLeapYear(2206) == false);
+    REQUIRE(isLeapYear(2207) == false);
+    REQUIRE(isLeapYear(2208) == true);
+
+    REQUIRE(isLeapYear(2209) == false);
+    REQUIRE(isLeapYear(2210) == false);
+    REQUIRE(isLeapYear(2211) == false);
+    REQUIRE(isLeapYear(2212) == true);
+
+    REQUIRE(isLeapYear(2213) == false);
+    REQUIRE(isLeapYear(2214) == false);
+    REQUIRE(isLeapYear(2215) == false);
+    REQUIRE(isLeapYear(2216) == true);
+
+    REQUIRE(isLeapYear(2217) == false);
+    REQUIRE(isLeapYear(2218) == false);
+    REQUIRE(isLeapYear(2219) == false);
+    REQUIRE(isLeapYear(2220) == true);
+
+    REQUIRE(isLeapYear(2221) == false);
+    REQUIRE(isLeapYear(2222) == false);
+    REQUIRE(isLeapYear(2223) == false);
+    REQUIRE(isLeapYear(2224) == true);
+
+    REQUIRE(isLeapYear(2225) == false);
+    REQUIRE(isLeapYear(2226) == false);
+    REQUIRE(isLeapYear(2227) == false);
+    REQUIRE(isLeapYear(2228) == true);
+
+    REQUIRE(isLeapYear(2229) == false);
+    REQUIRE(isLeapYear(2230) == false);
+    REQUIRE(isLeapYear(2231) == false);
+    REQUIRE(isLeapYear(2232) == true);
+
+    REQUIRE(isLeapYear(2233) == false);
+    REQUIRE(isLeapYear(2234) == false);
+    REQUIRE(isLeapYear(2235) == false);
+    REQUIRE(isLeapYear(2236) == true);
+
+    REQUIRE(isLeapYear(2237) == false);
+    REQUIRE(isLeapYear(2238) == false);
+    REQUIRE(isLeapYear(2239) == false);
+    REQUIRE(isLeapYear(2240) == true);
+
+    REQUIRE(isLeapYear(2241) == false);
+    REQUIRE(isLeapYear(2242) == false);
+    REQUIRE(isLeapYear(2243) == false);
+    REQUIRE(isLeapYear(2244) == true);
+
+    REQUIRE(isLeapYear(2245) == false);
+    REQUIRE(isLeapYear(2246) == false);
+    REQUIRE(isLeapYear(2247) == false);
+    REQUIRE(isLeapYear(2248) == true);
+
+    REQUIRE(isLeapYear(2249) == false);
+    REQUIRE(isLeapYear(2250) == false);
+    REQUIRE(isLeapYear(2251) == false);
+    REQUIRE(isLeapYear(2252) == true);
+
+    REQUIRE(isLeapYear(2253) == false);
+    REQUIRE(isLeapYear(2254) == false);
+    REQUIRE(isLeapYear(2255) == false);
+    REQUIRE(isLeapYear(2256) == true);
+
+    REQUIRE(isLeapYear(2257) == false);
+    REQUIRE(isLeapYear(2258) == false);
+    REQUIRE(isLeapYear(2259) == false);
+    REQUIRE(isLeapYear(2260) == true);
+
+    REQUIRE(isLeapYear(2261) == false);
+    REQUIRE(isLeapYear(2262) == false);
+    REQUIRE(isLeapYear(2263) == false);
+    REQUIRE(isLeapYear(2264) == true);
+
+    REQUIRE(isLeapYear(2265) == false);
+    REQUIRE(isLeapYear(2266) == false);
+    REQUIRE(isLeapYear(2267) == false);
+    REQUIRE(isLeapYear(2268) == true);
+
+    REQUIRE(isLeapYear(2269) == false);
+    REQUIRE(isLeapYear(2270) == false);
+    REQUIRE(isLeapYear(2271) == false);
+    REQUIRE(isLeapYear(2272) == true);
+
+    REQUIRE(isLeapYear(2273) == false);
+    REQUIRE(isLeapYear(2274) == false);
+    REQUIRE(isLeapYear(2275) == false);
+    REQUIRE(isLeapYear(2276) == true);
+
+    REQUIRE(isLeapYear(2277) == false);
+    REQUIRE(isLeapYear(2278) == false);
+    REQUIRE(isLeapYear(2279) == false);
+    REQUIRE(isLeapYear(2280) == true);
+
+    REQUIRE(isLeapYear(2281) == false);
+    REQUIRE(isLeapYear(2282) == false);
+    REQUIRE(isLeapYear(2283) == false);
+    REQUIRE(isLeapYear(2284) == true);
+
+    REQUIRE(isLeapYear(2285) == false);
+    REQUIRE(isLeapYear(2286) == false);
+    REQUIRE(isLeapYear(2287) == false);
+    REQUIRE(isLeapYear(2288) == true);
+
+    REQUIRE(isLeapYear(2289) == false);
+    REQUIRE(isLeapYear(2290) == false);
+    REQUIRE(isLeapYear(2291) == false);
+    REQUIRE(isLeapYear(2292) == true);
+
+    REQUIRE(isLeapYear(2293) == false);
+    REQUIRE(isLeapYear(2294) == false);
+    REQUIRE(isLeapYear(2295) == false);
+    REQUIRE(isLeapYear(2296) == true);
+
+    REQUIRE(isLeapYear(2297) == false);
+    REQUIRE(isLeapYear(2298) == false);
+    REQUIRE(isLeapYear(2299) == false);
+    REQUIRE(isLeapYear(2300) == false);
+
+    REQUIRE(isLeapYear(2301) == false);
+    REQUIRE(isLeapYear(2302) == false);
+    REQUIRE(isLeapYear(2303) == false);
+    REQUIRE(isLeapYear(2304) == true);
+
+    REQUIRE(isLeapYear(2305) == false);
+    REQUIRE(isLeapYear(2306) == false);
+    REQUIRE(isLeapYear(2307) == false);
+    REQUIRE(isLeapYear(2308) == true);
+
+    REQUIRE(isLeapYear(2309) == false);
+    REQUIRE(isLeapYear(2310) == false);
+    REQUIRE(isLeapYear(2311) == false);
+    REQUIRE(isLeapYear(2312) == true);
+
+    REQUIRE(isLeapYear(2313) == false);
+    REQUIRE(isLeapYear(2314) == false);
+    REQUIRE(isLeapYear(2315) == false);
+    REQUIRE(isLeapYear(2316) == true);
+
+    REQUIRE(isLeapYear(2317) == false);
+    REQUIRE(isLeapYear(2318) == false);
+    REQUIRE(isLeapYear(2319) == false);
+    REQUIRE(isLeapYear(2320) == true);
+
+    REQUIRE(isLeapYear(2321) == false);
+    REQUIRE(isLeapYear(2322) == false);
+    REQUIRE(isLeapYear(2323) == false);
+    REQUIRE(isLeapYear(2324) == true);
+
+    REQUIRE(isLeapYear(2325) == false);
+    REQUIRE(isLeapYear(2326) == false);
+    REQUIRE(isLeapYear(2327) == false);
+    REQUIRE(isLeapYear(2328) == true);
+
+    REQUIRE(isLeapYear(2329) == false);
+    REQUIRE(isLeapYear(2330) == false);
+    REQUIRE(isLeapYear(2331) == false);
+    REQUIRE(isLeapYear(2332) == true);
+
+    REQUIRE(isLeapYear(2333) == false);
+    REQUIRE(isLeapYear(2334) == false);
+    REQUIRE(isLeapYear(2335) == false);
+    REQUIRE(isLeapYear(2336) == true);
+
+    REQUIRE(isLeapYear(2337) == false);
+    REQUIRE(isLeapYear(2338) == false);
+    REQUIRE(isLeapYear(2339) == false);
+    REQUIRE(isLeapYear(2340) == true);
+
+    REQUIRE(isLeapYear(2341) == false);
+    REQUIRE(isLeapYear(2342) == false);
+    REQUIRE(isLeapYear(2343) == false);
+    REQUIRE(isLeapYear(2344) == true);
+
+    REQUIRE(isLeapYear(2345) == false);
+    REQUIRE(isLeapYear(2346) == false);
+    REQUIRE(isLeapYear(2347) == false);
+    REQUIRE(isLeapYear(2348) == true);
+
+    REQUIRE(isLeapYear(2349) == false);
+    REQUIRE(isLeapYear(2350) == false);
+    REQUIRE(isLeapYear(2351) == false);
+    REQUIRE(isLeapYear(2352) == true);
+
+    REQUIRE(isLeapYear(2353) == false);
+    REQUIRE(isLeapYear(2354) == false);
+    REQUIRE(isLeapYear(2355) == false);
+    REQUIRE(isLeapYear(2356) == true);
+
+    REQUIRE(isLeapYear(2357) == false);
+    REQUIRE(isLeapYear(2358) == false);
+    REQUIRE(isLeapYear(2359) == false);
+    REQUIRE(isLeapYear(2360) == true);
+
+    REQUIRE(isLeapYear(2361) == false);
+    REQUIRE(isLeapYear(2362) == false);
+    REQUIRE(isLeapYear(2363) == false);
+    REQUIRE(isLeapYear(2364) == true);
+
+    REQUIRE(isLeapYear(2365) == false);
+    REQUIRE(isLeapYear(2366) == false);
+    REQUIRE(isLeapYear(2367) == false);
+    REQUIRE(isLeapYear(2368) == true);
+
+    REQUIRE(isLeapYear(2369) == false);
+    REQUIRE(isLeapYear(2370) == false);
+    REQUIRE(isLeapYear(2371) == false);
+    REQUIRE(isLeapYear(2372) == true);
+
+    REQUIRE(isLeapYear(2373) == false);
+    REQUIRE(isLeapYear(2374) == false);
+    REQUIRE(isLeapYear(2375) == false);
+    REQUIRE(isLeapYear(2376) == true);
+
+    REQUIRE(isLeapYear(2377) == false);
+    REQUIRE(isLeapYear(2378) == false);
+    REQUIRE(isLeapYear(2379) == false);
+    REQUIRE(isLeapYear(2380) == true);
+
+    REQUIRE(isLeapYear(2381) == false);
+    REQUIRE(isLeapYear(2382) == false);
+    REQUIRE(isLeapYear(2383) == false);
+    REQUIRE(isLeapYear(2384) == true);
+
+    REQUIRE(isLeapYear(2385) == false);
+    REQUIRE(isLeapYear(2386) == false);
+    REQUIRE(isLeapYear(2387) == false);
+    REQUIRE(isLeapYear(2388) == true);
+
+    REQUIRE(isLeapYear(2389) == false);
+    REQUIRE(isLeapYear(2390) == false);
+    REQUIRE(isLeapYear(2391) == false);
+    REQUIRE(isLeapYear(2392) == true);
+
+    REQUIRE(isLeapYear(2393) == false);
+    REQUIRE(isLeapYear(2394) == false);
+    REQUIRE(isLeapYear(2395) == false);
+    REQUIRE(isLeapYear(2396) == true);
+
+    REQUIRE(isLeapYear(2397) == false);
+    REQUIRE(isLeapYear(2398) == false);
+    REQUIRE(isLeapYear(2399) == false);
+    REQUIRE(isLeapYear(2400) == true);
+
+    REQUIRE(isLeapYear(2401) == false);
+    REQUIRE(isLeapYear(2402) == false);
+    REQUIRE(isLeapYear(2403) == false);
+    REQUIRE(isLeapYear(2404) == true);
+
+    REQUIRE(isLeapYear(2405) == false);
+    REQUIRE(isLeapYear(2406) == false);
+    REQUIRE(isLeapYear(2407) == false);
+    REQUIRE(isLeapYear(2408) == true);
+
+    REQUIRE(isLeapYear(2409) == false);
+    REQUIRE(isLeapYear(2410) == false);
+    REQUIRE(isLeapYear(2411) == false);
+    REQUIRE(isLeapYear(2412) == true);
+
+    REQUIRE(isLeapYear(2413) == false);
+    REQUIRE(isLeapYear(2414) == false);
+    REQUIRE(isLeapYear(2415) == false);
+    REQUIRE(isLeapYear(2416) == true);
+
+    REQUIRE(isLeapYear(2417) == false);
+    REQUIRE(isLeapYear(2418) == false);
+    REQUIRE(isLeapYear(2419) == false);
+    REQUIRE(isLeapYear(2420) == true);
+
+    REQUIRE(isLeapYear(2421) == false);
+    REQUIRE(isLeapYear(2422) == false);
+    REQUIRE(isLeapYear(2423) == false);
+    REQUIRE(isLeapYear(2424) == true);
+
+    REQUIRE(isLeapYear(2425) == false);
+    REQUIRE(isLeapYear(2426) == false);
+    REQUIRE(isLeapYear(2427) == false);
+    REQUIRE(isLeapYear(2428) == true);
+
+    REQUIRE(isLeapYear(2429) == false);
+    REQUIRE(isLeapYear(2430) == false);
+    REQUIRE(isLeapYear(2431) == false);
+    REQUIRE(isLeapYear(2432) == true);
+
+    REQUIRE(isLeapYear(2433) == false);
+    REQUIRE(isLeapYear(2434) == false);
+    REQUIRE(isLeapYear(2435) == false);
+    REQUIRE(isLeapYear(2436) == true);
+
+    REQUIRE(isLeapYear(2437) == false);
+    REQUIRE(isLeapYear(2438) == false);
+    REQUIRE(isLeapYear(2439) == false);
+    REQUIRE(isLeapYear(2440) == true);
+
+    REQUIRE(isLeapYear(2441) == false);
+    REQUIRE(isLeapYear(2442) == false);
+    REQUIRE(isLeapYear(2443) == false);
+    REQUIRE(isLeapYear(2444) == true);
+
+    REQUIRE(isLeapYear(2445) == false);
+    REQUIRE(isLeapYear(2446) == false);
+    REQUIRE(isLeapYear(2447) == false);
+    REQUIRE(isLeapYear(2448) == true);
+
+    REQUIRE(isLeapYear(2449) == false);
+    REQUIRE(isLeapYear(2450) == false);
+    REQUIRE(isLeapYear(2451) == false);
+    REQUIRE(isLeapYear(2452) == true);
+
+    REQUIRE(isLeapYear(2453) == false);
+    REQUIRE(isLeapYear(2454) == false);
+    REQUIRE(isLeapYear(2455) == false);
+    REQUIRE(isLeapYear(2456) == true);
+
+    REQUIRE(isLeapYear(2457) == false);
+    REQUIRE(isLeapYear(2458) == false);
+    REQUIRE(isLeapYear(2459) == false);
+    REQUIRE(isLeapYear(2460) == true);
+
+    REQUIRE(isLeapYear(2461) == false);
+    REQUIRE(isLeapYear(2462) == false);
+    REQUIRE(isLeapYear(2463) == false);
+    REQUIRE(isLeapYear(2464) == true);
+
+    REQUIRE(isLeapYear(2465) == false);
+    REQUIRE(isLeapYear(2466) == false);
+    REQUIRE(isLeapYear(2467) == false);
+    REQUIRE(isLeapYear(2468) == true);
+
+    REQUIRE(isLeapYear(2469) == false);
+    REQUIRE(isLeapYear(2470) == false);
+    REQUIRE(isLeapYear(2471) == false);
+    REQUIRE(isLeapYear(2472) == true);
+
+    REQUIRE(isLeapYear(2473) == false);
+    REQUIRE(isLeapYear(2474) == false);
+    REQUIRE(isLeapYear(2475) == false);
+    REQUIRE(isLeapYear(2476) == true);
+
+    REQUIRE(isLeapYear(2477) == false);
+    REQUIRE(isLeapYear(2478) == false);
+    REQUIRE(isLeapYear(2479) == false);
+    REQUIRE(isLeapYear(2480) == true);
+
+    REQUIRE(isLeapYear(2481) == false);
+    REQUIRE(isLeapYear(2482) == false);
+    REQUIRE(isLeapYear(2483) == false);
+    REQUIRE(isLeapYear(2484) == true);
+
+    REQUIRE(isLeapYear(2485) == false);
+    REQUIRE(isLeapYear(2486) == false);
+    REQUIRE(isLeapYear(2487) == false);
+    REQUIRE(isLeapYear(2488) == true);
+
+    REQUIRE(isLeapYear(2489) == false);
+    REQUIRE(isLeapYear(2490) == false);
+    REQUIRE(isLeapYear(2491) == false);
+    REQUIRE(isLeapYear(2492) == true);
+
+    REQUIRE(isLeapYear(2493) == false);
+    REQUIRE(isLeapYear(2494) == false);
+    REQUIRE(isLeapYear(2495) == false);
+    REQUIRE(isLeapYear(2496) == true);
+
+    REQUIRE(isLeapYear(2497) == false);
+    REQUIRE(isLeapYear(2498) == false);
+    REQUIRE(isLeapYear(2499) == false);
+    REQUIRE(isLeapYear(2500) == false);
+
+}
+
