@@ -1,6 +1,6 @@
-TEST_CASE("Get Day of the Quarter for Year: 2017", "[J5C_Date]")
+TEST_CASE("Get Day of the Quarter for Year: 2017", "[j5c_Date]")
 {
-    J5C_Date d1{2017,01,01};
+    j5c_Date d1{2017,01,01};
 
     d1.set_y_d(2017, 1);   //  2017-01-01  Note: not a leap year.
     REQUIRE(d1.getDayOfTheQuarter() == 1);

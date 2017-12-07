@@ -1,4 +1,4 @@
-TEST_CASE("List Leap Years: 5001 to 5500", "[J5C_Date]")
+TEST_CASE("List Leap Years: 5001 to 5500", "[j5c_Date]")
 {
     REQUIRE(isLeapYear(5001) == false);
     REQUIRE(isLeapYear(5002) == false);

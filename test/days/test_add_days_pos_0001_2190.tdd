@@ -1,6 +1,6 @@
-TEST_CASE("Test addDays: 0001 to 2190", "[J5C_Date]")
+TEST_CASE("Test addDays: 0001 to 2190", "[j5c_Date]")
 {
-    J5C_Date d;
+    j5c_Date d;
     d.setYear(2017);
     d.setMonth(01);
     d.setDay(01);
