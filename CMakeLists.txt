@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.9)
-project(Date_001)
+cmake_minimum_required(VERSION 3.7)
+project(Date)
 
 set(CMAKE_CXX_STANDARD 17)
 
