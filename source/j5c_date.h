@@ -1,5 +1,5 @@
 //
-// J5C_Date Class Header File
+// j5c_Date Class Header File
 //
 // Copyright (C) 2017  Jay A. Carlson of J5C Marketing LLC.
 //
@@ -545,10 +545,10 @@ namespace J5C_DSL_Code {
             };
 
 
-    class J5C_Date {
+    class j5c_Date {
 
 
-    friend std::ostream& operator<<(std::ostream& out, const J5C_DSL_Code::J5C_Date& d);
+    friend std::ostream& operator<<(std::ostream& out, const J5C_DSL_Code::j5c_Date& d);
 
 private:
 
@@ -580,8 +580,8 @@ private:
     void cout_InvalidDate() const noexcept;
     int daysSinceYear0001Day001(int year, int month, int day) const noexcept;
     bool isLeapYear(int year) const noexcept;
-    J5C_Date internal_addDays(int days) const noexcept;
-    J5C_Date internal_subDays(int days) const noexcept;
+    j5c_Date internal_addDays(int days) const noexcept;
+    j5c_Date internal_subDays(int days) const noexcept;
 
 protected:
     int m_year;
@@ -591,14 +591,14 @@ protected:
 
 public:
     //constructors
-    explicit J5C_Date()                                                     noexcept;
-    explicit J5C_Date(const int &year, const int &month, const int &day)    noexcept;
-    explicit J5C_Date(const int &year, const int &dayOfTheYear)             noexcept;
+    explicit j5c_Date()                                                     noexcept;
+    explicit j5c_Date(const int &year, const int &month, const int &day)    noexcept;
+    explicit j5c_Date(const int &year, const int &dayOfTheYear)             noexcept;
     //constructor helpers / methods
     void set_ymd(const int &year, const int &month, const int &day)         noexcept;
     void set_y_d(const int &year, const int &dayOfTheYear)                  noexcept;
     //virtual destructor
-    virtual ~J5C_Date() = default;
+    virtual ~j5c_Date() = default;
 
 
     bool isValid()                              const noexcept;
@@ -612,26 +612,26 @@ public:
     int getDayOfTheYear()                       const noexcept;
     int getDayOfTheQuarter()                    const noexcept;
     int getQuarter()                            const noexcept;
-    int getDaysDiff(const J5C_Date& dt2)        const noexcept;
+    int getDaysDiff(const j5c_Date& dt2)        const noexcept;
     std::string getDayText(uint forcedLength)   const noexcept;
     std::string strDate()                       const noexcept;
 
-    J5C_Date next_Date()                        const noexcept;
-    J5C_Date prior_Date()                       const noexcept;
+    j5c_Date next_Date()                        const noexcept;
+    j5c_Date prior_Date()                       const noexcept;
     // add days can accept negative numbers
-    J5C_Date add_Days(int days)                 const noexcept;
+    j5c_Date add_Days(int days)                 const noexcept;
 
-    const bool operator==(const J5C_Date &)     const noexcept;
-    const bool operator!=(const J5C_Date &)     const noexcept;
-    const bool operator<( const J5C_Date &)     const noexcept;
-    const bool operator>( const J5C_Date &)     const noexcept;
-    const bool operator<=(const J5C_Date &)     const noexcept;
-    const bool operator>=(const J5C_Date &)     const noexcept;
+    const bool operator==(const j5c_Date &)     const noexcept;
+    const bool operator!=(const j5c_Date &)     const noexcept;
+    const bool operator<( const j5c_Date &)     const noexcept;
+    const bool operator>( const j5c_Date &)     const noexcept;
+    const bool operator<=(const j5c_Date &)     const noexcept;
+    const bool operator>=(const j5c_Date &)     const noexcept;
 
-    const J5C_Date& operator++()        noexcept;   // prefix
-    const J5C_Date  operator++(int)     noexcept;   // postfix
-    const J5C_Date& operator--()        noexcept;   // prefix
-    const J5C_Date  operator--(int)     noexcept;   // postfix
+    const j5c_Date& operator++()        noexcept;   // prefix
+    const j5c_Date  operator++(int)     noexcept;   // postfix
+    const j5c_Date& operator--()        noexcept;   // prefix
+    const j5c_Date  operator--(int)     noexcept;   // postfix
 
     void setDay(  const int &day)       noexcept;
     void setMonth(const int &month)     noexcept;
