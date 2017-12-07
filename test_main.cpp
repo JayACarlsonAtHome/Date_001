@@ -3,20 +3,19 @@
 
 using namespace J5C_DSL_Code;
 
-J5C_Date d1;
-J5C_Date d2;
+j5c_Date d1;
+j5c_Date d2;
 
-TEST_CASE("Dates are equal", "[J5C_Date]")
+TEST_CASE("Dates are equal", "[j5c_Date]")
 {
     REQUIRE(d1 == d2);
 }
 
 bool isLeapYear(int year)
 {
-    J5C_Date d(year, 01, 01);
+    j5c_Date d(year, 01, 01);
     return d.isLeapYear();
 }
-
 
 
 #include "test/year/test_leap_year_0001_0500.tdd"
@@ -45,16 +44,16 @@ bool isLeapYear(int year)
 #include "test/quarter/get_day_of_quarter_2020.tdd"
 
 
-TEST_CASE("Starting Tests", "[J5C_Date]")
+TEST_CASE("Starting Tests", "[j5c_Date]")
 {
     std::cout << std::endl;
     std::cout << "Starting Testing: ... Please be patient..." << std::endl;
 }
 
-TEST_CASE("Method J5C_Date::next_Date()", "[J5C_Date]")
+TEST_CASE("Method j5c_Date::next_Date()", "[j5c_Date]")
 {
-    J5C_Date d1{2017,01,01};
-    J5C_Date d2{2017,01,01};
+    j5c_Date d1{2017,01,01};
+    j5c_Date d2{2017,01,01};
     for (int yyyy = 2017; yyyy < 2020; yyyy++) {
         d1.setYear(yyyy);
         d2.setYear(yyyy);
@@ -67,10 +66,10 @@ TEST_CASE("Method J5C_Date::next_Date()", "[J5C_Date]")
     }
 };
 
-TEST_CASE("Method J5C_Date::prior_Date()", "[J5C_Date]")
+TEST_CASE("Method j5c_Date::prior_Date()", "[j5c_Date]")
 {
-    J5C_Date d1{2017,12,31};
-    J5C_Date d2{2017,12,31};
+    j5c_Date d1{2017,12,31};
+    j5c_Date d2{2017,12,31};
     for (int yyyy = 2017; yyyy > 2010; yyyy--) {
         d1.setYear(yyyy);
         d2.setYear(yyyy);
@@ -83,38 +82,38 @@ TEST_CASE("Method J5C_Date::prior_Date()", "[J5C_Date]")
     }
 };
 
-TEST_CASE("Method J5C_Date::++prefix", "[J5C_Date]")
+TEST_CASE("Method j5c_Date::++prefix", "[j5c_Date]")
 {
-    J5C_Date d1{2017,01,01};
-    J5C_Date d2{2017,01,01};
+    j5c_Date d1{2017,01,01};
+    j5c_Date d2{2017,01,01};
     REQUIRE(d1.next_Date().strDate() == (++d2).strDate());
 };
 
-TEST_CASE("Method J5C_Date::postfix++", "[J5C_Date]")
+TEST_CASE("Method j5c_Date::postfix++", "[j5c_Date]")
 {
-    J5C_Date d1{2017,01,01};
-    J5C_Date d2{2017,01,01};
+    j5c_Date d1{2017,01,01};
+    j5c_Date d2{2017,01,01};
     REQUIRE(d1.next_Date().strDate() == (d2++).strDate());
 };
 
-TEST_CASE("Method J5C_Date::--prefix", "[J5C_Date]")
+TEST_CASE("Method j5c_Date::--prefix", "[j5c_Date]")
 {
-    J5C_Date d1{2017,01,01};
-    J5C_Date d2{2017,01,01};
+    j5c_Date d1{2017,01,01};
+    j5c_Date d2{2017,01,01};
     REQUIRE(d1.prior_Date().strDate() == (--d2).strDate());
 };
 
-TEST_CASE("Method J5C_Date::postfix--", "[J5C_Date]")
+TEST_CASE("Method j5c_Date::postfix--", "[j5c_Date]")
 {
-    J5C_Date d1{2017,01,01};
-    J5C_Date d2{2017,01,01};
+    j5c_Date d1{2017,01,01};
+    j5c_Date d2{2017,01,01};
     REQUIRE(d1.prior_Date().strDate() == (d2--).strDate());
 };
 
-TEST_CASE("Method J5C_Date::getAge()", "[J5C_Date]")
+TEST_CASE("Method j5c_Date::getAge()", "[j5c_Date]")
 {
     const int expectedResult = 77;
-    J5C_Date d1{1940,10,8};
+    j5c_Date d1{1940,10,8};
     if (d1.getAge() != expectedResult)
     {
         std::cout << "Please update this test once a year..." << std::endl;
