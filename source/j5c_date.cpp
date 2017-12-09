@@ -105,6 +105,17 @@ namespace J5C_DSL_Code {
         cout_InvalidDate();
     }
 
+    j5c_Date&  j5c_Date::operator=(const j5c_Date& date)
+    {
+        if (this != &date)
+        {
+            m_year = date.m_year;
+            m_month = date.m_month;
+            m_day = date.m_day;
+        }
+        return *this;
+    }
+
     int j5c_Date::getDay()     const noexcept
     { return m_day; };
 
