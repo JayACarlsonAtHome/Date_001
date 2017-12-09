@@ -597,6 +597,9 @@ public:
     //constructor helpers / methods
     void set_ymd(const int &year, const int &month, const int &day)         noexcept;
     void set_y_d(const int &year, const int &dayOfTheYear)                  noexcept;
+
+    j5c_Date& operator=(const j5c_Date& date);
+
     //virtual destructor
     virtual ~j5c_Date() = default;
 
