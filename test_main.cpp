@@ -17,7 +17,7 @@ bool isLeapYear(int year)
     return d.isLeapYear();
 }
 
-
+/*
 #include "test/year/test_leap_year_0001_0500.tdd"
 #include "test/year/test_leap_year_0501_1000.tdd"
 #include "test/year/test_leap_year_1001_1500.tdd"
@@ -42,13 +42,25 @@ bool isLeapYear(int year)
 #include "test/days/test_add_days_pos_0001_2190.tdd"
 #include "test/quarter/get_day_of_quarter_2017.tdd"
 #include "test/quarter/get_day_of_quarter_2020.tdd"
-
+*/
 
 TEST_CASE("Starting Tests", "[j5c_Date]")
 {
     std::cout << std::endl;
     std::cout << "Starting Testing: ... Please be patient..." << std::endl;
 }
+
+
+TEST_CASE("Date Assignment operator", "[j5c_Date]")
+{
+    j5c_Date d1{2017,01,01};
+    j5c_Date d2{2018,12,31};
+    d2 = d1;
+    REQUIRE(d1.getYear()  == d2.getYear());
+    REQUIRE(d1.getMonth() == d2.getMonth());
+    REQUIRE(d1.getDay()   == d2.getDay());
+};
+
 
 TEST_CASE("Method j5c_Date::next_Date()", "[j5c_Date]")
 {
