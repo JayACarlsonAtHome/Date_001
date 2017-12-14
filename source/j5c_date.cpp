@@ -38,12 +38,12 @@ namespace J5C_DSL_Code {
         m_day = timeinfo->tm_mday;
     };
 
-    j5c_Date::j5c_Date(const int year, const int dayOfTheYear) noexcept
+    j5c_Date::j5c_Date(int year, int dayOfTheYear) noexcept
     {
         set_y_d(year, dayOfTheYear);
     }
 
-    void j5c_Date::set_y_d(const int year, const int dayOfTheYear) noexcept
+    void j5c_Date::set_y_d(int year, int dayOfTheYear) noexcept
     {
         m_year = year;
         m_month = 0;
@@ -106,17 +106,17 @@ namespace J5C_DSL_Code {
     int j5c_Date::getYear()    const noexcept
     { return m_year; };
 
-    void j5c_Date::setDay(const int &day) noexcept
+    void j5c_Date::setDay(int day) noexcept
     {
         m_day = day;
     };
 
-    void j5c_Date::setMonth(const int &month) noexcept
+    void j5c_Date::setMonth(int month) noexcept
     {
         m_month = month;
     };
 
-    void j5c_Date::setYear(const int &year) noexcept
+    void j5c_Date::setYear(int year) noexcept
     {
         m_year = year;
     };
@@ -137,10 +137,7 @@ namespace J5C_DSL_Code {
 
         bool divideBy400remainder0 = (year % 400 == 0);
         bool test3 = ((divideBy004remainder0) && (divideBy100remainder0) && (divideBy400remainder0));
-        if (test3) return true;
-
-        // there were no passing conditions so it must be false
-        return false;
+        return test3;
     }
 
     bool j5c_Date::isLeapYear() const noexcept
@@ -427,14 +424,12 @@ namespace J5C_DSL_Code {
     // remaining operators defined in terms of the above
     const bool j5c_Date::operator<=(const j5c_Date &d) const noexcept
         {
-        if (this == &d) { return true; }
-        return (operator<(d));
-    };
+            return this == &d || operator<(d);
+        };
 
     const bool j5c_Date::operator>=(const j5c_Date &d) const noexcept
     {
-        if (this == &d) { return true; }
-        return (operator>(d));
+        return this == &d || operator>(d);
     };
 
     const bool j5c_Date::operator>(const j5c_Date &d) const noexcept
@@ -503,22 +498,27 @@ namespace J5C_DSL_Code {
         return *this;
     };
 
-    std::string j5c_Date::strDate() const noexcept
+
+    std::stringstream j5c_Date::ssDate() const noexcept
     {
         std::stringstream ss;
         ss << std::setw(4) << std::setfill('0') << m_year << '-'
            << std::setw(2) << std::setfill('0') << m_month << '-'
            << std::setw(2) << std::setfill('0') << m_day;
-        return ss.str();
-
-
+        return ss;
     }
 
-    std::ostream &operator<<(std::ostream &out, const j5c_Date &d) {
+    std::string j5c_Date::strDate() const noexcept
+    {
+        return ssDate().str();
+    }
+
+    std::ostream &operator<<(std::ostream &out, const j5c_Date &d)
+    {
         return out
-                << std::setw(4) << std::setfill('0') << d.getYear() << '-'
-                << std::setw(2) << std::setfill('0') << d.getMonth() << '-'
-                << std::setw(2) << std::setfill('0') << d.getDay();
+            << std::setw(4) << std::setfill('0') << d.m_year << '-'
+            << std::setw(2) << std::setfill('0') << d.m_month << '-'
+            << std::setw(2) << std::setfill('0') << d.m_day;
     }
 
 }

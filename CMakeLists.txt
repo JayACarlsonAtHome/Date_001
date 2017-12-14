@@ -21,12 +21,21 @@ set(TEST_FILES
         test/year/test_leap_year_8001_8500.tdd
         test/year/test_leap_year_8501_9000.tdd
         test/year/test_leap_year_9501_9999.tdd
-        test/days/test_add_days_pos_0001_2190.tdd
+
+        test/days/get_day_of_year_2017.tdd
+        test/days/get_day_of_year_2020.tdd
+
+        test/days/test_getFirstDayOfYear.tdd
+
+        test/days/test_dayGetText.tdd
+
         test/days/test_add_days_neg_0001_2190.tdd
+        test/days/test_add_days_pos_0001_2190.tdd
+
         test/quarter/get_day_of_quarter_2017.tdd
         test/quarter/get_day_of_quarter_2020.tdd
-        test/days/test_getFirstDayOfYear.tdd
-        test/days/test_dayGetText.tdd
+
+        test_includes.tdd
         )
 
 set(SOURCE_FILES

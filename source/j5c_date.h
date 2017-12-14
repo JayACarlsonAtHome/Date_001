@@ -576,12 +576,13 @@ private:
     int LeapYearsSinceYear0001(int year, int month) const noexcept;
     static const int MIN_YEAR = 1;
     static const int MAX_YEAR = 9999;
-    std::string DOWT = "Invalid DOW";
+    //std::string DOWT = "Invalid DOW";
     void cout_InvalidDate() const noexcept;
     int daysSinceYear0001Day001(int year, int month, int day) const noexcept;
     bool isLeapYear(int year) const noexcept;
     j5c_Date internal_addDays(int days) const noexcept;
     j5c_Date internal_subDays(int days) const noexcept;
+    std::stringstream ssDate()          const noexcept;
 
 protected:
     int m_year;
@@ -592,10 +593,10 @@ protected:
 public:
     //constructors
     explicit j5c_Date()                                                     noexcept;
-    explicit j5c_Date(const int year, const int month, const int day) : m_year(year) , m_month(month), m_day(day) { };
-    explicit j5c_Date(const int year, const int dayOfTheYear)             noexcept;
+    explicit j5c_Date(int year, int month, int day) : m_year(year) , m_month(month), m_day(day) { };
+    explicit j5c_Date(int year, int dayOfTheYear)             noexcept;
     //constructor helpers / methods
-    void set_y_d(const int year, const int dayOfTheYear)                  noexcept;
+    void set_y_d(int year, int dayOfTheYear)                  noexcept;
 
     j5c_Date& operator=(const j5c_Date& date);
 
@@ -635,9 +636,9 @@ public:
     const j5c_Date& operator--()        noexcept;   // prefix
     const j5c_Date  operator--(int)     noexcept;   // postfix
 
-    void setDay(  const int &day)       noexcept;
-    void setMonth(const int &month)     noexcept;
-    void setYear( const int &year)      noexcept;
+    void setDay(  int day)       noexcept;
+    void setMonth(int month)     noexcept;
+    void setYear( int year)      noexcept;
 
 
 };

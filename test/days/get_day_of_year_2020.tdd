@@ -1,0 +1,1103 @@
+TEST_CASE("Get Day of the Year: 2020", "[j5c_Date]")
+{
+    j5c_Date d1{2020,01,01};
+
+    d1.set_y_d(2020, 1);   //  2020-01-01  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 1);
+
+    d1.set_y_d(2020, 2);   //  2020-01-02  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 2);
+
+    d1.set_y_d(2020, 3);   //  2020-01-03  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 3);
+
+    d1.set_y_d(2020, 4);   //  2020-01-04  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 4);
+
+    d1.set_y_d(2020, 5);   //  2020-01-05  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 5);
+
+    d1.set_y_d(2020, 6);   //  2020-01-06  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 6);
+
+    d1.set_y_d(2020, 7);   //  2020-01-07  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 7);
+
+    d1.set_y_d(2020, 8);   //  2020-01-08  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 8);
+
+    d1.set_y_d(2020, 9);   //  2020-01-09  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 9);
+
+    d1.set_y_d(2020, 10);   //  2020-01-10  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 10);
+
+    d1.set_y_d(2020, 11);   //  2020-01-11  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 11);
+
+    d1.set_y_d(2020, 12);   //  2020-01-12  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 12);
+
+    d1.set_y_d(2020, 13);   //  2020-01-13  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 13);
+
+    d1.set_y_d(2020, 14);   //  2020-01-14  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 14);
+
+    d1.set_y_d(2020, 15);   //  2020-01-15  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 15);
+
+    d1.set_y_d(2020, 16);   //  2020-01-16  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 16);
+
+    d1.set_y_d(2020, 17);   //  2020-01-17  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 17);
+
+    d1.set_y_d(2020, 18);   //  2020-01-18  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 18);
+
+    d1.set_y_d(2020, 19);   //  2020-01-19  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 19);
+
+    d1.set_y_d(2020, 20);   //  2020-01-20  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 20);
+
+    d1.set_y_d(2020, 21);   //  2020-01-21  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 21);
+
+    d1.set_y_d(2020, 22);   //  2020-01-22  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 22);
+
+    d1.set_y_d(2020, 23);   //  2020-01-23  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 23);
+
+    d1.set_y_d(2020, 24);   //  2020-01-24  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 24);
+
+    d1.set_y_d(2020, 25);   //  2020-01-25  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 25);
+
+    d1.set_y_d(2020, 26);   //  2020-01-26  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 26);
+
+    d1.set_y_d(2020, 27);   //  2020-01-27  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 27);
+
+    d1.set_y_d(2020, 28);   //  2020-01-28  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 28);
+
+    d1.set_y_d(2020, 29);   //  2020-01-29  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 29);
+
+    d1.set_y_d(2020, 30);   //  2020-01-30  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 30);
+
+    d1.set_y_d(2020, 31);   //  2020-01-31  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 31);
+
+    d1.set_y_d(2020, 32);   //  2020-02-01  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 32);
+
+    d1.set_y_d(2020, 33);   //  2020-02-02  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 33);
+
+    d1.set_y_d(2020, 34);   //  2020-02-03  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 34);
+
+    d1.set_y_d(2020, 35);   //  2020-02-04  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 35);
+
+    d1.set_y_d(2020, 36);   //  2020-02-05  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 36);
+
+    d1.set_y_d(2020, 37);   //  2020-02-06  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 37);
+
+    d1.set_y_d(2020, 38);   //  2020-02-07  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 38);
+
+    d1.set_y_d(2020, 39);   //  2020-02-08  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 39);
+
+    d1.set_y_d(2020, 40);   //  2020-02-09  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 40);
+
+    d1.set_y_d(2020, 41);   //  2020-02-10  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 41);
+
+    d1.set_y_d(2020, 42);   //  2020-02-11  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 42);
+
+    d1.set_y_d(2020, 43);   //  2020-02-12  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 43);
+
+    d1.set_y_d(2020, 44);   //  2020-02-13  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 44);
+
+    d1.set_y_d(2020, 45);   //  2020-02-14  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 45);
+
+    d1.set_y_d(2020, 46);   //  2020-02-15  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 46);
+
+    d1.set_y_d(2020, 47);   //  2020-02-16  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 47);
+
+    d1.set_y_d(2020, 48);   //  2020-02-17  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 48);
+
+    d1.set_y_d(2020, 49);   //  2020-02-18  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 49);
+
+    d1.set_y_d(2020, 50);   //  2020-02-19  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 50);
+
+    d1.set_y_d(2020, 51);   //  2020-02-20  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 51);
+
+    d1.set_y_d(2020, 52);   //  2020-02-21  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 52);
+
+    d1.set_y_d(2020, 53);   //  2020-02-22  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 53);
+
+    d1.set_y_d(2020, 54);   //  2020-02-23  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 54);
+
+    d1.set_y_d(2020, 55);   //  2020-02-24  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 55);
+
+    d1.set_y_d(2020, 56);   //  2020-02-25  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 56);
+
+    d1.set_y_d(2020, 57);   //  2020-02-26  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 57);
+
+    d1.set_y_d(2020, 58);   //  2020-02-27  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 58);
+
+    d1.set_y_d(2020, 59);   //  2020-02-28  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 59);
+
+    d1.set_y_d(2020, 60);   //  2020-02-29  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 60);
+
+    d1.set_y_d(2020, 61);   //  2020-03-01  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 61);
+
+    d1.set_y_d(2020, 62);   //  2020-03-02  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 62);
+
+    d1.set_y_d(2020, 63);   //  2020-03-03  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 63);
+
+    d1.set_y_d(2020, 64);   //  2020-03-04  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 64);
+
+    d1.set_y_d(2020, 65);   //  2020-03-05  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 65);
+
+    d1.set_y_d(2020, 66);   //  2020-03-06  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 66);
+
+    d1.set_y_d(2020, 67);   //  2020-03-07  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 67);
+
+    d1.set_y_d(2020, 68);   //  2020-03-08  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 68);
+
+    d1.set_y_d(2020, 69);   //  2020-03-09  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 69);
+
+    d1.set_y_d(2020, 70);   //  2020-03-10  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 70);
+
+    d1.set_y_d(2020, 71);   //  2020-03-11  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 71);
+
+    d1.set_y_d(2020, 72);   //  2020-03-12  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 72);
+
+    d1.set_y_d(2020, 73);   //  2020-03-13  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 73);
+
+    d1.set_y_d(2020, 74);   //  2020-03-14  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 74);
+
+    d1.set_y_d(2020, 75);   //  2020-03-15  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 75);
+
+    d1.set_y_d(2020, 76);   //  2020-03-16  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 76);
+
+    d1.set_y_d(2020, 77);   //  2020-03-17  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 77);
+
+    d1.set_y_d(2020, 78);   //  2020-03-18  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 78);
+
+    d1.set_y_d(2020, 79);   //  2020-03-19  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 79);
+
+    d1.set_y_d(2020, 80);   //  2020-03-20  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 80);
+
+    d1.set_y_d(2020, 81);   //  2020-03-21  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 81);
+
+    d1.set_y_d(2020, 82);   //  2020-03-22  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 82);
+
+    d1.set_y_d(2020, 83);   //  2020-03-23  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 83);
+
+    d1.set_y_d(2020, 84);   //  2020-03-24  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 84);
+
+    d1.set_y_d(2020, 85);   //  2020-03-25  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 85);
+
+    d1.set_y_d(2020, 86);   //  2020-03-26  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 86);
+
+    d1.set_y_d(2020, 87);   //  2020-03-27  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 87);
+
+    d1.set_y_d(2020, 88);   //  2020-03-28  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 88);
+
+    d1.set_y_d(2020, 89);   //  2020-03-29  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 89);
+
+    d1.set_y_d(2020, 90);   //  2020-03-30  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 90);
+
+    d1.set_y_d(2020, 91);   //  2020-03-31  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 91);
+
+    d1.set_y_d(2020, 92);   //  2020-04-01  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 92);
+
+    d1.set_y_d(2020, 93);   //  2020-04-02  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 93);
+
+    d1.set_y_d(2020, 94);   //  2020-04-03  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 94);
+
+    d1.set_y_d(2020, 95);   //  2020-04-04  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 95);
+
+    d1.set_y_d(2020, 96);   //  2020-04-05  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 96);
+
+    d1.set_y_d(2020, 97);   //  2020-04-06  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 97);
+
+    d1.set_y_d(2020, 98);   //  2020-04-07  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 98);
+
+    d1.set_y_d(2020, 99);   //  2020-04-08  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 99);
+
+    d1.set_y_d(2020, 100);   //  2020-04-09  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 100);
+
+    d1.set_y_d(2020, 101);   //  2020-04-10  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 101);
+
+    d1.set_y_d(2020, 102);   //  2020-04-11  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 102);
+
+    d1.set_y_d(2020, 103);   //  2020-04-12  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 103);
+
+    d1.set_y_d(2020, 104);   //  2020-04-13  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 104);
+
+    d1.set_y_d(2020, 105);   //  2020-04-14  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 105);
+
+    d1.set_y_d(2020, 106);   //  2020-04-15  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 106);
+
+    d1.set_y_d(2020, 107);   //  2020-04-16  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 107);
+
+    d1.set_y_d(2020, 108);   //  2020-04-17  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 108);
+
+    d1.set_y_d(2020, 109);   //  2020-04-18  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 109);
+
+    d1.set_y_d(2020, 110);   //  2020-04-19  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 110);
+
+    d1.set_y_d(2020, 111);   //  2020-04-20  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 111);
+
+    d1.set_y_d(2020, 112);   //  2020-04-21  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 112);
+
+    d1.set_y_d(2020, 113);   //  2020-04-22  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 113);
+
+    d1.set_y_d(2020, 114);   //  2020-04-23  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 114);
+
+    d1.set_y_d(2020, 115);   //  2020-04-24  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 115);
+
+    d1.set_y_d(2020, 116);   //  2020-04-25  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 116);
+
+    d1.set_y_d(2020, 117);   //  2020-04-26  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 117);
+
+    d1.set_y_d(2020, 118);   //  2020-04-27  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 118);
+
+    d1.set_y_d(2020, 119);   //  2020-04-28  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 119);
+
+    d1.set_y_d(2020, 120);   //  2020-04-29  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 120);
+
+    d1.set_y_d(2020, 121);   //  2020-04-30  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 121);
+
+    d1.set_y_d(2020, 122);   //  2020-05-01  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 122);
+
+    d1.set_y_d(2020, 123);   //  2020-05-02  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 123);
+
+    d1.set_y_d(2020, 124);   //  2020-05-03  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 124);
+
+    d1.set_y_d(2020, 125);   //  2020-05-04  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 125);
+
+    d1.set_y_d(2020, 126);   //  2020-05-05  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 126);
+
+    d1.set_y_d(2020, 127);   //  2020-05-06  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 127);
+
+    d1.set_y_d(2020, 128);   //  2020-05-07  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 128);
+
+    d1.set_y_d(2020, 129);   //  2020-05-08  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 129);
+
+    d1.set_y_d(2020, 130);   //  2020-05-09  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 130);
+
+    d1.set_y_d(2020, 131);   //  2020-05-10  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 131);
+
+    d1.set_y_d(2020, 132);   //  2020-05-11  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 132);
+
+    d1.set_y_d(2020, 133);   //  2020-05-12  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 133);
+
+    d1.set_y_d(2020, 134);   //  2020-05-13  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 134);
+
+    d1.set_y_d(2020, 135);   //  2020-05-14  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 135);
+
+    d1.set_y_d(2020, 136);   //  2020-05-15  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 136);
+
+    d1.set_y_d(2020, 137);   //  2020-05-16  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 137);
+
+    d1.set_y_d(2020, 138);   //  2020-05-17  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 138);
+
+    d1.set_y_d(2020, 139);   //  2020-05-18  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 139);
+
+    d1.set_y_d(2020, 140);   //  2020-05-19  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 140);
+
+    d1.set_y_d(2020, 141);   //  2020-05-20  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 141);
+
+    d1.set_y_d(2020, 142);   //  2020-05-21  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 142);
+
+    d1.set_y_d(2020, 143);   //  2020-05-22  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 143);
+
+    d1.set_y_d(2020, 144);   //  2020-05-23  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 144);
+
+    d1.set_y_d(2020, 145);   //  2020-05-24  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 145);
+
+    d1.set_y_d(2020, 146);   //  2020-05-25  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 146);
+
+    d1.set_y_d(2020, 147);   //  2020-05-26  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 147);
+
+    d1.set_y_d(2020, 148);   //  2020-05-27  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 148);
+
+    d1.set_y_d(2020, 149);   //  2020-05-28  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 149);
+
+    d1.set_y_d(2020, 150);   //  2020-05-29  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 150);
+
+    d1.set_y_d(2020, 151);   //  2020-05-30  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 151);
+
+    d1.set_y_d(2020, 152);   //  2020-05-31  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 152);
+
+    d1.set_y_d(2020, 153);   //  2020-06-01  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 153);
+
+    d1.set_y_d(2020, 154);   //  2020-06-02  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 154);
+
+    d1.set_y_d(2020, 155);   //  2020-06-03  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 155);
+
+    d1.set_y_d(2020, 156);   //  2020-06-04  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 156);
+
+    d1.set_y_d(2020, 157);   //  2020-06-05  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 157);
+
+    d1.set_y_d(2020, 158);   //  2020-06-06  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 158);
+
+    d1.set_y_d(2020, 159);   //  2020-06-07  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 159);
+
+    d1.set_y_d(2020, 160);   //  2020-06-08  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 160);
+
+    d1.set_y_d(2020, 161);   //  2020-06-09  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 161);
+
+    d1.set_y_d(2020, 162);   //  2020-06-10  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 162);
+
+    d1.set_y_d(2020, 163);   //  2020-06-11  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 163);
+
+    d1.set_y_d(2020, 164);   //  2020-06-12  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 164);
+
+    d1.set_y_d(2020, 165);   //  2020-06-13  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 165);
+
+    d1.set_y_d(2020, 166);   //  2020-06-14  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 166);
+
+    d1.set_y_d(2020, 167);   //  2020-06-15  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 167);
+
+    d1.set_y_d(2020, 168);   //  2020-06-16  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 168);
+
+    d1.set_y_d(2020, 169);   //  2020-06-17  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 169);
+
+    d1.set_y_d(2020, 170);   //  2020-06-18  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 170);
+
+    d1.set_y_d(2020, 171);   //  2020-06-19  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 171);
+
+    d1.set_y_d(2020, 172);   //  2020-06-20  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 172);
+
+    d1.set_y_d(2020, 173);   //  2020-06-21  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 173);
+
+    d1.set_y_d(2020, 174);   //  2020-06-22  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 174);
+
+    d1.set_y_d(2020, 175);   //  2020-06-23  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 175);
+
+    d1.set_y_d(2020, 176);   //  2020-06-24  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 176);
+
+    d1.set_y_d(2020, 177);   //  2020-06-25  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 177);
+
+    d1.set_y_d(2020, 178);   //  2020-06-26  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 178);
+
+    d1.set_y_d(2020, 179);   //  2020-06-27  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 179);
+
+    d1.set_y_d(2020, 180);   //  2020-06-28  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 180);
+
+    d1.set_y_d(2020, 181);   //  2020-06-29  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 181);
+
+    d1.set_y_d(2020, 182);   //  2020-06-30  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 182);
+
+    d1.set_y_d(2020, 183);   //  2020-07-01  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 183);
+
+    d1.set_y_d(2020, 184);   //  2020-07-02  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 184);
+
+    d1.set_y_d(2020, 185);   //  2020-07-03  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 185);
+
+    d1.set_y_d(2020, 186);   //  2020-07-04  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 186);
+
+    d1.set_y_d(2020, 187);   //  2020-07-05  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 187);
+
+    d1.set_y_d(2020, 188);   //  2020-07-06  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 188);
+
+    d1.set_y_d(2020, 189);   //  2020-07-07  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 189);
+
+    d1.set_y_d(2020, 190);   //  2020-07-08  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 190);
+
+    d1.set_y_d(2020, 191);   //  2020-07-09  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 191);
+
+    d1.set_y_d(2020, 192);   //  2020-07-10  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 192);
+
+    d1.set_y_d(2020, 193);   //  2020-07-11  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 193);
+
+    d1.set_y_d(2020, 194);   //  2020-07-12  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 194);
+
+    d1.set_y_d(2020, 195);   //  2020-07-13  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 195);
+
+    d1.set_y_d(2020, 196);   //  2020-07-14  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 196);
+
+    d1.set_y_d(2020, 197);   //  2020-07-15  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 197);
+
+    d1.set_y_d(2020, 198);   //  2020-07-16  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 198);
+
+    d1.set_y_d(2020, 199);   //  2020-07-17  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 199);
+
+    d1.set_y_d(2020, 200);   //  2020-07-18  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 200);
+
+    d1.set_y_d(2020, 201);   //  2020-07-19  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 201);
+
+    d1.set_y_d(2020, 202);   //  2020-07-20  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 202);
+
+    d1.set_y_d(2020, 203);   //  2020-07-21  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 203);
+
+    d1.set_y_d(2020, 204);   //  2020-07-22  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 204);
+
+    d1.set_y_d(2020, 205);   //  2020-07-23  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 205);
+
+    d1.set_y_d(2020, 206);   //  2020-07-24  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 206);
+
+    d1.set_y_d(2020, 207);   //  2020-07-25  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 207);
+
+    d1.set_y_d(2020, 208);   //  2020-07-26  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 208);
+
+    d1.set_y_d(2020, 209);   //  2020-07-27  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 209);
+
+    d1.set_y_d(2020, 210);   //  2020-07-28  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 210);
+
+    d1.set_y_d(2020, 211);   //  2020-07-29  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 211);
+
+    d1.set_y_d(2020, 212);   //  2020-07-30  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 212);
+
+    d1.set_y_d(2020, 213);   //  2020-07-31  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 213);
+
+    d1.set_y_d(2020, 214);   //  2020-08-01  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 214);
+
+    d1.set_y_d(2020, 215);   //  2020-08-02  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 215);
+
+    d1.set_y_d(2020, 216);   //  2020-08-03  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 216);
+
+    d1.set_y_d(2020, 217);   //  2020-08-04  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 217);
+
+    d1.set_y_d(2020, 218);   //  2020-08-05  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 218);
+
+    d1.set_y_d(2020, 219);   //  2020-08-06  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 219);
+
+    d1.set_y_d(2020, 220);   //  2020-08-07  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 220);
+
+    d1.set_y_d(2020, 221);   //  2020-08-08  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 221);
+
+    d1.set_y_d(2020, 222);   //  2020-08-09  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 222);
+
+    d1.set_y_d(2020, 223);   //  2020-08-10  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 223);
+
+    d1.set_y_d(2020, 224);   //  2020-08-11  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 224);
+
+    d1.set_y_d(2020, 225);   //  2020-08-12  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 225);
+
+    d1.set_y_d(2020, 226);   //  2020-08-13  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 226);
+
+    d1.set_y_d(2020, 227);   //  2020-08-14  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 227);
+
+    d1.set_y_d(2020, 228);   //  2020-08-15  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 228);
+
+    d1.set_y_d(2020, 229);   //  2020-08-16  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 229);
+
+    d1.set_y_d(2020, 230);   //  2020-08-17  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 230);
+
+    d1.set_y_d(2020, 231);   //  2020-08-18  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 231);
+
+    d1.set_y_d(2020, 232);   //  2020-08-19  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 232);
+
+    d1.set_y_d(2020, 233);   //  2020-08-20  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 233);
+
+    d1.set_y_d(2020, 234);   //  2020-08-21  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 234);
+
+    d1.set_y_d(2020, 235);   //  2020-08-22  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 235);
+
+    d1.set_y_d(2020, 236);   //  2020-08-23  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 236);
+
+    d1.set_y_d(2020, 237);   //  2020-08-24  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 237);
+
+    d1.set_y_d(2020, 238);   //  2020-08-25  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 238);
+
+    d1.set_y_d(2020, 239);   //  2020-08-26  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 239);
+
+    d1.set_y_d(2020, 240);   //  2020-08-27  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 240);
+
+    d1.set_y_d(2020, 241);   //  2020-08-28  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 241);
+
+    d1.set_y_d(2020, 242);   //  2020-08-29  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 242);
+
+    d1.set_y_d(2020, 243);   //  2020-08-30  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 243);
+
+    d1.set_y_d(2020, 244);   //  2020-08-31  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 244);
+
+    d1.set_y_d(2020, 245);   //  2020-09-01  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 245);
+
+    d1.set_y_d(2020, 246);   //  2020-09-02  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 246);
+
+    d1.set_y_d(2020, 247);   //  2020-09-03  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 247);
+
+    d1.set_y_d(2020, 248);   //  2020-09-04  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 248);
+
+    d1.set_y_d(2020, 249);   //  2020-09-05  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 249);
+
+    d1.set_y_d(2020, 250);   //  2020-09-06  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 250);
+
+    d1.set_y_d(2020, 251);   //  2020-09-07  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 251);
+
+    d1.set_y_d(2020, 252);   //  2020-09-08  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 252);
+
+    d1.set_y_d(2020, 253);   //  2020-09-09  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 253);
+
+    d1.set_y_d(2020, 254);   //  2020-09-10  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 254);
+
+    d1.set_y_d(2020, 255);   //  2020-09-11  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 255);
+
+    d1.set_y_d(2020, 256);   //  2020-09-12  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 256);
+
+    d1.set_y_d(2020, 257);   //  2020-09-13  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 257);
+
+    d1.set_y_d(2020, 258);   //  2020-09-14  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 258);
+
+    d1.set_y_d(2020, 259);   //  2020-09-15  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 259);
+
+    d1.set_y_d(2020, 260);   //  2020-09-16  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 260);
+
+    d1.set_y_d(2020, 261);   //  2020-09-17  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 261);
+
+    d1.set_y_d(2020, 262);   //  2020-09-18  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 262);
+
+    d1.set_y_d(2020, 263);   //  2020-09-19  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 263);
+
+    d1.set_y_d(2020, 264);   //  2020-09-20  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 264);
+
+    d1.set_y_d(2020, 265);   //  2020-09-21  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 265);
+
+    d1.set_y_d(2020, 266);   //  2020-09-22  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 266);
+
+    d1.set_y_d(2020, 267);   //  2020-09-23  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 267);
+
+    d1.set_y_d(2020, 268);   //  2020-09-24  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 268);
+
+    d1.set_y_d(2020, 269);   //  2020-09-25  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 269);
+
+    d1.set_y_d(2020, 270);   //  2020-09-26  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 270);
+
+    d1.set_y_d(2020, 271);   //  2020-09-27  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 271);
+
+    d1.set_y_d(2020, 272);   //  2020-09-28  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 272);
+
+    d1.set_y_d(2020, 273);   //  2020-09-29  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 273);
+
+    d1.set_y_d(2020, 274);   //  2020-09-30  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 274);
+
+    d1.set_y_d(2020, 275);   //  2020-10-01  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 275);
+
+    d1.set_y_d(2020, 276);   //  2020-10-02  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 276);
+
+    d1.set_y_d(2020, 277);   //  2020-10-03  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 277);
+
+    d1.set_y_d(2020, 278);   //  2020-10-04  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 278);
+
+    d1.set_y_d(2020, 279);   //  2020-10-05  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 279);
+
+    d1.set_y_d(2020, 280);   //  2020-10-06  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 280);
+
+    d1.set_y_d(2020, 281);   //  2020-10-07  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 281);
+
+    d1.set_y_d(2020, 282);   //  2020-10-08  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 282);
+
+    d1.set_y_d(2020, 283);   //  2020-10-09  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 283);
+
+    d1.set_y_d(2020, 284);   //  2020-10-10  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 284);
+
+    d1.set_y_d(2020, 285);   //  2020-10-11  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 285);
+
+    d1.set_y_d(2020, 286);   //  2020-10-12  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 286);
+
+    d1.set_y_d(2020, 287);   //  2020-10-13  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 287);
+
+    d1.set_y_d(2020, 288);   //  2020-10-14  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 288);
+
+    d1.set_y_d(2020, 289);   //  2020-10-15  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 289);
+
+    d1.set_y_d(2020, 290);   //  2020-10-16  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 290);
+
+    d1.set_y_d(2020, 291);   //  2020-10-17  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 291);
+
+    d1.set_y_d(2020, 292);   //  2020-10-18  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 292);
+
+    d1.set_y_d(2020, 293);   //  2020-10-19  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 293);
+
+    d1.set_y_d(2020, 294);   //  2020-10-20  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 294);
+
+    d1.set_y_d(2020, 295);   //  2020-10-21  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 295);
+
+    d1.set_y_d(2020, 296);   //  2020-10-22  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 296);
+
+    d1.set_y_d(2020, 297);   //  2020-10-23  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 297);
+
+    d1.set_y_d(2020, 298);   //  2020-10-24  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 298);
+
+    d1.set_y_d(2020, 299);   //  2020-10-25  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 299);
+
+    d1.set_y_d(2020, 300);   //  2020-10-26  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 300);
+
+    d1.set_y_d(2020, 301);   //  2020-10-27  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 301);
+
+    d1.set_y_d(2020, 302);   //  2020-10-28  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 302);
+
+    d1.set_y_d(2020, 303);   //  2020-10-29  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 303);
+
+    d1.set_y_d(2020, 304);   //  2020-10-30  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 304);
+
+    d1.set_y_d(2020, 305);   //  2020-10-31  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 305);
+
+    d1.set_y_d(2020, 306);   //  2020-11-01  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 306);
+
+    d1.set_y_d(2020, 307);   //  2020-11-02  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 307);
+
+    d1.set_y_d(2020, 308);   //  2020-11-03  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 308);
+
+    d1.set_y_d(2020, 309);   //  2020-11-04  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 309);
+
+    d1.set_y_d(2020, 310);   //  2020-11-05  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 310);
+
+    d1.set_y_d(2020, 311);   //  2020-11-06  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 311);
+
+    d1.set_y_d(2020, 312);   //  2020-11-07  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 312);
+
+    d1.set_y_d(2020, 313);   //  2020-11-08  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 313);
+
+    d1.set_y_d(2020, 314);   //  2020-11-09  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 314);
+
+    d1.set_y_d(2020, 315);   //  2020-11-10  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 315);
+
+    d1.set_y_d(2020, 316);   //  2020-11-11  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 316);
+
+    d1.set_y_d(2020, 317);   //  2020-11-12  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 317);
+
+    d1.set_y_d(2020, 318);   //  2020-11-13  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 318);
+
+    d1.set_y_d(2020, 319);   //  2020-11-14  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 319);
+
+    d1.set_y_d(2020, 320);   //  2020-11-15  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 320);
+
+    d1.set_y_d(2020, 321);   //  2020-11-16  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 321);
+
+    d1.set_y_d(2020, 322);   //  2020-11-17  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 322);
+
+    d1.set_y_d(2020, 323);   //  2020-11-18  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 323);
+
+    d1.set_y_d(2020, 324);   //  2020-11-19  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 324);
+
+    d1.set_y_d(2020, 325);   //  2020-11-20  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 325);
+
+    d1.set_y_d(2020, 326);   //  2020-11-21  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 326);
+
+    d1.set_y_d(2020, 327);   //  2020-11-22  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 327);
+
+    d1.set_y_d(2020, 328);   //  2020-11-23  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 328);
+
+    d1.set_y_d(2020, 329);   //  2020-11-24  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 329);
+
+    d1.set_y_d(2020, 330);   //  2020-11-25  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 330);
+
+    d1.set_y_d(2020, 331);   //  2020-11-26  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 331);
+
+    d1.set_y_d(2020, 332);   //  2020-11-27  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 332);
+
+    d1.set_y_d(2020, 333);   //  2020-11-28  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 333);
+
+    d1.set_y_d(2020, 334);   //  2020-11-29  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 334);
+
+    d1.set_y_d(2020, 335);   //  2020-11-30  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 335);
+
+    d1.set_y_d(2020, 336);   //  2020-12-01  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 336);
+
+    d1.set_y_d(2020, 337);   //  2020-12-02  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 337);
+
+    d1.set_y_d(2020, 338);   //  2020-12-03  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 338);
+
+    d1.set_y_d(2020, 339);   //  2020-12-04  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 339);
+
+    d1.set_y_d(2020, 340);   //  2020-12-05  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 340);
+
+    d1.set_y_d(2020, 341);   //  2020-12-06  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 341);
+
+    d1.set_y_d(2020, 342);   //  2020-12-07  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 342);
+
+    d1.set_y_d(2020, 343);   //  2020-12-08  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 343);
+
+    d1.set_y_d(2020, 344);   //  2020-12-09  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 344);
+
+    d1.set_y_d(2020, 345);   //  2020-12-10  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 345);
+
+    d1.set_y_d(2020, 346);   //  2020-12-11  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 346);
+
+    d1.set_y_d(2020, 347);   //  2020-12-12  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 347);
+
+    d1.set_y_d(2020, 348);   //  2020-12-13  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 348);
+
+    d1.set_y_d(2020, 349);   //  2020-12-14  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 349);
+
+    d1.set_y_d(2020, 350);   //  2020-12-15  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 350);
+
+    d1.set_y_d(2020, 351);   //  2020-12-16  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 351);
+
+    d1.set_y_d(2020, 352);   //  2020-12-17  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 352);
+
+    d1.set_y_d(2020, 353);   //  2020-12-18  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 353);
+
+    d1.set_y_d(2020, 354);   //  2020-12-19  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 354);
+
+    d1.set_y_d(2020, 355);   //  2020-12-20  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 355);
+
+    d1.set_y_d(2020, 356);   //  2020-12-21  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 356);
+
+    d1.set_y_d(2020, 357);   //  2020-12-22  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 357);
+
+    d1.set_y_d(2020, 358);   //  2020-12-23  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 358);
+
+    d1.set_y_d(2020, 359);   //  2020-12-24  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 359);
+
+    d1.set_y_d(2020, 360);   //  2020-12-25  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 360);
+
+    d1.set_y_d(2020, 361);   //  2020-12-26  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 361);
+
+    d1.set_y_d(2020, 362);   //  2020-12-27  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 362);
+
+    d1.set_y_d(2020, 363);   //  2020-12-28  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 363);
+
+    d1.set_y_d(2020, 364);   //  2020-12-29  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 364);
+
+    d1.set_y_d(2020, 365);   //  2020-12-30  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 365);
+
+    d1.set_y_d(2020, 366);   //  2020-12-31  Note: is a leap year.
+    REQUIRE(d1.getDayOfTheYear() == 366);
+
+}

@@ -18,8 +18,8 @@ Other Notes:
 I am considering valid years to be 1 to 9999.  It may be extreme, but no one says you have to use all those years.
 Anyhow the calenders are and were not constant the whole time, but if you stay with years greater then 1600 you should be ok.
 
-I would like an email if you like this class, or hate it, or somewhere inbetween.
+I would like an email if you like this class, or hate it, or somewhere  in between.
 There are some more methods that could be made, but I will most likely be moving on to other classes, and using this as is,
-and improving it once in a while at this point, and continue to write verifcation tests.
+and improving it once in a while at this point, and continue to write verification tests.
 
 
