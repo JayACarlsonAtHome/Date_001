@@ -1,0 +1,101 @@
+
+TEST_CASE("Test isValid: 2020 positive", "[j5c_Date]")
+{
+    j5c_Date d1{2020,01,01};
+
+    // January
+    d1.setMonth(1);
+    for(int dd = 1; dd < 32; dd++)
+    {
+        d1.setDay(dd);
+        REQUIRE(d1.isValid() == true);
+    }
+
+    // February
+    d1.setMonth(2);
+    for(int dd = 1; dd < 30; dd++)
+    {
+        d1.setDay(dd);
+        REQUIRE(d1.isValid() == true);
+    }
+
+    // March
+    d1.setMonth(3);
+    for(int dd = 1; dd < 32; dd++)
+    {
+        d1.setDay(dd);
+        REQUIRE(d1.isValid() == true);
+    }
+
+    // April
+    d1.setMonth(4);
+    for(int dd = 1; dd < 31; dd++)
+    {
+        d1.setDay(dd);
+        REQUIRE(d1.isValid() == true);
+    }
+
+    // May
+    d1.setMonth(5);
+    for(int dd = 1; dd < 32; dd++)
+    {
+        d1.setDay(dd);
+        REQUIRE(d1.isValid() == true);
+    }
+
+    // Jun
+    d1.setMonth(6);
+    for(int dd = 1; dd < 31; dd++)
+    {
+        d1.setDay(dd);
+        REQUIRE(d1.isValid() == true);
+    }
+
+    // July
+    d1.setMonth(7);
+    for(int dd = 1; dd < 32; dd++)
+    {
+        d1.setDay(dd);
+        REQUIRE(d1.isValid() == true);
+    }
+
+    // August
+    d1.setMonth(8);
+    for(int dd = 1; dd < 32; dd++)
+    {
+        d1.setDay(dd);
+        REQUIRE(d1.isValid() == true);
+    }
+
+    // September
+    d1.setMonth(9);
+    for(int dd = 1; dd < 31; dd++)
+    {
+        d1.setDay(dd);
+        REQUIRE(d1.isValid() == true);
+    }
+
+    // October
+    d1.setMonth(10);
+    for(int dd = 1; dd < 32; dd++)
+    {
+        d1.setDay(dd);
+        REQUIRE(d1.isValid() == true);
+    }
+
+    // November
+    d1.setMonth(11);
+    for(int dd = 1; dd < 31; dd++)
+    {
+        d1.setDay(dd);
+        REQUIRE(d1.isValid() == true);
+    }
+
+    // December
+    d1.setMonth(12);
+    for(int dd = 1; dd < 32; dd++)
+    {
+        d1.setDay(dd);
+        REQUIRE(d1.isValid() == true);
+    }
+}

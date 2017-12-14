@@ -592,8 +592,10 @@ protected:
 
 public:
     //constructors
-    explicit j5c_Date()                                                     noexcept;
-    explicit j5c_Date(int year, int month, int day) : m_year(year) , m_month(month), m_day(day) { };
+    explicit j5c_Date()                                       noexcept;
+    explicit j5c_Date(int year, int month, int day)           noexcept
+            : m_year(year) , m_month(month), m_day(day) { };
+
     explicit j5c_Date(int year, int dayOfTheYear)             noexcept;
     //constructor helpers / methods
     void set_y_d(int year, int dayOfTheYear)                  noexcept;
@@ -606,9 +608,6 @@ public:
 
     bool isValid()                              const noexcept;
     bool isLeapYear()                           const noexcept;
-    int getDay()                                const noexcept;
-    int getMonth()                              const noexcept;
-    int getYear()                               const noexcept;
     int getAge()                                const noexcept;
     int getFirstDayOfYear()                     const noexcept;
     int getDayOfWeek()                          const noexcept;
@@ -636,12 +635,17 @@ public:
     const j5c_Date& operator--()        noexcept;   // prefix
     const j5c_Date  operator--(int)     noexcept;   // postfix
 
-    void setDay(  int day)       noexcept;
-    void setMonth(int month)     noexcept;
-    void setYear( int year)      noexcept;
+    int  getDay()   const noexcept { return m_day;   }
+    int  getMonth() const noexcept { return m_month; }
+    int  getYear()  const noexcept { return m_year;  }
+
+    void setDay  (int day)   noexcept  { m_day   = day;   }
+    void setMonth(int month) noexcept  { m_month = month; }
+    void setYear (int year)  noexcept  { m_year  = year; }
 
 
-};
+
+    };
 
 }
 

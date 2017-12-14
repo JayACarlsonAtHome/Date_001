@@ -90,37 +90,12 @@ namespace J5C_DSL_Code {
     {
         if (this != &date)
         {
-            m_year = date.m_year;
+            m_year  = date.m_year;
             m_month = date.m_month;
-            m_day = date.m_day;
+            m_day   = date.m_day;
         }
         return *this;
     }
-
-    int j5c_Date::getDay()     const noexcept
-    { return m_day; };
-
-    int j5c_Date::getMonth()   const noexcept
-    { return m_month; };
-
-    int j5c_Date::getYear()    const noexcept
-    { return m_year; };
-
-    void j5c_Date::setDay(int day) noexcept
-    {
-        m_day = day;
-    };
-
-    void j5c_Date::setMonth(int month) noexcept
-    {
-        m_month = month;
-    };
-
-    void j5c_Date::setYear(int year) noexcept
-    {
-        m_year = year;
-    };
-
 
     bool j5c_Date::isLeapYear(int year) const noexcept
     {
@@ -375,11 +350,8 @@ namespace J5C_DSL_Code {
     bool j5c_Date::isValid() const noexcept
     {
 
-        //
-        // warning!! --contains many early returns
-        //
-
         if (m_year < MIN_YEAR) return false;
+        if (m_year > MAX_YEAR) return false;
         //
         if ((m_month > 12) || (m_month < 1)) return false;
         //
@@ -410,13 +382,19 @@ namespace J5C_DSL_Code {
 
     const bool j5c_Date::operator<(const j5c_Date &d) const noexcept
     {
-        if (m_year == d.m_year) { // same getYear
-            if (m_month == d.m_month) { // same getMonth
+        if (m_year == d.m_year)
+        {
+            if (m_month == d.m_month)
+            {
                 return (m_day < d.m_day);
-            } else {
+            }
+            else
+            {
                 return (m_month < d.m_month);
             };
-        } else { // different getYear
+        }
+        else
+        {
             return (m_year < d.m_year);
         };
     };
@@ -453,7 +431,6 @@ namespace J5C_DSL_Code {
 
     j5c_Date j5c_Date::next_Date() const noexcept
     {
-        // warning!! --early returns in code
         j5c_Date nextDate;
         nextDate = this->add_Days(1);
         return nextDate;
@@ -461,7 +438,6 @@ namespace J5C_DSL_Code {
 
     j5c_Date j5c_Date::prior_Date() const noexcept
     {
-        // warning!! --early returns in code
         j5c_Date nextDate;
         nextDate = this->add_Days(-1);
         return nextDate;
