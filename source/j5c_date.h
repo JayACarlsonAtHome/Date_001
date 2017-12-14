@@ -592,11 +592,10 @@ protected:
 public:
     //constructors
     explicit j5c_Date()                                                     noexcept;
-    explicit j5c_Date(const int &year, const int &month, const int &day)    noexcept;
-    explicit j5c_Date(const int &year, const int &dayOfTheYear)             noexcept;
+    explicit j5c_Date(const int year, const int month, const int day) : m_year(year) , m_month(month), m_day(day) { };
+    explicit j5c_Date(const int year, const int dayOfTheYear)             noexcept;
     //constructor helpers / methods
-    void set_ymd(const int &year, const int &month, const int &day)         noexcept;
-    void set_y_d(const int &year, const int &dayOfTheYear)                  noexcept;
+    void set_y_d(const int year, const int dayOfTheYear)                  noexcept;
 
     j5c_Date& operator=(const j5c_Date& date);
 

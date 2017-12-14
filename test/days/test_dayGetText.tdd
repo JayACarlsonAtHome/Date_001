@@ -1,0 +1,79 @@
+namespace dayGetText
+ {
+    std::string getDOW_Text(const int day, uint length)
+    {
+        std::string result = "";
+        if (length > 10) return ("Invalid length test parameter");
+
+        //
+        // begin processing
+        //
+        if ( day == 0) { result = "Sunday";    };
+        if ( day == 1) { result = "Monday";    };
+        if ( day == 2) { result = "Tuesday";   };
+        if ( day == 3) { result = "Wednesday"; };
+        if ( day == 4) { result = "Thursday";  };
+        if ( day == 5) { result = "Friday";    };
+        if ( day == 6) { result = "Saturday";  };
+
+        if (length == 0)
+        {
+            return result;
+        }
+        else
+        {
+            result = result + "          ";
+            result = result.substr(0,length);
+        }
+        return result;
+    }
+
+    TEST_CASE("Test getDayText method", "[j5c_Date]")
+    {
+        j5c_Date d;
+        std::string dayText1 = "";
+        std::string dayText2 = "";
+        int dayCounter = 0;
+        for (int yyyy = 2017; yyyy < 2021; ++yyyy)
+        {
+            for (int month = 1; month < 13; ++month)
+            {
+                for (int day = 1; day < 32; ++day)
+                {
+                    d.setYear(yyyy);
+                    d.setMonth(month);
+                    d.setDay(day);
+                    if ((month == 1) && (day == 1))
+                    {
+                        dayCounter = d.getFirstDayOfYear();
+                        --dayCounter;
+                    }
+
+                    if (d.isValid())
+                    {
+                        // std::cout << d << " : " << d.getDayText(10) << std::endl;
+                        //
+                        // Setup for test
+                        //
+                        ++dayCounter;
+                        if ( dayCounter > 6 ) { dayCounter = 0;               }
+
+                        //
+                        // test1
+                        //
+                        dayText1 = getDOW_Text(dayCounter, 0);
+                        dayText2 = d.getDayText(0);
+                        REQUIRE(dayText1 == dayText2);
+
+                        //
+                        // test 2
+                        //
+                        dayText1 = getDOW_Text(dayCounter, 10);
+                        dayText2 = d.getDayText(10);
+                        REQUIRE(dayText1 == dayText2);
+                    }
+                }
+            }
+        }
+    }
+}

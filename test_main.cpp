@@ -17,7 +17,6 @@ bool isLeapYear(int year)
     return d.isLeapYear();
 }
 
-/*
 #include "test/year/test_leap_year_0001_0500.tdd"
 #include "test/year/test_leap_year_0501_1000.tdd"
 #include "test/year/test_leap_year_1001_1500.tdd"
@@ -42,7 +41,8 @@ bool isLeapYear(int year)
 #include "test/days/test_add_days_pos_0001_2190.tdd"
 #include "test/quarter/get_day_of_quarter_2017.tdd"
 #include "test/quarter/get_day_of_quarter_2020.tdd"
-*/
+#include "test/days/test_getFirstDayOfYear.tdd"
+#include "test/days/test_dayGetText.tdd"
 
 TEST_CASE("Starting Tests", "[j5c_Date]")
 {
@@ -53,19 +53,64 @@ TEST_CASE("Starting Tests", "[j5c_Date]")
 
 TEST_CASE("Date Assignment operator", "[j5c_Date]")
 {
-    j5c_Date d1{2017,01,01};
+    j5c_Date d1{2017, 1, 1};
     j5c_Date d2{2018,12,31};
     d2 = d1;
     REQUIRE(d1.getYear()  == d2.getYear());
     REQUIRE(d1.getMonth() == d2.getMonth());
     REQUIRE(d1.getDay()   == d2.getDay());
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 1);
+    REQUIRE(d1.getDay()   == 1);
+};
+
+TEST_CASE("Get Day of Week Text", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 1};
+    //
+    // Test set 1
+    //
+    d1.setDay(1);
+    REQUIRE(d1.getDayText(0) == "Sunday");
+    d1.setDay(2);
+    REQUIRE(d1.getDayText(0) == "Monday");
+    d1.setDay(3);
+    REQUIRE(d1.getDayText(0) == "Tuesday");
+    d1.setDay(4);
+    REQUIRE(d1.getDayText(0) == "Wednesday");
+    d1.setDay(5);
+    REQUIRE(d1.getDayText(0) == "Thursday");
+    d1.setDay(6);
+    REQUIRE(d1.getDayText(0) == "Friday");
+    d1.setDay(7);
+    REQUIRE(d1.getDayText(0) == "Saturday");
+
+    //
+    // Test set 2
+    //
+    d1.setDay(15);
+    REQUIRE(d1.getDayText(10) == "Sunday    ");
+    d1.setDay(16);
+    REQUIRE(d1.getDayText(10) == "Monday    ");
+    d1.setDay(17);
+    REQUIRE(d1.getDayText(10) == "Tuesday   ");
+    d1.setDay(18);
+    REQUIRE(d1.getDayText(10) == "Wednesday ");
+    d1.setDay(19);
+    REQUIRE(d1.getDayText(10) == "Thursday  ");
+    d1.setDay(20);
+    REQUIRE(d1.getDayText(10) == "Friday    ");
+    d1.setDay(21);
+    REQUIRE(d1.getDayText(10) == "Saturday  ");
+
+
 };
 
 
 TEST_CASE("Method j5c_Date::next_Date()", "[j5c_Date]")
 {
-    j5c_Date d1{2017,01,01};
-    j5c_Date d2{2017,01,01};
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2017, 1, 1};
     for (int yyyy = 2017; yyyy < 2020; yyyy++) {
         d1.setYear(yyyy);
         d2.setYear(yyyy);
@@ -96,29 +141,29 @@ TEST_CASE("Method j5c_Date::prior_Date()", "[j5c_Date]")
 
 TEST_CASE("Method j5c_Date::++prefix", "[j5c_Date]")
 {
-    j5c_Date d1{2017,01,01};
-    j5c_Date d2{2017,01,01};
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2017, 1, 1};
     REQUIRE(d1.next_Date().strDate() == (++d2).strDate());
 };
 
 TEST_CASE("Method j5c_Date::postfix++", "[j5c_Date]")
 {
-    j5c_Date d1{2017,01,01};
-    j5c_Date d2{2017,01,01};
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2017, 1, 1};
     REQUIRE(d1.next_Date().strDate() == (d2++).strDate());
 };
 
 TEST_CASE("Method j5c_Date::--prefix", "[j5c_Date]")
 {
-    j5c_Date d1{2017,01,01};
-    j5c_Date d2{2017,01,01};
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2017, 1, 1};
     REQUIRE(d1.prior_Date().strDate() == (--d2).strDate());
 };
 
 TEST_CASE("Method j5c_Date::postfix--", "[j5c_Date]")
 {
-    j5c_Date d1{2017,01,01};
-    j5c_Date d2{2017,01,01};
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2017, 1, 1};
     REQUIRE(d1.prior_Date().strDate() == (d2--).strDate());
 };
 

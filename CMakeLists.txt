@@ -25,6 +25,8 @@ set(TEST_FILES
         test/days/test_add_days_neg_0001_2190.tdd
         test/quarter/get_day_of_quarter_2017.tdd
         test/quarter/get_day_of_quarter_2020.tdd
+        test/days/test_getFirstDayOfYear.tdd
+        test/days/test_dayGetText.tdd
         )
 
 set(SOURCE_FILES

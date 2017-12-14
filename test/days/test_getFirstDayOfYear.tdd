@@ -1,0 +1,91 @@
+namespace getFirstDayOfYear
+ {
+    std::string getDOW_Text(const int day, uint length)
+    {
+        std::string result = "";
+        if (length > 10) return ("Invalid length test parameter");
+
+        //
+        // begin processing
+        //
+        if ( day == 0) { result = "Sunday";    };
+        if ( day == 1) { result = "Monday";    };
+        if ( day == 2) { result = "Tuesday";   };
+        if ( day == 3) { result = "Wednesday"; };
+        if ( day == 4) { result = "Thursday";  };
+        if ( day == 5) { result = "Friday";    };
+        if ( day == 6) { result = "Saturday";  };
+
+        if (length == 0)
+        {
+            return result;
+        }
+        else
+        {
+            result = result + "          ";
+            result = result.substr(0,length);
+        }
+        return result;
+    }
+
+
+    TEST_CASE("Test getFirstDayOfYear method", "[j5c_Date]")
+    {
+        j5c_Date d1;
+        j5c_Date d2;
+        std::string dayText1 = "";
+        std::string dayText2 = "";
+        int DOW1 = 0;
+        int DOW2 = 0;
+        bool isPriorYearLeapYear = false;
+        for (int yyyy = 1; yyyy < 1000; ++yyyy)
+        {
+            d1.setYear(yyyy);
+            d1.setMonth(1);
+            d1.setDay(1);
+
+            if (yyyy == 1)
+            {
+                isPriorYearLeapYear = false;
+                DOW2 = 1;
+            }
+
+            if (yyyy > 1)
+            {
+                d2.setYear((yyyy-1));
+                d2.setMonth(1);
+                d2.setDay(1);
+                isPriorYearLeapYear = d2.isLeapYear();
+                DOW2 = d2.getDayOfWeek();
+                if (isPriorYearLeapYear)
+                {
+                 DOW2 += 2;
+                }
+                else
+                {
+                    DOW2 +=1;
+                }
+
+                if (DOW2 > 6) { DOW2 -= 7; }
+            }
+
+            if (d1.isValid())
+            {
+                dayText2 = getDOW_Text(DOW2, 0);
+                dayText1 = d1.getDayText(0);
+                /* // for debugging if necessary
+                std::cout << d1 << " : isPriorYearLeapYear =  " << std::boolalpha << isPriorYearLeapYear
+                << " : d1(text) = " << dayText1
+                << " : d2(text) = " << dayText2
+                <<  std::endl;
+                */
+                REQUIRE(dayText1 == dayText2);
+            }
+            else
+            {
+                REQUIRE(dayText1 == "Invalid date, not possible!!!");
+            }
+        }
+    }
+
+}

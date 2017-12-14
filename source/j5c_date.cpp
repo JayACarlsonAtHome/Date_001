@@ -33,36 +33,17 @@ namespace J5C_DSL_Code {
     {
         time_t nowTime = time(&nowTime);
         struct tm *timeinfo = localtime(&nowTime);
-        int year = timeinfo->tm_year + 1900;
-        int month = timeinfo->tm_mon + 1;
-        int day = timeinfo->tm_mday;
-        set_ymd(year, month, day);
+        m_year = timeinfo->tm_year + 1900;
+        m_month = timeinfo->tm_mon + 1;
+        m_day = timeinfo->tm_mday;
     };
 
-    j5c_Date::j5c_Date(const int &year, const int &month, const int &day)  noexcept
-    {
-        set_ymd(year, month, day);
-    };
-
-    j5c_Date::j5c_Date(const int &year, const int &dayOfTheYear) noexcept
+    j5c_Date::j5c_Date(const int year, const int dayOfTheYear) noexcept
     {
         set_y_d(year, dayOfTheYear);
     }
 
-
-    void j5c_Date::set_ymd(const int &year, const int &month, const int &day) noexcept
-    {
-
-        m_year = year;
-        m_month = month;
-        m_day = day;
-        if (!this->isValid())
-        {
-            cout_InvalidDate();
-        }
-    }
-
-    void j5c_Date::set_y_d(const int &year, const int &dayOfTheYear) noexcept
+    void j5c_Date::set_y_d(const int year, const int dayOfTheYear) noexcept
     {
         m_year = year;
         m_month = 0;
