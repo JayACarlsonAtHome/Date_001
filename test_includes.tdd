@@ -14,6 +14,22 @@ bool isLeapYear(int year)
     return d.isLeapYear();
 }
 
+#include "test/days/get_day_of_year_2017.tdd"
+#include "test/days/get_day_of_year_2020.tdd"
+#include "test/days/test_add_days_neg_0001_2190.tdd"
+#include "test/days/test_add_days_pos_0001_2190.tdd"
+#include "test/days/test_dayGetText.tdd"
+#include "test/days/test_getFirstDayOfYear.tdd"
+#include "test/days/test_isValid_2017_negative.tdd"
+#include "test/days/test_isValid_2017_positive.tdd"
+#include "test/days/test_isValid_2020_negative.tdd"
+#include "test/days/test_isValid_2020_positive.tdd"
+
+#include "test/quarter/get_day_of_quarter_2017.tdd"
+#include "test/quarter/get_day_of_quarter_2020.tdd"
+#include "test/quarter/get_quarter_2017.tdd"
+#include "test/quarter/get_quarter_2020.tdd"
+
 
 #include "test/year/test_leap_year_0001_0500.tdd"
 #include "test/year/test_leap_year_0501_1000.tdd"
@@ -36,15 +52,6 @@ bool isLeapYear(int year)
 #include "test/year/test_leap_year_9001_9500.tdd"
 #include "test/year/test_leap_year_9501_9999.tdd"
 
-#include "test/days/get_day_of_year_2017.tdd"
-#include "test/days/get_day_of_year_2020.tdd"
-#include "test/days/test_getFirstDayOfYear.tdd"
-#include "test/days/test_dayGetText.tdd"
-#include "test/days/test_add_days_neg_0001_2190.tdd"
-#include "test/days/test_add_days_pos_0001_2190.tdd"
-
-#include "test/quarter/get_day_of_quarter_2017.tdd"
-#include "test/quarter/get_day_of_quarter_2020.tdd"
 
 
 TEST_CASE("Starting Tests", "[j5c_Date]")
