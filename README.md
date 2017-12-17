@@ -22,4 +22,3 @@ I would like an email if you like this class, or hate it, or somewhere  in betwe
 There are some more methods that could be made, but I will most likely be moving on to other classes, and using this as is,
 and improving it once in a while at this point, and continue to write verification tests.
 
-

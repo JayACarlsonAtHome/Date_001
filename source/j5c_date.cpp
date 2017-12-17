@@ -161,12 +161,19 @@ namespace J5C_DSL_Code {
     {
         bool isLeapYear;
         int year = m_year;
-        j5c_Date newDate;
+        for (int m = 1; m < m_month; ++m)
+        {
+            days += numberOfDaysInMonth[m];
+        }
+        isLeapYear = this->isLeapYear(year);
+        if ((isLeapYear) && (m_month >2))
+        {
+            days++;
+        }
         days = days + m_day;
         const int daysInYear     = 365;
         const int daysInLeapYear = 366;
         bool cont = true;
-
         while (cont)
         {
             cont = false;
@@ -187,7 +194,7 @@ namespace J5C_DSL_Code {
                 }
             }
         }
-        newDate = j5c_Date(year,days);
+        j5c_Date newDate{year,days};
         return newDate;
 
     }
@@ -197,10 +204,7 @@ namespace J5C_DSL_Code {
         bool cont = true;
         bool isLeapYear;
         int newYear = m_year;
-        bool once = false;
-        // lets work with positive numbers by flipping the sign
-        days = days * -1;
-        j5c_Date newDate = j5c_Date(0001, 01, 01);
+        int temp = 0;
         int newDOTY = this->getDayOfTheYear();
         while (cont) {
             if (newDOTY > days)
@@ -211,17 +215,13 @@ namespace J5C_DSL_Code {
             else
             {
                 newDOTY += 365;
-                if (!once)
-                {
-                    once = true;
-                    newDOTY++;
-                }
-                isLeapYear = this->isLeapYear(newYear);
+                temp = newYear - 1;
+                isLeapYear = this->isLeapYear(temp);
                 if (isLeapYear) { newDOTY+= 1; }
                 newYear--;
             }
         }
-        newDate.set_y_d(newYear,newDOTY);
+        j5c_Date newDate{newYear,newDOTY};
         return newDate;
     }
 
@@ -239,6 +239,7 @@ namespace J5C_DSL_Code {
         }
         if (days < 0)
         {
+            days = days * -1;
             newDate = internal_subDays(days);
         }
         return newDate;
@@ -402,12 +403,14 @@ namespace J5C_DSL_Code {
     // remaining operators defined in terms of the above
     const bool j5c_Date::operator<=(const j5c_Date &d) const noexcept
         {
-            return this == &d || operator<(d);
+            if (operator==(d)) return true;
+            return operator<(d);
         };
 
     const bool j5c_Date::operator>=(const j5c_Date &d) const noexcept
     {
-        return this == &d || operator>(d);
+        if (operator==(d)) return true;
+        return operator>(d);
     };
 
     const bool j5c_Date::operator>(const j5c_Date &d) const noexcept
@@ -429,48 +432,57 @@ namespace J5C_DSL_Code {
         return !(t == d);
     };
 
-    j5c_Date j5c_Date::next_Date() const noexcept
+    j5c_Date j5c_Date::getNext_Date() const noexcept
     {
-        j5c_Date nextDate;
-        nextDate = this->add_Days(1);
-        return nextDate;
+        return this->internal_addDays(1);
     };
 
-    j5c_Date j5c_Date::prior_Date() const noexcept
+    j5c_Date j5c_Date::getPriorDate() const noexcept
     {
-        j5c_Date nextDate;
-        nextDate = this->add_Days(-1);
-        return nextDate;
+        return this->internal_subDays(1);
     };
 
     const j5c_Date j5c_Date::operator++(int) noexcept
     {
-        j5c_Date next = this->next_Date();
-        return next;
+        // postfix++
+        j5c_Date postfix{*this};
+        j5c_Date newThis = this->getNext_Date();
+        this->m_year  = newThis.m_year;
+        this->m_month = newThis.m_month;
+        this->m_day   = newThis.m_day;
+        return postfix;
     };
 
     const j5c_Date  j5c_Date::operator--(int) noexcept
     {
-        j5c_Date prior = this->prior_Date();
-        return prior;
+        // postfix++
+        j5c_Date postfix{*this};
+        j5c_Date newThis = this->getPriorDate();
+        this->m_year  = newThis.m_year;
+        this->m_month = newThis.m_month;
+        this->m_day   = newThis.m_day;
+        return postfix;
     };
 
-    const j5c_Date&  j5c_Date::operator++() noexcept
+    const j5c_Date& j5c_Date::operator++() noexcept
     {
-        j5c_Date next = this->next_Date();
-        m_year  = next.getYear();
-        m_month = next.m_month;
-        m_day   = next.m_day;
+        // prefix++
+        j5c_Date prefix = this->getNext_Date();
+        this->m_year  = prefix.m_year;
+        this->m_month = prefix.m_month;
+        this->m_day   = prefix.m_day;
         return *this;
+
     };
 
 
-    const j5c_Date&  j5c_Date::operator--() noexcept
+    const j5c_Date& j5c_Date::operator--() noexcept
     {
-        j5c_Date prior = this->prior_Date();
-        m_year  = prior.getYear();
-        m_month = prior.m_month;
-        m_day   = prior.m_day;
+        // prefix--
+        j5c_Date prefix = this->getPriorDate();
+        this->m_year  = prefix.m_year;
+        this->m_month = prefix.m_month;
+        this->m_day   = prefix.m_day;
         return *this;
     };
 

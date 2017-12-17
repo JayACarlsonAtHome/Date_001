@@ -1,4 +1,8 @@
-#include "source/catch2.h"
+
+
+#include "source/j5c_date.h"
+
+using namespace J5C_DSL_Code;
 
 j5c_Date d1;
 j5c_Date d2;
@@ -14,10 +18,11 @@ bool isLeapYear(int year)
     return d.isLeapYear();
 }
 
+
 #include "test/days/get_day_of_year_2017.tdd"
 #include "test/days/get_day_of_year_2020.tdd"
-#include "test/days/test_add_days_neg_0001_2190.tdd"
-#include "test/days/test_add_days_pos_0001_2190.tdd"
+#include "test/days/test_add_days_neg_0001_3653.tdd"
+#include "test/days/test_add_days_pos_0001_3652.tdd"
 #include "test/days/test_dayGetText.tdd"
 #include "test/days/test_getFirstDayOfYear.tdd"
 #include "test/days/test_isValid_2017_negative.tdd"
@@ -53,12 +58,25 @@ bool isLeapYear(int year)
 #include "test/year/test_leap_year_9501_9999.tdd"
 
 
+#include "test/z_operator/operators.tdd"
 
 TEST_CASE("Starting Tests", "[j5c_Date]")
 {
     std::cout << std::endl;
     std::cout << "Starting Testing: ... Please be patient..." << std::endl;
 }
+
+
+TEST_CASE("++Operator PreFix 999", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 2, 1};
+
+    ++d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 2);
+    REQUIRE(d1.getDay()   == 2);
+};
+
 
 
 TEST_CASE("Date Assignment operator", "[j5c_Date]")
@@ -128,7 +146,7 @@ TEST_CASE("Method j5c_Date::next_Date()", "[j5c_Date]")
         {
             d1.set_y_d(yyyy, ddd);
             d2.set_y_d(yyyy, ddd);
-            REQUIRE(d1.next_Date().strDate() == d2.add_Days(1).strDate());
+            REQUIRE(d1.getNext_Date().strDate() == d2.add_Days(1).strDate());
         }
     }
 };
@@ -144,7 +162,7 @@ TEST_CASE("Method j5c_Date::prior_Date()", "[j5c_Date]")
         {
             d1.set_y_d(yyyy,ddd);
             d2.set_y_d(yyyy,ddd);
-            REQUIRE(d1.next_Date().strDate() == d2.add_Days(1).strDate());
+            REQUIRE(d1.getNext_Date().strDate() == d2.add_Days(1).strDate());
         }
     }
 };
@@ -153,28 +171,37 @@ TEST_CASE("Method j5c_Date::++prefix", "[j5c_Date]")
 {
     j5c_Date d1{2017, 1, 1};
     j5c_Date d2{2017, 1, 1};
-    REQUIRE(d1.next_Date().strDate() == (++d2).strDate());
-};
-
-TEST_CASE("Method j5c_Date::postfix++", "[j5c_Date]")
-{
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2017, 1, 1};
-    REQUIRE(d1.next_Date().strDate() == (d2++).strDate());
+    REQUIRE(d1.getNext_Date().strDate()   == (++d2).strDate());
 };
 
 TEST_CASE("Method j5c_Date::--prefix", "[j5c_Date]")
 {
     j5c_Date d1{2017, 1, 1};
     j5c_Date d2{2017, 1, 1};
-    REQUIRE(d1.prior_Date().strDate() == (--d2).strDate());
+    REQUIRE(d1.getPriorDate().strDate()   == (--d2).strDate());
+};
+
+TEST_CASE("Method j5c_Date::postfix++", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    // d2 is assigned, then d1 is incremented
+       d2 = d1++;
+
+    REQUIRE(d2.getNext_Date().strDate()   == d1.strDate());
+
 };
 
 TEST_CASE("Method j5c_Date::postfix--", "[j5c_Date]")
 {
     j5c_Date d1{2017, 1, 1};
     j5c_Date d2{2017, 1, 1};
-    REQUIRE(d1.prior_Date().strDate() == (d2--).strDate());
+    j5c_Date d3{2017, 1, 1};
+    // d2 is assigned, then d1 is decremented
+       d2 = d1--;
+    d2 = d2.getPriorDate();
+    REQUIRE(d2.strDate() == d1.strDate());
 };
 
 TEST_CASE("Method j5c_Date::getAge()", "[j5c_Date]")

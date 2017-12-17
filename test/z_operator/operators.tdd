@@ -1,0 +1,1785 @@
+
+
+TEST_CASE("Operator== Verification", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    REQUIRE(d1 == d2);
+    REQUIRE(!(d1 < d2));
+    REQUIRE(!(d1 > d2));
+    REQUIRE(!(d2 < d1));
+    REQUIRE(!(d2 > d1));
+};
+
+TEST_CASE("Operator< Verification_negative_001", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 2};
+    j5c_Date d2{2017, 1, 1};
+    REQUIRE(!(d1 < d2));
+};
+
+TEST_CASE("Operator< Verification_negative_002", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 2, 1};
+    j5c_Date d2{2017, 1, 1};
+    REQUIRE(!(d1 < d2));
+};
+
+TEST_CASE("Operator< Verification_negative_003", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 2, 2};
+    j5c_Date d2{2017, 1, 1};
+    REQUIRE(!(d1 < d2));
+};
+
+TEST_CASE("Operator< Verification_negative_004", "[j5c_Date]")
+{
+    j5c_Date d1{2018, 1, 1};
+    j5c_Date d2{2017, 1, 1};
+    REQUIRE(!(d1 < d2));
+};
+
+TEST_CASE("Operator< Verification_negative_005", "[j5c_Date]")
+{
+    j5c_Date d1{2018, 1, 2};
+    j5c_Date d2{2017, 1, 1};
+    REQUIRE(!(d1 < d2));
+};
+
+TEST_CASE("Operator< Verification_negative_006", "[j5c_Date]")
+{
+    j5c_Date d1{2018, 2, 1};
+    j5c_Date d2{2017, 1, 1};
+    REQUIRE(!(d1 < d2));
+};
+
+TEST_CASE("Operator< Verification_negative_007", "[j5c_Date]")
+{
+    j5c_Date d1{2018, 2, 2};
+    j5c_Date d2{2017, 1, 1};
+    REQUIRE(!(d1 < d2));
+};
+
+TEST_CASE("Operator<= Verification_negative_001", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 2};
+    j5c_Date d2{2017, 1, 1};
+    REQUIRE(!(d1 <= d2));
+};
+
+TEST_CASE("Operator<= Verification_negative_002", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 2, 1};
+    j5c_Date d2{2017, 1, 1};
+    REQUIRE(!(d1 <= d2));
+};
+
+TEST_CASE("Operator<= Verification_negative_003", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 2, 2};
+    j5c_Date d2{2017, 1, 1};
+    REQUIRE(!(d1 <= d2));
+};
+
+TEST_CASE("Operator<= Verification_negative_004", "[j5c_Date]")
+{
+    j5c_Date d1{2018, 1, 1};
+    j5c_Date d2{2017, 1, 1};
+    REQUIRE(!(d1 <= d2));
+};
+
+TEST_CASE("Operator<= Verification_negative_005", "[j5c_Date]")
+{
+    j5c_Date d1{2018, 1, 2};
+    j5c_Date d2{2017, 1, 1};
+    REQUIRE(!(d1 <= d2));
+};
+
+TEST_CASE("Operator<= Verification_negative_006", "[j5c_Date]")
+{
+    j5c_Date d1{2018, 2, 1};
+    j5c_Date d2{2017, 1, 1};
+    REQUIRE(!(d1 <= d2));
+};
+
+TEST_CASE("Operator<= Verification_negative_007", "[j5c_Date]")
+{
+    j5c_Date d1{2018, 2, 2};
+    j5c_Date d2{2017, 1, 1};
+    REQUIRE(!(d1 <= d2));
+};
+
+TEST_CASE("Operator< Verification_positive_001", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2017, 1, 2};
+    REQUIRE(d1 < d2);
+};
+
+TEST_CASE("Operator< Verification_positive_002", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2017, 2, 1};
+    REQUIRE(d1 < d2);
+};
+
+TEST_CASE("Operator< Verification_positive_003", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2017, 2, 2};
+    REQUIRE(d1 < d2);
+};
+
+TEST_CASE("Operator< Verification_positive_004", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2018, 1, 1};
+    REQUIRE(d1 < d2);
+};
+
+TEST_CASE("Operator< Verification_positive_005", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2018, 1, 2};
+    REQUIRE(d1 < d2);
+};
+
+TEST_CASE("Operator< Verification_positive_006", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2018, 2, 1};
+    REQUIRE(d1 < d2);
+};
+
+TEST_CASE("Operator< Verification_positive_007", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2018, 2, 2};
+    REQUIRE(d1 < d2);
+};
+
+TEST_CASE("Operator<= Verification_positive_000", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2017, 1, 1};
+    REQUIRE(d1 <= d2);
+};
+
+TEST_CASE("Operator<= Verification_positive_001", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2017, 1, 2};
+    REQUIRE(d1 <= d2);
+};
+
+TEST_CASE("Operator<= Verification_positive_002", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2017, 2, 1};
+    REQUIRE(d1 <= d2);
+};
+
+TEST_CASE("Operator<= Verification_positive_003", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2017, 2, 2};
+    REQUIRE(d1 <= d2);
+};
+
+TEST_CASE("Operator<= Verification_positive_004", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2018, 1, 1};
+    REQUIRE(d1 <= d2);
+};
+
+TEST_CASE("Operator<= Verification_positive_005", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2018, 1, 2};
+    REQUIRE(d1 <= d2);
+};
+
+TEST_CASE("Operator<= Verification_positive_006", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2018, 2, 1};
+    REQUIRE(d1 <= d2);
+};
+
+TEST_CASE("Operator<= Verification_positive_007", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2018, 2, 2};
+    REQUIRE(d1 <= d2);
+};
+
+
+
+
+TEST_CASE("++Operator PreFix 001", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 1);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+
+};
+
+TEST_CASE("++Operator PreFix 002", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 31};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 2);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("++Operator PreFix 003", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 2, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 2);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("++Operator PreFix 004", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 2, 28};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 3);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+
+};
+
+TEST_CASE("++Operator PreFix 005", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 3, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 3);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("++Operator PreFix 006", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 3, 31};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 4);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("++Operator PreFix 007", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 4, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 4);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("++Operator PreFix 008", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 4, 30};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 5);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("++Operator PreFix 009", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 5, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 5);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("++Operator PreFix 010", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 5, 31};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 6);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("++Operator PreFix 011", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 6, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 6);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("++Operator PreFix 012", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 6, 30};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 7);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("++Operator PreFix 013", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 7, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 7);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("++Operator PreFix 014", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 7, 31};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 8);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("++Operator PreFix 015", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 8, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 8);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("++Operator PreFix 016", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 8, 31};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 9);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("++Operator PreFix 017", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 9, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 9);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("++Operator PreFix 018", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 9, 30};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 10);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("++Operator PreFix 019", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 10, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 10);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("++Operator PreFix 020", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 10, 31};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 11);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("++Operator PreFix 021", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 11, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 11);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("++Operator PreFix 022", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 11, 30};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 12);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("++Operator PreFix 023", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 12, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 12);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("++Operator PreFix 024", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 12, 31};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2018);
+    REQUIRE(d1.getMonth() == 1);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("++Operator PreFix 025", "[j5c_Date]")
+{
+    j5c_Date d1{2018, 1, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = ++d1;
+    REQUIRE(d1.getYear()  == 2018);
+    REQUIRE(d1.getMonth() == 1);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("Operator++ PostFix 001", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 1);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should be one day later than d2
+
+    // although I would love to use the next line,
+    // I can't because d1++ and getNextDate() share the same code
+    // so it wouldn't really be a good test
+    // so I have to hard code all the values...
+    // REQUIRE(d2.getNext_Date() == d1);
+
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 1);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("Operator++ PostFix 002", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 31};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 2);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should be one day later than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 1);
+    REQUIRE(d2.getDay()   == 31);
+
+};
+
+TEST_CASE("Operator++ PostFix 003", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 2, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 2);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should be one day later than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 2);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("Operator++ PostFix 004", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 2, 28};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 3);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should be one day later than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 2);
+    REQUIRE(d2.getDay()   == 28);
+
+};
+
+TEST_CASE("Operator++ PostFix 005", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 3, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 3);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should be one day later than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 3);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("Operator++ PostFix 006", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 3, 31};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 4);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should be one day later than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 3);
+    REQUIRE(d2.getDay()   == 31);
+};
+
+TEST_CASE("Operator++ PostFix 007", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 4, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 4);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should be one day later than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 4);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("Operator++ PostFix 008", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 4, 30};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 5);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should be one day later than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 4);
+    REQUIRE(d2.getDay()   == 30);
+
+};
+
+TEST_CASE("Operator++ PostFix 009", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 5, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 5);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should be one day later than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 5);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("Operator++ PostFix 010", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 5, 31};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 6);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should be one day later than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 5);
+    REQUIRE(d2.getDay()   == 31);
+
+};
+
+TEST_CASE("Operator++ PostFix 011", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 6, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 6);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should be one day later than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 6);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("Operator++ PostFix 012", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 6, 30};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 7);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should be one day later than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 6);
+    REQUIRE(d2.getDay()   == 30);
+
+};
+
+TEST_CASE("Operator++ PostFix 013", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 7, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 7);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should be one day later than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 7);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("Operator++ PostFix 014", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 7, 31};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 8);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should be one day later than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 7);
+    REQUIRE(d2.getDay()   == 31);
+
+};
+
+TEST_CASE("Operator++ PostFix 015", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 8, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 8);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should be one day later than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 8);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("Operator++ PostFix 016", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 8, 31};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 9);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should be one day later than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 8);
+    REQUIRE(d2.getDay()   == 31);
+
+};
+
+TEST_CASE("Operator++ PostFix 017", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 9, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 9);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should be one day later than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 9);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("Operator++ PostFix 018", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 9, 30};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 10);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should be one day later than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 9);
+    REQUIRE(d2.getDay()   == 30);
+
+};
+
+TEST_CASE("Operator++ PostFix 019", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 10, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 10);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should be one day later than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 10);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("Operator++ PostFix 020", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 10, 31};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 11);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should be one day later than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 10);
+    REQUIRE(d2.getDay()   == 31);
+
+};
+
+TEST_CASE("Operator++ PostFix 021", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 11, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 11);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should be one day later than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 11);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("Operator++ PostFix 022", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 11, 30};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 12);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should be one day later than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 11);
+    REQUIRE(d2.getDay()   == 30);
+
+};
+
+TEST_CASE("Operator++ PostFix 023", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 12, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 12);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should be one day later than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 12);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("Operator++ PostFix 024", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 12, 31};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2018);
+    REQUIRE(d1.getMonth() == 1);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should be one day later than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 12);
+    REQUIRE(d2.getDay()   == 31);
+
+};
+
+TEST_CASE("Operator++ PostFix 025", "[j5c_Date]")
+{
+    j5c_Date d1{2018, 1, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1++;
+    REQUIRE(d1.getYear()  == 2018);
+    REQUIRE(d1.getMonth() == 1);
+    REQUIRE(d1.getDay()   == 2);
+
+    //d1 should be one day later than d2
+    REQUIRE(d2.getYear()  == 2018);
+    REQUIRE(d2.getMonth() == 1);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("--Operator PreFix 001", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2016);
+    REQUIRE(d1.getMonth() == 12);
+    REQUIRE(d1.getDay()   == 31);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+
+};
+
+TEST_CASE("--Operator PreFix 002", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 2};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 1);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("--Operator PreFix 003", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 2, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 1);
+    REQUIRE(d1.getDay()   == 31);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("--Operator PreFix 004", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 2, 2};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 2);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+
+};
+
+TEST_CASE("--Operator PreFix 005", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 3, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 2);
+    REQUIRE(d1.getDay()   == 28);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("--Operator PreFix 006", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 3, 2};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 3);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("--Operator PreFix 007", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 4, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 3);
+    REQUIRE(d1.getDay()   == 31);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("--Operator PreFix 008", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 4, 2};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 4);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("--Operator PreFix 009", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 5, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 4);
+    REQUIRE(d1.getDay()   == 30);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("--Operator PreFix 010", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 5, 2};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 5);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("--Operator PreFix 011", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 6, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 5);
+    REQUIRE(d1.getDay()   == 31);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("--Operator PreFix 012", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 6, 2};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 6);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("--Operator PreFix 013", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 7, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 6);
+    REQUIRE(d1.getDay()   == 30);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("--Operator PreFix 014", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 7, 2};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 7);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("--Operator PreFix 015", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 8, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 7);
+    REQUIRE(d1.getDay()   == 31);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("--Operator PreFix 016", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 8, 2};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 8);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("--Operator PreFix 017", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 9, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 8);
+    REQUIRE(d1.getDay()   == 31);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("--Operator PreFix 018", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 9, 2};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 9);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("--Operator PreFix 019", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 10, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 9);
+    REQUIRE(d1.getDay()   == 30);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("--Operator PreFix 020", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 10, 2};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 10);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("--Operator PreFix 021", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 11, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 10);
+    REQUIRE(d1.getDay()   == 31);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("--Operator PreFix 022", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 11, 2};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 11);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("--Operator PreFix 023", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 12, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 11);
+    REQUIRE(d1.getDay()   == 30);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("--Operator PreFix 024", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 12, 2};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 12);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("--Operator PreFix 025", "[j5c_Date]")
+{
+    j5c_Date d1{2018, 1, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = --d1;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 12);
+    REQUIRE(d1.getDay()   == 31);
+
+    //d1 should == d2
+    REQUIRE(d1  == d2);
+};
+
+TEST_CASE("Operator-- PostFix 001", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2016);
+    REQUIRE(d1.getMonth() == 12);
+    REQUIRE(d1.getDay()   == 31);
+
+    //d1 should be one day earlier than d2
+
+    // although I would love to use the next line,
+    // I can't because d1-- and getPriorDate() share the same code
+    // so it wouldn't really be a good test
+    // so I have to hard code all the values...
+    // REQUIRE(d2.getPriorDate() == d1);
+
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 1);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("Operator-- PostFix 002", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 1, 31};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 1);
+    REQUIRE(d1.getDay()   == 30);
+
+    //d1 should be one day earlier than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 1);
+    REQUIRE(d2.getDay()   == 31);
+
+};
+
+TEST_CASE("Operator-- PostFix 003", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 2, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 1);
+    REQUIRE(d1.getDay()   == 31);
+
+    //d1 should be one day earlier than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 2);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("Operator-- PostFix 004", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 2, 2};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 2);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should be one day earlier than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 2);
+    REQUIRE(d2.getDay()   == 2);
+
+};
+
+TEST_CASE("Operator-- PostFix 005", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 3, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 2);
+    REQUIRE(d1.getDay()   == 28);
+
+    //d1 should be one day earlier than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 3);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("Operator-- PostFix 006", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 3, 2};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 3);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should be one day earlier than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 3);
+    REQUIRE(d2.getDay()   == 2);
+};
+
+TEST_CASE("Operator-- PostFix 007", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 4, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 3);
+    REQUIRE(d1.getDay()   == 31);
+
+    //d1 should be one day earlier than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 4);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("Operator-- PostFix 008", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 4, 2};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 4);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should be one day earlier than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 4);
+    REQUIRE(d2.getDay()   == 2);
+
+};
+
+TEST_CASE("Operator-- PostFix 009", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 5, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 4);
+    REQUIRE(d1.getDay()   == 30);
+
+    //d1 should be one day earlier than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 5);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("Operator-- PostFix 010", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 5, 2};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 5);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should be one day earlier than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 5);
+    REQUIRE(d2.getDay()   == 2);
+
+};
+
+TEST_CASE("Operator-- PostFix 011", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 6, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 5);
+    REQUIRE(d1.getDay()   == 31);
+
+    //d1 should be one day earlier than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 6);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("Operator-- PostFix 012", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 6, 2};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 6);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should be one day earlier than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 6);
+    REQUIRE(d2.getDay()   == 2);
+
+};
+
+TEST_CASE("Operator-- PostFix 013", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 7, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 6);
+    REQUIRE(d1.getDay()   == 30);
+
+    //d1 should be one day earlier than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 7);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("Operator-- PostFix 014", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 7, 2};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 7);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should be one day earlier than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 7);
+    REQUIRE(d2.getDay()   == 2);
+
+};
+
+TEST_CASE("Operator-- PostFix 015", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 8, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 7);
+    REQUIRE(d1.getDay()   == 31);
+
+    //d1 should be one day earlier than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 8);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("Operator-- PostFix 016", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 8, 2};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 8);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should be one day earlier than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 8);
+    REQUIRE(d2.getDay()   == 2);
+
+};
+
+TEST_CASE("Operator-- PostFix 017", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 9, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 8);
+    REQUIRE(d1.getDay()   == 31);
+
+    //d1 should be one day earlier than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 9);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("Operator-- PostFix 018", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 9, 2};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 9);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should be one day earlier than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 9);
+    REQUIRE(d2.getDay()   == 2);
+
+};
+
+TEST_CASE("Operator-- PostFix 019", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 10, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 9);
+    REQUIRE(d1.getDay()   == 30);
+
+    //d1 should be one day earlier than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 10);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("Operator-- PostFix 020", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 10, 2};
+    j5c_Date d2{2017, 1,  1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 10);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should be one day earlier than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 10);
+    REQUIRE(d2.getDay()   ==  2);
+
+};
+
+TEST_CASE("Operator-- PostFix 021", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 11, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 10);
+    REQUIRE(d1.getDay()   == 31);
+
+    //d1 should be one day earlier than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 11);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("Operator-- PostFix 022", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 11, 2 };
+    j5c_Date d2{2017, 1,  1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 11);
+    REQUIRE(d1.getDay()   == 1);
+
+    //d1 should be one day earlier than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 11);
+    REQUIRE(d2.getDay()   == 2);
+};
+
+TEST_CASE("Operator-- PostFix 023", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 12, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 11);
+    REQUIRE(d1.getDay()   == 30);
+
+    //d1 should be one day earlier than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 12);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+
+TEST_CASE("Operator-- PostFix 024", "[j5c_Date]")
+{
+    j5c_Date d1{2017, 12, 31};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 12);
+    REQUIRE(d1.getDay()   == 30);
+
+    //d1 should be one day earlier than d2
+    REQUIRE(d2.getYear()  == 2017);
+    REQUIRE(d2.getMonth() == 12);
+    REQUIRE(d2.getDay()   == 31);
+
+};
+
+TEST_CASE("Operator-- PostFix 025", "[j5c_Date]")
+{
+    j5c_Date d1{2018, 1, 1};
+    j5c_Date d2{2017, 1, 1};
+
+    d2 = d1--;
+    REQUIRE(d1.getYear()  == 2017);
+    REQUIRE(d1.getMonth() == 12);
+    REQUIRE(d1.getDay()   == 31);
+
+    //d1 should be one day earlier than d2
+    REQUIRE(d2.getYear()  == 2018);
+    REQUIRE(d2.getMonth() == 1);
+    REQUIRE(d2.getDay()   == 1);
+
+};
+

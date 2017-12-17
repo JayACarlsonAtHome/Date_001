@@ -618,8 +618,8 @@ public:
     std::string getDayText(uint forcedLength)   const noexcept;
     std::string strDate()                       const noexcept;
 
-    j5c_Date next_Date()                        const noexcept;
-    j5c_Date prior_Date()                       const noexcept;
+    j5c_Date getNext_Date()                     const noexcept;
+    j5c_Date getPriorDate()                     const noexcept;
     // add days can accept negative numbers
     j5c_Date add_Days(int days)                 const noexcept;
 
@@ -631,17 +631,18 @@ public:
     const bool operator>=(const j5c_Date &)     const noexcept;
 
     const j5c_Date& operator++()        noexcept;   // prefix
-    const j5c_Date  operator++(int)     noexcept;   // postfix
     const j5c_Date& operator--()        noexcept;   // prefix
+    const j5c_Date  operator++(int)     noexcept;   // postfix
     const j5c_Date  operator--(int)     noexcept;   // postfix
 
+
+    //too simple for tests...
     int  getDay()   const noexcept { return m_day;   }
     int  getMonth() const noexcept { return m_month; }
     int  getYear()  const noexcept { return m_year;  }
-
     void setDay  (int day)   noexcept  { m_day   = day;   }
     void setMonth(int month) noexcept  { m_month = month; }
-    void setYear (int year)  noexcept  { m_year  = year; }
+    void setYear (int year)  noexcept  { m_year  = year;  }
 
 
 
