@@ -23,7 +23,7 @@
 #include <ctime>
 #include <chrono>
 #include <ratio>
-#include <sstream>
+
 
 #ifndef DATE_DATE_H
 #define DATE_DATE_H
@@ -580,9 +580,9 @@ private:
     void cout_InvalidDate() const noexcept;
     int daysSinceYear0001Day001(int year, int month, int day) const noexcept;
     bool isLeapYear(int year) const noexcept;
-    j5c_Date internal_addDays(int days) const noexcept;
-    j5c_Date internal_subDays(int days) const noexcept;
-    std::stringstream ssDate()          const noexcept;
+    j5c_Date internal_addDays(int days)         const noexcept;
+    j5c_Date internal_subDays(int days)         const noexcept;
+    std::string padright(int width, int value)  const noexcept;
 
 protected:
     int m_year;

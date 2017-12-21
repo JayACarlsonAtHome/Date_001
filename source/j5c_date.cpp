@@ -486,19 +486,21 @@ namespace J5C_DSL_Code {
         return *this;
     };
 
-
-    std::stringstream j5c_Date::ssDate() const noexcept
+    std::string j5c_Date::padright(int width, int value) const noexcept
     {
-        std::stringstream ss;
-        ss << std::setw(4) << std::setfill('0') << m_year << '-'
-           << std::setw(2) << std::setfill('0') << m_month << '-'
-           << std::setw(2) << std::setfill('0') << m_day;
-        return ss;
+        unsigned long w = static_cast<unsigned long>(width);
+        std::string output = std::string{"0000"} + std::to_string(value);
+        unsigned long len = output.length();
+        return output.substr(len-w, len);
     }
+
 
     std::string j5c_Date::strDate() const noexcept
     {
-        return ssDate().str();
+        return
+                  padright(4, m_year)  + '-'
+                + padright(2, m_month) + '-'
+                + padright(2, m_day);
     }
 
     std::ostream &operator<<(std::ostream &out, const j5c_Date &d)
