@@ -1,7 +1,5 @@
-//using namespace J5C_DSL_Code;
-
 // This tells Catch to provide a main() - only do this in one cpp file
-#define CATCH_CONFIG_MAIN    1
+#define CATCH_CONFIG_MAIN    0
 #if     CATCH_CONFIG_MAIN == 1
 
     #include "source/catch.hpp"
@@ -24,17 +22,15 @@
         j5c_Date d;
         d.setYear(1);
         d.setMonth(01);
+
         d.setDay(01);
-        std::cout << d.strDate() << std::endl;
-
-        d.setYear(10);
-        std::cout << d.strDate() << std::endl;
-
-        d.setYear(100);
-        std::cout << d.strDate() << std::endl;
-
-        d.setYear(1000);
-        std::cout << d.strDate() << std::endl;
+        std::cout << d << " : " << d.getDayText(10) << std::endl;
+        d.setYear(15);
+        std::cout << d << " : " << d.getDayText(10) << std::endl;
+        d.setYear(127);
+        std::cout << d << " : " << d.getDayText(10) << std::endl;
+        d.setYear(1571);
+        std::cout << d << " : " << d.getDayText(10) << std::endl;
 
         return 0;
 
