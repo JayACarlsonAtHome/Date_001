@@ -4,7 +4,6 @@ using namespace J5C_DSL_Code;
 
 int main()
 {
-    using namespace J5C_DSL_Code;
 
     j5c_Date d1;
     bool isLeapYear = false;
