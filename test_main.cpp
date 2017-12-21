@@ -1,5 +1,5 @@
 // This tells Catch to provide a main() - only do this in one cpp file
-#define CATCH_CONFIG_MAIN    0
+#define CATCH_CONFIG_MAIN    1
 #if     CATCH_CONFIG_MAIN == 1
 
     #include "source/catch.hpp"
