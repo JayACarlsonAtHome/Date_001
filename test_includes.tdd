@@ -206,12 +206,10 @@ TEST_CASE("Method j5c_Date::postfix--", "[j5c_Date]")
 
 TEST_CASE("Method j5c_Date::getAge()", "[j5c_Date]")
 {
-    const int expectedResult = 77;
-    j5c_Date d1{1940, 1, 1};
-    if (d1.getAge() != expectedResult)
-    {
-        std::cout << "Please update this test once a year..." << std::endl;
-    }
+
+    j5c_Date dn{};              // date: now
+    j5c_Date d1{1940, 1, 1};    // sample birthdate
+    int expectedResult = dn.getYear() -  d1.getYear();
     REQUIRE(d1.getAge() == expectedResult);
 };
 
