@@ -130,8 +130,6 @@ public:
     void setMonth(int month) noexcept  { m_month = month; }
     void setYear (int year)  noexcept  { m_year  = year;  }
 
-
-
     };
 
 }
