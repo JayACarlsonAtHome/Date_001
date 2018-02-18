@@ -23,14 +23,21 @@
         d.setYear(1);
         d.setMonth(01);
 
-        d.setDay(01);
-        std::cout << d << " : " << d.getDayText(10) << std::endl;
-        d.setYear(15);
-        std::cout << d << " : " << d.getDayText(10) << std::endl;
-        d.setYear(127);
-        std::cout << d << " : " << d.getDayText(10) << std::endl;
-        d.setYear(1571);
-        std::cout << d << " : " << d.getDayText(10) << std::endl;
+        for (int i = 0; i < 21; i++)
+        {
+            std::cout << "                      1         2" << std::endl;
+            std::cout << "             12345678901234567890" << std::endl;
+            std::cout << "Max Column Size = " << i << std::endl;
+            d.setYear(01);
+            std::cout << d << " : " << d.getDayText(i) << "***" << std::endl;
+            d.setYear(15);
+            std::cout << d << " : " << d.getDayText(i) << "***" << std::endl;
+            d.setYear(127);
+            std::cout << d << " : " << d.getDayText(i) << "***" << std::endl;
+            d.setYear(1571);
+            std::cout << d << " : " << d.getDayText(i) << "***" << std::endl << std::endl;
+        }
+
 
         return 0;
 
