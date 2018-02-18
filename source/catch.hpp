@@ -1,6 +1,14 @@
 //
-// Created by Jay Carlson on 11/28/17.
+// File created by Jay Carlson on 11/28/17.
+// This file is needed for TDD / Unit Testing
+
+// Changes Only
+//   added by Jay Carlson #ifndef DATE_CATCH_H
+//   added by Jay Carlson #define DATE_CATCH_H
+//      original --  Catch2 from https://github.com/catchorg/Catch2   (License BSL-1.0)
+//   added by Jay Carlson #endif //DATE_CATCH_H
 //
+
 
 #ifndef DATE_CATCH_H
 #define DATE_CATCH_H

@@ -247,13 +247,13 @@ namespace J5C_DSL_Code {
 
     int j5c_Date::getFirstDayOfYear() const noexcept
     {
-        //This needs a little explaination...
+        //This needs a little explanation...
         //  There is no year 0, years go from -1 directly to 1.
         //  For this class we don't use years less than 1.
         //  The first day of the year is a repeating pattern every 400 years.
         //  The first year the first day is Monday      and is stored at array position   1 not zero.
         //  On the 400th year the first day is Saturday and is stored at array position 400
-        //  ( array position 400 would be position 0 in a repeating pattern )
+        //  ( array position 400 is position 0 in a repeating pattern but we do a substitution instead. )
 
         //early return possible
         if (m_year < 1)   return -1;
@@ -343,11 +343,9 @@ namespace J5C_DSL_Code {
             result = DOWT;
         } else {
             if (forcedLength > DOWT.length()) {
-                unsigned long counter = forcedLength - DOWT.length();
-                while (counter > 0) {
-                    DOWT.append(" ");
-                    counter--;
-                }
+                auto counter = forcedLength - DOWT.length();
+                std::string padding(counter, ' ');
+                DOWT.append(padding);
                 result = DOWT;
             } else {
                 result = DOWT.substr(0, forcedLength);
@@ -474,7 +472,7 @@ namespace J5C_DSL_Code {
 
     const j5c_Date  j5c_Date::operator--(int) noexcept
     {
-        // postfix++
+        // postfix--
         j5c_Date postfix{*this};
         j5c_Date newThis = this->getPriorDate();
         this->m_year  = newThis.m_year;
@@ -494,7 +492,6 @@ namespace J5C_DSL_Code {
 
     };
 
-
     const j5c_Date& j5c_Date::operator--() noexcept
     {
         // prefix--
@@ -512,7 +509,6 @@ namespace J5C_DSL_Code {
         unsigned long len = output.length();
         return output.substr(len-w, len);
     }
-
 
     std::string j5c_Date::strDate() const noexcept
     {
