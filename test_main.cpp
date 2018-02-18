@@ -23,11 +23,19 @@
         d.setYear(1);
         d.setMonth(01);
 
+        std::string strTemplate1 = "         11111111112";
+        std::string strTemplate2 = "12345678901234567890";
+        std::string str1;
+        std::string str2;
         for (int i = 0; i < 21; i++)
         {
-            std::cout << "                      1         2" << std::endl;
-            std::cout << "             12345678901234567890" << std::endl;
             std::cout << "Max Column Size = " << i << std::endl;
+
+            str1 = strTemplate1.substr(0,i);
+            str2 = strTemplate2.substr(0,i);
+            std::cout << "             " << str1 << std::endl;
+            std::cout << "             " << str2 << std::endl;
+
             d.setYear(01);
             std::cout << d << " : " << d.getDayText(i) << "***" << std::endl;
             d.setYear(15);
@@ -37,8 +45,15 @@
             d.setYear(1571);
             std::cout << d << " : " << d.getDayText(i) << "***" << std::endl << std::endl;
         }
-
-
+        int year = 0;
+        d.setMonth(01);
+        d.setDay(01);
+        for (int i = 0; i < 26; i++)
+        {
+            year = i * 400;
+            d.setYear(year);
+            std::cout << d << " : " << d.getDayText(10) << "***" << std::endl;
+        }
         return 0;
 
     }

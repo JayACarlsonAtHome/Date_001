@@ -263,6 +263,7 @@ namespace J5C_DSL_Code {
         int yearConversion = m_year - (range * 400);
 
         //this is year 400,800,1200, etc...
+        // the value at array position [5] is 6 which is the first Saturday in the array
         if (yearConversion == 0) yearConversion = 5;
 
         //this is (converted) years 1-399
