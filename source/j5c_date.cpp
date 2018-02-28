@@ -519,7 +519,7 @@ namespace J5C_DSL_Code {
                 + padright(2, m_day);
     }
 
-    std::ostream &operator<<(std::ostream &out, const j5c_Date &d)
+    std::ostream& operator<<(std::ostream &out, const j5c_Date &d)
     {
         return out
             << std::setw(4) << std::setfill('0') << d.m_year << '-'
@@ -527,4 +527,30 @@ namespace J5C_DSL_Code {
             << std::setw(2) << std::setfill('0') << d.m_day;
     }
 
+    std::istream& operator>>(std::istream &ins, j5c_Date &d)
+    {
+        // store value in temporary to validate before assignment
+        char delim1 = 0;
+        char delim2 = 0;
+
+        ins >> d.m_year >> delim1 >>  d.m_month >> delim2 >> d.m_day;
+        bool check1 = ((delim1 == '-') && (delim2 == '-'));
+        bool check2 = ((delim1 == '.') && (delim2 == '.'));
+        bool check3 = ((delim1 == '/') && (delim2 == '/'));
+
+        if (!(check1 || check2 || check3))
+        {
+            // this will make the date invalid
+            d.m_year = 0;
+        }
+
+        if (!d.isValid())
+        {
+            d.m_year  = 0;
+            d.m_month = 0;
+            d.m_day   = 0;
+            std::cout << "!!! Warning --> Invalid Date Entered !!!" << std::endl;
+        }
+        return ins;
+    }
 }

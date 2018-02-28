@@ -1,5 +1,5 @@
 // This tells Catch to provide a main() - only do this in one cpp file
-#define CATCH_CONFIG_MAIN    1
+#define CATCH_CONFIG_MAIN    0
 #if     CATCH_CONFIG_MAIN == 1
 
     #include "source/catch.hpp"
@@ -54,6 +54,27 @@
             d.setYear(year);
             std::cout << d << " : " << d.getDayText(10) << "***" << std::endl;
         }
+
+        j5c_Date inDate;
+
+        bool cont = true;
+        std::string input;
+        while (cont) {
+
+            std::cout << "Enter a valid date: ";
+            std::cin >> inDate;
+            std::cout << "inDate = " << inDate << std::endl;
+            std::cout << "Enter another date? (y/n): " << std::endl;
+            std::cin >> input;
+            if (!((input.at(0) == 'y') || (input.at(0) == 'Y')))
+            {
+                cont = false;
+            }
+        }
+
+
+
+
         return 0;
 
     }
