@@ -16,6 +16,16 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+// Note originally I included a lot of early returns in methods
+//   because is just made it easier and cleaner to do so.
+//   however I have become aware of requirements that in some cases
+//   do not allow any early returns.
+//   So in order to be more compliant with those requirements I
+//      am starting the process to remove the early returns.
+//
+//   Status -- Just starting to remove early returns.
+
+
 #include "j5c_date.h"
 
 namespace J5C_DSL_Code {
@@ -23,11 +33,17 @@ namespace J5C_DSL_Code {
 
     void j5c_Date::cout_InvalidDate() const noexcept
     {
-        std::cout << "!!! *** Invalid Date *** !!! -> "
+        std::ostringstream ss;
+
+        ss << "!!! *** Invalid Date *** !!! -> "
                   << std::setw(4) << std::setfill('0') << m_year << '-'
                   << std::setw(2) << std::setfill('0') << m_month << '-'
                   << std::setw(2) << std::setfill('0') << m_day << std::endl;
+
+        std::cerr << ss;
+        std::cout << ss;
     }
+
 
     j5c_Date::j5c_Date() noexcept
     {
@@ -45,45 +61,53 @@ namespace J5C_DSL_Code {
 
     void j5c_Date::set_y_d(int year, int dayOfTheYear) noexcept
     {
+        // assuming we can continue
+        //  and we are starting with a real date
+        bool cont = true;
+        bool invalid = false;
+
         m_year = year;
         m_month = 0;
         if (dayOfTheYear == 0)
         {
-            m_year = 0;
-            m_month = 0;
-            m_day = 0;
-            cout_InvalidDate();
-            return;
+            invalid = true;
+            cont = false;
         }
 
-        int workingDayOfTheYear = dayOfTheYear;
-        bool isLeapYear = this->isLeapYear();
-        if (isLeapYear) {
-            //Checking for leap getYear day
-            if (workingDayOfTheYear == 60) {
-                m_month = 2;
-                m_day = 29;
-                return;
+        if (cont) {
+            int workingDayOfTheYear = dayOfTheYear;
+            bool isLeapYear = this->isLeapYear();
+            if (isLeapYear) {
+                //Checking for leap getYear day
+                if (workingDayOfTheYear == 60) {
+                    m_month = 2;
+                    m_day = 29;
+                    cont = false;
+                } else {
+                    if (workingDayOfTheYear > 60) {
+                        workingDayOfTheYear--;
+                    }
+                }
             }
-            else
-            {
-                if (workingDayOfTheYear > 60) {
-                    workingDayOfTheYear--;
+            if (cont) {
+                while ((m_month < 12) && (cont)) {
+                    workingDayOfTheYear -= numberOfDaysInMonth[m_month];
+                    m_month++;
+                    if (workingDayOfTheYear <= numberOfDaysInMonth[m_month]) {
+                        m_day = workingDayOfTheYear;
+                        cont = false;
+                    }
                 }
             }
         }
-        while (m_month < 12) {
-            workingDayOfTheYear -= numberOfDaysInMonth[m_month];
-            m_month++;
-            if (workingDayOfTheYear <= numberOfDaysInMonth[m_month]) {
-                m_day = workingDayOfTheYear;
-                return;
-            }
+        if (invalid)
+        {
+            cout_InvalidDate();
+            m_year  = 0;
+            m_month = 0;
+            m_day   = 0;
         }
-        m_year = 0;
-        m_month = 0;
-        m_day = 0;
-        cout_InvalidDate();
+        return;
     }
 
     j5c_Date&  j5c_Date::operator=(const j5c_Date& date)
@@ -245,8 +269,7 @@ namespace J5C_DSL_Code {
         return newDate;
     }
 
-    int j5c_Date::getFirstDayOfYear() const noexcept
-    {
+    int j5c_Date::getFirstDayOfYear() const noexcept {
         //This needs a little explanation...
         //  There is no year 0, years go from -1 directly to 1.
         //  For this class we don't use years less than 1.
@@ -255,19 +278,42 @@ namespace J5C_DSL_Code {
         //  On the 400th year the first day is Saturday and is stored at array position 400
         //  ( array position 400 is position 0 in a repeating pattern but we do a substitution instead. )
 
-        //early return possible
-        if (m_year < 1)   return -1;
-        if (m_year < 400) return firstDayOfYear[m_year];
+        bool cont = true;
+        bool invalid = false;
+        int result = -1;
+
+        if (m_year < 1) {
+            result = -1;
+            cont = false;
+            invalid = true;
+        }
         //
-        int range = m_year / 400;
-        int yearConversion = m_year - (range * 400);
+        if (cont) {
+            if (m_year < 400) {
+                result = firstDayOfYear[m_year];
+                cont = false;
+            }
+        }
+        //
+        int yearConversion = 0;
+        if (cont) {
+            int range = m_year / 400;
+            yearConversion = m_year - (range * 400);
 
-        //this is year 400,800,1200, etc...
-        // the value at array position [5] is 6 which is the first Saturday in the array
-        if (yearConversion == 0) yearConversion = 5;
+            //this is year 400,800,1200, etc...
+            // the value at array position [5] is 6 which is the first Saturday in the array
+            if (yearConversion == 0) yearConversion = 5;
 
-        //this is (converted) years 1-399
-        return firstDayOfYear[yearConversion];
+            //this is (converted) years 1-399
+        }
+        if (cont) {
+            result = firstDayOfYear[yearConversion];
+        }
+        if (invalid)
+        {
+            cout_InvalidDate();
+        }
+        return result;
     }
 
     int j5c_Date::getDayOfTheYear() const noexcept
@@ -313,11 +359,14 @@ namespace J5C_DSL_Code {
         // 6 = Saturday
 
         int DOW = -1;
+        bool cont = true;
         if (!this->isValid()) {
-            return DOW;
+            cont = false;
         }
-        // DateToDayConversion is the reason for the -1 in the next line
-        DOW = ((this->getFirstDayOfYear() + this->getDayOfTheYear() - 1) % 7);
+        if (cont) {
+            // DateToDayConversion is the reason for the -1 in the next line
+            DOW = ((this->getFirstDayOfYear() + this->getDayOfTheYear() - 1) % 7);
+        }
         return DOW;
     }
 
@@ -325,21 +374,20 @@ namespace J5C_DSL_Code {
     {
         int DOW = this->getDayOfWeek();
         std::string DOWT = "Invalid Date";
+        std::string result;
         if (forcedLength > 50)
         {
             forcedLength = 50;
         }
-        std::string result;
-        if (DOW == -1) {
-            DOWT = "Invalid DOW";
-        }
-        if (DOW == 0) DOWT = "Sunday";
-        if (DOW == 1) DOWT = "Monday";
-        if (DOW == 2) DOWT = "Tuesday";
-        if (DOW == 3) DOWT = "Wednesday";
-        if (DOW == 4) DOWT = "Thursday";
-        if (DOW == 5) DOWT = "Friday";
-        if (DOW == 6) DOWT = "Saturday";
+
+        if (DOW == -1) DOWT = "Invalid DOW";
+        if (DOW ==  0) DOWT = "Sunday";
+        if (DOW ==  1) DOWT = "Monday";
+        if (DOW ==  2) DOWT = "Tuesday";
+        if (DOW ==  3) DOWT = "Wednesday";
+        if (DOW ==  4) DOWT = "Thursday";
+        if (DOW ==  5) DOWT = "Friday";
+        if (DOW ==  6) DOWT = "Saturday";
         if (forcedLength == 0) {
             result = DOWT;
         } else {
@@ -350,6 +398,22 @@ namespace J5C_DSL_Code {
                 result = DOWT;
             } else {
                 result = DOWT.substr(0, forcedLength);
+                // Most invalid dates are either a compromise of length
+                //   or at least interpretable as a result of truncation.
+                //   To me it seems "Invalid DO" is not very self descriptive
+                //   So we are going to change it to Invalid Dw"
+                //   Inv             = Understandable
+                //   Inva            = Understandable
+                //   Inval           = Understandable
+                //   Invali          = Understandable
+                //   Invalid         = Understandable
+                //   Inavalid_       = Understandable
+                //   Invalid D       = Understandable
+                //   Invalid DO      = Confusing -- what is this...
+                //   Invalid Dw      = Changed from confusing to Understandable
+                //   Invalid DOW     = Understandable
+
+                if (result == "Invalid DO") result = "Invalid Dw";
             }
         }
         return result;
@@ -368,30 +432,71 @@ namespace J5C_DSL_Code {
 
     bool j5c_Date::isValid() const noexcept
     {
+        bool result  = true;
+        bool cont    = true;
 
-        if (m_year < MIN_YEAR) return false;
-        if (m_year > MAX_YEAR) return false;
+        if (m_year < MIN_YEAR)
+        {
+            cont = false;
+            result = false;
+        };
+        if (cont) {
+            if (m_year > MAX_YEAR)
+            {
+                cont = false;
+                result = false;
+            }
+        }
         //
-        if ((m_month > 12) || (m_month < 1)) return false;
+        if (cont) {
+            if ((m_month > 12) || (m_month < 1))
+            {
+                cont = false;
+                result = false;
+            }
+        }
         //
-        if ((m_day > 31) || (m_day < 1)) return false;
+        if (cont) {
+            if ((m_day > 31) || (m_day < 1))
+            {
+                cont   = false;
+                result = false;
+            }
+        }
         //
-        if ((m_day == 31) && (m_month == 2 ||
-                              m_month == 4 ||
-                              m_month == 6 ||
-                              m_month == 9 ||
-                              m_month == 11))
-            return false;
+        if (cont) {
+            if ((m_day == 31) && (m_month == 2 ||
+                                  m_month == 4 ||
+                                  m_month == 6 ||
+                                  m_month == 9 ||
+                                  m_month == 11))
+            {
+                cont   = false;
+                result = false;
+            }
+        }
         //
-        if ((m_day >= 30) && (m_month == 2)) return false;
+        if (cont) {
+            if ((m_day >= 30) && (m_month == 2))
+            {
+                cont   = false;
+                result = false;
+            }
+        }
         //
-        // At this point the date is valid except for possible leap years
-        if ((m_month == 2) && (m_day == 29)) {
-            if (!isLeapYear()) return false;
+        if (cont) {
+            // At this point the date is valid except for possible leap years
+            if ((m_month == 2) && (m_day == 29)) {
+                if (!isLeapYear())
+                {
+                    cont   = false;
+                    result = false;
+                }
+            }
         }
         //
         // there were no failing conditions so it must be true
-        return true;
+        return result;
     };
 
     const bool j5c_Date::operator==(const j5c_Date &d) const noexcept
@@ -401,21 +506,26 @@ namespace J5C_DSL_Code {
 
     const bool j5c_Date::operator<(const j5c_Date &d) const noexcept
     {
+        bool cont   = true;
+        bool result = false;
+
         if (m_year == d.m_year)
         {
             if (m_month == d.m_month)
             {
-                return (m_day < d.m_day);
+                result = (m_day < d.m_day);
             }
             else
             {
-                return (m_month < d.m_month);
+                result = (m_month < d.m_month);
             };
+            cont = false;
         }
-        else
+        if (cont)
         {
-            return (m_year < d.m_year);
+            result = (m_year < d.m_year);
         };
+        return result;
     };
 
     // remaining operators defined in terms of the above
@@ -433,15 +543,22 @@ namespace J5C_DSL_Code {
 
     const bool j5c_Date::operator>(const j5c_Date &d) const noexcept
     {
+        bool cont   = true;
+        bool result = false;
+
         if (m_year == d.m_year) { // same getYear
             if (m_month == d.m_month) { // same getMonth
-                return (m_day > d.m_day);
+                result = (m_day > d.m_day);
             } else {
-                return (m_month > d.m_month);
+                result = (m_month > d.m_month);
             };
-        } else { // different getYear
-            return (m_year > d.m_year);
+            cont = false;
+        }
+        if (cont)
+        { // different getYear
+            result = (m_year > d.m_year);
         };
+        return result;
     };
 
     const bool j5c_Date::operator!=(const j5c_Date &d) const noexcept
@@ -521,10 +638,10 @@ namespace J5C_DSL_Code {
 
     std::ostream& operator<<(std::ostream &out, const j5c_Date &d)
     {
-        return out
-            << std::setw(4) << std::setfill('0') << d.m_year << '-'
+        out << std::setw(4) << std::setfill('0') << d.m_year << '-'
             << std::setw(2) << std::setfill('0') << d.m_month << '-'
             << std::setw(2) << std::setfill('0') << d.m_day;
+        return out;
     }
 
     std::istream& operator>>(std::istream &ins, j5c_Date &d)
@@ -534,11 +651,12 @@ namespace J5C_DSL_Code {
         char delim2 = 0;
 
         ins >> d.m_year >> delim1 >>  d.m_month >> delim2 >> d.m_day;
+        bool check0 = ((delim1 == '_') && (delim2 == '_'));
         bool check1 = ((delim1 == '-') && (delim2 == '-'));
         bool check2 = ((delim1 == '.') && (delim2 == '.'));
         bool check3 = ((delim1 == '/') && (delim2 == '/'));
 
-        if (!(check1 || check2 || check3))
+        if (!(check0 || check1 || check2 || check3))
         {
             // this will make the date invalid
             d.m_year = 0;

@@ -24,6 +24,7 @@
 #include <iosfwd>
 #include <iomanip>
 #include <iostream>
+#include <sstream>
 #include <ctime>
 #include <chrono>
 #include <ratio>
