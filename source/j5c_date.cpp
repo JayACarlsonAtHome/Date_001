@@ -40,8 +40,8 @@ namespace J5C_DSL_Code {
                   << std::setw(2) << std::setfill('0') << m_month << '-'
                   << std::setw(2) << std::setfill('0') << m_day << std::endl;
 
-        std::cerr << ss;
-        std::cout << ss;
+        std::cerr << ss.str();
+        std::cout << ss.str();
     }
 
 
