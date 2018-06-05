@@ -42,6 +42,7 @@ namespace J5C_DSL_Code {
 
         std::cerr << ss.str();
         std::cout << ss.str();
+        
     }
 
 
