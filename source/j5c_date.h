@@ -253,11 +253,11 @@ public:
     int getDaysDiff(const j5c_Date& dt2)        const noexcept;
     std::string getDayText(uint forcedLength)   const noexcept;
     std::string strDate()                       const noexcept;
-
     j5c_Date getNext_Date()                     const noexcept;
     j5c_Date getPriorDate()                     const noexcept;
     // add days can accept negative numbers
     j5c_Date add_Days(int days)                 const noexcept;
+    void addMonths(int months)                        noexcept;
 
     const bool operator==(const j5c_Date &)     const noexcept;
     const bool operator!=(const j5c_Date &)     const noexcept;
@@ -270,7 +270,6 @@ public:
     const j5c_Date& operator--()        noexcept;   // prefix
     const j5c_Date  operator++(int)     noexcept;   // postfix
     const j5c_Date  operator--(int)     noexcept;   // postfix
-
 
     //too simple for tests...
     int  getDay()   const noexcept { return m_day;   }

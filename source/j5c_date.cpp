@@ -159,46 +159,62 @@ namespace J5C_DSL_Code {
         return static_cast<int>(result);
     }
 
+    void j5c_Date::addMonths(int months) noexcept
+    {
+        int newMonth = this->m_month + months;
+        int yearAdjust = 0;
+
+        while (newMonth > 12)
+        {
+            newMonth -= 12;
+            yearAdjust += 1;
+        }
+        while (newMonth < 1)
+        {
+            newMonth += 12;
+            yearAdjust -= 1;
+        }
+
+        this->m_month = newMonth;
+        this->m_year += yearAdjust;
+
+        // Adjust day if it exceeds new month's max
+        int maxDays = J5C_DSL_Code::numberOfDaysInMonth[this->m_month];
+        if (this->m_day > maxDays)
+        {
+            this->m_day = maxDays;
+        }
+    }
+
     j5c_Date j5c_Date::internal_addDays(int days) const noexcept
     {
-        bool isaLeapYear;
-        int year = m_year;
-        for (int m = 1; m < m_month; ++m)
+        j5c_Date result(*this);
+        int remainingDays = days;
+
+        while (remainingDays != 0)
         {
-            days += numberOfDaysInMonth[m];
-        }
-        isaLeapYear = isLeapYear(year);
-        if ((isaLeapYear) && (m_month >2))
-        {
-            days++;
-        }
-        days = days + m_day;
-        const int daysInYear     = 365;
-        const int daysInLeapYear = 366;
-        bool cont = true;
-        while (cont)
-        {
-            cont = false;
-            isaLeapYear = isLeapYear(this->m_year);
-            if (isaLeapYear) {
-                if (days > daysInLeapYear) {
-                    year++;
-                    days -= daysInLeapYear;
-                    cont = true;
-                }
-            } else
+            int daysInThisMonth = numberOfDaysInMonth[this->m_month];
+            int daysLeftInMonth = daysInThisMonth - result.m_day + 1;
+            if (remainingDays < 0)
             {
-                if (days > daysInYear)
-                {
-                    year++;
-                    days -= daysInYear;
-                    cont = true;
-                }
+                daysLeftInMonth = result.m_day;  // Fix: Use current day count, not negated
+                result.m_day = 1;
+                result.addMonths(-1);
+                remainingDays += daysLeftInMonth;  // Move back by days in current month
+            }
+            else if (remainingDays >= daysLeftInMonth)
+            {
+                result.m_day = 1;
+                result.addMonths(1);
+                remainingDays -= daysLeftInMonth;
+            }
+            else
+            {
+                result.m_day += remainingDays;
+                remainingDays = 0;
             }
         }
-        j5c_Date newDate{year,days};
-        return newDate;
-
+        return result;
     }
 
     j5c_Date j5c_Date::internal_subDays(int days) const noexcept
