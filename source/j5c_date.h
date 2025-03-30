@@ -219,8 +219,6 @@ private:
     //std::string DOWT = "Invalid DOW";
     void cout_InvalidDate() const noexcept;
     int daysSinceYear0001Day001(int year, int month, int day) const noexcept;
-    j5c_Date internal_addDays(int days)         const noexcept;
-    j5c_Date internal_subDays(int days)         const noexcept;
     std::string padright(int width, int value)  const noexcept;
 
 protected:
@@ -245,6 +243,7 @@ public:
     virtual ~j5c_Date() = default;
     bool isValid() const noexcept;
     int getAge()                                const noexcept;
+    int getDaysInMonth()                        const noexcept;
     int getFirstDayOfYear()                     const noexcept;
     int getDayOfWeek()                          const noexcept;
     int getDayOfTheYear()                       const noexcept;
@@ -253,11 +252,15 @@ public:
     int getDaysDiff(const j5c_Date& dt2)        const noexcept;
     std::string getDayText(uint forcedLength)   const noexcept;
     std::string strDate()                       const noexcept;
-    j5c_Date getNext_Date()                     const noexcept;
-    j5c_Date getPriorDate()                     const noexcept;
+    j5c_Date getNext_Date()                     noexcept;
+    j5c_Date getPriorDate()                     noexcept;
     // add days can accept negative numbers
-    j5c_Date add_Days(int days)                 const noexcept;
-    void addMonths(int months)                        noexcept;
+    j5c_Date add_Days(int days)                 noexcept;
+    j5c_Date internal_addDays(int days)         noexcept;
+    j5c_Date internal_subDays(int days)         noexcept;
+
+
+    void addMonths(int months)                  noexcept;
 
     const bool operator==(const j5c_Date &)     const noexcept;
     const bool operator!=(const j5c_Date &)     const noexcept;

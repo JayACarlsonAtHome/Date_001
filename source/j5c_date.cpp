@@ -111,6 +111,17 @@ namespace J5C_DSL_Code {
         return;
     }
 
+
+    int j5c_Date::getDaysInMonth() const noexcept
+    {
+        static const int numberOfDaysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        int result = numberOfDaysInMonth[this->m_month - 1];  // -1 for 0-based array
+        if (this->m_month == 2 && isLeapYear(this->m_year))
+        {
+            result = 29;
+        }
+        return result;
+    }
     j5c_Date&  j5c_Date::operator=(const j5c_Date& date)
     {
         if (this != &date)
@@ -186,26 +197,25 @@ namespace J5C_DSL_Code {
         }
     }
 
-    j5c_Date j5c_Date::internal_addDays(int days) const noexcept
+    j5c_Date j5c_Date::internal_addDays(int days) noexcept
     {
         j5c_Date result(*this);
         int remainingDays = days;
-
         while (remainingDays != 0)
         {
-            int daysInThisMonth = numberOfDaysInMonth[this->m_month];
+            int daysInThisMonth = getDaysInMonth();
             int daysLeftInMonth = daysInThisMonth - result.m_day + 1;
             if (remainingDays < 0)
             {
-                daysLeftInMonth = result.m_day;  // Fix: Use current day count, not negated
+                daysLeftInMonth = result.m_day;
                 result.m_day = 1;
                 result.addMonths(-1);
-                remainingDays += daysLeftInMonth;  // Move back by days in current month
+                remainingDays += daysLeftInMonth;
             }
             else if (remainingDays >= daysLeftInMonth)
             {
-                result.m_day = 1;
-                result.addMonths(1);
+                result.addMonths(1);  // Roll month first
+                result.m_day = 1;       // Then set day
                 remainingDays -= daysLeftInMonth;
             }
             else
@@ -217,34 +227,39 @@ namespace J5C_DSL_Code {
         return result;
     }
 
-    j5c_Date j5c_Date::internal_subDays(int days) const noexcept
+    j5c_Date j5c_Date::internal_subDays(int days) noexcept
     {
-        bool cont = true;
-        bool isaLeapYear;
-        int newYear = m_year;
-        int temp = 0;
-        int newDOTY = this->getDayOfTheYear();
-        while (cont) {
-            if (newDOTY > days)
+        j5c_Date result(*this);
+        int remainingDays = -days;  // Flip to negative for subtraction
+        while (remainingDays != 0)
+        {
+            int daysInThisMonth = getDaysInMonth();
+            int daysLeftInMonth = result.m_day;  // Days to start of month
+            if (remainingDays > 0)  // Subtracting days
             {
-                newDOTY = newDOTY - days;
-                cont = false;
+                if (remainingDays >= daysLeftInMonth)
+                {
+                    result.addMonths(-1);
+                    result.m_day = getDaysInMonth();
+                    remainingDays -= daysLeftInMonth;
+                }
+                else
+                {
+                    result.m_day -= remainingDays;
+                    remainingDays = 0;
+                }
             }
-            else
+            else  // Adding days (unlikely, but complete)
             {
-                newDOTY += 365;
-                temp = newYear - 1;
-                isaLeapYear = isLeapYear(temp);
-                if (isaLeapYear) { newDOTY+= 1; }
-                newYear--;
+                int daysToEnd = daysInThisMonth - result.m_day + 1;
+                result.addMonths(1);
+                result.m_day = 1;
+                remainingDays += daysToEnd;
             }
         }
-        j5c_Date newDate{newYear,newDOTY};
-        return newDate;
+        return result;
     }
-
-
-    j5c_Date j5c_Date::add_Days(int days) const noexcept
+    j5c_Date j5c_Date::add_Days(int days) noexcept
     {
         j5c_Date newDate = j5c_Date(0001, 01, 01);
         if (days == 0)
@@ -464,14 +479,14 @@ namespace J5C_DSL_Code {
         return !(t == d);
     };
 
-    j5c_Date j5c_Date::getNext_Date() const noexcept
+    j5c_Date j5c_Date::getNext_Date() noexcept
     {
-        return this->internal_addDays(1);
+        return internal_addDays(1);
     };
 
-    j5c_Date j5c_Date::getPriorDate() const noexcept
+    j5c_Date j5c_Date::getPriorDate() noexcept
     {
-        return this->internal_subDays(1);
+        return internal_subDays(1);
     };
 
     const j5c_Date j5c_Date::operator++(int) noexcept
