@@ -5,11 +5,11 @@ using namespace J5C_DSL_Code;
 j5c_Date d1;
 j5c_Date d2;
 
+
 TEST_CASE("Dates are equal", "[j5c_Date]")
 {
     REQUIRE(d1 == d2);
 }
-
 
 #include "test/days/get_day_of_year_2017.tdd"
 #include "test/days/get_day_of_year_2020.tdd"

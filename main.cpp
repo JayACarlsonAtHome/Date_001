@@ -38,6 +38,9 @@ int main()
     std::string dayText1 = "";
     std::string dayText2 = "";
     int dayCounter =-1;
+
+
+    /*
     for (int yyyy = 2017; yyyy < 2021; ++yyyy)
     {
         dayCounter = 0;
@@ -93,6 +96,8 @@ int main()
             }
         }
     }
+
+     */
     return 0;
 };
 

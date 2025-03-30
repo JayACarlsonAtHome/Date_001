@@ -62,64 +62,47 @@ namespace J5C_DSL_Code {
 
     void j5c_Date::set_y_d(int year, int dayOfTheYear) noexcept
     {
-        // assuming we can continue
-        //  and we are starting with a real date
-        bool cont = true;
-        bool invalid = false;
+        static const int numberOfDaysBeforeMonth[13] = {0, 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
 
         m_year = year;
-        m_month = 0;
-        if (dayOfTheYear == 0)
-        {
-            invalid = true;
-            cont = false;
-        }
+        m_month = 1;  // Start at Jan
+        m_day = 1;    // Default
 
-        if (cont) {
-            int workingDayOfTheYear = dayOfTheYear;
-            bool isaLeapYear = isLeapYear(this->m_year);
-            if (isaLeapYear) {
-                //Checking for leap getYear day
-                if (workingDayOfTheYear == 60) {
-                    m_month = 2;
-                    m_day = 29;
-                    cont = false;
-                } else {
-                    if (workingDayOfTheYear > 60) {
-                        workingDayOfTheYear--;
-                    }
-                }
-            }
-            if (cont) {
-                while ((m_month < 12) && (cont)) {
-                    workingDayOfTheYear -= numberOfDaysInMonth[m_month];
-                    m_month++;
-                    if (workingDayOfTheYear <= numberOfDaysInMonth[m_month]) {
-                        m_day = workingDayOfTheYear;
-                        cont = false;
-                    }
-                }
-            }
-        }
-        if (invalid)
+        if (dayOfTheYear <= 0 || dayOfTheYear > (isLeapYear(year) ? 366 : 365))
         {
             cout_InvalidDate();
-            m_year  = 0;
+            m_year = 0;
             m_month = 0;
-            m_day   = 0;
+            m_day = 0;
+            return;
         }
-        return;
-    }
 
+        int days = dayOfTheYear;
+        bool leap = isLeapYear(year);
+        if (leap && days == 60)
+        {
+            m_month = 2;
+            m_day = 29;
+        }
+        else
+        {
+            if (leap && days > 60) days--;
+            while (m_month < 12 && days > numberOfDaysBeforeMonth[m_month + 1])
+            {
+                m_month++;
+            }
+            days -= numberOfDaysBeforeMonth[m_month];
+            m_day = days;
+        }
+    }
 
     int j5c_Date::getDaysInMonth() const noexcept
     {
-        static const int numberOfDaysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-        int result = numberOfDaysInMonth[this->m_month - 1];  // -1 for 0-based array
-        if (this->m_month == 2 && isLeapYear(this->m_year))
-        {
-            result = 29;
-        }
+        //We are using months 1-12, (index 0 = 0 days)
+        static const int numberOfDaysInMonth[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+        int result = numberOfDaysInMonth[this->m_month];
+        if (this->m_month == 2 && isLeapYear(this->m_year)) result++;
         return result;
     }
     j5c_Date&  j5c_Date::operator=(const j5c_Date& date)
@@ -190,7 +173,7 @@ namespace J5C_DSL_Code {
         this->m_year += yearAdjust;
 
         // Adjust day if it exceeds new month's max
-        int maxDays = J5C_DSL_Code::numberOfDaysInMonth[this->m_month];
+        int maxDays = getDaysInMonth();
         if (this->m_day > maxDays)
         {
             this->m_day = maxDays;
@@ -293,17 +276,11 @@ namespace J5C_DSL_Code {
 
     int j5c_Date::getDayOfTheYear() const noexcept
     {
-
-        int DOTY = 0;
-        if (m_month < 3) {
-            DOTY = numberOfDaysBeforeMonth[m_month] + m_day;
-        } else {
-            int LeapYearConditionalOffset = 0;
-            // although bool is usually converted to (int) 1, lets not assume that for portability
-            if (isLeapYear(this->m_year)) {
-                LeapYearConditionalOffset = 1;
-            }
-            DOTY = (LeapYearConditionalOffset + numberOfDaysBeforeMonth[m_month] + m_day);
+        int DOTY = numberOfDaysBeforeMonth[m_month];  // 1-based, no -1
+        DOTY += m_day;
+        if (isLeapYear(m_year))
+        {
+            if (m_month > 2) DOTY++;  // +1 after Feb
         }
         return DOTY;
     }

@@ -31,9 +31,6 @@
 
 namespace J5C_DSL_Code {
 
-    // leap getYear is adjusted in code      Not Used  Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec
-    static const int numberOfDaysInMonth[13]     = {0,  31,  28,  31,  30,  31,  30,  31,  31,  30,  31,  30,  31};
-
     //                                       Not Used  Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec
     static const int numberOfDaysBeforeMonth[13] = {0,   0,  31,  59,  90, 120, 151, 181, 212, 243, 273, 304, 334};
 
