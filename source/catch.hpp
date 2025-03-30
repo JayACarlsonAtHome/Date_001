@@ -1146,7 +1146,8 @@ namespace Catch {
 // start catch_result_type.h
 
 namespace Catch {
-
+    constexpr std::size_t SIGSTKSZ = 8192;
+    constexpr std::size_t kSigStackSize = SIGSTKSZ;
     // ResultWas::OfType enum
     struct ResultWas { enum OfType {
             Unknown = -1,
@@ -6643,7 +6644,7 @@ namespace Catch {
     bool FatalConditionHandler::isSet = false;
     struct sigaction FatalConditionHandler::oldSigActions[sizeof(signalDefs)/sizeof(SignalDefs)] = {};
     stack_t FatalConditionHandler::oldSigStack = {};
-    char FatalConditionHandler::altStackMem[SIGSTKSZ] = {};
+        char FatalConditionHandler::altStackMem[kSigStackSize] = {};
 
 } // namespace Catch
 

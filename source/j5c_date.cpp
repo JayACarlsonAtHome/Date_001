@@ -271,48 +271,13 @@ namespace J5C_DSL_Code {
     }
 
     int j5c_Date::getFirstDayOfYear() const noexcept {
-        //This needs a little explanation...
-        //  There is no year 0, years go from -1 directly to 1.
-        //  For this class we don't use years less than 1.
-        //  The first day of the year is a repeating pattern every 400 years.
-        //  The first year the first day is Monday      and is stored at array position   1 not zero.
-        //  On the 400th year the first day is Saturday and is stored at array position 400
-        //  ( array position 400 is position 0 in a repeating pattern but we do a substitution instead. )
-
-        bool cont = true;
-        bool invalid = false;
-        int result = -1;
-
-        if (m_year < 1) {
-            result = -1;
-            cont = false;
-            invalid = true;
-        }
-        //
-        if (cont) {
-            if (m_year < 400) {
-                result = firstDayOfYear[m_year];
-                cont = false;
-            }
-        }
-        //
         int yearConversion = 0;
-        if (cont) {
-            int range = m_year / 400;
-            yearConversion = m_year - (range * 400);
-
-            //this is year 400,800,1200, etc...
-            // the value at array position [5] is 6 which is the first Saturday in the array
-            if (yearConversion == 0) yearConversion = 5;
-
-            //this is (converted) years 1-399
-        }
-        if (cont) {
-            result = firstDayOfYear[yearConversion];
-        }
-        if (invalid)
-        {
+        int result = -1;
+        if (m_year < 1) {
             cout_InvalidDate();
+        } else {
+            yearConversion = (m_year - 1) % 400; // 0-399 cycle
+            result = firstDayOfYear[yearConversion];
         }
         return result;
     }
