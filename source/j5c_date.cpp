@@ -226,56 +226,57 @@ namespace J5C_DSL_Code {
         }
         return result;
     }
-
     j5c_Date j5c_Date::internal_subDays(int days) noexcept
     {
         j5c_Date result(*this);
-        int remainingDays = -days;  // Flip to negative for subtraction
+        int remainingDays = days;  // Keep negative as-is
         while (remainingDays != 0)
         {
-            int daysInThisMonth = getDaysInMonth();
-            int daysLeftInMonth = result.m_day;  // Days to start of month
-            if (remainingDays > 0)  // Subtracting days
+            int daysInThisMonth = result.getDaysInMonth();
+            int daysLeftInMonth = result.m_day;
+            if (remainingDays < 0)  // Subtracting days
             {
-                if (remainingDays >= daysLeftInMonth)
+                if (-remainingDays >= daysLeftInMonth)  // Use absolute value
                 {
                     result.addMonths(-1);
-                    result.m_day = getDaysInMonth();
-                    remainingDays -= daysLeftInMonth;
+                    result.m_day = result.getDaysInMonth();
+                    remainingDays += daysLeftInMonth;  // Add since negative
                 }
                 else
                 {
-                    result.m_day -= remainingDays;
+                    result.m_day += remainingDays;  // Add negative = subtract
                     remainingDays = 0;
                 }
             }
-            else  // Adding days (unlikely, but complete)
+            else  // Adding days
             {
                 int daysToEnd = daysInThisMonth - result.m_day + 1;
-                result.addMonths(1);
-                result.m_day = 1;
-                remainingDays += daysToEnd;
+                if (remainingDays >= daysToEnd)
+                {
+                    result.addMonths(1);
+                    result.m_day = 1;
+                    remainingDays -= daysToEnd;
+                }
+                else
+                {
+                    result.m_day += remainingDays;
+                    remainingDays = 0;
+                }
             }
         }
         return result;
     }
+
     j5c_Date j5c_Date::add_Days(int days) noexcept
     {
-        j5c_Date newDate = j5c_Date(0001, 01, 01);
-        if (days == 0)
+        if(days >= 0)
         {
-            return newDate;
+            return internal_addDays(days);
         }
-        if (days > 0)
+        else
         {
-            newDate = internal_addDays(days);
+            return internal_subDays(days);
         }
-        if (days < 0)
-        {
-            days = days * -1;
-            newDate = internal_subDays(days);
-        }
-        return newDate;
     }
 
     int j5c_Date::getFirstDayOfYear() const noexcept {
