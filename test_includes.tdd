@@ -10,12 +10,6 @@ TEST_CASE("Dates are equal", "[j5c_Date]")
     REQUIRE(d1 == d2);
 }
 
-bool isLeapYear(int year)
-{
-    j5c_Date d(year, 01, 01);
-    return d.isLeapYear();
-}
-
 
 #include "test/days/get_day_of_year_2017.tdd"
 #include "test/days/get_day_of_year_2020.tdd"

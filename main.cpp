@@ -53,7 +53,7 @@ int main()
                     dayCounter = d.getFirstDayOfYear();
                 }
 
-                if (d.isValid())
+                if (isValid(d.year, d.month, d.day))
                 {
                     std::cout << "dayCounter =  " << dayCounter << std::endl;
                     std::cout << d << " : " << d.getDayText(10) << std::endl;

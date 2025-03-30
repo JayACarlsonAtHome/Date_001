@@ -144,7 +144,46 @@ namespace J5C_DSL_Code {
                 3,4,5,6     //This stops short of the 400th year
             };
 
+    static bool isLeapYear(const int year) noexcept
+    {
+        bool result = false;
+        if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
+        {
+            result = true;
+        }
+        return result;
+    }
 
+    static bool isValidDate(int year, int month, int day) noexcept
+    {
+        constexpr int MIN_YEAR = 1;
+        bool valid = true;
+
+        if (day < 1 || month < 1 || month > 12 || year < MIN_YEAR)
+        {
+            valid = false;
+        }
+        else if (month == 2)
+        {
+            if (isLeapYear(year))
+            {
+                if (day > 29) valid = false;
+            }
+            else
+            {
+                if (day > 28) valid = false;
+            }
+        }
+        else if (month == 4 || month == 6 || month == 9 || month == 11)
+        {
+            if (day > 30) valid = false;
+        }
+        else if (day > 31)
+        {
+            valid = false;
+        }
+        return valid;
+    }
 
     class j5c_Date {
 
@@ -180,7 +219,6 @@ private:
     //std::string DOWT = "Invalid DOW";
     void cout_InvalidDate() const noexcept;
     int daysSinceYear0001Day001(int year, int month, int day) const noexcept;
-    bool isLeapYear(int year) const noexcept;
     j5c_Date internal_addDays(int days)         const noexcept;
     j5c_Date internal_subDays(int days)         const noexcept;
     std::string padright(int width, int value)  const noexcept;
@@ -205,10 +243,7 @@ public:
 
     //virtual destructor
     virtual ~j5c_Date() = default;
-
-
-    bool isValid()                              const noexcept;
-    bool isLeapYear()                           const noexcept;
+    bool isValid() const noexcept;
     int getAge()                                const noexcept;
     int getFirstDayOfYear()                     const noexcept;
     int getDayOfWeek()                          const noexcept;
