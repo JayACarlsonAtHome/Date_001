@@ -30,6 +30,61 @@
 
 namespace J5C_DSL_Code {
 
+    bool j5c_Date::isLeapYear(int year) const noexcept
+    {
+        bool result = false;
+        if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
+        {
+            result = true;
+        }
+        return result;
+    }
+    bool j5c_Date::isLeapYear() const noexcept
+    {
+        bool result = false;
+        if ((m_year % 4 == 0 && m_year % 100 != 0) || (m_year % 400 == 0))
+        {
+            result = true;
+        }
+        return result;
+    }
+
+    bool j5c_Date::isValidDate(int year, int month, int day) noexcept
+    {
+        constexpr int MIN_YEAR = 1;
+        bool valid = true;
+
+        if (day < 1 || month < 1 || month > 12 || year < MIN_YEAR || year > MAX_YEAR)
+        {
+            valid = false;
+        }
+        else if (month == 2)
+        {
+            if (isLeapYear(year))
+            {
+                if (day > 29) valid = false;
+            }
+            else
+            {
+                if (day > 28) valid = false;
+            }
+        }
+        else if (month == 4 || month == 6 || month == 9 || month == 11)
+        {
+            if (day > 30) valid = false;
+        }
+        else if (day > 31)
+        {
+            valid = false;
+        }
+        return valid;
+    }
+
+    bool j5c_Date::isValid() noexcept
+    {
+        bool result = this->isValidDate(this->m_year, this->m_month, this->m_day);
+        return result;
+    };
 
     void j5c_Date::cout_InvalidDate() const noexcept
     {
@@ -42,9 +97,8 @@ namespace J5C_DSL_Code {
 
         std::cerr << ss.str();
         std::cout << ss.str();
-        
-    }
 
+    }
 
     j5c_Date::j5c_Date() noexcept
     {
@@ -96,15 +150,47 @@ namespace J5C_DSL_Code {
         }
     }
 
-    int j5c_Date::getDaysInMonth() const noexcept
+    void j5c_Date::adjustMonth(int& year, int& month, int direction) noexcept
     {
-        //We are using months 1-12, (index 0 = 0 days)
-        static const int numberOfDaysInMonth[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        month += direction;
+        if (month > 12)
+        {
+            month = 1;
+            year++;
+        }
+        else if (month < 1)
+        {
+            month = 12;
+            year--;
+        }
+    }
 
-        int result = numberOfDaysInMonth[this->m_month];
-        if (this->m_month == 2 && isLeapYear(this->m_year)) result++;
+    int j5c_Date::daysToMonthEnd(int year, int month, int day) noexcept
+    {
+        return j5c_Date::getDaysInMonth(year, month) - day + 1;
+    }
+
+    int j5c_Date::daysFromMonthStart(int day) noexcept
+    {
+        return day;
+    }
+
+    int j5c_Date::getDaysInMonth(int year, int month) const noexcept
+    {
+        static const int numberOfDaysInMonth[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        int result = numberOfDaysInMonth[month];
+        if (month == 2 && j5c_Date::isLeapYear(year))
+        {
+            result = 29;
+        }
         return result;
     }
+
+    int j5c_Date::getDaysInMonth() const noexcept
+    {
+        return getDaysInMonth(this->m_year, this->m_month);
+    }
+
     j5c_Date&  j5c_Date::operator=(const j5c_Date& date)
     {
         if (this != &date)
@@ -168,7 +254,6 @@ namespace J5C_DSL_Code {
             newMonth += 12;
             yearAdjust -= 1;
         }
-
         this->m_month = newMonth;
         this->m_year += yearAdjust;
 
@@ -180,107 +265,75 @@ namespace J5C_DSL_Code {
         }
     }
 
-    j5c_Date j5c_Date::internal_addDays(int days) noexcept
+j5c_Date j5c_Date::internal_addDays(int days) noexcept
+{
+    int Year = m_year;
+    int Month = m_month;
+    int Day = m_day;
+    int remainingDays = days;
+
+    //std::cout << "Start: Y=" << Year << ", M=" << Month << ", D=" << Day << ", Days to add: " << days << std::endl;
+    while (remainingDays != 0)
     {
-        j5c_Date result(*this);
-        int remainingDays = days;
-        while (remainingDays != 0)
+        //std::cout << "Loop: Y=" << Year << ", M=" << Month << ", D=" << Day << ", Remaining=" << remainingDays << std::endl;
+        if (remainingDays > 0)
         {
-            int daysInThisMonth = getDaysInMonth();
-            int daysLeftInMonth = daysInThisMonth - result.m_day + 1;
-            if (remainingDays < 0)
+            int daysLeft = daysToMonthEnd(Year, Month, Day);
+            if (remainingDays >= daysLeft)
             {
-                daysLeftInMonth = result.m_day;
-                result.m_day = 1;
-                result.addMonths(-1);
-                remainingDays += daysLeftInMonth;
-            }
-            else if (remainingDays >= daysLeftInMonth)
-            {
-                result.addMonths(1);  // Roll month first
-                result.m_day = 1;       // Then set day
-                remainingDays -= daysLeftInMonth;
+                remainingDays -= daysLeft;
+                adjustMonth(Year, Month, 1);
+                Day = 1;
+                //std::cout << "Add Month: Y=" << Year << ", M=" << Month << ", D=" << Day << ", Remaining=" << remainingDays << std::endl;
             }
             else
             {
-                result.m_day += remainingDays;
+                Day += remainingDays;
                 remainingDays = 0;
+                //std::cout << "Add Done: Y=" << Year << ", M=" << Month << ", D=" << Day << std::endl;
             }
         }
-        return result;
-    }
-    j5c_Date j5c_Date::internal_subDays(int days) noexcept
-    {
-        j5c_Date result(*this);
-        int remainingDays = days;  // Keep negative as-is
-        while (remainingDays != 0)
+        else if (remainingDays < 0)
         {
-            int daysInThisMonth = result.getDaysInMonth();
-            int daysLeftInMonth = result.m_day;
-            if (remainingDays < 0)  // Subtracting days
+            int daysBack = daysFromMonthStart(Day);
+            if (-remainingDays >= daysBack)
             {
-                if (-remainingDays >= daysLeftInMonth)  // Use absolute value
-                {
-                    result.addMonths(-1);
-                    result.m_day = result.getDaysInMonth();
-                    remainingDays += daysLeftInMonth;  // Add since negative
-                }
-                else
-                {
-                    result.m_day += remainingDays;  // Add negative = subtract
-                    remainingDays = 0;
-                }
+                remainingDays += daysBack;
+                adjustMonth(Year, Month, -1);
+                Day = j5c_Date::getDaysInMonth(Year, Month);
+                //std::cout << "Sub Month: Y=" << Year << ", M=" << Month << ", D=" << Day << ", Remaining=" << remainingDays << std::endl;
             }
-            else  // Adding days
+            else
             {
-                int daysToEnd = daysInThisMonth - result.m_day + 1;
-                if (remainingDays >= daysToEnd)
-                {
-                    result.addMonths(1);
-                    result.m_day = 1;
-                    remainingDays -= daysToEnd;
-                }
-                else
-                {
-                    result.m_day += remainingDays;
-                    remainingDays = 0;
-                }
+                Day += remainingDays;
+                remainingDays = 0;
+                //std::cout << "Sub Done: Y=" << Year << ", M=" << Month << ", D=" << Day << std::endl;
             }
         }
-        return result;
     }
+    j5c_Date result;
+    result.setYear(Year);
+    result.setMonth(Month);
+    result.setDay(Day);
+    //std::cout << "End: " << result.strDate() << " (Expect: " << (days == 58 ? "2017-02-28" : days == 59 ? "2017-03-01" : days == 1 ? "2017-03-01" : "2016-12-31") << ")" << std::endl;
+    return result;
+}
 
     j5c_Date j5c_Date::add_Days(int days) noexcept
     {
-        if(days >= 0)
-        {
-            return internal_addDays(days);
-        }
-        else
-        {
-            return internal_subDays(days);
-        }
+        return internal_addDays(days);  // Handles + and - now
     }
-
-    int j5c_Date::getFirstDayOfYear() const noexcept {
-        int yearConversion = 0;
-        int result = -1;
-        if (m_year < 1) {
-            cout_InvalidDate();
-        } else {
-            yearConversion = (m_year - 1) % 400; // 0-399 cycle
-            result = firstDayOfYear[yearConversion];
-        }
-        return result;
+    int j5c_Date::getFirstDayOfYear() noexcept
+    {
+        return getDayOfWeek( m_year,1,1);
     }
-
     int j5c_Date::getDayOfTheYear() const noexcept
     {
-        int DOTY = numberOfDaysBeforeMonth[m_month];  // 1-based, no -1
+        int DOTY = numberOfDaysBeforeMonth[m_month];
         DOTY += m_day;
         if (isLeapYear(m_year))
         {
-            if (m_month > 2) DOTY++;  // +1 after Feb
+            if (m_month > 2) DOTY++;
         }
         return DOTY;
     }
@@ -300,8 +353,7 @@ namespace J5C_DSL_Code {
         return result;
     }
 
-
-    int j5c_Date::getDayOfWeek() const noexcept
+    int j5c_Date::getDayOfWeek(int year, int month, int day) noexcept
     {
         // -1 = invalid DOW
         // 0 = Sunday
@@ -313,17 +365,26 @@ namespace J5C_DSL_Code {
         // 6 = Saturday
 
         int t[] = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
-        int adjustedYear = this->m_year;
-        int adjustedMonth = this->m_month;
-        if (adjustedMonth < 3)
+        int adjustedYear = year;
+        int adjustedMonth = month;
+        int result = -1;
+        if (isValidDate(year, month, day))
         {
-            adjustedYear -= 1;
+            if (month < 3)
+            {
+                adjustedYear -= 1;
+            }
+            result = (adjustedYear + adjustedYear/4 - adjustedYear/100 + adjustedYear/400 + t[adjustedMonth-1] + day) % 7;
         }
-        int result = (adjustedYear + adjustedYear/4 - adjustedYear/100 + adjustedYear/400 + t[adjustedMonth-1] + this->m_day) % 7;
+        return result;    }
+
+    int j5c_Date::getDayOfWeek() noexcept
+    {
+        int result = getDayOfWeek(m_year, m_month, m_day);
         return result;
     }
 
-    std::string j5c_Date::getDayText(unsigned int forcedLength = 0) const noexcept
+    std::string j5c_Date::getDayText(unsigned int forcedLength = 0) noexcept
     {
         int DOW = this->getDayOfWeek();
         std::string DOWT = "Invalid Date";
@@ -381,13 +442,6 @@ namespace J5C_DSL_Code {
         if (m_month > 9) quarter++;
         return quarter;
     }
-
-
-    bool j5c_Date::isValid() const noexcept
-    {
-        bool result = isValidDate(this->m_day, this->m_month, this->m_day);
-        return result;
-    };
 
     const bool j5c_Date::operator==(const j5c_Date &d) const noexcept
     {
@@ -462,53 +516,30 @@ namespace J5C_DSL_Code {
         return internal_addDays(1);
     };
 
-    j5c_Date j5c_Date::getPriorDate() noexcept
-    {
-        return internal_subDays(1);
-    };
+    j5c_Date j5c_Date::getPriorDate() noexcept {
+        return internal_addDays(-1);  // Subtract 1 day
+    }
 
-    const j5c_Date j5c_Date::operator++(int) noexcept
-    {
-        // postfix++
-        j5c_Date postfix{*this};
-        j5c_Date newThis = this->getNext_Date();
-        this->m_year  = newThis.m_year;
-        this->m_month = newThis.m_month;
-        this->m_day   = newThis.m_day;
-        return postfix;
-    };
-
-    const j5c_Date  j5c_Date::operator--(int) noexcept
-    {
-        // postfix--
-        j5c_Date postfix{*this};
-        j5c_Date newThis = this->getPriorDate();
-        this->m_year  = newThis.m_year;
-        this->m_month = newThis.m_month;
-        this->m_day   = newThis.m_day;
-        return postfix;
-    };
-
-    const j5c_Date& j5c_Date::operator++() noexcept
-    {
-        // prefix++
-        j5c_Date prefix = this->getNext_Date();
-        this->m_year  = prefix.m_year;
-        this->m_month = prefix.m_month;
-        this->m_day   = prefix.m_day;
+    const j5c_Date& j5c_Date::operator++() noexcept {
+        *this = internal_addDays(1);
         return *this;
+    }
 
-    };
-
-    const j5c_Date& j5c_Date::operator--() noexcept
-    {
-        // prefix--
-        j5c_Date prefix = this->getPriorDate();
-        this->m_year  = prefix.m_year;
-        this->m_month = prefix.m_month;
-        this->m_day   = prefix.m_day;
+    const j5c_Date& j5c_Date::operator--() noexcept {
+        *this = internal_addDays(-1);  // Subtract 1 day
         return *this;
-    };
+    }
+    const j5c_Date j5c_Date::operator++(int) noexcept {
+        j5c_Date temp(*this);
+        *this = internal_addDays(1);
+        return temp;
+    }
+
+    const j5c_Date j5c_Date::operator--(int) noexcept {  // Postfix
+        j5c_Date temp(*this);
+        *this = internal_addDays(-1);  // Subtract 1 day
+        return temp;
+    }
 
     std::string j5c_Date::padright(int width, int value) const noexcept
     {
@@ -562,3 +593,4 @@ namespace J5C_DSL_Code {
         return ins;
     }
 }
+
