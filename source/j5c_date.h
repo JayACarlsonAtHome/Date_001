@@ -20,126 +20,16 @@
 #ifndef DATE_DATE_H
 #define DATE_DATE_H
 
-#include <limits>
 #include <iosfwd>
 #include <iomanip>
 #include <iostream>
-#include <sstream>
-#include <ctime>
-#include <chrono>
-#include <ratio>
 
 namespace J5C_DSL_Code {
 
     //                                       Not Used  Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec
     static const int numberOfDaysBeforeMonth[13] = {0,   0,  31,  59,  90, 120, 151, 181, 212, 243, 273, 304, 334};
 
-
     static const int numberOfDaysBefore_forDayOfQuarter[13] = {0, 0, 31, 59, 0, 30, 61, 0, 31, 62, 0, 31, 61};
-
-
-    static constexpr int firstDayOfYear[400] =
-            {   1,2,3,5,
-                6,0,1,3,
-                4,5,6,1,
-                2,3,4,6,
-                0,1,2,4,
-                5,6,0,2,
-                3,4,5,0,
-                1,2,3,5,
-                6,0,1,3,
-                4,5,6,1,
-                2,3,4,6,
-                0,1,2,4,
-                5,6,0,2,
-                3,4,5,0,
-                1,2,3,5,
-                6,0,1,3,
-                4,5,6,1,
-                2,3,4,6,
-                0,1,2,4,
-                5,6,0,2,
-                3,4,5,0,
-                1,2,3,5,
-                6,0,1,3,
-                4,5,6,1,
-                2,3,4,5,  //this is a 100 year
-                6,0,1,3,
-                4,5,6,1,
-                2,3,4,6,
-                0,1,2,4,
-                5,6,0,2,
-                3,4,5,0,
-                1,2,3,5,
-                6,0,1,3,
-                4,5,6,1,
-                2,3,4,6,
-                0,1,2,4,
-                5,6,0,2,
-                3,4,5,0,
-                1,2,3,5,
-                6,0,1,3,
-                4,5,6,1,
-                2,3,4,6,
-                0,1,2,4,
-                5,6,0,2,
-                3,4,5,0,
-                1,2,3,5,
-                6,0,1,3,
-                4,5,6,1,
-                2,3,4,6,
-                0,1,2,3,  //This is the 200 year
-                4,5,6,1,
-                2,3,4,6,
-                0,1,2,4,
-                5,6,0,2,
-                3,4,5,0,
-                1,2,3,5,
-                6,0,1,3,
-                4,5,6,1,
-                2,3,4,6,
-                0,1,2,4,
-                5,6,0,2,
-                3,4,5,0,
-                1,2,3,5,
-                6,0,1,3,
-                4,5,6,1,
-                2,3,4,6,
-                0,1,2,4,
-                5,6,0,2,
-                3,4,5,0,
-                1,2,3,5,
-                6,0,1,3,
-                4,5,6,1,
-                2,3,4,6,
-                0,1,2,4,
-                5,6,0,1,  //This is the 300 year
-                2,3,4,6,
-                0,1,2,4,
-                5,6,0,2,
-                3,4,5,0,
-                1,2,3,5,
-                6,0,1,3,
-                4,5,6,1,
-                2,3,4,6,
-                0,1,2,4,
-                5,6,0,2,
-                3,4,5,0,
-                1,2,3,5,
-                6,0,1,3,
-                4,5,6,1,
-                2,3,4,6,
-                0,1,2,4,
-                5,6,0,2,
-                3,4,5,0,
-                1,2,3,5,
-                6,0,1,3,
-                4,5,6,1,
-                2,3,4,6,
-                0,1,2,4,
-                5,6,0,2,
-                3,4,5,6     //This stops short of the 400th year
-            };
 
     static bool isLeapYear(int year)
     {
@@ -175,19 +65,19 @@ private:
     // firstDayOfYear[0] is not used ie -1
     // Note: valid years in this class are limited to 1 - 9999 AD (CE)
 
-    // Time Line Abbreviations in order...
+    // TimeLine Abbreviations in order...
     // Past Infinity -> 1 BC (BCE) -> (no zero getYear) -> 1 AD (CE) -> (Present Date) -> Future Infinity
 
 
 private:
-    int LeapYearsSinceYear0001(int year, int month) const noexcept;
-    j5c_Date  internal_addDays(int days)                  noexcept;
-    static const int MIN_YEAR = 1;
-    static const int MAX_YEAR = 9999;
+    [[nodiscard]] int LeapYearsSinceYear0001(int year, int month) const noexcept;
+    j5c_Date  internal_addDays(int days)                                noexcept;
+    static constexpr  int MIN_YEAR = 1;
+    static constexpr int MAX_YEAR = 9999;
     //std::string DOWT = "Invalid DOW";
     void cout_InvalidDate() const noexcept;
-    int daysSinceYear0001Day001(int year, int month, int day) const noexcept;
-    std::string padright(int width, int value)  const noexcept;
+    [[nodiscard]] int daysSinceYear0001Day001(int year, int month, int day) const noexcept;
+    [[nodiscard]] std::string padright(int width, int value)    const noexcept;
 
 protected:
     int m_year;
@@ -197,49 +87,49 @@ protected:
 
 public:
     //constructors
-    explicit j5c_Date()                                       noexcept;
-    explicit j5c_Date(int year, int month, int day)           noexcept
+    explicit j5c_Date()                                               noexcept;
+    explicit j5c_Date(int year, int month, int day)                   noexcept
             : m_year(year) , m_month(month), m_day(day) { };
 
-    explicit j5c_Date(int year, int dayOfTheYear)             noexcept;
+    explicit j5c_Date(int year, int dayOfTheYear)                     noexcept;
     //constructor helpers / methods
-    void set_y_d(int year, int dayOfTheYear)                  noexcept;
+    void set_y_d(int year, int dayOfTheYear)                          noexcept;
 
     j5c_Date& operator=(const j5c_Date& date);
 
     //virtual destructor
     virtual ~j5c_Date() = default;
-    bool isValidDate(int year, int month, int day)      noexcept;
-    bool isValid()                                      noexcept;
-    bool isLeapYear(int year)                     const noexcept;
-    bool isLeapYear()                             const noexcept;
+    bool isValidDate(int year, int month, int day)                    noexcept;
+    bool isValid()                                                    noexcept;
+    [[nodiscard]] bool isLeapYear(int year)                     const noexcept;
+    [[nodiscard]] bool isLeapYear()                             const noexcept;
 
-    int getAge()                                  const noexcept;
-    int getDaysInMonth(int year, int month)       const noexcept;
-    int getDaysInMonth()                          const noexcept;
+    [[nodiscard]] int getAge()                                  const noexcept;
+    [[nodiscard]] int getDaysInMonth(int year, int month)       const noexcept;
+    [[nodiscard]] int getDaysInMonth()                          const noexcept;
 
 
-    void adjustMonth(int& year, int& month, int direction) noexcept;
-    int daysToMonthEnd(int year, int month, int day)    noexcept;
-    int daysFromMonthStart(int day)                     noexcept;
+    void adjustMonth(int& year, int& month, int direction)            noexcept;
+    int daysToMonthEnd(int year, int month, int day)                  noexcept;
+    int daysFromMonthStart(int day)                                   noexcept;
 
-    int getFirstDayOfYear()                             noexcept;
-    int getDayOfWeek(int year, int mont, int day)       noexcept;
-    int getDayOfWeek()                                  noexcept;
-    int getDayOfTheYear()                         const noexcept;
-    int getDayOfTheQuarter()                      const noexcept;
-    int getQuarter()                              const noexcept;
-    int getDaysDiff(const j5c_Date& dt2)          const noexcept;
-    std::string getDayText(uint forcedLength)     noexcept;
-    std::string strDate()                         const noexcept;
-    j5c_Date getNext_Date()                       noexcept;
-    j5c_Date getPriorDate()                       noexcept;
+    int getFirstDayOfYear()                                           noexcept;
+    int getDayOfWeek(int year, int mont, int day)                     noexcept;
+    int getDayOfWeek()                                                noexcept;
+    [[nodiscard]] int getDayOfTheYear()                         const noexcept;
+    [[nodiscard]] int getDayOfTheQuarter()                      const noexcept;
+    [[nodiscard]] int getQuarter()                              const noexcept;
+    [[nodiscard]] int getDaysDiff(const j5c_Date& dt2)          const noexcept;
+    std::string getDayText(uint forcedLength)                         noexcept;
+    [[nodiscard]] std::string strDate()                         const noexcept;
+    j5c_Date getNext_Date()                                           noexcept;
+    j5c_Date getPriorDate()                                           noexcept;
     // add days can accept negative numbers
-    j5c_Date add_Days(int days)                   noexcept;
+    j5c_Date add_Days(int days)                                       noexcept;
 
 
 
-    void addMonths(int months)                    noexcept;
+    void addMonths(int months)                                        noexcept;
 
     const bool operator==(const j5c_Date &)     const noexcept;
     const bool operator!=(const j5c_Date &)     const noexcept;
@@ -254,9 +144,9 @@ public:
     const j5c_Date  operator--(int)     noexcept;   // postfix
 
     //too simple for tests...
-    int  getDay()   const noexcept { return m_day;   }
-    int  getMonth() const noexcept { return m_month; }
-    int  getYear()  const noexcept { return m_year;  }
+    [[nodiscard]] int  getDay()   const noexcept { return m_day;   }
+    [[nodiscard]] int  getMonth() const noexcept { return m_month; }
+    [[nodiscard]] int  getYear()  const noexcept { return m_year;  }
     void setDay  (int day)   noexcept  { m_day   = day;   }
     void setMonth(int month) noexcept  { m_month = month; }
     void setYear (int year)  noexcept  { m_year  = year;  }
