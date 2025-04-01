@@ -31,9 +31,6 @@
 
 namespace J5C_DSL_Code {
 
-    // leap getYear is adjusted in code      Not Used  Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec
-    static const int numberOfDaysInMonth[13]     = {0,  31,  28,  31,  30,  31,  30,  31,  31,  30,  31,  30,  31};
-
     //                                       Not Used  Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec
     static const int numberOfDaysBeforeMonth[13] = {0,   0,  31,  59,  90, 120, 151, 181, 212, 243, 273, 304, 334};
 
@@ -41,39 +38,118 @@ namespace J5C_DSL_Code {
     static const int numberOfDaysBefore_forDayOfQuarter[13] = {0, 0, 31, 59, 0, 30, 61, 0, 31, 62, 0, 31, 61};
 
 
-    static const int firstDayOfYear[400] =
-            { -1,
-              1, 2, 3, 4, 6, 0, 1, 2, 4, 5, 6, 0, 2, 3,
-              4, 5, 0, 1, 2, 3, 5, 6, 0, 1, 3, 4, 5, 6,
-              1, 2, 3, 4, 6, 0, 1, 2, 4, 5, 6, 0, 2, 3,
-              4, 5, 0, 1, 2, 3, 5, 6, 0, 1, 3, 4, 5, 6,
-              1, 2, 3, 4, 6, 0, 1, 2, 4, 5, 6, 0, 2, 3,
-              4, 5, 0, 1, 2, 3, 5, 6, 0, 1, 3, 4, 5, 6,
-              1, 2, 3, 4, 6, 0, 1, 2, 4, 5, 6, 0, 2, 3,
-              4, 5, 6, 0, 1, 2, 4, 5, 6, 0, 2, 3, 4, 5,
-              0, 1, 2, 3, 5, 6, 0, 1, 3, 4, 5, 6, 1, 2,
-              3, 4, 6, 0, 1, 2, 4, 5, 6, 0, 2, 3, 4, 5,
-              0, 1, 2, 3, 5, 6, 0, 1, 3, 4, 5, 6, 1, 2,
-              3, 4, 6, 0, 1, 2, 4, 5, 6, 0, 2, 3, 4, 5,
-              0, 1, 2, 3, 5, 6, 0, 1, 3, 4, 5, 6, 1, 2,
-              3, 4, 6, 0, 1, 2, 4, 5, 6, 0, 2, 3, 4, 5,
-              0, 1, 2, 3, 4, 5, 6, 0, 2, 3, 4, 5, 0, 1,
-              2, 3, 5, 6, 0, 1, 3, 4, 5, 6, 1, 2, 3, 4,
-              6, 0, 1, 2, 4, 5, 6, 0, 2, 3, 4, 5, 0, 1,
-              2, 3, 5, 6, 0, 1, 3, 4, 5, 6, 1, 2, 3, 4,
-              6, 0, 1, 2, 4, 5, 6, 0, 2, 3, 4, 5, 0, 1,
-              2, 3, 5, 6, 0, 1, 3, 4, 5, 6, 1, 2, 3, 4,
-              6, 0, 1, 2, 4, 5, 6, 0, 2, 3, 4, 5, 0, 1,
-              2, 3, 5, 6, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3,
-              5, 6, 0, 1, 3, 4, 5, 6, 1, 2, 3, 4, 6, 0,
-              1, 2, 4, 5, 6, 0, 2, 3, 4, 5, 0, 1, 2, 3,
-              5, 6, 0, 1, 3, 4, 5, 6, 1, 2, 3, 4, 6, 0,
-              1, 2, 4, 5, 6, 0, 2, 3, 4, 5, 0, 1, 2, 3,
-              5, 6, 0, 1, 3, 4, 5, 6, 1, 2, 3, 4, 6, 0,
-              1, 2, 4, 5, 6, 0, 2, 3, 4, 5, 0, 1, 2, 3,
-              5, 6, 0, 1, 3, 4, 5
+    static constexpr int firstDayOfYear[400] =
+            {   1,2,3,5,
+                6,0,1,3,
+                4,5,6,1,
+                2,3,4,6,
+                0,1,2,4,
+                5,6,0,2,
+                3,4,5,0,
+                1,2,3,5,
+                6,0,1,3,
+                4,5,6,1,
+                2,3,4,6,
+                0,1,2,4,
+                5,6,0,2,
+                3,4,5,0,
+                1,2,3,5,
+                6,0,1,3,
+                4,5,6,1,
+                2,3,4,6,
+                0,1,2,4,
+                5,6,0,2,
+                3,4,5,0,
+                1,2,3,5,
+                6,0,1,3,
+                4,5,6,1,
+                2,3,4,5,  //this is a 100 year
+                6,0,1,3,
+                4,5,6,1,
+                2,3,4,6,
+                0,1,2,4,
+                5,6,0,2,
+                3,4,5,0,
+                1,2,3,5,
+                6,0,1,3,
+                4,5,6,1,
+                2,3,4,6,
+                0,1,2,4,
+                5,6,0,2,
+                3,4,5,0,
+                1,2,3,5,
+                6,0,1,3,
+                4,5,6,1,
+                2,3,4,6,
+                0,1,2,4,
+                5,6,0,2,
+                3,4,5,0,
+                1,2,3,5,
+                6,0,1,3,
+                4,5,6,1,
+                2,3,4,6,
+                0,1,2,3,  //This is the 200 year
+                4,5,6,1,
+                2,3,4,6,
+                0,1,2,4,
+                5,6,0,2,
+                3,4,5,0,
+                1,2,3,5,
+                6,0,1,3,
+                4,5,6,1,
+                2,3,4,6,
+                0,1,2,4,
+                5,6,0,2,
+                3,4,5,0,
+                1,2,3,5,
+                6,0,1,3,
+                4,5,6,1,
+                2,3,4,6,
+                0,1,2,4,
+                5,6,0,2,
+                3,4,5,0,
+                1,2,3,5,
+                6,0,1,3,
+                4,5,6,1,
+                2,3,4,6,
+                0,1,2,4,
+                5,6,0,1,  //This is the 300 year
+                2,3,4,6,
+                0,1,2,4,
+                5,6,0,2,
+                3,4,5,0,
+                1,2,3,5,
+                6,0,1,3,
+                4,5,6,1,
+                2,3,4,6,
+                0,1,2,4,
+                5,6,0,2,
+                3,4,5,0,
+                1,2,3,5,
+                6,0,1,3,
+                4,5,6,1,
+                2,3,4,6,
+                0,1,2,4,
+                5,6,0,2,
+                3,4,5,0,
+                1,2,3,5,
+                6,0,1,3,
+                4,5,6,1,
+                2,3,4,6,
+                0,1,2,4,
+                5,6,0,2,
+                3,4,5,6     //This stops short of the 400th year
             };
 
+    static bool isLeapYear(int year)
+    {
+        bool result = false;
+        if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
+        {
+            result = true;
+        }
+        return result;
+    }
 
 
     class j5c_Date {
@@ -105,14 +181,12 @@ private:
 
 private:
     int LeapYearsSinceYear0001(int year, int month) const noexcept;
+    j5c_Date  internal_addDays(int days)                  noexcept;
     static const int MIN_YEAR = 1;
     static const int MAX_YEAR = 9999;
     //std::string DOWT = "Invalid DOW";
     void cout_InvalidDate() const noexcept;
     int daysSinceYear0001Day001(int year, int month, int day) const noexcept;
-    bool isLeapYear(int year) const noexcept;
-    j5c_Date internal_addDays(int days)         const noexcept;
-    j5c_Date internal_subDays(int days)         const noexcept;
     std::string padright(int width, int value)  const noexcept;
 
 protected:
@@ -135,24 +209,37 @@ public:
 
     //virtual destructor
     virtual ~j5c_Date() = default;
+    bool isValidDate(int year, int month, int day)      noexcept;
+    bool isValid()                                      noexcept;
+    bool isLeapYear(int year)                     const noexcept;
+    bool isLeapYear()                             const noexcept;
+
+    int getAge()                                  const noexcept;
+    int getDaysInMonth(int year, int month)       const noexcept;
+    int getDaysInMonth()                          const noexcept;
 
 
-    bool isValid()                              const noexcept;
-    bool isLeapYear()                           const noexcept;
-    int getAge()                                const noexcept;
-    int getFirstDayOfYear()                     const noexcept;
-    int getDayOfWeek()                          const noexcept;
-    int getDayOfTheYear()                       const noexcept;
-    int getDayOfTheQuarter()                    const noexcept;
-    int getQuarter()                            const noexcept;
-    int getDaysDiff(const j5c_Date& dt2)        const noexcept;
-    std::string getDayText(uint forcedLength)   const noexcept;
-    std::string strDate()                       const noexcept;
+    void adjustMonth(int& year, int& month, int direction) noexcept;
+    int daysToMonthEnd(int year, int month, int day)    noexcept;
+    int daysFromMonthStart(int day)                     noexcept;
 
-    j5c_Date getNext_Date()                     const noexcept;
-    j5c_Date getPriorDate()                     const noexcept;
+    int getFirstDayOfYear()                             noexcept;
+    int getDayOfWeek(int year, int mont, int day)       noexcept;
+    int getDayOfWeek()                                  noexcept;
+    int getDayOfTheYear()                         const noexcept;
+    int getDayOfTheQuarter()                      const noexcept;
+    int getQuarter()                              const noexcept;
+    int getDaysDiff(const j5c_Date& dt2)          const noexcept;
+    std::string getDayText(uint forcedLength)     noexcept;
+    std::string strDate()                         const noexcept;
+    j5c_Date getNext_Date()                       noexcept;
+    j5c_Date getPriorDate()                       noexcept;
     // add days can accept negative numbers
-    j5c_Date add_Days(int days)                 const noexcept;
+    j5c_Date add_Days(int days)                   noexcept;
+
+
+
+    void addMonths(int months)                    noexcept;
 
     const bool operator==(const j5c_Date &)     const noexcept;
     const bool operator!=(const j5c_Date &)     const noexcept;
@@ -165,7 +252,6 @@ public:
     const j5c_Date& operator--()        noexcept;   // prefix
     const j5c_Date  operator++(int)     noexcept;   // postfix
     const j5c_Date  operator--(int)     noexcept;   // postfix
-
 
     //too simple for tests...
     int  getDay()   const noexcept { return m_day;   }
@@ -181,3 +267,4 @@ public:
 
 
 #endif //DATE_DATE_H
+
