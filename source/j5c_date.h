@@ -151,36 +151,7 @@ namespace J5C_DSL_Code {
         return result;
     }
 
-    static bool isValidDate(int year, int month, int day) noexcept
-    {
-        constexpr int MIN_YEAR = 1;
-        bool valid = true;
 
-        if (day < 1 || month < 1 || month > 12 || year < MIN_YEAR)
-        {
-            valid = false;
-        }
-        else if (month == 2)
-        {
-            if (isLeapYear(year))
-            {
-                if (day > 29) valid = false;
-            }
-            else
-            {
-                if (day > 28) valid = false;
-            }
-        }
-        else if (month == 4 || month == 6 || month == 9 || month == 11)
-        {
-            if (day > 30) valid = false;
-        }
-        else if (day > 31)
-        {
-            valid = false;
-        }
-        return valid;
-    }
 
     class j5c_Date {
 
@@ -238,26 +209,37 @@ public:
 
     //virtual destructor
     virtual ~j5c_Date() = default;
-    bool isValid() const noexcept;
-    int getAge()                                const noexcept;
-    int getDaysInMonth()                        const noexcept;
-    int getFirstDayOfYear()                     const noexcept;
-    int getDayOfWeek()                          const noexcept;
-    int getDayOfTheYear()                       const noexcept;
-    int getDayOfTheQuarter()                    const noexcept;
-    int getQuarter()                            const noexcept;
-    int getDaysDiff(const j5c_Date& dt2)        const noexcept;
-    std::string getDayText(uint forcedLength)   const noexcept;
-    std::string strDate()                       const noexcept;
-    j5c_Date getNext_Date()                     noexcept;
-    j5c_Date getPriorDate()                     noexcept;
+    bool isValidDate(int year, int month, int day)      noexcept;
+    bool isValid()                                      noexcept;
+    bool isLeapYear(int year)                     const noexcept;
+    bool isLeapYear()                             const noexcept;
+
+    int getAge()                                  const noexcept;
+    int getDaysInMonth(int year, int month)       const noexcept;
+    int getDaysInMonth()                          const noexcept;
+
+
+    void adjustMonth(int& year, int& month, int direction) noexcept;
+    int daysToMonthEnd(int year, int month, int day)    noexcept;
+    int daysFromMonthStart(int day)                     noexcept;
+
+    int getFirstDayOfYear()                             noexcept;
+    int getDayOfWeek(int year, int mont, int day)       noexcept;
+    int getDayOfWeek()                                  noexcept;
+    int getDayOfTheYear()                         const noexcept;
+    int getDayOfTheQuarter()                      const noexcept;
+    int getQuarter()                              const noexcept;
+    int getDaysDiff(const j5c_Date& dt2)          const noexcept;
+    std::string getDayText(uint forcedLength)     noexcept;
+    std::string strDate()                         const noexcept;
+    j5c_Date getNext_Date()                       noexcept;
+    j5c_Date getPriorDate()                       noexcept;
     // add days can accept negative numbers
-    j5c_Date add_Days(int days)                 noexcept;
-    j5c_Date internal_addDays(int days)         noexcept;
-    j5c_Date internal_subDays(int days)         noexcept;
+    j5c_Date add_Days(int days)                   noexcept;
+    j5c_Date internal_addDays(int days)           noexcept;
+    j5c_Date internal_subDays(int days)           noexcept;
 
-
-    void addMonths(int months)                  noexcept;
+    void addMonths(int months)                    noexcept;
 
     const bool operator==(const j5c_Date &)     const noexcept;
     const bool operator!=(const j5c_Date &)     const noexcept;
