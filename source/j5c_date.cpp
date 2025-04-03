@@ -30,7 +30,7 @@
 
 namespace J5C_DSL_Code {
 
-    bool j5c_Date::isLeapYear(int year) const noexcept
+    bool j5c_Date::isLeapYear(const int year) const noexcept
     {
         bool result = false;
         if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
@@ -49,7 +49,7 @@ namespace J5C_DSL_Code {
         return result;
     }
 
-    bool j5c_Date::isValidDate(int year, int month, int day) noexcept
+    bool j5c_Date::isValidDate(const int year, const  int month, const int day) noexcept
     {
         constexpr int MIN_YEAR = 1;
         bool valid = true;
@@ -114,7 +114,7 @@ namespace J5C_DSL_Code {
         set_y_d(year, dayOfTheYear);
     }
 
-    void j5c_Date::set_y_d(int year, int dayOfTheYear) noexcept
+    void j5c_Date::set_y_d(const int year, const int dayOfTheYear) noexcept
     {
         static const int numberOfDaysBeforeMonth[13] = {0, 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
 
@@ -150,7 +150,7 @@ namespace J5C_DSL_Code {
         }
     }
 
-    void j5c_Date::adjustMonth(int& year, int& month, int direction) noexcept
+    void j5c_Date::adjustMonth(int& year, int& month, const int direction) noexcept
     {
         month += direction;
         if (month > 12)
@@ -165,17 +165,17 @@ namespace J5C_DSL_Code {
         }
     }
 
-    int j5c_Date::daysToMonthEnd(int year, int month, int day) noexcept
+    int j5c_Date::daysToMonthEnd(const int year, const int month, const int day) noexcept
     {
         return j5c_Date::getDaysInMonth(year, month) - day + 1;
     }
 
-    int j5c_Date::daysFromMonthStart(int day) noexcept
+    int j5c_Date::daysFromMonthStart(const int day) noexcept
     {
         return day;
     }
 
-    int j5c_Date::getDaysInMonth(int year, int month) const noexcept
+    int j5c_Date::getDaysInMonth(const int year, const int month) const noexcept
     {
         static const int numberOfDaysInMonth[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
         int result = numberOfDaysInMonth[month];
@@ -202,7 +202,7 @@ namespace J5C_DSL_Code {
         return *this;
     }
 
-    int j5c_Date::LeapYearsSinceYear0001(int year, int month) const noexcept
+    int j5c_Date::LeapYearsSinceYear0001(int year, const int month) const noexcept
         {
             // Check if the current getYear needs to be considered
             // for the count of leap years or not
@@ -214,7 +214,7 @@ namespace J5C_DSL_Code {
             return result;
         }
 
-    int j5c_Date::daysSinceYear0001Day001(int year, int month, int day) const noexcept
+    int j5c_Date::daysSinceYear0001Day001(const int year, const int month, const int day) const noexcept
     {
         // initialize count using years and day
         int n = year*365 + numberOfDaysBeforeMonth[month] + day;
@@ -265,7 +265,7 @@ namespace J5C_DSL_Code {
         }
     }
 
-j5c_Date j5c_Date::internal_addDays(int days) noexcept
+    j5c_Date j5c_Date::internal_addDays(int days) noexcept
 {
     int Year = m_year;
     int Month = m_month;
@@ -319,7 +319,7 @@ j5c_Date j5c_Date::internal_addDays(int days) noexcept
     return result;
 }
 
-    j5c_Date j5c_Date::add_Days(int days) noexcept
+    j5c_Date j5c_Date::add_Days(const int days) noexcept
     {
         return internal_addDays(days);  // Handles + and - now
     }
@@ -353,7 +353,7 @@ j5c_Date j5c_Date::internal_addDays(int days) noexcept
         return result;
     }
 
-    int j5c_Date::getDayOfWeek(int year, int month, int day) noexcept
+    int j5c_Date::getDayOfWeek(const int year, const int month, const int day) noexcept
     {
         // -1 = invalid DOW
         // 0 = Sunday
@@ -541,7 +541,7 @@ j5c_Date j5c_Date::internal_addDays(int days) noexcept
         return temp;
     }
 
-    std::string j5c_Date::padright(int width, int value) const noexcept
+    std::string j5c_Date::padright(const int width, const int value) const noexcept
     {
         unsigned long w = static_cast<unsigned long>(width);
         std::string output = std::string{"0000"} + std::to_string(value);

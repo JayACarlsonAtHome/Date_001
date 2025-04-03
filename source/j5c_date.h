@@ -31,7 +31,7 @@ namespace J5C_DSL_Code {
 
     static const int numberOfDaysBefore_forDayOfQuarter[13] = {0, 0, 31, 59, 0, 30, 61, 0, 31, 62, 0, 31, 61};
 
-    static bool isLeapYear(int year)
+    static bool isLeapYear(const int year)
     {
         bool result = false;
         if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
@@ -70,14 +70,14 @@ private:
 
 
 private:
-    [[nodiscard]] int LeapYearsSinceYear0001(int year, int month) const noexcept;
+    [[nodiscard]] int LeapYearsSinceYear0001(int year, const int month) const noexcept;
     j5c_Date  internal_addDays(int days)                                noexcept;
     static constexpr  int MIN_YEAR = 1;
     static constexpr int MAX_YEAR = 9999;
     //std::string DOWT = "Invalid DOW";
     void cout_InvalidDate() const noexcept;
-    [[nodiscard]] int daysSinceYear0001Day001(int year, int month, int day) const noexcept;
-    [[nodiscard]] std::string padright(int width, int value)    const noexcept;
+    [[nodiscard]] int daysSinceYear0001Day001(const int year, const int month, const int day) const noexcept;
+    [[nodiscard]] std::string padright(const int width, const int value)    const noexcept;
 
 protected:
     int m_year;
@@ -93,28 +93,28 @@ public:
 
     explicit j5c_Date(int year, int dayOfTheYear)                     noexcept;
     //constructor helpers / methods
-    void set_y_d(int year, int dayOfTheYear)                          noexcept;
+    void set_y_d(const int year, const int dayOfTheYear)              noexcept;
 
     j5c_Date& operator=(const j5c_Date& date);
 
     //virtual destructor
     virtual ~j5c_Date() = default;
-    bool isValidDate(int year, int month, int day)                    noexcept;
+    bool isValidDate(const int year, const int month, const int day)  noexcept;
     bool isValid()                                                    noexcept;
-    [[nodiscard]] bool isLeapYear(int year)                     const noexcept;
+    [[nodiscard]] bool isLeapYear(const int year)               const noexcept;
     [[nodiscard]] bool isLeapYear()                             const noexcept;
 
     [[nodiscard]] int getAge()                                  const noexcept;
-    [[nodiscard]] int getDaysInMonth(int year, int month)       const noexcept;
+    [[nodiscard]] int getDaysInMonth(const int year, const int month)  const noexcept;
     [[nodiscard]] int getDaysInMonth()                          const noexcept;
 
 
-    void adjustMonth(int& year, int& month, int direction)            noexcept;
-    int daysToMonthEnd(int year, int month, int day)                  noexcept;
-    int daysFromMonthStart(int day)                                   noexcept;
+    void adjustMonth(int& year, int& month, const int direction)        noexcept;
+    int daysToMonthEnd(const int year, const int month, const int day)  noexcept;
+    int daysFromMonthStart(const int day)                             noexcept;
 
     int getFirstDayOfYear()                                           noexcept;
-    int getDayOfWeek(int year, int mont, int day)                     noexcept;
+    int getDayOfWeek(const int year, const int mont, const int day)   noexcept;
     int getDayOfWeek()                                                noexcept;
     [[nodiscard]] int getDayOfTheYear()                         const noexcept;
     [[nodiscard]] int getDayOfTheQuarter()                      const noexcept;
@@ -125,7 +125,7 @@ public:
     j5c_Date getNext_Date()                                           noexcept;
     j5c_Date getPriorDate()                                           noexcept;
     // add days can accept negative numbers
-    j5c_Date add_Days(int days)                                       noexcept;
+    j5c_Date add_Days(const int days)                                 noexcept;
 
 
 
