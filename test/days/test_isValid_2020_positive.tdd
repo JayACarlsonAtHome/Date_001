@@ -1,7 +1,7 @@
 
 TEST_CASE("Test isValid: 2020 positive", "[j5c_Date]")
 {
-    j5c_Date d1{2020,01,01};
+    jc313_Date d1{2020,01,01};
 
     // January
     d1.setMonth(1);

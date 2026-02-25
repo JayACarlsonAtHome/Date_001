@@ -47,8 +47,8 @@ set(TEST_FILES
 set(SOURCE_FILES
         source/catch.hpp
         ${TEST_FILES}
-        source/j5c_date.cpp
-        source/j5c_date.h
+        source/jc313_Date.cpp
+        source/jc313_Date.h
         test_main.cpp
         )
 add_executable(Date ${SOURCE_FILES})

@@ -2,8 +2,8 @@
 
 TEST_CASE("Operator== Verification", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2017, 1, 1};
 
     REQUIRE(d1 == d2);
     REQUIRE(!(d1 < d2));
@@ -14,204 +14,204 @@ TEST_CASE("Operator== Verification", "[j5c_Date]")
 
 TEST_CASE("Operator< Verification_negative_001", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 1, 2};
+    jc313_Date d2{2017, 1, 1};
     REQUIRE(!(d1 < d2));
 };
 
 TEST_CASE("Operator< Verification_negative_002", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 2, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 2, 1};
+    jc313_Date d2{2017, 1, 1};
     REQUIRE(!(d1 < d2));
 };
 
 TEST_CASE("Operator< Verification_negative_003", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 2, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 2, 2};
+    jc313_Date d2{2017, 1, 1};
     REQUIRE(!(d1 < d2));
 };
 
 TEST_CASE("Operator< Verification_negative_004", "[j5c_Date]")
 {
-    j5c_Date d1{2018, 1, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2018, 1, 1};
+    jc313_Date d2{2017, 1, 1};
     REQUIRE(!(d1 < d2));
 };
 
 TEST_CASE("Operator< Verification_negative_005", "[j5c_Date]")
 {
-    j5c_Date d1{2018, 1, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2018, 1, 2};
+    jc313_Date d2{2017, 1, 1};
     REQUIRE(!(d1 < d2));
 };
 
 TEST_CASE("Operator< Verification_negative_006", "[j5c_Date]")
 {
-    j5c_Date d1{2018, 2, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2018, 2, 1};
+    jc313_Date d2{2017, 1, 1};
     REQUIRE(!(d1 < d2));
 };
 
 TEST_CASE("Operator< Verification_negative_007", "[j5c_Date]")
 {
-    j5c_Date d1{2018, 2, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2018, 2, 2};
+    jc313_Date d2{2017, 1, 1};
     REQUIRE(!(d1 < d2));
 };
 
 TEST_CASE("Operator<= Verification_negative_001", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 1, 2};
+    jc313_Date d2{2017, 1, 1};
     REQUIRE(!(d1 <= d2));
 };
 
 TEST_CASE("Operator<= Verification_negative_002", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 2, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 2, 1};
+    jc313_Date d2{2017, 1, 1};
     REQUIRE(!(d1 <= d2));
 };
 
 TEST_CASE("Operator<= Verification_negative_003", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 2, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 2, 2};
+    jc313_Date d2{2017, 1, 1};
     REQUIRE(!(d1 <= d2));
 };
 
 TEST_CASE("Operator<= Verification_negative_004", "[j5c_Date]")
 {
-    j5c_Date d1{2018, 1, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2018, 1, 1};
+    jc313_Date d2{2017, 1, 1};
     REQUIRE(!(d1 <= d2));
 };
 
 TEST_CASE("Operator<= Verification_negative_005", "[j5c_Date]")
 {
-    j5c_Date d1{2018, 1, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2018, 1, 2};
+    jc313_Date d2{2017, 1, 1};
     REQUIRE(!(d1 <= d2));
 };
 
 TEST_CASE("Operator<= Verification_negative_006", "[j5c_Date]")
 {
-    j5c_Date d1{2018, 2, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2018, 2, 1};
+    jc313_Date d2{2017, 1, 1};
     REQUIRE(!(d1 <= d2));
 };
 
 TEST_CASE("Operator<= Verification_negative_007", "[j5c_Date]")
 {
-    j5c_Date d1{2018, 2, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2018, 2, 2};
+    jc313_Date d2{2017, 1, 1};
     REQUIRE(!(d1 <= d2));
 };
 
 TEST_CASE("Operator< Verification_positive_001", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2017, 1, 2};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2017, 1, 2};
     REQUIRE(d1 < d2);
 };
 
 TEST_CASE("Operator< Verification_positive_002", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2017, 2, 1};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2017, 2, 1};
     REQUIRE(d1 < d2);
 };
 
 TEST_CASE("Operator< Verification_positive_003", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2017, 2, 2};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2017, 2, 2};
     REQUIRE(d1 < d2);
 };
 
 TEST_CASE("Operator< Verification_positive_004", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2018, 1, 1};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2018, 1, 1};
     REQUIRE(d1 < d2);
 };
 
 TEST_CASE("Operator< Verification_positive_005", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2018, 1, 2};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2018, 1, 2};
     REQUIRE(d1 < d2);
 };
 
 TEST_CASE("Operator< Verification_positive_006", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2018, 2, 1};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2018, 2, 1};
     REQUIRE(d1 < d2);
 };
 
 TEST_CASE("Operator< Verification_positive_007", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2018, 2, 2};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2018, 2, 2};
     REQUIRE(d1 < d2);
 };
 
 TEST_CASE("Operator<= Verification_positive_000", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2017, 1, 1};
     REQUIRE(d1 <= d2);
 };
 
 TEST_CASE("Operator<= Verification_positive_001", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2017, 1, 2};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2017, 1, 2};
     REQUIRE(d1 <= d2);
 };
 
 TEST_CASE("Operator<= Verification_positive_002", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2017, 2, 1};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2017, 2, 1};
     REQUIRE(d1 <= d2);
 };
 
 TEST_CASE("Operator<= Verification_positive_003", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2017, 2, 2};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2017, 2, 2};
     REQUIRE(d1 <= d2);
 };
 
 TEST_CASE("Operator<= Verification_positive_004", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2018, 1, 1};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2018, 1, 1};
     REQUIRE(d1 <= d2);
 };
 
 TEST_CASE("Operator<= Verification_positive_005", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2018, 1, 2};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2018, 1, 2};
     REQUIRE(d1 <= d2);
 };
 
 TEST_CASE("Operator<= Verification_positive_006", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2018, 2, 1};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2018, 2, 1};
     REQUIRE(d1 <= d2);
 };
 
 TEST_CASE("Operator<= Verification_positive_007", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2018, 2, 2};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2018, 2, 2};
     REQUIRE(d1 <= d2);
 };
 
@@ -220,8 +220,8 @@ TEST_CASE("Operator<= Verification_positive_007", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 001", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -235,8 +235,8 @@ TEST_CASE("++Operator PreFix 001", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 002", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 31};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 1, 31};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -249,8 +249,8 @@ TEST_CASE("++Operator PreFix 002", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 003", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 2, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 2, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -263,8 +263,8 @@ TEST_CASE("++Operator PreFix 003", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 004", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 2, 28};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 2, 28};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -278,8 +278,8 @@ TEST_CASE("++Operator PreFix 004", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 005", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 3, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 3, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -292,8 +292,8 @@ TEST_CASE("++Operator PreFix 005", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 006", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 3, 31};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 3, 31};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -306,8 +306,8 @@ TEST_CASE("++Operator PreFix 006", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 007", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 4, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 4, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -320,8 +320,8 @@ TEST_CASE("++Operator PreFix 007", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 008", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 4, 30};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 4, 30};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -334,8 +334,8 @@ TEST_CASE("++Operator PreFix 008", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 009", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 5, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 5, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -348,8 +348,8 @@ TEST_CASE("++Operator PreFix 009", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 010", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 5, 31};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 5, 31};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -362,8 +362,8 @@ TEST_CASE("++Operator PreFix 010", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 011", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 6, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 6, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -376,8 +376,8 @@ TEST_CASE("++Operator PreFix 011", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 012", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 6, 30};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 6, 30};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -390,8 +390,8 @@ TEST_CASE("++Operator PreFix 012", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 013", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 7, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 7, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -404,8 +404,8 @@ TEST_CASE("++Operator PreFix 013", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 014", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 7, 31};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 7, 31};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -418,8 +418,8 @@ TEST_CASE("++Operator PreFix 014", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 015", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 8, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 8, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -432,8 +432,8 @@ TEST_CASE("++Operator PreFix 015", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 016", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 8, 31};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 8, 31};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -446,8 +446,8 @@ TEST_CASE("++Operator PreFix 016", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 017", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 9, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 9, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -460,8 +460,8 @@ TEST_CASE("++Operator PreFix 017", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 018", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 9, 30};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 9, 30};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -474,8 +474,8 @@ TEST_CASE("++Operator PreFix 018", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 019", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 10, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 10, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -488,8 +488,8 @@ TEST_CASE("++Operator PreFix 019", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 020", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 10, 31};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 10, 31};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -502,8 +502,8 @@ TEST_CASE("++Operator PreFix 020", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 021", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 11, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 11, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -516,8 +516,8 @@ TEST_CASE("++Operator PreFix 021", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 022", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 11, 30};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 11, 30};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -530,8 +530,8 @@ TEST_CASE("++Operator PreFix 022", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 023", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 12, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 12, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -544,8 +544,8 @@ TEST_CASE("++Operator PreFix 023", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 024", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 12, 31};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 12, 31};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2018);
@@ -558,8 +558,8 @@ TEST_CASE("++Operator PreFix 024", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 025", "[j5c_Date]")
 {
-    j5c_Date d1{2018, 1, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2018, 1, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = ++d1;
     REQUIRE(d1.getYear()  == 2018);
@@ -572,8 +572,8 @@ TEST_CASE("++Operator PreFix 025", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 001", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2017);
@@ -596,8 +596,8 @@ TEST_CASE("Operator++ PostFix 001", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 002", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 31};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 1, 31};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2017);
@@ -613,8 +613,8 @@ TEST_CASE("Operator++ PostFix 002", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 003", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 2, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 2, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2017);
@@ -630,8 +630,8 @@ TEST_CASE("Operator++ PostFix 003", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 004", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 2, 28};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 2, 28};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2017);
@@ -647,8 +647,8 @@ TEST_CASE("Operator++ PostFix 004", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 005", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 3, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 3, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2017);
@@ -664,8 +664,8 @@ TEST_CASE("Operator++ PostFix 005", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 006", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 3, 31};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 3, 31};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2017);
@@ -680,8 +680,8 @@ TEST_CASE("Operator++ PostFix 006", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 007", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 4, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 4, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2017);
@@ -697,8 +697,8 @@ TEST_CASE("Operator++ PostFix 007", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 008", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 4, 30};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 4, 30};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2017);
@@ -714,8 +714,8 @@ TEST_CASE("Operator++ PostFix 008", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 009", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 5, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 5, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2017);
@@ -731,8 +731,8 @@ TEST_CASE("Operator++ PostFix 009", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 010", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 5, 31};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 5, 31};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2017);
@@ -748,8 +748,8 @@ TEST_CASE("Operator++ PostFix 010", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 011", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 6, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 6, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2017);
@@ -765,8 +765,8 @@ TEST_CASE("Operator++ PostFix 011", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 012", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 6, 30};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 6, 30};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2017);
@@ -782,8 +782,8 @@ TEST_CASE("Operator++ PostFix 012", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 013", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 7, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 7, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2017);
@@ -799,8 +799,8 @@ TEST_CASE("Operator++ PostFix 013", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 014", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 7, 31};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 7, 31};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2017);
@@ -816,8 +816,8 @@ TEST_CASE("Operator++ PostFix 014", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 015", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 8, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 8, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2017);
@@ -833,8 +833,8 @@ TEST_CASE("Operator++ PostFix 015", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 016", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 8, 31};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 8, 31};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2017);
@@ -850,8 +850,8 @@ TEST_CASE("Operator++ PostFix 016", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 017", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 9, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 9, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2017);
@@ -867,8 +867,8 @@ TEST_CASE("Operator++ PostFix 017", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 018", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 9, 30};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 9, 30};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2017);
@@ -884,8 +884,8 @@ TEST_CASE("Operator++ PostFix 018", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 019", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 10, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 10, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2017);
@@ -901,8 +901,8 @@ TEST_CASE("Operator++ PostFix 019", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 020", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 10, 31};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 10, 31};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2017);
@@ -918,8 +918,8 @@ TEST_CASE("Operator++ PostFix 020", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 021", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 11, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 11, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2017);
@@ -935,8 +935,8 @@ TEST_CASE("Operator++ PostFix 021", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 022", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 11, 30};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 11, 30};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2017);
@@ -952,8 +952,8 @@ TEST_CASE("Operator++ PostFix 022", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 023", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 12, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 12, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2017);
@@ -969,8 +969,8 @@ TEST_CASE("Operator++ PostFix 023", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 024", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 12, 31};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 12, 31};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2018);
@@ -986,8 +986,8 @@ TEST_CASE("Operator++ PostFix 024", "[j5c_Date]")
 
 TEST_CASE("Operator++ PostFix 025", "[j5c_Date]")
 {
-    j5c_Date d1{2018, 1, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2018, 1, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1++;
     REQUIRE(d1.getYear()  == 2018);
@@ -1003,8 +1003,8 @@ TEST_CASE("Operator++ PostFix 025", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 001", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2016);
@@ -1018,8 +1018,8 @@ TEST_CASE("--Operator PreFix 001", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 002", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 1, 2};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -1032,8 +1032,8 @@ TEST_CASE("--Operator PreFix 002", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 003", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 2, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 2, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -1046,8 +1046,8 @@ TEST_CASE("--Operator PreFix 003", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 004", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 2, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 2, 2};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -1061,8 +1061,8 @@ TEST_CASE("--Operator PreFix 004", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 005", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 3, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 3, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -1075,8 +1075,8 @@ TEST_CASE("--Operator PreFix 005", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 006", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 3, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 3, 2};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -1089,8 +1089,8 @@ TEST_CASE("--Operator PreFix 006", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 007", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 4, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 4, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -1103,8 +1103,8 @@ TEST_CASE("--Operator PreFix 007", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 008", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 4, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 4, 2};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -1117,8 +1117,8 @@ TEST_CASE("--Operator PreFix 008", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 009", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 5, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 5, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -1131,8 +1131,8 @@ TEST_CASE("--Operator PreFix 009", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 010", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 5, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 5, 2};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -1145,8 +1145,8 @@ TEST_CASE("--Operator PreFix 010", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 011", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 6, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 6, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -1159,8 +1159,8 @@ TEST_CASE("--Operator PreFix 011", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 012", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 6, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 6, 2};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -1173,8 +1173,8 @@ TEST_CASE("--Operator PreFix 012", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 013", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 7, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 7, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -1187,8 +1187,8 @@ TEST_CASE("--Operator PreFix 013", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 014", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 7, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 7, 2};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -1201,8 +1201,8 @@ TEST_CASE("--Operator PreFix 014", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 015", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 8, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 8, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -1215,8 +1215,8 @@ TEST_CASE("--Operator PreFix 015", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 016", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 8, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 8, 2};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -1229,8 +1229,8 @@ TEST_CASE("--Operator PreFix 016", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 017", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 9, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 9, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -1243,8 +1243,8 @@ TEST_CASE("--Operator PreFix 017", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 018", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 9, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 9, 2};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -1257,8 +1257,8 @@ TEST_CASE("--Operator PreFix 018", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 019", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 10, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 10, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -1271,8 +1271,8 @@ TEST_CASE("--Operator PreFix 019", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 020", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 10, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 10, 2};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -1285,8 +1285,8 @@ TEST_CASE("--Operator PreFix 020", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 021", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 11, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 11, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -1299,8 +1299,8 @@ TEST_CASE("--Operator PreFix 021", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 022", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 11, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 11, 2};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -1313,8 +1313,8 @@ TEST_CASE("--Operator PreFix 022", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 023", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 12, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 12, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -1327,8 +1327,8 @@ TEST_CASE("--Operator PreFix 023", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 024", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 12, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 12, 2};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -1341,8 +1341,8 @@ TEST_CASE("--Operator PreFix 024", "[j5c_Date]")
 
 TEST_CASE("--Operator PreFix 025", "[j5c_Date]")
 {
-    j5c_Date d1{2018, 1, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2018, 1, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = --d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -1355,8 +1355,8 @@ TEST_CASE("--Operator PreFix 025", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 001", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2016);
@@ -1379,8 +1379,8 @@ TEST_CASE("Operator-- PostFix 001", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 002", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 31};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 1, 31};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2017);
@@ -1396,8 +1396,8 @@ TEST_CASE("Operator-- PostFix 002", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 003", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 2, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 2, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2017);
@@ -1413,8 +1413,8 @@ TEST_CASE("Operator-- PostFix 003", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 004", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 2, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 2, 2};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2017);
@@ -1430,8 +1430,8 @@ TEST_CASE("Operator-- PostFix 004", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 005", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 3, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 3, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2017);
@@ -1447,8 +1447,8 @@ TEST_CASE("Operator-- PostFix 005", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 006", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 3, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 3, 2};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2017);
@@ -1463,8 +1463,8 @@ TEST_CASE("Operator-- PostFix 006", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 007", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 4, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 4, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2017);
@@ -1480,8 +1480,8 @@ TEST_CASE("Operator-- PostFix 007", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 008", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 4, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 4, 2};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2017);
@@ -1497,8 +1497,8 @@ TEST_CASE("Operator-- PostFix 008", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 009", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 5, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 5, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2017);
@@ -1514,8 +1514,8 @@ TEST_CASE("Operator-- PostFix 009", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 010", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 5, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 5, 2};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2017);
@@ -1531,8 +1531,8 @@ TEST_CASE("Operator-- PostFix 010", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 011", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 6, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 6, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2017);
@@ -1548,8 +1548,8 @@ TEST_CASE("Operator-- PostFix 011", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 012", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 6, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 6, 2};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2017);
@@ -1565,8 +1565,8 @@ TEST_CASE("Operator-- PostFix 012", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 013", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 7, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 7, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2017);
@@ -1582,8 +1582,8 @@ TEST_CASE("Operator-- PostFix 013", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 014", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 7, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 7, 2};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2017);
@@ -1599,8 +1599,8 @@ TEST_CASE("Operator-- PostFix 014", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 015", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 8, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 8, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2017);
@@ -1616,8 +1616,8 @@ TEST_CASE("Operator-- PostFix 015", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 016", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 8, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 8, 2};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2017);
@@ -1633,8 +1633,8 @@ TEST_CASE("Operator-- PostFix 016", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 017", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 9, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 9, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2017);
@@ -1650,8 +1650,8 @@ TEST_CASE("Operator-- PostFix 017", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 018", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 9, 2};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 9, 2};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2017);
@@ -1667,8 +1667,8 @@ TEST_CASE("Operator-- PostFix 018", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 019", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 10, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 10, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2017);
@@ -1684,8 +1684,8 @@ TEST_CASE("Operator-- PostFix 019", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 020", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 10, 2};
-    j5c_Date d2{2017, 1,  1};
+    jc313_Date d1{2017, 10, 2};
+    jc313_Date d2{2017, 1,  1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2017);
@@ -1701,8 +1701,8 @@ TEST_CASE("Operator-- PostFix 020", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 021", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 11, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 11, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2017);
@@ -1718,8 +1718,8 @@ TEST_CASE("Operator-- PostFix 021", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 022", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 11, 2 };
-    j5c_Date d2{2017, 1,  1};
+    jc313_Date d1{2017, 11, 2 };
+    jc313_Date d2{2017, 1,  1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2017);
@@ -1734,8 +1734,8 @@ TEST_CASE("Operator-- PostFix 022", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 023", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 12, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 12, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2017);
@@ -1751,8 +1751,8 @@ TEST_CASE("Operator-- PostFix 023", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 024", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 12, 31};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 12, 31};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2017);
@@ -1768,8 +1768,8 @@ TEST_CASE("Operator-- PostFix 024", "[j5c_Date]")
 
 TEST_CASE("Operator-- PostFix 025", "[j5c_Date]")
 {
-    j5c_Date d1{2018, 1, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2018, 1, 1};
+    jc313_Date d2{2017, 1, 1};
 
     d2 = d1--;
     REQUIRE(d1.getYear()  == 2017);

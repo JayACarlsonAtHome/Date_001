@@ -25,7 +25,7 @@
 #include <iostream>
 #include <limits>
 
-namespace J5C_DSL_Code {
+namespace JC313_DSL_Code {
 
     //                                       Not Used  Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec
     static const int numberOfDaysBeforeMonth[13] = {0,   0,  31,  59,  90, 120, 151, 181, 212, 243, 273, 304, 334};
@@ -42,10 +42,10 @@ namespace J5C_DSL_Code {
         return result;
     }
 
-    class j5c_Date {
+    class jc313_Date {
 
-    friend std::ostream& operator<<(std::ostream& out, const j5c_Date& d);
-    friend std::istream& operator>>(std::istream& ins,       j5c_Date& d);
+    friend std::ostream& operator<<(std::ostream& out, const jc313_Date& d);
+    friend std::istream& operator>>(std::istream& ins,       jc313_Date& d);
 
 private:
 
@@ -71,7 +71,6 @@ private:
 
 private:
     [[nodiscard]] int LeapYearsSinceYear0001(int year, const int month) const noexcept;
-    j5c_Date  internal_addDays(int days)                                noexcept;
     static constexpr int MIN_YEAR = 1;
     static constexpr int MAX_YEAR = 9999;
     //std::string DOWT = "Invalid DOW";
@@ -87,17 +86,17 @@ protected:
 
 public:
     //constructors
-    explicit j5c_Date()                                               noexcept;
-    explicit j5c_Date(int year, int month, int day)                   noexcept
+    explicit jc313_Date()                                               noexcept;
+    explicit jc313_Date(int year, int month, int day)                   noexcept
             : m_year(year) , m_month(month), m_day(day) { };
-    explicit j5c_Date(int year, int dayOfTheYear)                     noexcept;
+    explicit jc313_Date(int year, int dayOfTheYear)                     noexcept;
     //constructor helpers / methods
     void set_y_d(const int year, const int dayOfTheYear)              noexcept;
 
-    j5c_Date& operator=(const j5c_Date& date);
+    jc313_Date& operator=(const jc313_Date& date);
 
     //virtual destructor
-    virtual ~j5c_Date() = default;
+    virtual ~jc313_Date() = default;
     bool isValidDate(const int year, const int month, const int day) const noexcept;
     bool isValid()                                                   const noexcept;
     [[nodiscard]] bool isLeapYear(const int year)               const noexcept;
@@ -118,29 +117,29 @@ public:
     [[nodiscard]] int getDayOfTheYear()                          const noexcept;
     [[nodiscard]] int getDayOfTheQuarter()                       const noexcept;
     [[nodiscard]] int getQuarter()                               const noexcept;
-    [[nodiscard]] int getDaysDiff(const j5c_Date& dt2)           const noexcept;
+    [[nodiscard]] int getDaysDiff(const jc313_Date& dt2)         const noexcept;
     std::string getDayText(uint forcedLength = 0)                      noexcept;
     [[nodiscard]] std::string strDate()                          const noexcept;
-    j5c_Date getNext_Date()                                            noexcept;
-    j5c_Date getPriorDate()                                            noexcept;
+    jc313_Date getNext_Date()                                    const noexcept;
+    jc313_Date getPriorDate()                                    const noexcept;
     // add days can accept negative numbers
-    j5c_Date add_Days(const int days)                                  noexcept;
+    jc313_Date add_Days(int days)                                const noexcept;
 
 
 
     void addMonths(int months)                                         noexcept;
 
-    const bool operator==(const j5c_Date &)     const noexcept;
-    const bool operator!=(const j5c_Date &)     const noexcept;
-    const bool operator<( const j5c_Date &)     const noexcept;
-    const bool operator>( const j5c_Date &)     const noexcept;
-    const bool operator<=(const j5c_Date &)     const noexcept;
-    const bool operator>=(const j5c_Date &)     const noexcept;
+    const bool operator==(const jc313_Date &)     const noexcept;
+    const bool operator!=(const jc313_Date &)     const noexcept;
+    const bool operator<( const jc313_Date &)     const noexcept;
+    const bool operator>( const jc313_Date &)     const noexcept;
+    const bool operator<=(const jc313_Date &)     const noexcept;
+    const bool operator>=(const jc313_Date &)     const noexcept;
 
-    const j5c_Date& operator++()                      noexcept;   // prefix
-    const j5c_Date& operator--()                      noexcept;   // prefix
-    const j5c_Date  operator++(int)                   noexcept;   // postfix
-    const j5c_Date  operator--(int)                   noexcept;   // postfix
+    const jc313_Date& operator++()                      noexcept;   // prefix
+    const jc313_Date& operator--()                      noexcept;   // prefix
+    const jc313_Date  operator++(int)                   noexcept;   // postfix
+    const jc313_Date  operator--(int)                   noexcept;   // postfix
 
     //too simple for tests...
     [[nodiscard]] int  getDay()                 const noexcept { return m_day;   }

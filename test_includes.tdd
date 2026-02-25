@@ -1,9 +1,9 @@
-#include "source/j5c_date.h"
+#include "source/jc313_Date.h"
 
-using namespace J5C_DSL_Code;
+using namespace JC313_DSL_Code;
 
-j5c_Date d1;
-j5c_Date d2;
+jc313_Date d1;
+jc313_Date d2;
 
 
 TEST_CASE("Dates are equal", "[j5c_Date]")
@@ -59,7 +59,7 @@ TEST_CASE("Starting Tests", "[j5c_Date]")
 
 TEST_CASE("++Operator PreFix 999", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 2, 1};
+    jc313_Date d1{2017, 2, 1};
 
     ++d1;
     REQUIRE(d1.getYear()  == 2017);
@@ -71,8 +71,8 @@ TEST_CASE("++Operator PreFix 999", "[j5c_Date]")
 
 TEST_CASE("Date Assignment operator", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2018,12,31};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2018,12,31};
     d2 = d1;
     REQUIRE(d1.getYear()  == d2.getYear());
     REQUIRE(d1.getMonth() == d2.getMonth());
@@ -84,7 +84,7 @@ TEST_CASE("Date Assignment operator", "[j5c_Date]")
 
 TEST_CASE("Get Day of Week Text", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
+    jc313_Date d1{2017, 1, 1};
     //
     // Test set 1
     //
@@ -127,8 +127,8 @@ TEST_CASE("Get Day of Week Text", "[j5c_Date]")
 
 TEST_CASE("Method j5c_Date::next_Date()", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2017, 1, 1};
     for (int yyyy = 2017; yyyy < 2020; yyyy++) {
         d1.setYear(yyyy);
         d2.setYear(yyyy);
@@ -143,8 +143,8 @@ TEST_CASE("Method j5c_Date::next_Date()", "[j5c_Date]")
 
 TEST_CASE("Method j5c_Date::prior_Date()", "[j5c_Date]")
 {
-    j5c_Date d1{2017,12,31};
-    j5c_Date d2{2017,12,31};
+    jc313_Date d1{2017,12,31};
+    jc313_Date d2{2017,12,31};
     for (int yyyy = 2017; yyyy > 2010; yyyy--) {
         d1.setYear(yyyy);
         d2.setYear(yyyy);
@@ -159,22 +159,22 @@ TEST_CASE("Method j5c_Date::prior_Date()", "[j5c_Date]")
 
 TEST_CASE("Method j5c_Date::++prefix", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2017, 1, 1};
     REQUIRE(d1.getNext_Date().strDate()   == (++d2).strDate());
 };
 
 TEST_CASE("Method j5c_Date::--prefix", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2017, 1, 1};
     REQUIRE(d1.getPriorDate().strDate()   == (--d2).strDate());
 };
 
 TEST_CASE("Method j5c_Date::postfix++", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2017, 1, 1};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2017, 1, 1};
 
     // d2 is assigned, then d1 is incremented
        d2 = d1++;
@@ -185,9 +185,9 @@ TEST_CASE("Method j5c_Date::postfix++", "[j5c_Date]")
 
 TEST_CASE("Method j5c_Date::postfix--", "[j5c_Date]")
 {
-    j5c_Date d1{2017, 1, 1};
-    j5c_Date d2{2017, 1, 1};
-    j5c_Date d3{2017, 1, 1};
+    jc313_Date d1{2017, 1, 1};
+    jc313_Date d2{2017, 1, 1};
+    jc313_Date d3{2017, 1, 1};
     // d2 is assigned, then d1 is decremented
        d2 = d1--;
     d2 = d2.getPriorDate();
@@ -197,8 +197,8 @@ TEST_CASE("Method j5c_Date::postfix--", "[j5c_Date]")
 TEST_CASE("Method j5c_Date::getAge()", "[j5c_Date]")
 {
 
-    j5c_Date dn{};              // date: now
-    j5c_Date d1{1940, 1, 1};    // sample birthdate
+    jc313_Date dn{};              // date: now
+    jc313_Date d1{1940, 1, 1};    // sample birthdate
     int expectedResult = dn.getYear() -  d1.getYear();
     REQUIRE(d1.getAge() == expectedResult);
 };

@@ -12,14 +12,14 @@
     #include <iostream>
     #include "source/j5c_date.h"
 
-    using namespace J5C_DSL_Code;
+    using namespace JC313_DSL_Code;
 
     int main()
     {
 
         std::cout << "j5c_Date tests disabled for faster compiling." << std::endl;
 
-        j5c_Date d;
+        jc313_Date d;
         d.setYear(1);
         d.setMonth(01);
 
@@ -55,7 +55,7 @@
             std::cout << d << " : " << d.getDayText(10) << "***" << std::endl;
         }
 
-        j5c_Date inDate;
+        jc313_Date inDate;
 
         bool cont = true;
         std::string input;
