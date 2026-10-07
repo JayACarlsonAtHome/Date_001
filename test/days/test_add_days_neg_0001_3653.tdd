@@ -1,4 +1,4 @@
-TEST_CASE("Test addDays: -0001 to -3653", "[j5c_Date]")
+TEST_CASE("Test addDays: -0001 to -3653", "[jc313_Date]")
 {
     jc313_Date d;
     d.setYear(2017);

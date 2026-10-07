@@ -1,4 +1,4 @@
-TEST_CASE("Test isValid: 2017 positive", "[j5c_Date]")
+TEST_CASE("Test isValid: 2017 positive", "[jc313_Date]")
 {
     jc313_Date d1{2017,01,01};
 

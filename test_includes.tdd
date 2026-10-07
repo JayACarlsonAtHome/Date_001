@@ -6,7 +6,7 @@ jc313_Date d1;
 jc313_Date d2;
 
 
-TEST_CASE("Dates are equal", "[j5c_Date]")
+TEST_CASE("Dates are equal", "[jc313_Date]")
 {
     REQUIRE(d1 == d2);
 }
@@ -50,14 +50,14 @@ TEST_CASE("Dates are equal", "[j5c_Date]")
 
 #include "test/z_operator/operators.tdd"
 
-TEST_CASE("Starting Tests", "[j5c_Date]")
+TEST_CASE("Starting Tests", "[jc313_Date]")
 {
     std::cout << std::endl;
     std::cout << "Starting Testing: ... Please be patient..." << std::endl;
 }
 
 
-TEST_CASE("++Operator PreFix 999", "[j5c_Date]")
+TEST_CASE("++Operator PreFix 999", "[jc313_Date]")
 {
     jc313_Date d1{2017, 2, 1};
 
@@ -69,7 +69,7 @@ TEST_CASE("++Operator PreFix 999", "[j5c_Date]")
 
 
 
-TEST_CASE("Date Assignment operator", "[j5c_Date]")
+TEST_CASE("Date Assignment operator", "[jc313_Date]")
 {
     jc313_Date d1{2017, 1, 1};
     jc313_Date d2{2018,12,31};
@@ -82,7 +82,7 @@ TEST_CASE("Date Assignment operator", "[j5c_Date]")
     REQUIRE(d1.getDay()   == 1);
 };
 
-TEST_CASE("Get Day of Week Text", "[j5c_Date]")
+TEST_CASE("Get Day of Week Text", "[jc313_Date]")
 {
     jc313_Date d1{2017, 1, 1};
     //
@@ -125,7 +125,7 @@ TEST_CASE("Get Day of Week Text", "[j5c_Date]")
 };
 
 
-TEST_CASE("Method j5c_Date::next_Date()", "[j5c_Date]")
+TEST_CASE("Method jc313_Date::next_Date()", "[jc313_Date]")
 {
     jc313_Date d1{2017, 1, 1};
     jc313_Date d2{2017, 1, 1};
@@ -141,7 +141,7 @@ TEST_CASE("Method j5c_Date::next_Date()", "[j5c_Date]")
     }
 };
 
-TEST_CASE("Method j5c_Date::prior_Date()", "[j5c_Date]")
+TEST_CASE("Method jc313_Date::prior_Date()", "[jc313_Date]")
 {
     jc313_Date d1{2017,12,31};
     jc313_Date d2{2017,12,31};
@@ -157,21 +157,21 @@ TEST_CASE("Method j5c_Date::prior_Date()", "[j5c_Date]")
     }
 };
 
-TEST_CASE("Method j5c_Date::++prefix", "[j5c_Date]")
+TEST_CASE("Method jc313_Date::++prefix", "[jc313_Date]")
 {
     jc313_Date d1{2017, 1, 1};
     jc313_Date d2{2017, 1, 1};
     REQUIRE(d1.getNext_Date().strDate()   == (++d2).strDate());
 };
 
-TEST_CASE("Method j5c_Date::--prefix", "[j5c_Date]")
+TEST_CASE("Method jc313_Date::--prefix", "[jc313_Date]")
 {
     jc313_Date d1{2017, 1, 1};
     jc313_Date d2{2017, 1, 1};
     REQUIRE(d1.getPriorDate().strDate()   == (--d2).strDate());
 };
 
-TEST_CASE("Method j5c_Date::postfix++", "[j5c_Date]")
+TEST_CASE("Method jc313_Date::postfix++", "[jc313_Date]")
 {
     jc313_Date d1{2017, 1, 1};
     jc313_Date d2{2017, 1, 1};
@@ -183,7 +183,7 @@ TEST_CASE("Method j5c_Date::postfix++", "[j5c_Date]")
 
 };
 
-TEST_CASE("Method j5c_Date::postfix--", "[j5c_Date]")
+TEST_CASE("Method jc313_Date::postfix--", "[jc313_Date]")
 {
     jc313_Date d1{2017, 1, 1};
     jc313_Date d2{2017, 1, 1};
@@ -194,7 +194,7 @@ TEST_CASE("Method j5c_Date::postfix--", "[j5c_Date]")
     REQUIRE(d2.strDate() == d1.strDate());
 };
 
-TEST_CASE("Method j5c_Date::getAge()", "[j5c_Date]")
+TEST_CASE("Method jc313_Date::getAge()", "[jc313_Date]")
 {
 
     jc313_Date dn{};              // date: now

@@ -10,14 +10,14 @@
 
 
     #include <iostream>
-    #include "source/j5c_date.h"
+    #include "source/jc313_Date.h"
 
     using namespace JC313_DSL_Code;
 
     int main()
     {
 
-        std::cout << "j5c_Date tests disabled for faster compiling." << std::endl;
+        std::cout << "jc313_Date tests disabled for faster compiling." << std::endl;
 
         jc313_Date d;
         d.setYear(1);

@@ -1,7 +1,7 @@
 //
-// j5c_Date Class Header File
+// jc313_Date Class Header File
 //
-// Copyright (C) 2017  Jay A. Carlson of J5C Marketing LLC.
+// Copyright (C) 2017  Jay A. Carlson.
 //
 // This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -17,8 +17,7 @@
 //
 
 
-#ifndef DATE_DATE_H
-#define DATE_DATE_H
+#pragma once
 
 #include <iosfwd>
 #include <iomanip>
@@ -154,5 +153,4 @@ public:
 }
 
 
-#endif //DATE_DATE_H
 

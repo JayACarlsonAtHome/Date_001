@@ -32,7 +32,7 @@ namespace getFirstDayOfYear
     }
 
 
-    TEST_CASE("Test getFirstDayOfYear method", "[j5c_Date]")
+    TEST_CASE("Test getFirstDayOfYear method", "[jc313_Date]")
     {
         jc313_Date d1;
         jc313_Date d2;

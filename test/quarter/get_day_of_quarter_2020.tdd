@@ -1,4 +1,4 @@
-TEST_CASE("Get Day of the Quarter for Year: 2020", "[j5c_Date]")
+TEST_CASE("Get Day of the Quarter for Year: 2020", "[jc313_Date]")
 {
     jc313_Date d1{2020,01,01};
 

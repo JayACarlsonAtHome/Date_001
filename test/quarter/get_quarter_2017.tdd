@@ -1,4 +1,4 @@
-TEST_CASE("Get Quarter for Year: 2017", "[j5c_Date]")
+TEST_CASE("Get Quarter for Year: 2017", "[jc313_Date]")
 {
     jc313_Date d1{2017,01,01};
 
