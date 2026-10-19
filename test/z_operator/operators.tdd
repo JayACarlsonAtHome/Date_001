@@ -1783,3 +1783,28 @@ TEST_CASE("Operator-- PostFix 025", "[jc313_Date]")
 
 };
 
+
+TEST_CASE("All six comparison operators agree with yyyy-mm-dd text order", "[jc313_Date]")
+{
+    // strDate() is zero padded, so text order is date order for valid dates
+    const jc313_Date dates[] = {
+        jc313_Date{   1,  1,  1}, jc313_Date{ 999, 12, 31}, jc313_Date{2016,  2, 29},
+        jc313_Date{2016,  3,  1}, jc313_Date{2017,  1,  1}, jc313_Date{2017,  1,  2},
+        jc313_Date{2017,  2,  1}, jc313_Date{2017, 12, 31}, jc313_Date{2018,  1,  1},
+        jc313_Date{2020,  2, 29}, jc313_Date{9999, 12, 31}
+    };
+    for (const auto& a : dates)
+    {
+        for (const auto& b : dates)
+        {
+            const std::string sa = a.strDate();
+            const std::string sb = b.strDate();
+            REQUIRE((a == b) == (sa == sb));
+            REQUIRE((a != b) == (sa != sb));
+            REQUIRE((a <  b) == (sa <  sb));
+            REQUIRE((a >  b) == (sa >  sb));
+            REQUIRE((a <= b) == (sa <= sb));
+            REQUIRE((a >= b) == (sa >= sb));
+        }
+    }
+}

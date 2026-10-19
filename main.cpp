@@ -1,8 +1,11 @@
 #include "source/jc313_Date.h"
 
+#include <iostream>
+#include <string>
+
 using namespace JC313_DSL_Code;
 
-std::string getDOW_Text(const int day, uint length)
+std::string getDOW_Text(const int day, unsigned int length)
 {
     std::string result = "";
     if (length > 10) return ("Invalid length test parameter");

@@ -11,6 +11,8 @@ Originally I wrote my own testing framework.
 Later I heard of Catch2 (also on Github) and tried that.
 I was and am pleased with Catch2, but unfortunately with the number of tests, it seems to be slowing down CLion
 more than I appreciate.  So if you don't want to be annoyed, please comment out a bunch of tests.
+(The tests now use Catch2 v3.8.1, vendored as `source/catch_amalgamated.hpp/.cpp`. Catch2 itself is compiled
+once, so editing a test only rebuilds the tests. `CATCH_CONFIG_MAIN 0` in `test_main.cpp` still skips them.)
 
 I believe I have tested 99% or more of all common scenarios, but before you use this class for anything more than 
 a school project be sure to analyse the tests, test coverage, test results, etc for yourself and see if they are 
@@ -19,14 +21,48 @@ mean that I covered every possible scenario, or that I coded each test correctly
 So what I am saying is this is free to use (as per license) but I do not guarantee the results. 
 
 
-/Users/jaycarlson/git/Date_001/cmake-build-debug/Date
+## Build and test
 
+```
+cmake -S . -B build -G Ninja
+cmake --build build
+ctest --test-dir build      # or run ./build/Date directly
+```
+
+Expected output:
+
+```
 Starting Testing: ... Please be patient...
 ===============================================================================
-All tests passed (28660 assertions in 176 test cases)
+All tests passed (29460 assertions in 185 test cases)
+```
 
+One of those tests walks every date from 0001-01-01 to 9999-12-31 (3,652,059 dates), so a run takes about half
+a second. Needs a C++23 compiler (GCC 13+ or clang 17+; tested with GCC 15 and clang 21).
 
-Process finished with exit code 0
+`./build/date_demo` prints the day of the week for every date in 2017-2020 (from `main.cpp`).
+
+## Using the class
+
+```cpp
+#include "source/jc313_Date.h"
+using namespace JC313_DSL_Code;
+
+jc313_Date d{2017, 3, 4};                 // an invalid year/month/day gives 0000-00-00
+if (auto checked = jc313_Date::make(2017, 2, 29)) { /* only runs for a valid date */ }
+jc313_Date later = d.add_Days(1000);       // negative counts go back; out of range gives 0000-00-00
+int age = jc313_Date{2000, 10, 19}.getAge(jc313_Date{2026, 10, 19});   // 26
+std::cin >> d;                             // yyyy-mm-dd (or . / _); bad input sets failbit
+```
+
+- Valid dates are years 1 - 9999 in the proleptic Gregorian calendar (see the notes below).
+- The class never prints. Anything that would give an invalid date gives 0000-00-00 instead, so check
+  `isValid()`. `setYear/setMonth/setDay` do not validate, so check `isValid()` after them too.
+- An invalid date answers -1 from `getDayOfWeek()`, "Invalid DOW" from `getDayText()`, 0 from
+  `getDaysInMonth/getDayOfTheYear/getDayOfTheQuarter`, and INT_MIN from `getDaysDiff/getAge`.
+- `getAge()` counts whole years up to the birthday; a 29 Feb birthday counts on 1 Mar in other years.
+- Day arithmetic and the day of the week come from `std::chrono`, so `add_Days(1000000)` is as quick as `add_Days(1)`.
+- `==, !=, <, >, <=, >=` all come from one defaulted `operator<=>` (year, then month, then day).
 
 
 Other Notes:

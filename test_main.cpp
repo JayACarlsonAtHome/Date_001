@@ -1,10 +1,16 @@
-// This tells Catch to provide a main() - only do this in one cpp file
+// 1 = run the Catch2 tests; 0 = skip them (faster compiling) and run the small demo below.
+// Catch2 v3 itself is compiled once from source/catch_amalgamated.cpp, which is built with
+// CATCH_AMALGAMATED_CUSTOM_MAIN, so main() is always defined here.
 #define CATCH_CONFIG_MAIN    1
 #if     CATCH_CONFIG_MAIN == 1
 
-    #include "source/catch.hpp"
+    #include "source/catch_amalgamated.hpp"
     #include "test_includes.tdd"
-    // main is provided by test framework Catch2
+
+    int main(int argc, char* argv[])
+    {
+        return Catch::Session().run(argc, argv);
+    }
 
 #else
 

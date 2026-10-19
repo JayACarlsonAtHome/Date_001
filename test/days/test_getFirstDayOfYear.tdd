@@ -38,9 +38,7 @@ namespace getFirstDayOfYear
         jc313_Date d2;
         std::string dayText1 = "";
         std::string dayText2 = "";
-        int DOW1 = 0;
         int DOW2 = 0;
-        bool isPriorYearLeapYear = false;
         for (int yyyy = 1; yyyy < 1000; ++yyyy)
         {
             d1.setYear(yyyy);

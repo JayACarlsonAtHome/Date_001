@@ -1,0 +1,172 @@
+//
+// Checked construction, getAge birthdays, stream input, no printing, add_Days limits,
+//   and a walk over every date the class supports.
+//
+
+#include <iomanip>
+#include <sstream>
+
+TEST_CASE("getAge counts whole years up to the birthday", "[jc313_Date]")
+{
+    const jc313_Date born{2000, 10, 19};
+    REQUIRE(born.getAge(jc313_Date{2026, 10, 18}) == 25);   // day before the birthday
+    REQUIRE(born.getAge(jc313_Date{2026, 10, 19}) == 26);   // on the birthday
+    REQUIRE(born.getAge(jc313_Date{2026, 10, 20}) == 26);
+    REQUIRE(born.getAge(jc313_Date{2026,  1,  1}) == 25);
+    REQUIRE(born.getAge(jc313_Date{2000, 10, 19}) ==  0);
+    REQUIRE(born.getAge(jc313_Date{1999, 10, 19}) == -1);   // onDate before the birth date
+
+    const jc313_Date leap{2000, 2, 29};                       // counts on 1 Mar in other years
+    REQUIRE(leap.getAge(jc313_Date{2001, 2, 28}) == 0);
+    REQUIRE(leap.getAge(jc313_Date{2001, 3,  1}) == 1);
+    REQUIRE(leap.getAge(jc313_Date{2004, 2, 29}) == 4);
+
+    jc313_Date bad{2000, 1, 1};
+    bad.setMonth(13);
+    REQUIRE(bad.getAge(jc313_Date{2026, 1, 1}) == std::numeric_limits<int>::min());
+}
+
+TEST_CASE("Constructor and make() refuse invalid dates", "[jc313_Date]")
+{
+    const jc313_Date feb30{2017, 2, 30};
+    REQUIRE_FALSE(feb30.isValid());
+    REQUIRE(feb30.strDate() == "0000-00-00");
+    REQUIRE(jc313_Date{2016, 2, 29}.isValid());
+    REQUIRE_FALSE(jc313_Date{2017, 2, 29}.isValid());
+    REQUIRE_FALSE(jc313_Date{0, 1, 1}.isValid());
+    REQUIRE_FALSE(jc313_Date{10000, 1, 1}.isValid());
+    REQUIRE_FALSE(jc313_Date{2017, 0, 1}.isValid());
+    REQUIRE_FALSE(jc313_Date{2017, 4, 31}.isValid());
+
+    REQUIRE(jc313_Date::make(2017, 2, 28).has_value());
+    REQUIRE(jc313_Date::make(2017, 2, 28)->strDate() == "2017-02-28");
+    REQUIRE_FALSE(jc313_Date::make(2017, 2, 29).has_value());
+    REQUIRE_FALSE(jc313_Date::make(2017, 13, 1).has_value());
+
+    REQUIRE_FALSE(jc313_Date(2017, 0).isValid());
+    REQUIRE_FALSE(jc313_Date(2017, 366).isValid());
+    REQUIRE(jc313_Date(2016, 366).strDate() == "2016-12-31");
+    REQUIRE(jc313_Date(2016, 60).strDate() == "2016-02-29");
+    REQUIRE(jc313_Date().isValid());   // today
+}
+
+TEST_CASE("Methods on an invalid date give the documented answers", "[jc313_Date]")
+{
+    jc313_Date d{2017, 1, 1};
+    d.setMonth(14);                    // set*() does not validate
+    REQUIRE_FALSE(d.isValid());
+    REQUIRE(d.getDaysInMonth() == 0);
+    REQUIRE(d.getDayOfTheYear() == 0);
+    REQUIRE(d.getDayOfTheQuarter() == 0);
+    REQUIRE(d.getDayOfWeek() == -1);
+    REQUIRE(d.getDayText() == "Invalid DOW");
+    REQUIRE(d.getDaysDiff(jc313_Date{2017, 1, 1}) == std::numeric_limits<int>::min());
+    REQUIRE(d.add_Days(1).strDate() == "0000-00-00");
+}
+
+TEST_CASE("operator>> reads yyyy-mm-dd and sets failbit on bad input", "[jc313_Date]")
+{
+    const char* good[] = {"2017-03-04", "2017.03.04", "2017/03/04", "2017_03_04"};
+    for (const char* text : good)
+    {
+        std::istringstream in{text};
+        jc313_Date d{2000, 1, 1};
+        in >> d;
+        REQUIRE_FALSE(in.fail());
+        REQUIRE(d.strDate() == "2017-03-04");
+    }
+    const char* bad[] = {"2017-02-30", "2017-03/04", "2017:03:04", "abc", "2017-03"};
+    for (const char* text : bad)
+    {
+        std::istringstream in{text};
+        jc313_Date d{2000, 1, 1};
+        in >> d;
+        REQUIRE(in.fail());
+        REQUIRE(d.strDate() == "0000-00-00");
+    }
+}
+
+TEST_CASE("Invalid dates print nothing", "[jc313_Date]")
+{
+    std::ostringstream capturedOut;
+    std::ostringstream capturedErr;
+    auto* oldOut = std::cout.rdbuf(capturedOut.rdbuf());
+    auto* oldErr = std::cerr.rdbuf(capturedErr.rdbuf());
+
+    const jc313_Date a{2017, 2, 30};
+    const jc313_Date b = jc313_Date{9999, 12, 31}.add_Days(1);
+    jc313_Date c{1, 1, 1};
+    c.addMonths(-1);
+    std::istringstream in{"bad"};
+    jc313_Date e{2000, 1, 1};
+    in >> e;
+
+    std::cout.rdbuf(oldOut);
+    std::cerr.rdbuf(oldErr);
+    REQUIRE_FALSE(a.isValid());
+    REQUIRE_FALSE(b.isValid());
+    REQUIRE_FALSE(c.isValid());
+    REQUIRE_FALSE(e.isValid());
+    REQUIRE(capturedOut.str().empty());
+    REQUIRE(capturedErr.str().empty());
+}
+
+TEST_CASE("operator<< leaves the stream's fill character alone", "[jc313_Date]")
+{
+    std::ostringstream out;
+    out << jc313_Date{17, 3, 4} << '|' << std::setw(3) << 7;
+    REQUIRE(out.str() == "0017-03-04|  7");
+}
+
+TEST_CASE("add_Days at the ends of the range and with huge counts", "[jc313_Date]")
+{
+    const jc313_Date first{1, 1, 1};
+    const jc313_Date last{9999, 12, 31};
+    REQUIRE(first.getDaysDiff(last) == 3652058);
+    REQUIRE(first.add_Days(3652058) == last);
+    REQUIRE(last.add_Days(-3652058) == first);
+    REQUIRE_FALSE(first.add_Days(-1).isValid());
+    REQUIRE_FALSE(last.add_Days(1).isValid());
+    REQUIRE_FALSE(first.add_Days(std::numeric_limits<int>::max()).isValid());
+    REQUIRE_FALSE(last.add_Days(std::numeric_limits<int>::min()).isValid());
+    REQUIRE(jc313_Date{2017, 1, 1}.add_Days(1000000).strDate() == "4754-11-29");
+}
+
+TEST_CASE("Every date from 0001-01-01 to 9999-12-31 steps and counts correctly", "[jc313_Date]")
+{
+    // one REQUIRE per check at the end (3.65 million dates; a REQUIRE each would be slow)
+    jc313_Date d{1, 1, 1};
+    const jc313_Date first{1, 1, 1};
+    int expectedDow     = 1;   // 0001-01-01 was a Monday (proleptic Gregorian)
+    int expectedDoy     = 1;
+    int count           = 0;
+    int dowMismatch     = 0;
+    int doyMismatch     = 0;
+    int diffMismatch    = 0;
+    int invalid         = 0;
+    int orderMismatch   = 0;
+    bool done = false;
+    while (!done)
+    {
+        if (!d.isValid())                          { invalid++; }
+        if (d.getDayOfWeek() != expectedDow)       { dowMismatch++; }
+        if (d.getDayOfTheYear() != expectedDoy)    { doyMismatch++; }
+        if (first.getDaysDiff(d) != count)         { diffMismatch++; }
+        done = (d.getYear() == 9999 && d.getMonth() == 12 && d.getDay() == 31);
+        if (!done)
+        {
+            const jc313_Date next = d.getNext_Date();
+            if (!(d < next))                       { orderMismatch++; }
+            expectedDoy = (next.getYear() != d.getYear()) ? 1 : expectedDoy + 1;
+            d = next;
+            expectedDow = (expectedDow + 1) % 7;
+            count++;
+        }
+    }
+    REQUIRE(count         == 3652058);
+    REQUIRE(invalid       == 0);
+    REQUIRE(dowMismatch   == 0);
+    REQUIRE(doyMismatch   == 0);
+    REQUIRE(diffMismatch  == 0);
+    REQUIRE(orderMismatch == 0);
+}

@@ -21,14 +21,23 @@
 //   however I have become aware of requirements that in some cases
 //   do not allow any early returns.
 //   So in order to be more compliant with those requirements I
-//      am starting the process to remove the early returns.
+//      removed the early returns.
 //
-//   Status -- Just starting to remove early returns.
+//   Status -- No early returns.
+//
+// Day counting (add_Days, getDaysDiff, day of week) is done by std::chrono::sys_days,
+//   so it takes the same time for 1 day or 3 million days.
 
 
 #include "jc313_Date.h"
 
+#include <ctime>
+#include <iomanip>
+#include <iostream>
+
 namespace JC313_DSL_Code {
+
+    namespace chr = std::chrono;
 
     bool jc313_Date::isLeapYear(const int year) const noexcept
     {
@@ -43,33 +52,9 @@ namespace JC313_DSL_Code {
 
     bool jc313_Date::isValidDate(const int year, const  int month, const int day) const noexcept
     {
-        bool result = true;
-        if ( year < MIN_YEAR || year > MAX_YEAR) {
-            result = false;
-        }
-        if (month < 1 || month > 12 )
-        {
-            result = false;
-        }
-        if (day < 1 || day > 31)
-        {
-            result = false;
-        }
-        if (month == 2)
-        {
-            if (isLeapYear(year))
-            {
-                if (day > 29) result = false;
-            }
-            else
-            {
-                if (day > 28) result = false;
-            }
-        }
-        else if (month == 4 || month == 6 || month == 9 || month == 11)
-        {
-            if (day > 30) result = false;
-        }
+        bool result = (year >= MIN_YEAR && year <= MAX_YEAR)
+                   && (month >= 1 && month <= 12)
+                   && (day >= 1 && day <= getDaysInMonth(year, month));
         return result;
     }
 
@@ -79,36 +64,46 @@ namespace JC313_DSL_Code {
         return result;
     };
 
-    void jc313_Date::cout_InvalidDate() const noexcept
+    chr::sys_days jc313_Date::toSysDays() const noexcept
     {
-        std::ostringstream ss;
-
-        ss << "!!! *** Invalid Date *** !!! -> "
-                  << std::setw(4) << std::setfill('0') << m_year << '-'
-                  << std::setw(2) << std::setfill('0') << m_month << '-'
-                  << std::setw(2) << std::setfill('0') << m_day << std::endl;
-
-        std::cerr << ss.str();
-        std::cout << ss.str();
-
+        return chr::sys_days{chr::year{m_year} / chr::month{static_cast<unsigned>(m_month)}
+                                               / chr::day{static_cast<unsigned>(m_day)}};
     }
 
-    jc313_Date::jc313_Date() noexcept {
+    jc313_Date jc313_Date::fromSysDays(const chr::sys_days days) noexcept
+    {
+        const chr::year_month_day ymd{days};
+        // the constructor turns a year outside 1 - 9999 into 0000-00-00
+        return jc313_Date{static_cast<int>(ymd.year()),
+                          static_cast<int>(static_cast<unsigned>(ymd.month())),
+                          static_cast<int>(static_cast<unsigned>(ymd.day()))};
+    }
+
+    jc313_Date::jc313_Date() noexcept
+    {
         time_t nowTime = time(nullptr);
-        bool valid = (nowTime != static_cast<time_t>(-1));
-        if (valid) {
-            struct tm* timeinfo = localtime(&nowTime);
-            valid = (timeinfo != nullptr);
-            if (valid) {
-                m_year = timeinfo->tm_year + 1900;
-                m_month = timeinfo->tm_mon + 1;
-                m_day = timeinfo->tm_mday;
-            }
+        struct tm timeinfo {};
+        bool valid = (nowTime != static_cast<time_t>(-1))
+                  && (localtime_r(&nowTime, &timeinfo) != nullptr);   // thread-safe localtime
+        if (valid)
+        {
+            m_year  = timeinfo.tm_year + 1900;
+            m_month = timeinfo.tm_mon + 1;
+            m_day   = timeinfo.tm_mday;
         }
-        if (!valid) {
-            m_year = 0; m_month = 0; m_day = 0;
-            cout_InvalidDate();
-        };
+        if (!isValid())
+        {
+            setInvalid();
+        }
+    }
+
+    jc313_Date::jc313_Date(int year, int month, int day) noexcept
+        : m_year(year), m_month(month), m_day(day)
+    {
+        if (!isValid())
+        {
+            setInvalid();
+        }
     }
 
     jc313_Date::jc313_Date(int year, int dayOfTheYear) noexcept
@@ -116,30 +111,31 @@ namespace JC313_DSL_Code {
         set_y_d(year, dayOfTheYear);
     }
 
+    std::optional<jc313_Date> jc313_Date::make(int year, int month, int day) noexcept
+    {
+        std::optional<jc313_Date> result;
+        jc313_Date d{year, month, day};
+        if (d.isValid())
+        {
+            result = d;
+        }
+        return result;
+    }
+
     void jc313_Date::set_y_d(const int year, const int dayOfTheYear) noexcept
     {
-        m_year = year;
-        m_month = 1;
-        m_day = 1;
-        bool valid = (dayOfTheYear > 0 && dayOfTheYear <= (isLeapYear(year) ? 366 : 365));
-        if (valid) {
-            int days = dayOfTheYear;
-            bool leap = isLeapYear(year);
-            if (leap && days == 60) {
-                m_month = 2;
-                m_day = 29;
-            } else {
-                if (leap && days > 60) days--;
-                while (m_month < 12 && days > numberOfDaysBeforeMonth[m_month + 1]) {
-                    m_month++;
-                }
-                days -= numberOfDaysBeforeMonth[m_month];
-                m_day = days;
-            }
-        } else {
-            m_year = 0; m_month = 0; m_day = 0;
-            cout_InvalidDate();
-        }    }
+        bool valid = (year >= MIN_YEAR && year <= MAX_YEAR)
+                  && (dayOfTheYear > 0 && dayOfTheYear <= (JC313_DSL_Code::isLeapYear(year) ? 366 : 365));
+        if (valid)
+        {
+            const chr::sys_days jan1{chr::year{year} / chr::January / 1};
+            *this = fromSysDays(jan1 + chr::days{dayOfTheYear - 1});
+        }
+        else
+        {
+            setInvalid();
+        }
+    }
 
     void jc313_Date::adjustMonth(int& year, int& month, const int direction) noexcept
     {
@@ -156,7 +152,7 @@ namespace JC313_DSL_Code {
         }
     }
 
-    int jc313_Date::daysToMonthEnd(const int year, const int month, const int day) noexcept
+    int jc313_Date::daysToMonthEnd(const int year, const int month, const int day) const noexcept
     {
         return jc313_Date::getDaysInMonth(year, month) - day + 1;
     }
@@ -168,8 +164,12 @@ namespace JC313_DSL_Code {
 
     int jc313_Date::getDaysInMonth(const int year, const int month) const noexcept
     {
-        static const int numberOfDaysInMonth[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-        int result = numberOfDaysInMonth[month];
+        static constexpr int numberOfDaysInMonth[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        int result = 0;   // month out of range
+        if (month >= 1 && month <= 12)
+        {
+            result = numberOfDaysInMonth[month];
+        }
         if (month == 2 && jc313_Date::isLeapYear(year))
         {
             result = 29;
@@ -182,53 +182,12 @@ namespace JC313_DSL_Code {
         return getDaysInMonth(this->m_year, this->m_month);
     }
 
-    jc313_Date&  jc313_Date::operator=(const jc313_Date& date)
+    int jc313_Date::getDaysDiff(const jc313_Date& dt2) const noexcept
     {
-        if (this != &date)
-        {
-            m_year  = date.m_year;
-            m_month = date.m_month;
-            m_day   = date.m_day;
-        }
-        return *this;
-    }
-
-    int jc313_Date::LeapYearsSinceYear0001(int year, const int month) const noexcept
-        {
-            // Check if the current getYear needs to be considered
-            // for the count of leap years or not
-            if (month <= 2) year--;
-
-            // An year is a leap getYear if it is a multiple of 4,
-            // multiple of 400 and not a multiple of 100.
-            int result = ((year/4) - (year/100) + (year/400));
-            return result;
-        }
-
-    int jc313_Date::daysSinceYear0001Day001(const int year, const int month, const int day) const noexcept
-    {
-        int n = std::numeric_limits<int>::min();
-        bool valid = isValidDate(year, month, day);
-        // initialize count using years and day
-        if (valid) {
-            n = (year * 365) + numberOfDaysBeforeMonth[month] + day;
-            // Add a day for every leap getYear
-            n += LeapYearsSinceYear0001(year, month);
-        }
-        return n;
-    }
-
-    int jc313_Date::getDaysDiff(const jc313_Date& dt2) const noexcept {
-
-        int n1 = this->daysSinceYear0001Day001(m_year, m_month, m_day);
-        int n2 = this->daysSinceYear0001Day001(dt2.getYear(), dt2.getMonth(), dt2.getDay());
-
-        bool isN1Valid = (n1 != std::numeric_limits<int>::min());
-        bool isN2Valid = (n2 != std::numeric_limits<int>::min());
-
         int result = std::numeric_limits<int>::min();
-        if (isN1Valid && isN2Valid) {
-                result = n2 - n1;
+        if (this->isValid() && dt2.isValid())
+        {
+            result = static_cast<int>((dt2.toSysDays() - this->toSysDays()).count());
         }
         return result;
     }
@@ -236,10 +195,25 @@ namespace JC313_DSL_Code {
     int jc313_Date::getAge() const noexcept
     {
         const jc313_Date now{};
-        int days = this->getDaysDiff(now);
-        auto ddays = static_cast<double>(days);
-        auto result = ddays / 365.25;
-        return static_cast<int>(result);
+        return getAge(now);
+    }
+
+    int jc313_Date::getAge(const jc313_Date& onDate) const noexcept
+    {
+        // whole years: the year difference, less one if onDate is before this year's birthday
+        //   (a 29 Feb birthday counts on 1 Mar in other years)
+        int result = std::numeric_limits<int>::min();
+        if (this->isValid() && onDate.isValid())
+        {
+            result = onDate.m_year - m_year;
+            bool beforeBirthday = (onDate.m_month < m_month)
+                               || (onDate.m_month == m_month && onDate.m_day < m_day);
+            if (beforeBirthday)
+            {
+                result--;
+            }
+        }
+        return result;
     }
 
     void jc313_Date::addMonths(int months) noexcept
@@ -262,8 +236,7 @@ namespace JC313_DSL_Code {
             int maxDays = getDaysInMonth();
             if (m_day > maxDays) m_day = maxDays;
         } else {
-            m_year = 0; m_month = 0; m_day = 0;
-            cout_InvalidDate();
+            setInvalid();
         }
     }
 
@@ -275,57 +248,49 @@ namespace JC313_DSL_Code {
         return add_Days(-1);
     }
 
-    jc313_Date jc313_Date::add_Days(int days) const noexcept {
-        if (days == 0) return *this;
-
-        jc313_Date result = *this;
-        int total = m_day + days;
-        int y = m_year;
-        int m = m_month;
-
-        while (total < 1) {
-            --m;
-            if (m < 1) { --y; m = 12; }
-            total += getDaysInMonth(y, m);
-        }
-        while (total > getDaysInMonth(y, m)) {
-            total -= getDaysInMonth(y, m);
-            ++m;
-            if (m > 12) { ++y; m = 1; }
-        }
-
-        result.m_year = y;
-        result.m_month = m;
-        result.m_day = total;
-
-        if (!result.isValid()) {
-            result.m_year = 0;
-            result.m_month = 0;
-            result.m_day = 0;
-            result.cout_InvalidDate();
+    jc313_Date jc313_Date::add_Days(int days) const noexcept
+    {
+        // the range check is in 64 bits so a huge days cannot overflow the chrono day count
+        static const long long firstDay = chr::sys_days{chr::year{MIN_YEAR} / chr::January  /  1}.time_since_epoch().count();
+        static const long long lastDay  = chr::sys_days{chr::year{MAX_YEAR} / chr::December / 31}.time_since_epoch().count();
+        jc313_Date result{0, 0, 0};   // 0000-00-00 unless the answer is in range
+        if (isValid())
+        {
+            const long long target = toSysDays().time_since_epoch().count() + static_cast<long long>(days);
+            if (target >= firstDay && target <= lastDay)
+            {
+                result = fromSysDays(chr::sys_days{chr::days{target}});
+            }
         }
         return result;
     }
 
-    int jc313_Date::getFirstDayOfYear() noexcept
+    int jc313_Date::getFirstDayOfYear() const noexcept
     {
         return getDayOfWeek( m_year,1,1);
     }
 
     int jc313_Date::getDayOfTheYear() const noexcept
     {
-        int DOTY = numberOfDaysBeforeMonth[m_month];
-        DOTY += m_day;
-        if (isLeapYear(m_year))
+        int DOTY = 0;   // month out of range
+        if (m_month >= 1 && m_month <= 12)
         {
-            if (m_month > 2) DOTY++;
+            DOTY = numberOfDaysBeforeMonth[m_month] + m_day;
+            if (isLeapYear(m_year))
+            {
+                if (m_month > 2) DOTY++;
+            }
         }
         return DOTY;
     }
 
     int jc313_Date::getDayOfTheQuarter() const noexcept
     {
-        int result = numberOfDaysBefore_forDayOfQuarter[m_month] + m_day;
+        int result = 0;   // month out of range
+        if (m_month >= 1 && m_month <= 12)
+        {
+            result = numberOfDaysBefore_forDayOfQuarter[m_month] + m_day;
+        }
         bool isLeap = isLeapYear(this->m_year);
         bool isQ1 = (m_month <= 3);
         if (isLeap) {
@@ -337,7 +302,8 @@ namespace JC313_DSL_Code {
         }
         return result;
     }
-    int jc313_Date::getDayOfWeek(const int year, const int month, const int day) noexcept
+
+    int jc313_Date::getDayOfWeek(const int year, const int month, const int day) const noexcept
     {
         // -1 = invalid DOW
         // 0 = Sunday
@@ -347,45 +313,33 @@ namespace JC313_DSL_Code {
         // 4 = Thursday
         // 5 = Friday
         // 6 = Saturday
-
-        int t[] = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
-        int adjustedYear = year;
-        int adjustedMonth = month;
         int result = -1;
-        if (isValidDate(year, month, day))
+        const jc313_Date d{year, month, day};
+        if (d.isValid())
         {
-            if (month < 3)
-            {
-                adjustedYear -= 1;
-            }
-            result = (adjustedYear + adjustedYear/4 - adjustedYear/100 + adjustedYear/400 + t[adjustedMonth-1] + day) % 7;
+            result = static_cast<int>(chr::weekday{d.toSysDays()}.c_encoding());   // 0 = Sunday
         }
-        return result;    }
+        return result;
+    }
 
-    int jc313_Date::getDayOfWeek() noexcept
+    int jc313_Date::getDayOfWeek() const noexcept
     {
         int result = getDayOfWeek(m_year, m_month, m_day);
         return result;
     }
 
-    std::string jc313_Date::getDayText(unsigned int forcedLength) noexcept
+    std::string jc313_Date::getDayText(unsigned int forcedLength) const
     {
+        static const char* const names[7] = {"Sunday", "Monday", "Tuesday", "Wednesday",
+                                             "Thursday", "Friday", "Saturday"};
         int DOW = this->getDayOfWeek();
-        std::string DOWT = "Invalid Date";
+        std::string DOWT = (DOW >= 0 && DOW <= 6) ? names[DOW] : "Invalid DOW";
         std::string result;
         if (forcedLength > 50)
         {
             forcedLength = 50;
         }
 
-        if (DOW == -1) DOWT = "Invalid DOW";
-        if (DOW ==  0) DOWT = "Sunday";
-        if (DOW ==  1) DOWT = "Monday";
-        if (DOW ==  2) DOWT = "Tuesday";
-        if (DOW ==  3) DOWT = "Wednesday";
-        if (DOW ==  4) DOWT = "Thursday";
-        if (DOW ==  5) DOWT = "Friday";
-        if (DOW ==  6) DOWT = "Saturday";
         if (forcedLength == 0) {
             result = DOWT;
         } else {
@@ -427,96 +381,28 @@ namespace JC313_DSL_Code {
         return quarter;
     }
 
-    const bool jc313_Date::operator==(const jc313_Date &d) const noexcept
-    {
-        return ((m_year == d.m_year) && (m_month == d.m_month) && (m_day == d.m_day));
-    };
-
-    const bool jc313_Date::operator<(const jc313_Date &d) const noexcept
-    {
-        bool cont   = true;
-        bool result = false;
-
-        if (m_year == d.m_year)
-        {
-            if (m_month == d.m_month)
-            {
-                result = (m_day < d.m_day);
-            }
-            else
-            {
-                result = (m_month < d.m_month);
-            };
-            cont = false;
-        }
-        if (cont)
-        {
-            result = (m_year < d.m_year);
-        };
-        return result;
-    };
-
-    // remaining operators defined in terms of the above
-    const bool jc313_Date::operator<=(const jc313_Date &d) const noexcept
-        {
-            if (operator==(d)) return true;
-            return operator<(d);
-        };
-
-    const bool jc313_Date::operator>=(const jc313_Date &d) const noexcept
-    {
-        if (operator==(d)) return true;
-        return operator>(d);
-    };
-
-    const bool jc313_Date::operator>(const jc313_Date &d) const noexcept
-    {
-        bool cont   = true;
-        bool result = false;
-
-        if (m_year == d.m_year) { // same getYear
-            if (m_month == d.m_month) { // same getMonth
-                result = (m_day > d.m_day);
-            } else {
-                result = (m_month > d.m_month);
-            };
-            cont = false;
-        }
-        if (cont)
-        { // different getYear
-            result = (m_year > d.m_year);
-        };
-        return result;
-    };
-
-    const bool jc313_Date::operator!=(const jc313_Date &d) const noexcept
-    {
-        jc313_Date t = *this;
-        return !(t == d);
-    };
-
-    const jc313_Date& jc313_Date::operator++() noexcept {
+    jc313_Date& jc313_Date::operator++() noexcept {
         *this = add_Days(1);
         return *this;
     }
 
-    const jc313_Date& jc313_Date::operator--() noexcept {
+    jc313_Date& jc313_Date::operator--() noexcept {
         *this = add_Days(-1);  // Subtract 1 day
         return *this;
     }
-    const jc313_Date jc313_Date::operator++(int) noexcept {
+    jc313_Date jc313_Date::operator++(int) noexcept {
         jc313_Date temp(*this);
         *this = add_Days(1);
         return temp;
     }
 
-    const jc313_Date jc313_Date::operator--(int) noexcept {  // Postfix
+    jc313_Date jc313_Date::operator--(int) noexcept {  // Postfix
         jc313_Date temp(*this);
         *this = add_Days(-1);  // Subtract 1 day
         return temp;
     }
 
-    std::string jc313_Date::padright(const int width, const int value) const noexcept
+    std::string jc313_Date::padright(const int width, const int value)
     {
         unsigned long w = static_cast<unsigned long>(width);
         std::string output = std::string{"0000"} + std::to_string(value);
@@ -524,7 +410,7 @@ namespace JC313_DSL_Code {
         return output.substr(len-w, len);
     }
 
-    std::string jc313_Date::strDate() const noexcept
+    std::string jc313_Date::strDate() const
     {
         return
                   padright(4, m_year)  + '-'
@@ -534,38 +420,31 @@ namespace JC313_DSL_Code {
 
     std::ostream& operator<<(std::ostream &out, const jc313_Date &d)
     {
-        out << std::setw(4) << std::setfill('0') << d.m_year << '-'
-            << std::setw(2) << std::setfill('0') << d.m_month << '-'
-            << std::setw(2) << std::setfill('0') << d.m_day;
+        const char oldFill = out.fill('0');   // setfill is sticky: put the caller's fill back
+        out << std::setw(4) << d.m_year << '-'
+            << std::setw(2) << d.m_month << '-'
+            << std::setw(2) << d.m_day;
+        out.fill(oldFill);
         return out;
     }
 
     std::istream& operator>>(std::istream &ins, jc313_Date &d)
     {
-        // store value in temporary to validate before assignment
+        // read into temporaries; yyyy-mm-dd with matching '-', '.', '/' or '_' delimiters
+        int year = 0, month = 0, day = 0;
         char delim1 = 0;
         char delim2 = 0;
 
-        ins >> d.m_year >> delim1 >>  d.m_month >> delim2 >> d.m_day;
-        bool check0 = ((delim1 == '_') && (delim2 == '_'));
-        bool check1 = ((delim1 == '-') && (delim2 == '-'));
-        bool check2 = ((delim1 == '.') && (delim2 == '.'));
-        bool check3 = ((delim1 == '/') && (delim2 == '/'));
+        ins >> year >> delim1 >> month >> delim2 >> day;
+        bool delimsOk = (delim1 == delim2)
+                     && (delim1 == '-' || delim1 == '.' || delim1 == '/' || delim1 == '_');
 
-        if (!(check0 || check1 || check2 || check3))
+        d = jc313_Date{year, month, day};   // 0000-00-00 when invalid
+        if (!ins || !delimsOk || !d.isValid())
         {
-            // this will make the date invalid
-            d.m_year = 0;
-        }
-
-        if (!d.isValid())
-        {
-            d.m_year  = 0;
-            d.m_month = 0;
-            d.m_day   = 0;
-            std::cout << "!!! Warning --> Invalid Date Entered !!!" << std::endl;
+            d.setInvalid();
+            ins.setstate(std::ios::failbit);   // the caller checks the stream, as for any >>
         }
         return ins;
     }
 }
-
