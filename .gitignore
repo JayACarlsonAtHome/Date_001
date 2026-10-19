@@ -56,3 +56,7 @@ dkms.conf
 cmake-build-debug/
 
 \.DS_Store
+
+# bootstrap.sh build output, and the DateRunner GUI (umk -> gui/out/)
+build/
+gui/out/

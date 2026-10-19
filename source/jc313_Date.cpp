@@ -420,7 +420,11 @@ namespace JC313_DSL_Code {
 
     std::ostream& operator<<(std::ostream &out, const jc313_Date &d)
     {
-        const char oldFill = out.fill('0');   // setfill is sticky: put the caller's fill back
+        // setfill is sticky: put the caller's fill back. Read it with fill() first: with GCC 15's
+        //   libstdc++ at -O2, fill('0') on a fresh stream returned 0, not ' ', and the restored
+        //   NUL then padded the caller's next setw output with NUL bytes.
+        const char oldFill = out.fill();
+        out.fill('0');
         out << std::setw(4) << d.m_year << '-'
             << std::setw(2) << d.m_month << '-'
             << std::setw(2) << d.m_day;

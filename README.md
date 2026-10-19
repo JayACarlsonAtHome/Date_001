@@ -21,6 +21,26 @@ mean that I covered every possible scenario, or that I coded each test correctly
 So what I am saying is this is free to use (as per license) but I do not guarantee the results. 
 
 
+## Quick start
+
+```
+cd Date_001
+./bootstrap.sh          # finds or offers to install a compiler + CMake, builds into build/, runs the tests
+./bootstrap.sh --gui    # the same, plus U++ (into ~/u++, no sudo) and the DateRunner window
+./gui/out/DateRunner
+```
+
+bootstrap.sh compiles a small probe program to pick the newest compiler that works (GCC 15 from
+gcc-toolset, g++-15/14, clang, then the system g++). Anything missing is shown with its install
+command for your OS (RHEL, Fedora, Mint/Ubuntu/Debian) and installed only if you answer y.
+Run it as yourself, from the Date_001 folder (it refuses to run from anywhere else).
+
+**DateRunner** builds (only what changed) and runs the tests, then lists every test case with its
+result and time. Pick one to see its details: for a failure, the file:line, the check as written,
+and the values it saw. Filters: a tag, part of a name, and "Skip [slow]" (the two walks over every
+date). "Run selected" re-runs one test case; "Stop" ends a build or run.
+`DateRunner --smoke` runs everything once without clicks and exits 0 when all passed.
+
 ## Build and test
 
 ```

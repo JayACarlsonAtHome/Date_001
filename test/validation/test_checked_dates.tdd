@@ -132,7 +132,7 @@ TEST_CASE("add_Days at the ends of the range and with huge counts", "[jc313_Date
     REQUIRE(jc313_Date{2017, 1, 1}.add_Days(1000000).strDate() == "4754-11-29");
 }
 
-TEST_CASE("Every date from 0001-01-01 to 9999-12-31 steps and counts correctly", "[jc313_Date]")
+TEST_CASE("Every date from 0001-01-01 to 9999-12-31 steps and counts correctly", "[jc313_Date][slow]")
 {
     // one REQUIRE per check at the end (3.65 million dates; a REQUIRE each would be slow)
     jc313_Date d{1, 1, 1};

@@ -1,0 +1,10 @@
+description "DateRunner - build Date_001 and run its Catch2 tests in a window\n";
+
+uses
+	CtrlLib;
+
+file
+	main.cpp;
+
+mainconfig
+	"" = "GUI WAYLAND";

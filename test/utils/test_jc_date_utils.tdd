@@ -28,7 +28,7 @@ namespace jc_date_test {
     static_assert(jc_date::day_of_week(make_ymd(1, 1, 1)) == 1);   // Monday
 }
 
-TEST_CASE("jc_date_utils agree with jc313_Date on every date 0001-01-01 to 9999-12-31", "[jc_date_utils]")
+TEST_CASE("jc_date_utils agree with jc313_Date on every date 0001-01-01 to 9999-12-31", "[jc_date_utils][slow]")
 {
     using namespace jc_date_test;
     jc313_Date d{1, 1, 1};
