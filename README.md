@@ -34,11 +34,11 @@ Expected output:
 ```
 Starting Testing: ... Please be patient...
 ===============================================================================
-All tests passed (29460 assertions in 185 test cases)
+All tests passed (29513 assertions in 191 test cases)
 ```
 
-One of those tests walks every date from 0001-01-01 to 9999-12-31 (3,652,059 dates), so a run takes about half
-a second. Needs a C++23 compiler (GCC 13+ or clang 17+; tested with GCC 15 and clang 21).
+One of those tests walks every date from 0001-01-01 to 9999-12-31 (3,652,059 dates), twice (once for each header), so a
+run takes about 2 seconds in a debug build. Needs a C++23 compiler (GCC 13+ or clang 17+; tested with GCC 15 and clang 21).
 
 `./build/date_demo` prints the day of the week for every date in 2017-2020 (from `main.cpp`).
 
@@ -63,6 +63,38 @@ std::cin >> d;                             // yyyy-mm-dd (or . / _); bad input s
 - `getAge()` counts whole years up to the birthday; a 29 Feb birthday counts on 1 Mar in other years.
 - Day arithmetic and the day of the week come from `std::chrono`, so `add_Days(1000000)` is as quick as `add_Days(1)`.
 - `==, !=, <, >, <=, >=` all come from one defaulted `operator<=>` (year, then month, then day).
+
+
+## jc_date_utils.hpp: for new code, prefer std::chrono
+
+When this class was written C++ had no date type. C++20 added one: `std::chrono::year_month_day`
+does validation, leap years, weekdays, day arithmetic (`sys_days`), comparisons, formatting and parsing.
+`source/jc_date_utils.hpp` (header only) adds just what chrono lacks, as free functions on that type:
+
+| Function | Gives |
+|---|---|
+| `is_valid_1_9999(d)` | `ok()` and years 1 - 9999 |
+| `day_of_year(d)`, `quarter(d)`, `day_of_quarter(d)` | 1 - 366, 1 - 4, 1 - 92 |
+| `day_of_week(d)`, `day_name(d, width)` | 0 = Sunday; English name, padded/cut like `getDayText` |
+| `age(birth, on)` | whole years (`std::optional<int>`) |
+| `add_months_clamped(d, n)` | Jan 31 + 1 month = Feb 28/29 (chrono alone gives Feb 31, not `ok()`) |
+| `add_days_1_9999(d, n)`, `days_between(a, b)` | range-checked day arithmetic |
+| `parse_ymd(text)`, `to_string(d)` | yyyy-mm-dd in and out (`- . / _` delimiters) |
+| `today_local()` | today in local time |
+
+Everything but the string and clock helpers is `constexpr`. Invalid input gives 0 or `std::nullopt`;
+nothing prints or throws. The tests in `test/utils/` check every function against `jc313_Date`
+(every date 0001-01-01 to 9999-12-31), so the original test suite vouches for both.
+
+```cpp
+#include "source/jc_date_utils.hpp"
+using namespace std::chrono;
+
+year_month_day d = 2017y / January / 31;
+auto next = jc_date::add_months_clamped(d, 1);         // 2017-02-28
+int doy = jc_date::day_of_year(d);                     // 31
+if (auto p = jc_date::parse_ymd("2016/02/29")) { /* valid date */ }
+```
 
 
 Other Notes:

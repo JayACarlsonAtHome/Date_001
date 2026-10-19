@@ -46,6 +46,8 @@ set(TEST_FILES
 
         test/validation/test_checked_dates.tdd
 
+        test/utils/test_jc_date_utils.tdd
+
         test/z_operator/operators.tdd
 
         test_includes.tdd
@@ -57,6 +59,7 @@ set(SOURCE_FILES
         ${TEST_FILES}
         source/jc313_Date.cpp
         source/jc313_Date.h
+        source/jc_date_utils.hpp
         test_main.cpp
         )
 add_executable(Date ${SOURCE_FILES})

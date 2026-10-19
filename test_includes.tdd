@@ -1,4 +1,5 @@
 #include "source/jc313_Date.h"
+#include "source/jc_date_utils.hpp"
 
 #include <iostream>
 
@@ -51,6 +52,8 @@ TEST_CASE("Dates are equal", "[jc313_Date]")
 #include "test/year/test_leap_year_9501_9999.tdd"
 
 #include "test/validation/test_checked_dates.tdd"
+
+#include "test/utils/test_jc_date_utils.tdd"
 
 #include "test/z_operator/operators.tdd"
 

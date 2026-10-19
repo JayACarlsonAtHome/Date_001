@@ -1,0 +1,163 @@
+//
+// jc_date_utils.hpp: checked against jc313_Date (which the other tests check),
+//   plus the cases chrono gets wrong on its own (month ends) and compile-time checks.
+//
+
+
+#include <sstream>
+
+namespace jc_date_test {
+    namespace chr = std::chrono;
+    using jc_date::ymd;
+
+    constexpr ymd make_ymd(int y, unsigned m, unsigned d)
+    {
+        return ymd{chr::year{y}, chr::month{m}, chr::day{d}};
+    }
+
+    // these run at compile time: a wrong answer stops the build
+    static_assert(jc_date::day_of_year(make_ymd(2016, 12, 31)) == 366);
+    static_assert(jc_date::day_of_year(make_ymd(2017, 3, 1)) == 60);
+    static_assert(jc_date::quarter(make_ymd(2017, 9, 30)) == 3);
+    static_assert(jc_date::day_of_quarter(make_ymd(2016, 3, 31)) == 91);
+    static_assert(jc_date::day_of_quarter(make_ymd(2017, 12, 31)) == 92);
+    static_assert(*jc_date::age(make_ymd(2000, 10, 19), make_ymd(2026, 10, 19)) == 26);
+    static_assert(*jc_date::add_months_clamped(make_ymd(2017, 1, 31), 1) == make_ymd(2017, 2, 28));
+    static_assert(*jc_date::parse_ymd("2017/03/04") == make_ymd(2017, 3, 4));
+    static_assert(!jc_date::parse_ymd("2017-02-29").has_value());
+    static_assert(jc_date::day_of_week(make_ymd(1, 1, 1)) == 1);   // Monday
+}
+
+TEST_CASE("jc_date_utils agree with jc313_Date on every date 0001-01-01 to 9999-12-31", "[jc_date_utils]")
+{
+    using namespace jc_date_test;
+    jc313_Date d{1, 1, 1};
+    const ymd first = make_ymd(1, 1, 1);
+    int count = 0;
+    int mismatches[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+    bool done = false;
+    while (!done)
+    {
+        const ymd u = make_ymd(d.getYear(), static_cast<unsigned>(d.getMonth()), static_cast<unsigned>(d.getDay()));
+        if (!jc_date::is_valid_1_9999(u))                               { mismatches[0]++; }
+        if (jc_date::day_of_year(u)    != d.getDayOfTheYear())          { mismatches[1]++; }
+        if (jc_date::quarter(u)        != d.getQuarter())               { mismatches[2]++; }
+        if (jc_date::day_of_quarter(u) != d.getDayOfTheQuarter())       { mismatches[3]++; }
+        if (jc_date::day_of_week(u)    != d.getDayOfWeek())             { mismatches[4]++; }
+        if (jc_date::days_between(first, u) != count)                   { mismatches[5]++; }
+        // the string checks build strings, so they run on every 97th date (still 37,650 dates)
+        if (count % 97 == 0 && jc_date::to_string(u) != d.strDate())    { mismatches[6]++; }
+        if (count % 97 == 0 && (jc_date::day_name(u) != d.getDayText() || jc_date::day_name(u, 10) != d.getDayText(10)))
+                                                                        { mismatches[7]++; }
+        done = (d.getYear() == 9999 && d.getMonth() == 12 && d.getDay() == 31);
+        if (!done)
+        {
+            d = d.getNext_Date();
+            count++;
+        }
+    }
+    REQUIRE(count == 3652058);
+    for (int m : mismatches)
+    {
+        REQUIRE(m == 0);
+    }
+}
+
+TEST_CASE("jc_date::add_months_clamped agrees with jc313_Date::addMonths", "[jc_date_utils]")
+{
+    using namespace jc_date_test;
+    int checked = 0;
+    int mismatches = 0;
+    for (int year = 1999; year <= 2005; ++year)
+    {
+        for (int month = 1; month <= 12; ++month)
+        {
+            for (int day : {1, 15, 28, 29, 30, 31})
+            {
+                const jc313_Date start{year, month, day};
+                if (start.isValid())
+                {
+                    for (int add = -40; add <= 40; ++add)
+                    {
+                        jc313_Date expected = start;
+                        expected.addMonths(add);
+                        const auto got = jc_date::add_months_clamped(
+                            make_ymd(year, static_cast<unsigned>(month), static_cast<unsigned>(day)), add);
+                        if (!got || jc_date::to_string(*got) != expected.strDate()) { mismatches++; }
+                        checked++;
+                    }
+                }
+            }
+        }
+    }
+    REQUIRE(checked > 30000);
+    REQUIRE(mismatches == 0);
+    // chrono on its own: Jan 31 + 1 month is "Feb 31", which is not ok()
+    REQUIRE_FALSE((make_ymd(2017, 1, 31) + chr::months{1}).ok());
+    REQUIRE(*jc_date::add_months_clamped(make_ymd(2016, 1, 31), 1)   == make_ymd(2016, 2, 29));
+    REQUIRE(*jc_date::add_months_clamped(make_ymd(2016, 3, 31), -13) == make_ymd(2015, 2, 28));
+    REQUIRE_FALSE(jc_date::add_months_clamped(make_ymd(2017, 2, 30), 1).has_value());
+}
+
+TEST_CASE("jc_date::age matches jc313_Date::getAge", "[jc_date_utils]")
+{
+    using namespace jc_date_test;
+    REQUIRE(*jc_date::age(make_ymd(2000, 10, 19), make_ymd(2026, 10, 18)) == 25);
+    REQUIRE(*jc_date::age(make_ymd(2000, 10, 19), make_ymd(2026, 10, 19)) == 26);
+    REQUIRE(*jc_date::age(make_ymd(2000,  2, 29), make_ymd(2001,  2, 28)) == 0);
+    REQUIRE(*jc_date::age(make_ymd(2000,  2, 29), make_ymd(2001,  3,  1)) == 1);
+    REQUIRE(*jc_date::age(make_ymd(2000, 10, 19), make_ymd(1999, 10, 19)) == -1);
+    REQUIRE_FALSE(jc_date::age(make_ymd(2017, 2, 30), make_ymd(2026, 1, 1)).has_value());
+
+    int mismatches = 0;
+    jc313_Date birth{1996, 1, 1};
+    for (int i = 0; i < 3000; ++i, birth = birth.add_Days(1))
+    {
+        const jc313_Date on = birth.add_Days(9000 + (i * 37) % 800);
+        const auto got = jc_date::age(
+            make_ymd(birth.getYear(), static_cast<unsigned>(birth.getMonth()), static_cast<unsigned>(birth.getDay())),
+            make_ymd(on.getYear(), static_cast<unsigned>(on.getMonth()), static_cast<unsigned>(on.getDay())));
+        if (!got || *got != birth.getAge(on)) { mismatches++; }
+    }
+    REQUIRE(mismatches == 0);
+}
+
+TEST_CASE("jc_date::parse_ymd accepts what jc313_Date's >> accepts", "[jc_date_utils]")
+{
+    const char* texts[] = {"2017-03-04", "2017.03.04", "2017/03/04", "2017_03_04", "1-1-1", "9999-12-31",
+                           "2016-02-29", "2017-02-29", "2017-03/04", "2017:03:04", "abc", "2017-03",
+                           "0-01-01", "10000-01-01", "2017-13-01", "2017--03-04", "2017-03-04-"};
+    for (const char* text : texts)
+    {
+        std::istringstream in{text};
+        jc313_Date d{2000, 1, 1};
+        in >> d;
+        const bool streamOk = !in.fail() && (in >> std::ws).eof();
+        const auto parsed = jc_date::parse_ymd(text);
+        INFO("text = " << text);
+        REQUIRE(parsed.has_value() == streamOk);
+        if (parsed)
+        {
+            REQUIRE(jc_date::to_string(*parsed) == d.strDate());
+        }
+    }
+}
+
+TEST_CASE("jc_date::add_days_1_9999 at the ends and with huge counts", "[jc_date_utils]")
+{
+    using namespace jc_date_test;
+    const ymd first = make_ymd(1, 1, 1);
+    const ymd last  = make_ymd(9999, 12, 31);
+    REQUIRE(*jc_date::add_days_1_9999(first, 3652058) == last);
+    REQUIRE(*jc_date::add_days_1_9999(last, -3652058) == first);
+    REQUIRE_FALSE(jc_date::add_days_1_9999(first, -1).has_value());
+    REQUIRE_FALSE(jc_date::add_days_1_9999(last, 1).has_value());
+    REQUIRE_FALSE(jc_date::add_days_1_9999(first, 1LL << 40).has_value());
+    REQUIRE(jc_date::to_string(*jc_date::add_days_1_9999(make_ymd(2017, 1, 1), 1000000)) == "4754-11-29");
+}
+
+TEST_CASE("jc_date::today_local matches jc313_Date's today", "[jc_date_utils]")
+{
+    const jc313_Date today{};
+    REQUIRE(jc_date::to_string(jc_date::today_local()) == today.strDate());
+}
