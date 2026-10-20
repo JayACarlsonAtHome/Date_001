@@ -300,7 +300,9 @@ struct DateRunner : TopWindow {
 	String      stepText;     // all of the running step's output (the build summary reads it)
 	String      buildSummary; // "Build OK: ..." of the last build, kept for the status line
 	TimeCallback tick;
-	dword       runStart = 0;
+	int         runStart = 0;      // msecs() when the run started; msecs(runStart) is the elapsed time
+	int         stepStart = 0;     // when the running step started (the build summary says how long)
+	bool        buildOnly = false; // the Build button: after the build, say Run tests is next
 	int         xmlScanPos = 0;   // how far LogFinishedCases has read the XML report
 	int         casesLogged = 0;
 
@@ -407,6 +409,7 @@ DateRunner::DateRunner()
 		if(busy)
 			return;
 		stopped = false;
+		buildOnly = true;
 		queue.Clear();
 		log.Clear();
 		EnqueueBuild();
@@ -511,6 +514,9 @@ void DateRunner::StartNext()
 			exe = found;
 	}
 	current = s.kind;
+	stepStart = msecs();
+	if(s.kind == BUILD)
+		prog.Set(0, 1);
 	out.Clear();
 	partialLine.Clear();
 	stepText.Clear();
@@ -551,7 +557,13 @@ void DateRunner::LogStepOutput(bool flush)
 	String text;
 	int nl;
 	while((nl = partialLine.Find('\n')) >= 0) {
-		text << PadNinjaLine(partialLine.Left(nl)) << "\n";
+		String line = partialLine.Left(nl);
+		if(current == BUILD && line.StartsWith("[")) {   // ninja [done/total]: the progress bar follows it
+			int slash = line.Find('/'), close = line.Find(']');
+			if(slash > 1 && close > slash)
+				prog.Set(ScanInt(line.Mid(1, slash - 1)), max(ScanInt(line.Mid(slash + 1)), 1));
+		}
+		text << PadNinjaLine(line) << "\n";
 		partialLine.Remove(0, nl + 1);
 	}
 	if(flush && partialLine.GetCount()) {
@@ -572,7 +584,7 @@ void DateRunner::Poll()
 		int n = LogFinishedCases();
 		prog.Set(min(n, cases.GetCount()), max(cases.GetCount(), 1));
 		status.SetText(Format("Running tests ... %s / %d  (%.1f s)", PadCount(n, cases.GetCount()), cases.GetCount(),
-		                      (msecs() - runStart) / 1000.0));
+		                      msecs(runStart) / 1000.0));
 	}
 	if(alive && proc.IsRunning())
 		return;
@@ -600,6 +612,7 @@ void DateRunner::OnStepDone(Kind k, int rc)
 	}
 	if(k == CONFIGURE || k == BUILD) {
 		if(rc != 0) {
+			Log(Format("\n--- %s FAILED (exit code %d) ---\n", k == CONFIGURE ? "configure" : "build", rc));
 			status.SetText(k == CONFIGURE ? "Configure failed (see Log)." : "Build failed (see Log).");
 			tabs.Set(1);
 			queue.Clear();
@@ -616,8 +629,11 @@ void DateRunner::OnStepDone(Kind k, int rc)
 			}
 			bool none = stepText.Find("no work to do") >= 0 || (steps == 0 && stepText.Find("Building") < 0);
 			buildSummary = "Build OK: build/" + BuildName() + (none ? " was already up to date"
-			               : Format(" (%d steps%s)", steps, cleanBuild ? ", clean rebuild" : ""));
-			status.SetText(buildSummary + ".");
+			               : Format(" (%d steps%s, %.1f s)", steps, cleanBuild ? ", clean rebuild" : "",
+			                        msecs(stepStart) / 1000.0));
+			prog.Set(1, 1);
+			Log("\n--- " + buildSummary + (buildOnly ? ". Done: press Run tests to run them. ---\n" : ". Running the tests next. ---\n"));
+			status.SetText(buildSummary + (buildOnly ? ". Done. Press Run tests to run them." : "."));
 		}
 	}
 	else if(k == LIST_TAGS) {
@@ -633,7 +649,7 @@ void DateRunner::OnStepDone(Kind k, int rc)
 		if(tag.GetIndex() < 0)
 			tag.SetIndex(0);
 		if(buildSummary.GetCount() && queue.IsEmpty())
-			status.SetText(buildSummary + ".   " + AsString(tag.GetCount() - 1) + " tags.");
+			status.SetText(buildSummary + ". Done (" + AsString(tag.GetCount() - 1) + " tags). Press Run tests to run them.");
 	}
 	else if(k == LIST_TESTS) {
 		cases.Clear();
@@ -695,6 +711,7 @@ void DateRunner::StartRun(bool selectedOnly)
 		filters = CurrentFilters();
 
 	stopped = false;
+	buildOnly = false;
 	queue.Clear();
 	log.Clear();
 	EnqueueBuild();
@@ -739,7 +756,7 @@ int DateRunner::LogFinishedCases()
 
 void DateRunner::FinishRun()
 {
-	double secs = (msecs() - runStart) / 1000.0;
+	double secs = msecs(runStart) / 1000.0;
 	LogFinishedCases();   // the last few, written after the final poll
 	int ok = 0, bad = 0;
 	String xml = LoadFile(xmlPath);
@@ -757,6 +774,7 @@ void DateRunner::FinishRun()
 	prog.Set(cases.GetCount(), max(cases.GetCount(), 1));
 	status.SetText(Format("%s   %d test cases: %d passed, %d failed.   %d checks passed, %d failed.   %.2f s   (%s)",
 	                      failed ? "FAILED" : "ALL PASSED", cases.GetCount(), passed, failed, ok, bad, secs, BuildName()));
+	Log("\n--- " + status.GetText() + " ---\n");
 	for(int r = 0; r < results.GetCount(); r++) {   // jump to the first failure
 		int i = results.Get(r, "IDX");
 		if(!cases[i].success) {
