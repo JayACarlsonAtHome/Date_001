@@ -348,9 +348,9 @@ DateRunner::DateRunner()
 	}
 	if(toolchains.GetCount() && compiler.GetIndex() < 0)
 		compiler.SetIndex(0);
-	buildType.Add("release", "Release");
 	buildType.Add("debug", "Debug");
-	buildType.SetIndex(0);
+	buildType.Add("release", "Release");
+	buildType <<= "release";   // listed alphabetically; Release is the default (what bootstrap.sh builds)
 	compiler << THISBACK(SelectBuild);
 	buildType << THISBACK(SelectBuild);
 
@@ -762,7 +762,7 @@ GUI_APP_MAIN
 		}
 	}
 	if(w.buildType.GetIndex() < 0)
-		w.buildType.SetIndex(0);
+		w.buildType <<= "release";
 	if(!IsNull(w.root))
 		w.SelectBuild();
 	if(w.smoke)
