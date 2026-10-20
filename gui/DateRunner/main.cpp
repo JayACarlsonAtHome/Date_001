@@ -76,6 +76,22 @@ static String PadCount(int n, int total)
 	return String(' ', max(t.GetCount() - v.GetCount(), 0)) + v;
 }
 
+// ninja's "[3/45] Building ..." -> "[ 3/45] Building ...", like the test lines in the Log
+static String PadNinjaLine(const String& line)
+{
+	int slash = line.Find('/');
+	int close = line.Find(']');
+	if(line.StartsWith("[") && slash > 1 && close > slash + 1) {
+		String done = line.Mid(1, slash - 1), total = line.Mid(slash + 1, close - slash - 1);
+		bool digits = true;
+		for(int c : done + total)
+			digits = digits && IsDigit(c);
+		if(digits)
+			return "[" + String(' ', max(total.GetCount() - done.GetCount(), 0)) + done + line.Mid(slash);
+	}
+	return line;
+}
+
 // the value of attribute id in one XML start tag (Catch2 escapes only these five)
 static String TagAttr(const String& tag, const char *id)
 {
@@ -299,6 +315,8 @@ struct DateRunner : TopWindow {
 	~DateRunner() { if(busy) KillGroup(proc); }
 
 	void Log(const String& s)          { log.Append(s); log.SetCursor(log.GetLength()); }
+	void LogStepOutput(bool flush);
+	String partialLine;   // build output after the last newline, logged once the line is whole
 	void SetBusy(bool b);
 	void Enqueue(Kind k, const String& exe, const Vector<String>& args);
 	void EnqueueBuild();
@@ -494,6 +512,7 @@ void DateRunner::StartNext()
 	}
 	current = s.kind;
 	out.Clear();
+	partialLine.Clear();
 	stepText.Clear();
 	String line = exe;
 	for(const String& a : s.args)
@@ -516,15 +535,39 @@ void DateRunner::StartNext()
 	tick.Set(-100, THISBACK(Poll));
 }
 
+// the step's new output into the Log; configure/build lines whole, with ninja's counts padded
+void DateRunner::LogStepOutput(bool flush)
+{
+	if(current == LIST_TAGS || current == LIST_TESTS)
+		return;   // these are read, not shown
+	if(current != CONFIGURE && current != BUILD) {
+		if(out.GetCount())
+			Log(out);
+		out.Clear();
+		return;
+	}
+	partialLine << out;
+	out.Clear();
+	String text;
+	int nl;
+	while((nl = partialLine.Find('\n')) >= 0) {
+		text << PadNinjaLine(partialLine.Left(nl)) << "\n";
+		partialLine.Remove(0, nl + 1);
+	}
+	if(flush && partialLine.GetCount()) {
+		text << PadNinjaLine(partialLine) << "\n";
+		partialLine.Clear();
+	}
+	if(text.GetCount())
+		Log(text);
+}
+
 void DateRunner::Poll()
 {
 	bool alive = Drain(proc, out);
 	if(current == CONFIGURE || current == BUILD)
 		stepText << out;
-	if(current != LIST_TAGS && current != LIST_TESTS && out.GetCount()) {
-		Log(out);
-		out.Clear();
-	}
+	LogStepOutput(false);
 	if(current == RUN) {
 		int n = LogFinishedCases();
 		prog.Set(min(n, cases.GetCount()), max(cases.GetCount(), 1));
@@ -537,10 +580,7 @@ void DateRunner::Poll()
 	Drain(proc, out);
 	if(current == CONFIGURE || current == BUILD)
 		stepText << out;
-	if(current != LIST_TAGS && current != LIST_TESTS && out.GetCount()) {
-		Log(out);
-		out.Clear();
-	}
+	LogStepOutput(true);
 	OnStepDone(current, proc.GetExitCode());
 }
 
