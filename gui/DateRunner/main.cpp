@@ -98,13 +98,16 @@ struct Toolchain {
 	String cxx;      // full path
 	String folder;   // build folder prefix: gcc15, clang21, ... (same names as bootstrap.sh)
 	String label;    // for the drop list
+	String name;     // Clang, GCC: the drop list is sorted by name, then version
+	int    major = 0;
 };
 
 // first line of `cxx --version`, and the major version from -dumpversion
 static String FirstLine(const String& s)  { int n = s.Find('\n'); return TrimBoth(n >= 0 ? s.Left(n) : s); }
 
-// the compilers installed here, newest GCC first; one entry per real binary
-static Array<Toolchain> FindToolchains()
+// the compilers installed here, one entry per real binary, sorted by name then version
+//   (Clang 21, GCC 11, GCC 14, GCC 15); *preferred is the newest GCC, the default choice
+static Array<Toolchain> FindToolchains(String *preferred)
 {
 	const char *cand[] = { "/opt/rh/gcc-toolset-15/root/usr/bin/g++", "g++-15",
 	                       "/opt/rh/gcc-toolset-14/root/usr/bin/g++", "g++-14",
@@ -133,8 +136,15 @@ static Array<Toolchain> FindToolchains()
 		Toolchain& t = list.Add();
 		t.cxx = path;
 		t.folder = (clang ? "clang" : "gcc") + major;
-		t.label = (clang ? "Clang " : "GCC ") + major + "   (" + path + ")";
+		t.name = clang ? "Clang" : "GCC";
+		t.major = ScanInt(major);
+		t.label = t.name + " " + major + "   (" + path + ")";
+		if(preferred && preferred->IsEmpty())
+			*preferred = t.folder;   // the candidates are tried newest GCC first
 	}
+	Sort(list, [](const Toolchain& a, const Toolchain& b) {
+		return a.name != b.name ? a.name < b.name : a.major < b.major;
+	});
 	return list;
 }
 
@@ -329,10 +339,14 @@ DateRunner::DateRunner()
 	skipSlow = false;
 	cleanBuild = false;
 
-	toolchains = FindToolchains();
-	for(int i = 0; i < toolchains.GetCount(); i++)
+	String preferred;
+	toolchains = FindToolchains(&preferred);
+	for(int i = 0; i < toolchains.GetCount(); i++) {
 		compiler.Add(i, toolchains[i].label);
-	if(toolchains.GetCount())
+		if(toolchains[i].folder == preferred)
+			compiler.SetIndex(i);
+	}
+	if(toolchains.GetCount() && compiler.GetIndex() < 0)
 		compiler.SetIndex(0);
 	buildType.Add("release", "Release");
 	buildType.Add("debug", "Debug");
