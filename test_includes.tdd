@@ -1,12 +1,10 @@
 // The general test cases. The other test files are listed in CMakeLists.txt (TEST_FILES),
 //   each compiled on its own with test/test_common.hpp.
 
-jc313_Date d1;
-jc313_Date d2;
-
-
 TEST_CASE("Dates are equal", "[jc313_Date]")
 {
+    jc313_Date d1;
+    jc313_Date d2;
     REQUIRE(d1 == d2);
 }
 
