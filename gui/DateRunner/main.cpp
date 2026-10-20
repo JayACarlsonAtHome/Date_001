@@ -6,6 +6,7 @@
 //         --compiler/--type/--clean preset the choices at the top of the window.
 //         --smoke presses Run tests itself, prints the final status line and exits:
 //         0 when every test passed (a check that the window, build and report all work).
+//         --print-log (with --smoke) also prints the Log tab.
 //
 // It only drives the tools bootstrap.sh set up: `cmake --build build`, then the test binary
 // build/Date with Catch2's XML reporter. Results are read from that XML, so what the window
@@ -65,6 +66,32 @@ static String SpecEscape(const String& s)
 		r.Cat(c);
 	}
 	return r;
+}
+
+// "7" -> "  7" when the total is 205: counts padded with spaces to the width of the total
+static String PadCount(int n, int total)
+{
+	String t = AsString(max(total, 1));
+	String v = AsString(n);
+	return String(' ', max(t.GetCount() - v.GetCount(), 0)) + v;
+}
+
+// the value of attribute id in one XML start tag (Catch2 escapes only these five)
+static String TagAttr(const String& tag, const char *id)
+{
+	String key = String(" ") + id + "=\"";
+	int p = tag.Find(key);
+	if(p < 0)
+		return Null;
+	p += key.GetCount();
+	int e = tag.Find('"', p);
+	String v = tag.Mid(p, e < 0 ? tag.GetCount() - p : e - p);
+	v.Replace("&quot;", "\"");
+	v.Replace("&apos;", "'");
+	v.Replace("&lt;", "<");
+	v.Replace("&gt;", ">");
+	v.Replace("&amp;", "&");
+	return v;
 }
 
 // the project root: an argument, else two folders above gui/out/DateRunner
@@ -258,8 +285,11 @@ struct DateRunner : TopWindow {
 	String      buildSummary; // "Build OK: ..." of the last build, kept for the status line
 	TimeCallback tick;
 	dword       runStart = 0;
+	int         xmlScanPos = 0;   // how far LogFinishedCases has read the XML report
+	int         casesLogged = 0;
 
 	bool        smoke = false;     // --smoke: run once, print the status, exit
+	bool        printLog = false;  // --print-log (with --smoke): also print the Log tab
 	int         smokeRc = 1;
 
 	Array<CaseResult> cases;
@@ -276,6 +306,7 @@ struct DateRunner : TopWindow {
 	void Poll();
 	void OnStepDone(Kind k, int rc);
 	void FinishRun();
+	int  LogFinishedCases();
 	void ShowRows();
 	void ShowDetail();
 	void StartRun(bool selectedOnly);
@@ -495,13 +526,10 @@ void DateRunner::Poll()
 		out.Clear();
 	}
 	if(current == RUN) {
-		// progress: Catch2 writes each test case's OverallResult as the case ends
-		String xml = LoadFile(xmlPath);
-		int n = 0;
-		for(int p = xml.Find("<OverallResult "); p >= 0; p = xml.Find("<OverallResult ", p + 1))
-			n++;
+		int n = LogFinishedCases();
 		prog.Set(min(n, cases.GetCount()), max(cases.GetCount(), 1));
-		status.SetText(Format("Running tests ... %d / %d  (%.1f s)", n, cases.GetCount(), (msecs() - runStart) / 1000.0));
+		status.SetText(Format("Running tests ... %s / %d  (%.1f s)", PadCount(n, cases.GetCount()), cases.GetCount(),
+		                      (msecs() - runStart) / 1000.0));
 	}
 	if(alive && proc.IsRunning())
 		return;
@@ -584,6 +612,8 @@ void DateRunner::OnStepDone(Kind k, int rc)
 		prog.Set(0, cases.GetCount());
 		FileDelete(xmlPath);
 		runStart = msecs();
+		xmlScanPos = 0;
+		casesLogged = 0;
 	}
 	else if(k == RUN) {
 		FinishRun();
@@ -637,9 +667,40 @@ void DateRunner::StartRun(bool selectedOnly)
 	StartNext();
 }
 
+// Log one line per test case Catch2 has finished: [  7/205] passed   12.3 ms  name.
+//   Catch2 writes each <TestCase> element whole when the case ends, so a closed one is final.
+int DateRunner::LogFinishedCases()
+{
+	String xml = LoadFile(xmlPath);
+	int total = cases.GetCount();
+	String lines;
+	for(;;) {
+		int b = xml.Find("<TestCase ", xmlScanPos);
+		if(b < 0)
+			break;
+		int e = xml.Find("</TestCase>", b);
+		if(e < 0)
+			break;   // still running
+		String tagText = xml.Mid(b, xml.Find('>', b) - b);
+		int rp = xml.Find("<OverallResult ", b);
+		String result = rp >= 0 && rp < e ? xml.Mid(rp, xml.Find('>', rp) - rp) : String();
+		bool ok = TagAttr(result, "success") == "true";
+		double ms = ScanDouble(TagAttr(result, "durationInSeconds")) * 1000;
+		casesLogged++;
+		lines << "[" << PadCount(casesLogged, total) << "/" << total << "] "
+		      << (ok ? "passed " : "FAILED ") << Format("%9.1f ms  ", IsNull(ms) ? 0.0 : ms)
+		      << TagAttr(tagText, "name") << "\n";
+		xmlScanPos = e + 11;
+	}
+	if(lines.GetCount())
+		Log(lines);
+	return casesLogged;
+}
+
 void DateRunner::FinishRun()
 {
 	double secs = (msecs() - runStart) / 1000.0;
+	LogFinishedCases();   // the last few, written after the final poll
 	int ok = 0, bad = 0;
 	String xml = LoadFile(xmlPath);
 	if(!ParseReport(xml, cases, ok, bad)) {
@@ -670,6 +731,8 @@ void DateRunner::FinishRun()
 		printf("%s\n", ~status.GetText());
 		if(smokeRc)
 			printf("%s\n", ~detail.Get());   // the first failed case, as the Details tab shows it
+		if(printLog)
+			printf("%s\n", ~log.Get());
 		fflush(stdout);
 		Break();
 	}
@@ -750,6 +813,8 @@ GUI_APP_MAIN
 	for(int i = 0; i < cl.GetCount(); i++) {
 		if(cl[i] == "--smoke")
 			w.smoke = true;
+		else if(cl[i] == "--print-log")
+			w.printLog = true;
 		else if(cl[i] == "--clean")
 			w.cleanBuild = true;
 		else if(cl[i] == "--type" && i + 1 < cl.GetCount())
