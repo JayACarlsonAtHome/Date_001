@@ -3,6 +3,9 @@ description "DateRunner - build Date_001 and run its Catch2 tests in a window\n"
 uses
 	CtrlLib;
 
+options
+	"-Wformat=2 -Werror=format";
+
 file
 	main.cpp;
 

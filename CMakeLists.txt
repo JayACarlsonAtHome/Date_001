@@ -85,14 +85,16 @@ set(SOURCE_FILES
         )
 add_executable(Date ${SOURCE_FILES})
 target_include_directories(Date PRIVATE "${CMAKE_SOURCE_DIR}")
-target_compile_options(Date PRIVATE -Wall -Wextra)
+# -Wformat=2 -Werror=format: a printf-style call whose arguments do not match its format
+#   (e.g. a 64-bit value given to %d) fails the build instead of misreading memory at run time
+target_compile_options(Date PRIVATE -Wall -Wextra -Wformat=2 -Werror=format)
 # Catch2 v3.8.1 (amalgamated); main() is in test_main.cpp, and Catch2's own code is not ours to warn about
 target_compile_definitions(Date PRIVATE CATCH_AMALGAMATED_CUSTOM_MAIN)
 set_source_files_properties(source/catch_amalgamated.cpp PROPERTIES COMPILE_OPTIONS "-w")
 
 # main.cpp: a small day-of-week printout for 2017-2020 (not a test)
 add_executable(date_demo main.cpp source/jc313_Date.cpp)
-target_compile_options(date_demo PRIVATE -Wall -Wextra)
+target_compile_options(date_demo PRIVATE -Wall -Wextra -Wformat=2 -Werror=format)
 
 enable_testing()
 add_test(NAME Date COMMAND Date)
