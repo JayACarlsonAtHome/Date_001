@@ -1,7 +1,9 @@
 // DateRunner - build Date_001 and run its Catch2 tests in a window.
 //
 // Build:  ./bootstrap.sh --gui   (or umk <root>/gui,<uppsrc> DateRunner CLANG -brsH <root>/gui/out/DateRunner)
-// Start:  <root>/gui/out/DateRunner [PROJECT_DIR] [--smoke]
+// Start:  <root>/gui/out/DateRunner [PROJECT_DIR] [--compiler gcc15|clang21|...] [--type release|debug]
+//                                    [--clean] [--smoke]
+//         --compiler/--type/--clean preset the choices at the top of the window.
 //         --smoke presses Run tests itself, prints the final status line and exits:
 //         0 when every test passed (a check that the window, build and report all work).
 //
@@ -12,6 +14,7 @@
 #include <CtrlLib/CtrlLib.h>
 
 #include <signal.h>
+#include <unistd.h>
 
 using namespace Upp;
 
@@ -74,9 +77,12 @@ static bool IsProjectRoot(const String& dir)
 static String FindProjectRoot()
 {
 	const Vector<String>& cl = CommandLine();
-	for(const String& a : cl)
-		if(!a.StartsWith("--") && IsProjectRoot(NormalizePath(a)))
-			return NormalizePath(a);
+	for(int i = 0; i < cl.GetCount(); i++) {
+		if(cl[i] == "--compiler" || cl[i] == "--type")
+			i++;   // skip the option's value
+		else if(!cl[i].StartsWith("--") && IsProjectRoot(NormalizePath(cl[i])))
+			return NormalizePath(cl[i]);
+	}
 	String d = GetFileFolder(GetExeFilePath());
 	for(int up = 0; up < 4 && d.GetCount() > 1; up++) {
 		if(IsProjectRoot(d))
@@ -84,6 +90,52 @@ static String FindProjectRoot()
 		d = GetFileFolder(d);
 	}
 	return Null;
+}
+
+// ======================================================================= compilers
+
+struct Toolchain {
+	String cxx;      // full path
+	String folder;   // build folder prefix: gcc15, clang21, ... (same names as bootstrap.sh)
+	String label;    // for the drop list
+};
+
+// first line of `cxx --version`, and the major version from -dumpversion
+static String FirstLine(const String& s)  { int n = s.Find('\n'); return TrimBoth(n >= 0 ? s.Left(n) : s); }
+
+// the compilers installed here, newest GCC first; one entry per real binary
+static Array<Toolchain> FindToolchains()
+{
+	const char *cand[] = { "/opt/rh/gcc-toolset-15/root/usr/bin/g++", "g++-15",
+	                       "/opt/rh/gcc-toolset-14/root/usr/bin/g++", "g++-14",
+	                       "clang++", "g++-13", "g++" };
+	Array<Toolchain> list;
+	Index<String> seen;
+	for(const char *c : cand) {
+		String path = *c == '/' ? String(c) : GetFileOnPath(c, GetEnv("PATH"));
+		if(path.IsEmpty() || !FileExists(path))
+			continue;
+		String real = GetFullPath(path);
+		char buf[4096];
+		ssize_t n = readlink(path, buf, sizeof(buf) - 1);
+		if(n > 0) { buf[n] = 0; real = NormalizePath(buf, GetFileFolder(path)); }
+		if(seen.Find(real) >= 0)
+			continue;
+		seen.Add(real);
+		String version = FirstLine(Sys(path + " --version"));
+		String major = FirstLine(Sys(path + " -dumpversion"));
+		int dot = major.Find('.');
+		if(dot >= 0)
+			major = major.Left(dot);
+		if(version.IsEmpty() || major.IsEmpty())
+			continue;
+		bool clang = version.Find("clang") >= 0;
+		Toolchain& t = list.Add();
+		t.cxx = path;
+		t.folder = (clang ? "clang" : "gcc") + major;
+		t.label = (clang ? "Clang " : "GCC ") + major + "   (" + path + ")";
+	}
+	return list;
 }
 
 // ======================================================================= results
@@ -169,8 +221,10 @@ struct DateRunner : TopWindow {
 	String root, buildDir, testExe, xmlPath;
 
 	Button    bBuild, bRun, bRunSel, bStop;
-	Label     lTag, lName;
-	DropList  tag;
+	Label     lCompiler, lType, lTag, lName;
+	DropList  compiler, buildType, tag;
+	Option    cleanBuild;
+	Array<Toolchain> toolchains;
 	EditString name;
 	Option    skipSlow;
 	ProgressIndicator prog;
@@ -186,10 +240,12 @@ struct DateRunner : TopWindow {
 	Array<Step> queue;
 	Kind        current = BUILD;
 	bool        busy = false;
-	bool        stopped = false;
-	int         pendingRun = 0;    // Run pressed while a step was running: 1 = all, 2 = selected   // Stop was pressed: a failing step says "stopped", not "failed"
+	bool        stopped = false;   // Stop was pressed: a failing step says "stopped", not "failed"
+	int         pendingRun = 0;    // Run pressed while a step was running: 1 = all, 2 = selected
 	LocalProcess proc;
-	String      out;          // the running step's output
+	String      out;          // the running step's output, not yet shown
+	String      stepText;     // all of the running step's output (the build summary reads it)
+	String      buildSummary; // "Build OK: ..." of the last build, kept for the status line
 	TimeCallback tick;
 	dword       runStart = 0;
 
@@ -215,21 +271,27 @@ struct DateRunner : TopWindow {
 	void StartRun(bool selectedOnly);
 	void Stop();
 	void LoadTags();
+	void SelectBuild();
+	String BuildName() const;
 	Vector<String> CurrentFilters() const;
 };
 
 DateRunner::DateRunner()
 {
 	root = FindProjectRoot();
-	buildDir = AppendFileName(root, "build");
-	testExe = AppendFileName(buildDir, "Date");
 	xmlPath = GetTempFileName("DateRunner") + ".xml";
 
 	Title("DateRunner - " + root).Sizeable().Zoomable().SetRect(0, 0, Zx(1060), Zy(720));
 
 	int y = 8;
-	Add(bBuild.SetLabel("Build").LeftPosZ(8, 80).TopPosZ(y, 26));
-	Add(bRun.SetLabel("Run tests").LeftPosZ(94, 90).TopPosZ(y, 26));
+	Add(lCompiler.SetText("Compiler").LeftPosZ(8, 60).TopPosZ(y + 2, 22));
+	Add(compiler.LeftPosZ(70, 420).TopPosZ(y + 2, 22));
+	Add(lType.SetText("Build type").LeftPosZ(502, 66).TopPosZ(y + 2, 22));
+	Add(buildType.LeftPosZ(570, 90).TopPosZ(y + 2, 22));
+	Add(cleanBuild.SetLabel("Clean rebuild (compile everything)").LeftPosZ(674, 230).TopPosZ(y + 2, 22));
+	Add(bBuild.SetLabel("Build").LeftPosZ(910, 80).TopPosZ(y, 26));
+	y += 34;
+	Add(bRun.SetLabel("Run tests").LeftPosZ(8, 176).TopPosZ(y, 26));
 	Add(bRunSel.SetLabel("Run selected").LeftPosZ(190, 100).TopPosZ(y, 26));
 	Add(bStop.SetLabel("Stop").LeftPosZ(296, 70).TopPosZ(y, 26));
 	Add(lTag.SetText("Tag").LeftPosZ(386, 28).TopPosZ(y + 2, 22));
@@ -265,26 +327,65 @@ DateRunner::DateRunner()
 	tag.Add("", "All tags");
 	tag.SetIndex(0);
 	skipSlow = false;
+	cleanBuild = false;
 
-	bBuild << [this] { stopped = false; queue.Clear(); log.Clear(); EnqueueBuild(); Enqueue(LIST_TAGS, testExe, {"--list-tags"}); StartNext(); };
+	toolchains = FindToolchains();
+	for(int i = 0; i < toolchains.GetCount(); i++)
+		compiler.Add(i, toolchains[i].label);
+	if(toolchains.GetCount())
+		compiler.SetIndex(0);
+	buildType.Add("release", "Release");
+	buildType.Add("debug", "Debug");
+	buildType.SetIndex(0);
+	compiler << THISBACK(SelectBuild);
+	buildType << THISBACK(SelectBuild);
+
+	bBuild << [this] {
+		if(busy)
+			return;
+		stopped = false;
+		queue.Clear();
+		log.Clear();
+		EnqueueBuild();
+		Enqueue(LIST_TAGS, testExe, {"--list-tags"});
+		StartNext();
+	};
 	bRun << [this] { StartRun(false); };
 	bRunSel << [this] { StartRun(true); };
 	bStop << THISBACK(Stop);
 	SetBusy(false);
 
-	if(IsNull(root)) {
-		status.SetText("Project not found: start it as gui/out/DateRunner inside Date_001, or pass the folder.");
-		bBuild.Disable();
-		bRun.Disable();
-		bRunSel.Disable();
+	if(IsNull(root) || toolchains.IsEmpty()) {
+		status.SetText(IsNull(root) ? "Project not found: start it as gui/out/DateRunner inside Date_001, or pass the folder."
+		                            : "No C++ compiler found (g++ or clang++). Run ./bootstrap.sh first.");
+		root = Null;
+		SetBusy(false);
 		return;
 	}
+	SelectBuild();
+}
+
+// build/<compiler><major>-<type>, e.g. build/gcc15-release: one folder per choice, so switching
+// compiler or type never mixes object files and each stays built
+String DateRunner::BuildName() const
+{
+	int i = compiler.GetIndex();
+	return (i >= 0 ? toolchains[i].folder : String("none")) + "-" + AsString(~buildType);
+}
+
+void DateRunner::SelectBuild()
+{
+	buildDir = AppendFileName(AppendFileName(root, "build"), BuildName());
+	testExe = AppendFileName(buildDir, "Date");
+	cases.Clear();
+	ShowRows();
 	if(FileExists(testExe)) {
-		LoadTags();
-		status.SetText("Ready. Run tests builds first (only what changed), then runs.");
+		status.SetText("build/" + BuildName() + " is built. Run tests rebuilds what changed first, then runs.");
+		if(!busy)
+			LoadTags();
 	}
 	else
-		status.SetText("No build yet (" + testExe + "). Run tests will configure and build it first.");
+		status.SetText("build/" + BuildName() + " is not built yet. Build (or Run tests) will configure and build it.");
 }
 
 void DateRunner::SetBusy(bool b)
@@ -297,6 +398,9 @@ void DateRunner::SetBusy(bool b)
 	tag.Enable(!b);
 	name.Enable(!b);
 	skipSlow.Enable(!b);
+	compiler.Enable(!b);
+	buildType.Enable(!b);
+	cleanBuild.Enable(!b);
 }
 
 void DateRunner::Enqueue(Kind k, const String& exe, const Vector<String>& args)
@@ -309,13 +413,19 @@ void DateRunner::Enqueue(Kind k, const String& exe, const Vector<String>& args)
 
 void DateRunner::EnqueueBuild()
 {
+	const Toolchain& t = toolchains[max(compiler.GetIndex(), 0)];
 	if(!FileExists(AppendFileName(buildDir, "CMakeCache.txt"))) {
-		Vector<String> a = { "-S", root, "-B", buildDir, "-DCMAKE_BUILD_TYPE=Release" };
+		Vector<String> a = { "-S", root, "-B", buildDir,
+		                     String("-DCMAKE_BUILD_TYPE=") + (AsString(~buildType) == "debug" ? "Debug" : "Release"),
+		                     "-DCMAKE_CXX_COMPILER=" + t.cxx };
 		if(GetFileOnPath("ninja", GetEnv("PATH")).GetCount())
 			a << "-G" << "Ninja";
 		Enqueue(CONFIGURE, "cmake", a);
 	}
-	Enqueue(BUILD, "cmake", { "--build", buildDir, "-j", AsString(max(CPU_Cores(), 1)) });
+	Vector<String> b = { "--build", buildDir, "-j", AsString(max(CPU_Cores(), 1)) };
+	if(cleanBuild)
+		b << "--clean-first";
+	Enqueue(BUILD, "cmake", b);
 }
 
 void DateRunner::StartNext()
@@ -339,6 +449,7 @@ void DateRunner::StartNext()
 	}
 	current = s.kind;
 	out.Clear();
+	stepText.Clear();
 	String line = exe;
 	for(const String& a : s.args)
 		line << ' ' << a;
@@ -352,8 +463,10 @@ void DateRunner::StartNext()
 		return;
 	}
 	SetBusy(true);
-	if(s.kind == CONFIGURE)  status.SetText("Configuring build/ ...");
-	if(s.kind == BUILD)      status.SetText("Building ...");
+	if(s.kind == CONFIGURE || s.kind == BUILD)
+		tabs.Set(1);   // show the Log while building
+	if(s.kind == CONFIGURE)  status.SetText("Configuring build/" + BuildName() + " ...");
+	if(s.kind == BUILD)      status.SetText(String(cleanBuild ? "Clean rebuild of" : "Building") + " build/" + BuildName() + " ...");
 	if(s.kind == RUN)        status.SetText("Running tests ...");
 	tick.Set(-100, THISBACK(Poll));
 }
@@ -361,6 +474,8 @@ void DateRunner::StartNext()
 void DateRunner::Poll()
 {
 	bool alive = Drain(proc, out);
+	if(current == CONFIGURE || current == BUILD)
+		stepText << out;
 	if(current != LIST_TAGS && current != LIST_TESTS && out.GetCount()) {
 		Log(out);
 		out.Clear();
@@ -378,6 +493,8 @@ void DateRunner::Poll()
 		return;
 	tick.Kill();
 	Drain(proc, out);
+	if(current == CONFIGURE || current == BUILD)
+		stepText << out;
 	if(current != LIST_TAGS && current != LIST_TESTS && out.GetCount()) {
 		Log(out);
 		out.Clear();
@@ -407,8 +524,19 @@ void DateRunner::OnStepDone(Kind k, int rc)
 			SetBusy(false);
 			return;
 		}
-		if(queue.IsEmpty())
-			status.SetText("Build OK.");
+		if(k == BUILD) {
+			// ninja prints [done/total] per step; make prints [ NN%]; both say when nothing was to do
+			int steps = 0;
+			for(const String& l : Split(stepText, '\n')) {
+				int a = l.Find('['), b = l.Find('/');
+				if(a == 0 && b > a && l.Find(']') > b)
+					steps = max(steps, ScanInt(l.Mid(b + 1)));
+			}
+			bool none = stepText.Find("no work to do") >= 0 || (steps == 0 && stepText.Find("Building") < 0);
+			buildSummary = "Build OK: build/" + BuildName() + (none ? " was already up to date"
+			               : Format(" (%d steps%s)", steps, cleanBuild ? ", clean rebuild" : ""));
+			status.SetText(buildSummary + ".");
+		}
 	}
 	else if(k == LIST_TAGS) {
 		String keep = ~tag;
@@ -422,8 +550,8 @@ void DateRunner::OnStepDone(Kind k, int rc)
 		tag <<= keep;
 		if(tag.GetIndex() < 0)
 			tag.SetIndex(0);
-		if(!busy || queue.IsEmpty())
-			status.SetText("Build OK. " + AsString(tag.GetCount() - 1) + " tags.");
+		if(buildSummary.GetCount() && queue.IsEmpty())
+			status.SetText(buildSummary + ".   " + AsString(tag.GetCount() - 1) + " tags.");
 	}
 	else if(k == LIST_TESTS) {
 		cases.Clear();
@@ -512,8 +640,8 @@ void DateRunner::FinishRun()
 	for(const CaseResult& c : cases)
 		(c.success ? passed : failed)++;
 	prog.Set(cases.GetCount(), max(cases.GetCount(), 1));
-	status.SetText(Format("%s   %d test cases: %d passed, %d failed.   %d checks passed, %d failed.   %.2f s",
-	                      failed ? "FAILED" : "ALL PASSED", cases.GetCount(), passed, failed, ok, bad, secs));
+	status.SetText(Format("%s   %d test cases: %d passed, %d failed.   %d checks passed, %d failed.   %.2f s   (%s)",
+	                      failed ? "FAILED" : "ALL PASSED", cases.GetCount(), passed, failed, ok, bad, secs, BuildName()));
 	for(int r = 0; r < results.GetCount(); r++) {   // jump to the first failure
 		int i = results.Get(r, "IDX");
 		if(!cases[i].success) {
@@ -595,6 +723,7 @@ void DateRunner::Stop()
 
 void DateRunner::LoadTags()
 {
+	buildSummary.Clear();
 	queue.Clear();
 	Enqueue(LIST_TAGS, testExe, {"--list-tags"});
 	StartNext();
@@ -603,9 +732,25 @@ void DateRunner::LoadTags()
 GUI_APP_MAIN
 {
 	DateRunner w;
-	for(const String& a : CommandLine())
-		if(a == "--smoke")
+	const Vector<String>& cl = CommandLine();
+	for(int i = 0; i < cl.GetCount(); i++) {
+		if(cl[i] == "--smoke")
 			w.smoke = true;
+		else if(cl[i] == "--clean")
+			w.cleanBuild = true;
+		else if(cl[i] == "--type" && i + 1 < cl.GetCount())
+			w.buildType <<= cl[++i];
+		else if(cl[i] == "--compiler" && i + 1 < cl.GetCount()) {
+			String want = cl[++i];
+			for(int k = 0; k < w.toolchains.GetCount(); k++)
+				if(w.toolchains[k].folder == want)
+					w.compiler.SetIndex(k);
+		}
+	}
+	if(w.buildType.GetIndex() < 0)
+		w.buildType.SetIndex(0);
+	if(!IsNull(w.root))
+		w.SelectBuild();
 	if(w.smoke)
 		PostCallback([&w] { w.StartRun(false); });
 	w.Run();

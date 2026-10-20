@@ -1,11 +1,11 @@
-// 1 = run the Catch2 tests; 0 = skip them (faster compiling) and run the small demo below.
-// Catch2 v3 itself is compiled once from source/catch_amalgamated.cpp, which is built with
+// 1 = run the Catch2 tests; 0 = run the small demo below instead.
+// The tests themselves are separate files (see TEST_FILES in CMakeLists.txt), so editing one only
+// recompiles that one. Catch2 v3 is compiled once from source/catch_amalgamated.cpp, built with
 // CATCH_AMALGAMATED_CUSTOM_MAIN, so main() is always defined here.
 #define CATCH_CONFIG_MAIN    1
 #if     CATCH_CONFIG_MAIN == 1
 
     #include "source/catch_amalgamated.hpp"
-    #include "test_includes.tdd"
 
     int main(int argc, char* argv[])
     {

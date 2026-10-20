@@ -8,7 +8,8 @@
 #      newest first, instead of guessing from version numbers. Also needs CMake 3.26+;
 #      Ninja is used when present.
 #   3. Anything missing: show the install command for this OS and offer it [y/N] (sudo).
-#   4. Configure + build into ./build (Release), then run the tests with ctest.
+#   4. Configure + build into build/<compiler><major>-release (e.g. build/gcc15-release, the
+#      same folders DateRunner uses), then run the tests with ctest.
 #   5. With --gui (optional): the U++ GUI build libraries ([y/N], sudo), U++ itself into
 #      $HOME/u++ (pinned release, SHA-256 checked, no sudo), then the DateRunner GUI
 #      into gui/out/DateRunner. A plain bootstrap never does this.
@@ -17,7 +18,6 @@
 set -eu
 
 ROOT="$(cd "$(dirname "$0")" && pwd)"
-BUILD="$ROOT/build"
 
 WANT_GUI=0
 for arg in "$@"; do
@@ -138,20 +138,24 @@ echo "Compiler: $CXX_FOUND ($("$CXX_FOUND" --version | head -n1))"
 echo "CMake:    $(cmake --version | head -n1)"
 
 # --- 4. build + test -------------------------------------------------------------------
+# one folder per compiler and build type, so a build made with another compiler is never reused
+kind=gcc; "$CXX_FOUND" --version 2>/dev/null | head -n1 | grep -qi clang && kind=clang
+major=$("$CXX_FOUND" -dumpversion 2>/dev/null | cut -d. -f1)
+BUILD_NAME="$kind$major-release"
+BUILD="$ROOT/build/$BUILD_NAME"
 GEN=""
 command -v ninja >/dev/null 2>&1 && GEN="-G Ninja"
-# a build dir configured with another compiler or generator cannot be reused: start it over
+# a folder first configured with the other generator (ninja installed or removed since) cannot be reused
 if [ -f "$BUILD/CMakeCache.txt" ]; then
-  old_cxx=$(sed -n 's/^CMAKE_CXX_COMPILER:[A-Z]*=//p' "$BUILD/CMakeCache.txt")
   old_gen=$(sed -n 's/^CMAKE_GENERATOR:[A-Z]*=//p' "$BUILD/CMakeCache.txt")
   want_gen="Unix Makefiles"; [ -n "$GEN" ] && want_gen="Ninja"
-  if [ "$old_cxx" != "$CXX_FOUND" ] || [ "$old_gen" != "$want_gen" ]; then
-    echo "build/ was made with $old_cxx ($old_gen): starting it over"
+  if [ "$old_gen" != "$want_gen" ]; then
+    echo "build/$BUILD_NAME was made for $old_gen: starting it over"
     rm -rf "$BUILD"
   fi
 fi
 echo
-echo "=== build (Release) -> build/ ==="
+echo "=== build (Release) -> build/$BUILD_NAME ==="
 # shellcheck disable=SC2086
 cmake -S "$ROOT" -B "$BUILD" $GEN -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER="$CXX_FOUND" >/dev/null
 cmake --build "$BUILD" -j"$(nproc 2>/dev/null || echo 2)"

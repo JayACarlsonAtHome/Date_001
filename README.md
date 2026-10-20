@@ -25,7 +25,7 @@ So what I am saying is this is free to use (as per license) but I do not guarant
 
 ```
 cd Date_001
-./bootstrap.sh          # finds or offers to install a compiler + CMake, builds into build/, runs the tests
+./bootstrap.sh          # finds or offers to install a compiler + CMake, builds, runs the tests
 ./bootstrap.sh --gui    # the same, plus U++ (into ~/u++, no sudo) and the DateRunner window
 ./gui/out/DateRunner
 ```
@@ -35,18 +35,27 @@ gcc-toolset, g++-15/14, clang, then the system g++). Anything missing is shown w
 command for your OS (RHEL, Fedora, Mint/Ubuntu/Debian) and installed only if you answer y.
 Run it as yourself, from the Date_001 folder (it refuses to run from anywhere else).
 
-**DateRunner** builds (only what changed) and runs the tests, then lists every test case with its
+Builds go in one folder per compiler and build type: `build/gcc15-release`, `build/clang21-debug`,
+and so on (bootstrap.sh makes the Release one for the compiler it picks). Switching compiler never
+mixes object files, and every folder stays built.
+
+**DateRunner**: pick the **Compiler** (every one installed, newest GCC first), the **Build type**
+(Release or Debug), and **Clean rebuild** to compile everything from scratch. **Build** builds
+(only what changed, unless Clean rebuild is ticked) and shows the Log while it works; the status line
+says how many steps it compiled, or that it was already up to date. **Run tests** builds first, then
+runs and lists every test case with its
 result and time. Pick one to see its details: for a failure, the file:line, the check as written,
 and the values it saw. Filters: a tag, part of a name, and "Skip [slow]" (the two walks over every
 date). "Run selected" re-runs one test case; "Stop" ends a build or run.
-`DateRunner --smoke` runs everything once without clicks and exits 0 when all passed.
+`DateRunner --compiler clang21 --type debug --clean` presets those choices (names as in build/);
+add `--smoke` to run everything once without clicks and exit 0 when all passed.
 
 ## Build and test
 
 ```
-cmake -S . -B build -G Ninja
-cmake --build build
-ctest --test-dir build      # or run ./build/Date directly
+cmake -S . -B build/mine -G Ninja -DCMAKE_BUILD_TYPE=Release
+cmake --build build/mine
+ctest --test-dir build/mine      # or run ./build/mine/Date directly
 ```
 
 Expected output:
@@ -54,13 +63,13 @@ Expected output:
 ```
 Starting Testing: ... Please be patient...
 ===============================================================================
-All tests passed (29513 assertions in 191 test cases)
+All tests passed (29513 assertions in 205 test cases)
 ```
 
 One of those tests walks every date from 0001-01-01 to 9999-12-31 (3,652,059 dates), twice (once for each header), so a
-run takes about 2 seconds in a debug build. Needs a C++23 compiler (GCC 13+ or clang 17+; tested with GCC 15 and clang 21).
+run takes about 2 seconds in a debug build. Needs a C++23 compiler; tested with GCC 15, 14 and 11 and clang 21, Release and Debug.
 
-`./build/date_demo` prints the day of the week for every date in 2017-2020 (from `main.cpp`).
+`date_demo` (next to `Date` in the build folder) prints the day of the week for every date in 2017-2020 (from `main.cpp`).
 
 ## Using the class
 

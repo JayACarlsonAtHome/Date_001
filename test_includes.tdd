@@ -1,9 +1,5 @@
-#include "source/jc313_Date.h"
-#include "source/jc_date_utils.hpp"
-
-#include <iostream>
-
-using namespace JC313_DSL_Code;
+// The general test cases. The other test files are listed in CMakeLists.txt (TEST_FILES),
+//   each compiled on its own with test/test_common.hpp.
 
 jc313_Date d1;
 jc313_Date d2;
@@ -13,49 +9,6 @@ TEST_CASE("Dates are equal", "[jc313_Date]")
 {
     REQUIRE(d1 == d2);
 }
-
-#include "test/days/get_day_of_year_2017.tdd"
-#include "test/days/get_day_of_year_2020.tdd"
-#include "test/days/test_add_days_neg_0001_3653.tdd"
-#include "test/days/test_add_days_pos_0001_3652.tdd"
-#include "test/days/test_dayGetText.tdd"
-#include "test/days/test_getFirstDayOfYear.tdd"
-#include "test/days/test_isValid_2017_negative.tdd"
-#include "test/days/test_isValid_2017_positive.tdd"
-#include "test/days/test_isValid_2020_negative.tdd"
-#include "test/days/test_isValid_2020_positive.tdd"
-
-#include "test/quarter/get_day_of_quarter_2017.tdd"
-#include "test/quarter/get_day_of_quarter_2020.tdd"
-#include "test/quarter/get_quarter_2017.tdd"
-#include "test/quarter/get_quarter_2020.tdd"
-
-#include "test/year/test_leap_year_0001_0500.tdd"
-#include "test/year/test_leap_year_0501_1000.tdd"
-#include "test/year/test_leap_year_1001_1500.tdd"
-#include "test/year/test_leap_year_1501_2000.tdd"
-#include "test/year/test_leap_year_2001_2500.tdd"
-#include "test/year/test_leap_year_2501_3000.tdd"
-#include "test/year/test_leap_year_3001_3500.tdd"
-#include "test/year/test_leap_year_3501_4000.tdd"
-#include "test/year/test_leap_year_4001_4500.tdd"
-#include "test/year/test_leap_year_4501_5000.tdd"
-#include "test/year/test_leap_year_5001_5500.tdd"
-#include "test/year/test_leap_year_5501_6000.tdd"
-#include "test/year/test_leap_year_6001_6500.tdd"
-#include "test/year/test_leap_year_6501_7000.tdd"
-#include "test/year/test_leap_year_7001_7500.tdd"
-#include "test/year/test_leap_year_7501_8000.tdd"
-#include "test/year/test_leap_year_8001_8500.tdd"
-#include "test/year/test_leap_year_8501_9000.tdd"
-#include "test/year/test_leap_year_9001_9500.tdd"
-#include "test/year/test_leap_year_9501_9999.tdd"
-
-#include "test/validation/test_checked_dates.tdd"
-
-#include "test/utils/test_jc_date_utils.tdd"
-
-#include "test/z_operator/operators.tdd"
 
 TEST_CASE("Starting Tests", "[jc313_Date]")
 {

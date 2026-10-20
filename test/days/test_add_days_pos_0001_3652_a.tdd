@@ -1,0 +1,1024 @@
+// split into 8 test cases in 4 files (same checks, same order): one function with ~3650 checks
+//   took over a minute to optimize in a Release build
+TEST_CASE("Test addDays: 0001 to 3652 (part 1 of 8)", "[jc313_Date]")
+{
+    jc313_Date d;
+    d.setYear(2017);
+    d.setMonth(01);
+    d.setDay(01);
+
+REQUIRE((d.add_Days(    1)).strDate() == "2017-01-02" );
+REQUIRE((d.add_Days(    2)).strDate() == "2017-01-03" );
+REQUIRE((d.add_Days(    3)).strDate() == "2017-01-04" );
+REQUIRE((d.add_Days(    4)).strDate() == "2017-01-05" );
+REQUIRE((d.add_Days(    5)).strDate() == "2017-01-06" );
+REQUIRE((d.add_Days(    6)).strDate() == "2017-01-07" );
+REQUIRE((d.add_Days(    7)).strDate() == "2017-01-08" );
+REQUIRE((d.add_Days(    8)).strDate() == "2017-01-09" );
+REQUIRE((d.add_Days(    9)).strDate() == "2017-01-10" );
+REQUIRE((d.add_Days(   10)).strDate() == "2017-01-11" );
+
+REQUIRE((d.add_Days(   11)).strDate() == "2017-01-12" );
+REQUIRE((d.add_Days(   12)).strDate() == "2017-01-13" );
+REQUIRE((d.add_Days(   13)).strDate() == "2017-01-14" );
+REQUIRE((d.add_Days(   14)).strDate() == "2017-01-15" );
+REQUIRE((d.add_Days(   15)).strDate() == "2017-01-16" );
+REQUIRE((d.add_Days(   16)).strDate() == "2017-01-17" );
+REQUIRE((d.add_Days(   17)).strDate() == "2017-01-18" );
+REQUIRE((d.add_Days(   18)).strDate() == "2017-01-19" );
+REQUIRE((d.add_Days(   19)).strDate() == "2017-01-20" );
+REQUIRE((d.add_Days(   20)).strDate() == "2017-01-21" );
+
+REQUIRE((d.add_Days(   21)).strDate() == "2017-01-22" );
+REQUIRE((d.add_Days(   22)).strDate() == "2017-01-23" );
+REQUIRE((d.add_Days(   23)).strDate() == "2017-01-24" );
+REQUIRE((d.add_Days(   24)).strDate() == "2017-01-25" );
+REQUIRE((d.add_Days(   25)).strDate() == "2017-01-26" );
+REQUIRE((d.add_Days(   26)).strDate() == "2017-01-27" );
+REQUIRE((d.add_Days(   27)).strDate() == "2017-01-28" );
+REQUIRE((d.add_Days(   28)).strDate() == "2017-01-29" );
+REQUIRE((d.add_Days(   29)).strDate() == "2017-01-30" );
+REQUIRE((d.add_Days(   30)).strDate() == "2017-01-31" );
+
+REQUIRE((d.add_Days(   31)).strDate() == "2017-02-01" );
+REQUIRE((d.add_Days(   32)).strDate() == "2017-02-02" );
+REQUIRE((d.add_Days(   33)).strDate() == "2017-02-03" );
+REQUIRE((d.add_Days(   34)).strDate() == "2017-02-04" );
+REQUIRE((d.add_Days(   35)).strDate() == "2017-02-05" );
+REQUIRE((d.add_Days(   36)).strDate() == "2017-02-06" );
+REQUIRE((d.add_Days(   37)).strDate() == "2017-02-07" );
+REQUIRE((d.add_Days(   38)).strDate() == "2017-02-08" );
+REQUIRE((d.add_Days(   39)).strDate() == "2017-02-09" );
+REQUIRE((d.add_Days(   40)).strDate() == "2017-02-10" );
+
+REQUIRE((d.add_Days(   41)).strDate() == "2017-02-11" );
+REQUIRE((d.add_Days(   42)).strDate() == "2017-02-12" );
+REQUIRE((d.add_Days(   43)).strDate() == "2017-02-13" );
+REQUIRE((d.add_Days(   44)).strDate() == "2017-02-14" );
+REQUIRE((d.add_Days(   45)).strDate() == "2017-02-15" );
+REQUIRE((d.add_Days(   46)).strDate() == "2017-02-16" );
+REQUIRE((d.add_Days(   47)).strDate() == "2017-02-17" );
+REQUIRE((d.add_Days(   48)).strDate() == "2017-02-18" );
+REQUIRE((d.add_Days(   49)).strDate() == "2017-02-19" );
+REQUIRE((d.add_Days(   50)).strDate() == "2017-02-20" );
+
+REQUIRE((d.add_Days(   51)).strDate() == "2017-02-21" );
+REQUIRE((d.add_Days(   52)).strDate() == "2017-02-22" );
+REQUIRE((d.add_Days(   53)).strDate() == "2017-02-23" );
+REQUIRE((d.add_Days(   54)).strDate() == "2017-02-24" );
+REQUIRE((d.add_Days(   55)).strDate() == "2017-02-25" );
+REQUIRE((d.add_Days(   56)).strDate() == "2017-02-26" );
+REQUIRE((d.add_Days(   57)).strDate() == "2017-02-27" );
+REQUIRE((d.add_Days(   58)).strDate() == "2017-02-28" );
+REQUIRE((d.add_Days(   59)).strDate() == "2017-03-01" );
+REQUIRE((d.add_Days(   60)).strDate() == "2017-03-02" );
+
+REQUIRE((d.add_Days(   61)).strDate() == "2017-03-03" );
+REQUIRE((d.add_Days(   62)).strDate() == "2017-03-04" );
+REQUIRE((d.add_Days(   63)).strDate() == "2017-03-05" );
+REQUIRE((d.add_Days(   64)).strDate() == "2017-03-06" );
+REQUIRE((d.add_Days(   65)).strDate() == "2017-03-07" );
+REQUIRE((d.add_Days(   66)).strDate() == "2017-03-08" );
+REQUIRE((d.add_Days(   67)).strDate() == "2017-03-09" );
+REQUIRE((d.add_Days(   68)).strDate() == "2017-03-10" );
+REQUIRE((d.add_Days(   69)).strDate() == "2017-03-11" );
+REQUIRE((d.add_Days(   70)).strDate() == "2017-03-12" );
+
+REQUIRE((d.add_Days(   71)).strDate() == "2017-03-13" );
+REQUIRE((d.add_Days(   72)).strDate() == "2017-03-14" );
+REQUIRE((d.add_Days(   73)).strDate() == "2017-03-15" );
+REQUIRE((d.add_Days(   74)).strDate() == "2017-03-16" );
+REQUIRE((d.add_Days(   75)).strDate() == "2017-03-17" );
+REQUIRE((d.add_Days(   76)).strDate() == "2017-03-18" );
+REQUIRE((d.add_Days(   77)).strDate() == "2017-03-19" );
+REQUIRE((d.add_Days(   78)).strDate() == "2017-03-20" );
+REQUIRE((d.add_Days(   79)).strDate() == "2017-03-21" );
+REQUIRE((d.add_Days(   80)).strDate() == "2017-03-22" );
+
+REQUIRE((d.add_Days(   81)).strDate() == "2017-03-23" );
+REQUIRE((d.add_Days(   82)).strDate() == "2017-03-24" );
+REQUIRE((d.add_Days(   83)).strDate() == "2017-03-25" );
+REQUIRE((d.add_Days(   84)).strDate() == "2017-03-26" );
+REQUIRE((d.add_Days(   85)).strDate() == "2017-03-27" );
+REQUIRE((d.add_Days(   86)).strDate() == "2017-03-28" );
+REQUIRE((d.add_Days(   87)).strDate() == "2017-03-29" );
+REQUIRE((d.add_Days(   88)).strDate() == "2017-03-30" );
+REQUIRE((d.add_Days(   89)).strDate() == "2017-03-31" );
+REQUIRE((d.add_Days(   90)).strDate() == "2017-04-01" );
+
+REQUIRE((d.add_Days(   91)).strDate() == "2017-04-02" );
+REQUIRE((d.add_Days(   92)).strDate() == "2017-04-03" );
+REQUIRE((d.add_Days(   93)).strDate() == "2017-04-04" );
+REQUIRE((d.add_Days(   94)).strDate() == "2017-04-05" );
+REQUIRE((d.add_Days(   95)).strDate() == "2017-04-06" );
+REQUIRE((d.add_Days(   96)).strDate() == "2017-04-07" );
+REQUIRE((d.add_Days(   97)).strDate() == "2017-04-08" );
+REQUIRE((d.add_Days(   98)).strDate() == "2017-04-09" );
+REQUIRE((d.add_Days(   99)).strDate() == "2017-04-10" );
+REQUIRE((d.add_Days(  100)).strDate() == "2017-04-11" );
+
+REQUIRE((d.add_Days(  101)).strDate() == "2017-04-12" );
+REQUIRE((d.add_Days(  102)).strDate() == "2017-04-13" );
+REQUIRE((d.add_Days(  103)).strDate() == "2017-04-14" );
+REQUIRE((d.add_Days(  104)).strDate() == "2017-04-15" );
+REQUIRE((d.add_Days(  105)).strDate() == "2017-04-16" );
+REQUIRE((d.add_Days(  106)).strDate() == "2017-04-17" );
+REQUIRE((d.add_Days(  107)).strDate() == "2017-04-18" );
+REQUIRE((d.add_Days(  108)).strDate() == "2017-04-19" );
+REQUIRE((d.add_Days(  109)).strDate() == "2017-04-20" );
+REQUIRE((d.add_Days(  110)).strDate() == "2017-04-21" );
+
+REQUIRE((d.add_Days(  111)).strDate() == "2017-04-22" );
+REQUIRE((d.add_Days(  112)).strDate() == "2017-04-23" );
+REQUIRE((d.add_Days(  113)).strDate() == "2017-04-24" );
+REQUIRE((d.add_Days(  114)).strDate() == "2017-04-25" );
+REQUIRE((d.add_Days(  115)).strDate() == "2017-04-26" );
+REQUIRE((d.add_Days(  116)).strDate() == "2017-04-27" );
+REQUIRE((d.add_Days(  117)).strDate() == "2017-04-28" );
+REQUIRE((d.add_Days(  118)).strDate() == "2017-04-29" );
+REQUIRE((d.add_Days(  119)).strDate() == "2017-04-30" );
+REQUIRE((d.add_Days(  120)).strDate() == "2017-05-01" );
+
+REQUIRE((d.add_Days(  121)).strDate() == "2017-05-02" );
+REQUIRE((d.add_Days(  122)).strDate() == "2017-05-03" );
+REQUIRE((d.add_Days(  123)).strDate() == "2017-05-04" );
+REQUIRE((d.add_Days(  124)).strDate() == "2017-05-05" );
+REQUIRE((d.add_Days(  125)).strDate() == "2017-05-06" );
+REQUIRE((d.add_Days(  126)).strDate() == "2017-05-07" );
+REQUIRE((d.add_Days(  127)).strDate() == "2017-05-08" );
+REQUIRE((d.add_Days(  128)).strDate() == "2017-05-09" );
+REQUIRE((d.add_Days(  129)).strDate() == "2017-05-10" );
+REQUIRE((d.add_Days(  130)).strDate() == "2017-05-11" );
+
+REQUIRE((d.add_Days(  131)).strDate() == "2017-05-12" );
+REQUIRE((d.add_Days(  132)).strDate() == "2017-05-13" );
+REQUIRE((d.add_Days(  133)).strDate() == "2017-05-14" );
+REQUIRE((d.add_Days(  134)).strDate() == "2017-05-15" );
+REQUIRE((d.add_Days(  135)).strDate() == "2017-05-16" );
+REQUIRE((d.add_Days(  136)).strDate() == "2017-05-17" );
+REQUIRE((d.add_Days(  137)).strDate() == "2017-05-18" );
+REQUIRE((d.add_Days(  138)).strDate() == "2017-05-19" );
+REQUIRE((d.add_Days(  139)).strDate() == "2017-05-20" );
+REQUIRE((d.add_Days(  140)).strDate() == "2017-05-21" );
+
+REQUIRE((d.add_Days(  141)).strDate() == "2017-05-22" );
+REQUIRE((d.add_Days(  142)).strDate() == "2017-05-23" );
+REQUIRE((d.add_Days(  143)).strDate() == "2017-05-24" );
+REQUIRE((d.add_Days(  144)).strDate() == "2017-05-25" );
+REQUIRE((d.add_Days(  145)).strDate() == "2017-05-26" );
+REQUIRE((d.add_Days(  146)).strDate() == "2017-05-27" );
+REQUIRE((d.add_Days(  147)).strDate() == "2017-05-28" );
+REQUIRE((d.add_Days(  148)).strDate() == "2017-05-29" );
+REQUIRE((d.add_Days(  149)).strDate() == "2017-05-30" );
+REQUIRE((d.add_Days(  150)).strDate() == "2017-05-31" );
+
+REQUIRE((d.add_Days(  151)).strDate() == "2017-06-01" );
+REQUIRE((d.add_Days(  152)).strDate() == "2017-06-02" );
+REQUIRE((d.add_Days(  153)).strDate() == "2017-06-03" );
+REQUIRE((d.add_Days(  154)).strDate() == "2017-06-04" );
+REQUIRE((d.add_Days(  155)).strDate() == "2017-06-05" );
+REQUIRE((d.add_Days(  156)).strDate() == "2017-06-06" );
+REQUIRE((d.add_Days(  157)).strDate() == "2017-06-07" );
+REQUIRE((d.add_Days(  158)).strDate() == "2017-06-08" );
+REQUIRE((d.add_Days(  159)).strDate() == "2017-06-09" );
+REQUIRE((d.add_Days(  160)).strDate() == "2017-06-10" );
+
+REQUIRE((d.add_Days(  161)).strDate() == "2017-06-11" );
+REQUIRE((d.add_Days(  162)).strDate() == "2017-06-12" );
+REQUIRE((d.add_Days(  163)).strDate() == "2017-06-13" );
+REQUIRE((d.add_Days(  164)).strDate() == "2017-06-14" );
+REQUIRE((d.add_Days(  165)).strDate() == "2017-06-15" );
+REQUIRE((d.add_Days(  166)).strDate() == "2017-06-16" );
+REQUIRE((d.add_Days(  167)).strDate() == "2017-06-17" );
+REQUIRE((d.add_Days(  168)).strDate() == "2017-06-18" );
+REQUIRE((d.add_Days(  169)).strDate() == "2017-06-19" );
+REQUIRE((d.add_Days(  170)).strDate() == "2017-06-20" );
+
+REQUIRE((d.add_Days(  171)).strDate() == "2017-06-21" );
+REQUIRE((d.add_Days(  172)).strDate() == "2017-06-22" );
+REQUIRE((d.add_Days(  173)).strDate() == "2017-06-23" );
+REQUIRE((d.add_Days(  174)).strDate() == "2017-06-24" );
+REQUIRE((d.add_Days(  175)).strDate() == "2017-06-25" );
+REQUIRE((d.add_Days(  176)).strDate() == "2017-06-26" );
+REQUIRE((d.add_Days(  177)).strDate() == "2017-06-27" );
+REQUIRE((d.add_Days(  178)).strDate() == "2017-06-28" );
+REQUIRE((d.add_Days(  179)).strDate() == "2017-06-29" );
+REQUIRE((d.add_Days(  180)).strDate() == "2017-06-30" );
+
+REQUIRE((d.add_Days(  181)).strDate() == "2017-07-01" );
+REQUIRE((d.add_Days(  182)).strDate() == "2017-07-02" );
+REQUIRE((d.add_Days(  183)).strDate() == "2017-07-03" );
+REQUIRE((d.add_Days(  184)).strDate() == "2017-07-04" );
+REQUIRE((d.add_Days(  185)).strDate() == "2017-07-05" );
+REQUIRE((d.add_Days(  186)).strDate() == "2017-07-06" );
+REQUIRE((d.add_Days(  187)).strDate() == "2017-07-07" );
+REQUIRE((d.add_Days(  188)).strDate() == "2017-07-08" );
+REQUIRE((d.add_Days(  189)).strDate() == "2017-07-09" );
+REQUIRE((d.add_Days(  190)).strDate() == "2017-07-10" );
+
+REQUIRE((d.add_Days(  191)).strDate() == "2017-07-11" );
+REQUIRE((d.add_Days(  192)).strDate() == "2017-07-12" );
+REQUIRE((d.add_Days(  193)).strDate() == "2017-07-13" );
+REQUIRE((d.add_Days(  194)).strDate() == "2017-07-14" );
+REQUIRE((d.add_Days(  195)).strDate() == "2017-07-15" );
+REQUIRE((d.add_Days(  196)).strDate() == "2017-07-16" );
+REQUIRE((d.add_Days(  197)).strDate() == "2017-07-17" );
+REQUIRE((d.add_Days(  198)).strDate() == "2017-07-18" );
+REQUIRE((d.add_Days(  199)).strDate() == "2017-07-19" );
+REQUIRE((d.add_Days(  200)).strDate() == "2017-07-20" );
+
+REQUIRE((d.add_Days(  201)).strDate() == "2017-07-21" );
+REQUIRE((d.add_Days(  202)).strDate() == "2017-07-22" );
+REQUIRE((d.add_Days(  203)).strDate() == "2017-07-23" );
+REQUIRE((d.add_Days(  204)).strDate() == "2017-07-24" );
+REQUIRE((d.add_Days(  205)).strDate() == "2017-07-25" );
+REQUIRE((d.add_Days(  206)).strDate() == "2017-07-26" );
+REQUIRE((d.add_Days(  207)).strDate() == "2017-07-27" );
+REQUIRE((d.add_Days(  208)).strDate() == "2017-07-28" );
+REQUIRE((d.add_Days(  209)).strDate() == "2017-07-29" );
+REQUIRE((d.add_Days(  210)).strDate() == "2017-07-30" );
+
+REQUIRE((d.add_Days(  211)).strDate() == "2017-07-31" );
+REQUIRE((d.add_Days(  212)).strDate() == "2017-08-01" );
+REQUIRE((d.add_Days(  213)).strDate() == "2017-08-02" );
+REQUIRE((d.add_Days(  214)).strDate() == "2017-08-03" );
+REQUIRE((d.add_Days(  215)).strDate() == "2017-08-04" );
+REQUIRE((d.add_Days(  216)).strDate() == "2017-08-05" );
+REQUIRE((d.add_Days(  217)).strDate() == "2017-08-06" );
+REQUIRE((d.add_Days(  218)).strDate() == "2017-08-07" );
+REQUIRE((d.add_Days(  219)).strDate() == "2017-08-08" );
+REQUIRE((d.add_Days(  220)).strDate() == "2017-08-09" );
+
+REQUIRE((d.add_Days(  221)).strDate() == "2017-08-10" );
+REQUIRE((d.add_Days(  222)).strDate() == "2017-08-11" );
+REQUIRE((d.add_Days(  223)).strDate() == "2017-08-12" );
+REQUIRE((d.add_Days(  224)).strDate() == "2017-08-13" );
+REQUIRE((d.add_Days(  225)).strDate() == "2017-08-14" );
+REQUIRE((d.add_Days(  226)).strDate() == "2017-08-15" );
+REQUIRE((d.add_Days(  227)).strDate() == "2017-08-16" );
+REQUIRE((d.add_Days(  228)).strDate() == "2017-08-17" );
+REQUIRE((d.add_Days(  229)).strDate() == "2017-08-18" );
+REQUIRE((d.add_Days(  230)).strDate() == "2017-08-19" );
+
+REQUIRE((d.add_Days(  231)).strDate() == "2017-08-20" );
+REQUIRE((d.add_Days(  232)).strDate() == "2017-08-21" );
+REQUIRE((d.add_Days(  233)).strDate() == "2017-08-22" );
+REQUIRE((d.add_Days(  234)).strDate() == "2017-08-23" );
+REQUIRE((d.add_Days(  235)).strDate() == "2017-08-24" );
+REQUIRE((d.add_Days(  236)).strDate() == "2017-08-25" );
+REQUIRE((d.add_Days(  237)).strDate() == "2017-08-26" );
+REQUIRE((d.add_Days(  238)).strDate() == "2017-08-27" );
+REQUIRE((d.add_Days(  239)).strDate() == "2017-08-28" );
+REQUIRE((d.add_Days(  240)).strDate() == "2017-08-29" );
+
+REQUIRE((d.add_Days(  241)).strDate() == "2017-08-30" );
+REQUIRE((d.add_Days(  242)).strDate() == "2017-08-31" );
+REQUIRE((d.add_Days(  243)).strDate() == "2017-09-01" );
+REQUIRE((d.add_Days(  244)).strDate() == "2017-09-02" );
+REQUIRE((d.add_Days(  245)).strDate() == "2017-09-03" );
+REQUIRE((d.add_Days(  246)).strDate() == "2017-09-04" );
+REQUIRE((d.add_Days(  247)).strDate() == "2017-09-05" );
+REQUIRE((d.add_Days(  248)).strDate() == "2017-09-06" );
+REQUIRE((d.add_Days(  249)).strDate() == "2017-09-07" );
+REQUIRE((d.add_Days(  250)).strDate() == "2017-09-08" );
+
+REQUIRE((d.add_Days(  251)).strDate() == "2017-09-09" );
+REQUIRE((d.add_Days(  252)).strDate() == "2017-09-10" );
+REQUIRE((d.add_Days(  253)).strDate() == "2017-09-11" );
+REQUIRE((d.add_Days(  254)).strDate() == "2017-09-12" );
+REQUIRE((d.add_Days(  255)).strDate() == "2017-09-13" );
+REQUIRE((d.add_Days(  256)).strDate() == "2017-09-14" );
+REQUIRE((d.add_Days(  257)).strDate() == "2017-09-15" );
+REQUIRE((d.add_Days(  258)).strDate() == "2017-09-16" );
+REQUIRE((d.add_Days(  259)).strDate() == "2017-09-17" );
+REQUIRE((d.add_Days(  260)).strDate() == "2017-09-18" );
+
+REQUIRE((d.add_Days(  261)).strDate() == "2017-09-19" );
+REQUIRE((d.add_Days(  262)).strDate() == "2017-09-20" );
+REQUIRE((d.add_Days(  263)).strDate() == "2017-09-21" );
+REQUIRE((d.add_Days(  264)).strDate() == "2017-09-22" );
+REQUIRE((d.add_Days(  265)).strDate() == "2017-09-23" );
+REQUIRE((d.add_Days(  266)).strDate() == "2017-09-24" );
+REQUIRE((d.add_Days(  267)).strDate() == "2017-09-25" );
+REQUIRE((d.add_Days(  268)).strDate() == "2017-09-26" );
+REQUIRE((d.add_Days(  269)).strDate() == "2017-09-27" );
+REQUIRE((d.add_Days(  270)).strDate() == "2017-09-28" );
+
+REQUIRE((d.add_Days(  271)).strDate() == "2017-09-29" );
+REQUIRE((d.add_Days(  272)).strDate() == "2017-09-30" );
+REQUIRE((d.add_Days(  273)).strDate() == "2017-10-01" );
+REQUIRE((d.add_Days(  274)).strDate() == "2017-10-02" );
+REQUIRE((d.add_Days(  275)).strDate() == "2017-10-03" );
+REQUIRE((d.add_Days(  276)).strDate() == "2017-10-04" );
+REQUIRE((d.add_Days(  277)).strDate() == "2017-10-05" );
+REQUIRE((d.add_Days(  278)).strDate() == "2017-10-06" );
+REQUIRE((d.add_Days(  279)).strDate() == "2017-10-07" );
+REQUIRE((d.add_Days(  280)).strDate() == "2017-10-08" );
+
+REQUIRE((d.add_Days(  281)).strDate() == "2017-10-09" );
+REQUIRE((d.add_Days(  282)).strDate() == "2017-10-10" );
+REQUIRE((d.add_Days(  283)).strDate() == "2017-10-11" );
+REQUIRE((d.add_Days(  284)).strDate() == "2017-10-12" );
+REQUIRE((d.add_Days(  285)).strDate() == "2017-10-13" );
+REQUIRE((d.add_Days(  286)).strDate() == "2017-10-14" );
+REQUIRE((d.add_Days(  287)).strDate() == "2017-10-15" );
+REQUIRE((d.add_Days(  288)).strDate() == "2017-10-16" );
+REQUIRE((d.add_Days(  289)).strDate() == "2017-10-17" );
+REQUIRE((d.add_Days(  290)).strDate() == "2017-10-18" );
+
+REQUIRE((d.add_Days(  291)).strDate() == "2017-10-19" );
+REQUIRE((d.add_Days(  292)).strDate() == "2017-10-20" );
+REQUIRE((d.add_Days(  293)).strDate() == "2017-10-21" );
+REQUIRE((d.add_Days(  294)).strDate() == "2017-10-22" );
+REQUIRE((d.add_Days(  295)).strDate() == "2017-10-23" );
+REQUIRE((d.add_Days(  296)).strDate() == "2017-10-24" );
+REQUIRE((d.add_Days(  297)).strDate() == "2017-10-25" );
+REQUIRE((d.add_Days(  298)).strDate() == "2017-10-26" );
+REQUIRE((d.add_Days(  299)).strDate() == "2017-10-27" );
+REQUIRE((d.add_Days(  300)).strDate() == "2017-10-28" );
+
+REQUIRE((d.add_Days(  301)).strDate() == "2017-10-29" );
+REQUIRE((d.add_Days(  302)).strDate() == "2017-10-30" );
+REQUIRE((d.add_Days(  303)).strDate() == "2017-10-31" );
+REQUIRE((d.add_Days(  304)).strDate() == "2017-11-01" );
+REQUIRE((d.add_Days(  305)).strDate() == "2017-11-02" );
+REQUIRE((d.add_Days(  306)).strDate() == "2017-11-03" );
+REQUIRE((d.add_Days(  307)).strDate() == "2017-11-04" );
+REQUIRE((d.add_Days(  308)).strDate() == "2017-11-05" );
+REQUIRE((d.add_Days(  309)).strDate() == "2017-11-06" );
+REQUIRE((d.add_Days(  310)).strDate() == "2017-11-07" );
+
+REQUIRE((d.add_Days(  311)).strDate() == "2017-11-08" );
+REQUIRE((d.add_Days(  312)).strDate() == "2017-11-09" );
+REQUIRE((d.add_Days(  313)).strDate() == "2017-11-10" );
+REQUIRE((d.add_Days(  314)).strDate() == "2017-11-11" );
+REQUIRE((d.add_Days(  315)).strDate() == "2017-11-12" );
+REQUIRE((d.add_Days(  316)).strDate() == "2017-11-13" );
+REQUIRE((d.add_Days(  317)).strDate() == "2017-11-14" );
+REQUIRE((d.add_Days(  318)).strDate() == "2017-11-15" );
+REQUIRE((d.add_Days(  319)).strDate() == "2017-11-16" );
+REQUIRE((d.add_Days(  320)).strDate() == "2017-11-17" );
+
+REQUIRE((d.add_Days(  321)).strDate() == "2017-11-18" );
+REQUIRE((d.add_Days(  322)).strDate() == "2017-11-19" );
+REQUIRE((d.add_Days(  323)).strDate() == "2017-11-20" );
+REQUIRE((d.add_Days(  324)).strDate() == "2017-11-21" );
+REQUIRE((d.add_Days(  325)).strDate() == "2017-11-22" );
+REQUIRE((d.add_Days(  326)).strDate() == "2017-11-23" );
+REQUIRE((d.add_Days(  327)).strDate() == "2017-11-24" );
+REQUIRE((d.add_Days(  328)).strDate() == "2017-11-25" );
+REQUIRE((d.add_Days(  329)).strDate() == "2017-11-26" );
+REQUIRE((d.add_Days(  330)).strDate() == "2017-11-27" );
+
+REQUIRE((d.add_Days(  331)).strDate() == "2017-11-28" );
+REQUIRE((d.add_Days(  332)).strDate() == "2017-11-29" );
+REQUIRE((d.add_Days(  333)).strDate() == "2017-11-30" );
+REQUIRE((d.add_Days(  334)).strDate() == "2017-12-01" );
+REQUIRE((d.add_Days(  335)).strDate() == "2017-12-02" );
+REQUIRE((d.add_Days(  336)).strDate() == "2017-12-03" );
+REQUIRE((d.add_Days(  337)).strDate() == "2017-12-04" );
+REQUIRE((d.add_Days(  338)).strDate() == "2017-12-05" );
+REQUIRE((d.add_Days(  339)).strDate() == "2017-12-06" );
+REQUIRE((d.add_Days(  340)).strDate() == "2017-12-07" );
+
+REQUIRE((d.add_Days(  341)).strDate() == "2017-12-08" );
+REQUIRE((d.add_Days(  342)).strDate() == "2017-12-09" );
+REQUIRE((d.add_Days(  343)).strDate() == "2017-12-10" );
+REQUIRE((d.add_Days(  344)).strDate() == "2017-12-11" );
+REQUIRE((d.add_Days(  345)).strDate() == "2017-12-12" );
+REQUIRE((d.add_Days(  346)).strDate() == "2017-12-13" );
+REQUIRE((d.add_Days(  347)).strDate() == "2017-12-14" );
+REQUIRE((d.add_Days(  348)).strDate() == "2017-12-15" );
+REQUIRE((d.add_Days(  349)).strDate() == "2017-12-16" );
+REQUIRE((d.add_Days(  350)).strDate() == "2017-12-17" );
+
+REQUIRE((d.add_Days(  351)).strDate() == "2017-12-18" );
+REQUIRE((d.add_Days(  352)).strDate() == "2017-12-19" );
+REQUIRE((d.add_Days(  353)).strDate() == "2017-12-20" );
+REQUIRE((d.add_Days(  354)).strDate() == "2017-12-21" );
+REQUIRE((d.add_Days(  355)).strDate() == "2017-12-22" );
+REQUIRE((d.add_Days(  356)).strDate() == "2017-12-23" );
+REQUIRE((d.add_Days(  357)).strDate() == "2017-12-24" );
+REQUIRE((d.add_Days(  358)).strDate() == "2017-12-25" );
+REQUIRE((d.add_Days(  359)).strDate() == "2017-12-26" );
+REQUIRE((d.add_Days(  360)).strDate() == "2017-12-27" );
+
+REQUIRE((d.add_Days(  361)).strDate() == "2017-12-28" );
+REQUIRE((d.add_Days(  362)).strDate() == "2017-12-29" );
+REQUIRE((d.add_Days(  363)).strDate() == "2017-12-30" );
+REQUIRE((d.add_Days(  364)).strDate() == "2017-12-31" );
+REQUIRE((d.add_Days(  365)).strDate() == "2018-01-01" );
+REQUIRE((d.add_Days(  366)).strDate() == "2018-01-02" );
+REQUIRE((d.add_Days(  367)).strDate() == "2018-01-03" );
+REQUIRE((d.add_Days(  368)).strDate() == "2018-01-04" );
+REQUIRE((d.add_Days(  369)).strDate() == "2018-01-05" );
+REQUIRE((d.add_Days(  370)).strDate() == "2018-01-06" );
+
+REQUIRE((d.add_Days(  371)).strDate() == "2018-01-07" );
+REQUIRE((d.add_Days(  372)).strDate() == "2018-01-08" );
+REQUIRE((d.add_Days(  373)).strDate() == "2018-01-09" );
+REQUIRE((d.add_Days(  374)).strDate() == "2018-01-10" );
+REQUIRE((d.add_Days(  375)).strDate() == "2018-01-11" );
+REQUIRE((d.add_Days(  376)).strDate() == "2018-01-12" );
+REQUIRE((d.add_Days(  377)).strDate() == "2018-01-13" );
+REQUIRE((d.add_Days(  378)).strDate() == "2018-01-14" );
+REQUIRE((d.add_Days(  379)).strDate() == "2018-01-15" );
+REQUIRE((d.add_Days(  380)).strDate() == "2018-01-16" );
+
+REQUIRE((d.add_Days(  381)).strDate() == "2018-01-17" );
+REQUIRE((d.add_Days(  382)).strDate() == "2018-01-18" );
+REQUIRE((d.add_Days(  383)).strDate() == "2018-01-19" );
+REQUIRE((d.add_Days(  384)).strDate() == "2018-01-20" );
+REQUIRE((d.add_Days(  385)).strDate() == "2018-01-21" );
+REQUIRE((d.add_Days(  386)).strDate() == "2018-01-22" );
+REQUIRE((d.add_Days(  387)).strDate() == "2018-01-23" );
+REQUIRE((d.add_Days(  388)).strDate() == "2018-01-24" );
+REQUIRE((d.add_Days(  389)).strDate() == "2018-01-25" );
+REQUIRE((d.add_Days(  390)).strDate() == "2018-01-26" );
+
+REQUIRE((d.add_Days(  391)).strDate() == "2018-01-27" );
+REQUIRE((d.add_Days(  392)).strDate() == "2018-01-28" );
+REQUIRE((d.add_Days(  393)).strDate() == "2018-01-29" );
+REQUIRE((d.add_Days(  394)).strDate() == "2018-01-30" );
+REQUIRE((d.add_Days(  395)).strDate() == "2018-01-31" );
+REQUIRE((d.add_Days(  396)).strDate() == "2018-02-01" );
+REQUIRE((d.add_Days(  397)).strDate() == "2018-02-02" );
+REQUIRE((d.add_Days(  398)).strDate() == "2018-02-03" );
+REQUIRE((d.add_Days(  399)).strDate() == "2018-02-04" );
+REQUIRE((d.add_Days(  400)).strDate() == "2018-02-05" );
+
+REQUIRE((d.add_Days(  401)).strDate() == "2018-02-06" );
+REQUIRE((d.add_Days(  402)).strDate() == "2018-02-07" );
+REQUIRE((d.add_Days(  403)).strDate() == "2018-02-08" );
+REQUIRE((d.add_Days(  404)).strDate() == "2018-02-09" );
+REQUIRE((d.add_Days(  405)).strDate() == "2018-02-10" );
+REQUIRE((d.add_Days(  406)).strDate() == "2018-02-11" );
+REQUIRE((d.add_Days(  407)).strDate() == "2018-02-12" );
+REQUIRE((d.add_Days(  408)).strDate() == "2018-02-13" );
+REQUIRE((d.add_Days(  409)).strDate() == "2018-02-14" );
+REQUIRE((d.add_Days(  410)).strDate() == "2018-02-15" );
+
+REQUIRE((d.add_Days(  411)).strDate() == "2018-02-16" );
+REQUIRE((d.add_Days(  412)).strDate() == "2018-02-17" );
+REQUIRE((d.add_Days(  413)).strDate() == "2018-02-18" );
+REQUIRE((d.add_Days(  414)).strDate() == "2018-02-19" );
+REQUIRE((d.add_Days(  415)).strDate() == "2018-02-20" );
+REQUIRE((d.add_Days(  416)).strDate() == "2018-02-21" );
+REQUIRE((d.add_Days(  417)).strDate() == "2018-02-22" );
+REQUIRE((d.add_Days(  418)).strDate() == "2018-02-23" );
+REQUIRE((d.add_Days(  419)).strDate() == "2018-02-24" );
+REQUIRE((d.add_Days(  420)).strDate() == "2018-02-25" );
+
+REQUIRE((d.add_Days(  421)).strDate() == "2018-02-26" );
+REQUIRE((d.add_Days(  422)).strDate() == "2018-02-27" );
+REQUIRE((d.add_Days(  423)).strDate() == "2018-02-28" );
+REQUIRE((d.add_Days(  424)).strDate() == "2018-03-01" );
+REQUIRE((d.add_Days(  425)).strDate() == "2018-03-02" );
+REQUIRE((d.add_Days(  426)).strDate() == "2018-03-03" );
+REQUIRE((d.add_Days(  427)).strDate() == "2018-03-04" );
+REQUIRE((d.add_Days(  428)).strDate() == "2018-03-05" );
+REQUIRE((d.add_Days(  429)).strDate() == "2018-03-06" );
+REQUIRE((d.add_Days(  430)).strDate() == "2018-03-07" );
+
+REQUIRE((d.add_Days(  431)).strDate() == "2018-03-08" );
+REQUIRE((d.add_Days(  432)).strDate() == "2018-03-09" );
+REQUIRE((d.add_Days(  433)).strDate() == "2018-03-10" );
+REQUIRE((d.add_Days(  434)).strDate() == "2018-03-11" );
+REQUIRE((d.add_Days(  435)).strDate() == "2018-03-12" );
+REQUIRE((d.add_Days(  436)).strDate() == "2018-03-13" );
+REQUIRE((d.add_Days(  437)).strDate() == "2018-03-14" );
+REQUIRE((d.add_Days(  438)).strDate() == "2018-03-15" );
+REQUIRE((d.add_Days(  439)).strDate() == "2018-03-16" );
+REQUIRE((d.add_Days(  440)).strDate() == "2018-03-17" );
+
+REQUIRE((d.add_Days(  441)).strDate() == "2018-03-18" );
+REQUIRE((d.add_Days(  442)).strDate() == "2018-03-19" );
+REQUIRE((d.add_Days(  443)).strDate() == "2018-03-20" );
+REQUIRE((d.add_Days(  444)).strDate() == "2018-03-21" );
+REQUIRE((d.add_Days(  445)).strDate() == "2018-03-22" );
+REQUIRE((d.add_Days(  446)).strDate() == "2018-03-23" );
+REQUIRE((d.add_Days(  447)).strDate() == "2018-03-24" );
+REQUIRE((d.add_Days(  448)).strDate() == "2018-03-25" );
+REQUIRE((d.add_Days(  449)).strDate() == "2018-03-26" );
+REQUIRE((d.add_Days(  450)).strDate() == "2018-03-27" );
+
+REQUIRE((d.add_Days(  451)).strDate() == "2018-03-28" );
+REQUIRE((d.add_Days(  452)).strDate() == "2018-03-29" );
+REQUIRE((d.add_Days(  453)).strDate() == "2018-03-30" );
+REQUIRE((d.add_Days(  454)).strDate() == "2018-03-31" );
+REQUIRE((d.add_Days(  455)).strDate() == "2018-04-01" );
+REQUIRE((d.add_Days(  456)).strDate() == "2018-04-02" );
+REQUIRE((d.add_Days(  457)).strDate() == "2018-04-03" );
+}
+
+TEST_CASE("Test addDays: 0001 to 3652 (part 2 of 8)", "[jc313_Date]")
+{
+    jc313_Date d;
+    d.setYear(2017);
+    d.setMonth(01);
+    d.setDay(01);
+REQUIRE((d.add_Days(  458)).strDate() == "2018-04-04" );
+REQUIRE((d.add_Days(  459)).strDate() == "2018-04-05" );
+REQUIRE((d.add_Days(  460)).strDate() == "2018-04-06" );
+
+REQUIRE((d.add_Days(  461)).strDate() == "2018-04-07" );
+REQUIRE((d.add_Days(  462)).strDate() == "2018-04-08" );
+REQUIRE((d.add_Days(  463)).strDate() == "2018-04-09" );
+REQUIRE((d.add_Days(  464)).strDate() == "2018-04-10" );
+REQUIRE((d.add_Days(  465)).strDate() == "2018-04-11" );
+REQUIRE((d.add_Days(  466)).strDate() == "2018-04-12" );
+REQUIRE((d.add_Days(  467)).strDate() == "2018-04-13" );
+REQUIRE((d.add_Days(  468)).strDate() == "2018-04-14" );
+REQUIRE((d.add_Days(  469)).strDate() == "2018-04-15" );
+REQUIRE((d.add_Days(  470)).strDate() == "2018-04-16" );
+
+REQUIRE((d.add_Days(  471)).strDate() == "2018-04-17" );
+REQUIRE((d.add_Days(  472)).strDate() == "2018-04-18" );
+REQUIRE((d.add_Days(  473)).strDate() == "2018-04-19" );
+REQUIRE((d.add_Days(  474)).strDate() == "2018-04-20" );
+REQUIRE((d.add_Days(  475)).strDate() == "2018-04-21" );
+REQUIRE((d.add_Days(  476)).strDate() == "2018-04-22" );
+REQUIRE((d.add_Days(  477)).strDate() == "2018-04-23" );
+REQUIRE((d.add_Days(  478)).strDate() == "2018-04-24" );
+REQUIRE((d.add_Days(  479)).strDate() == "2018-04-25" );
+REQUIRE((d.add_Days(  480)).strDate() == "2018-04-26" );
+
+REQUIRE((d.add_Days(  481)).strDate() == "2018-04-27" );
+REQUIRE((d.add_Days(  482)).strDate() == "2018-04-28" );
+REQUIRE((d.add_Days(  483)).strDate() == "2018-04-29" );
+REQUIRE((d.add_Days(  484)).strDate() == "2018-04-30" );
+REQUIRE((d.add_Days(  485)).strDate() == "2018-05-01" );
+REQUIRE((d.add_Days(  486)).strDate() == "2018-05-02" );
+REQUIRE((d.add_Days(  487)).strDate() == "2018-05-03" );
+REQUIRE((d.add_Days(  488)).strDate() == "2018-05-04" );
+REQUIRE((d.add_Days(  489)).strDate() == "2018-05-05" );
+REQUIRE((d.add_Days(  490)).strDate() == "2018-05-06" );
+
+REQUIRE((d.add_Days(  491)).strDate() == "2018-05-07" );
+REQUIRE((d.add_Days(  492)).strDate() == "2018-05-08" );
+REQUIRE((d.add_Days(  493)).strDate() == "2018-05-09" );
+REQUIRE((d.add_Days(  494)).strDate() == "2018-05-10" );
+REQUIRE((d.add_Days(  495)).strDate() == "2018-05-11" );
+REQUIRE((d.add_Days(  496)).strDate() == "2018-05-12" );
+REQUIRE((d.add_Days(  497)).strDate() == "2018-05-13" );
+REQUIRE((d.add_Days(  498)).strDate() == "2018-05-14" );
+REQUIRE((d.add_Days(  499)).strDate() == "2018-05-15" );
+REQUIRE((d.add_Days(  500)).strDate() == "2018-05-16" );
+
+REQUIRE((d.add_Days(  501)).strDate() == "2018-05-17" );
+REQUIRE((d.add_Days(  502)).strDate() == "2018-05-18" );
+REQUIRE((d.add_Days(  503)).strDate() == "2018-05-19" );
+REQUIRE((d.add_Days(  504)).strDate() == "2018-05-20" );
+REQUIRE((d.add_Days(  505)).strDate() == "2018-05-21" );
+REQUIRE((d.add_Days(  506)).strDate() == "2018-05-22" );
+REQUIRE((d.add_Days(  507)).strDate() == "2018-05-23" );
+REQUIRE((d.add_Days(  508)).strDate() == "2018-05-24" );
+REQUIRE((d.add_Days(  509)).strDate() == "2018-05-25" );
+REQUIRE((d.add_Days(  510)).strDate() == "2018-05-26" );
+
+REQUIRE((d.add_Days(  511)).strDate() == "2018-05-27" );
+REQUIRE((d.add_Days(  512)).strDate() == "2018-05-28" );
+REQUIRE((d.add_Days(  513)).strDate() == "2018-05-29" );
+REQUIRE((d.add_Days(  514)).strDate() == "2018-05-30" );
+REQUIRE((d.add_Days(  515)).strDate() == "2018-05-31" );
+REQUIRE((d.add_Days(  516)).strDate() == "2018-06-01" );
+REQUIRE((d.add_Days(  517)).strDate() == "2018-06-02" );
+REQUIRE((d.add_Days(  518)).strDate() == "2018-06-03" );
+REQUIRE((d.add_Days(  519)).strDate() == "2018-06-04" );
+REQUIRE((d.add_Days(  520)).strDate() == "2018-06-05" );
+
+REQUIRE((d.add_Days(  521)).strDate() == "2018-06-06" );
+REQUIRE((d.add_Days(  522)).strDate() == "2018-06-07" );
+REQUIRE((d.add_Days(  523)).strDate() == "2018-06-08" );
+REQUIRE((d.add_Days(  524)).strDate() == "2018-06-09" );
+REQUIRE((d.add_Days(  525)).strDate() == "2018-06-10" );
+REQUIRE((d.add_Days(  526)).strDate() == "2018-06-11" );
+REQUIRE((d.add_Days(  527)).strDate() == "2018-06-12" );
+REQUIRE((d.add_Days(  528)).strDate() == "2018-06-13" );
+REQUIRE((d.add_Days(  529)).strDate() == "2018-06-14" );
+REQUIRE((d.add_Days(  530)).strDate() == "2018-06-15" );
+
+REQUIRE((d.add_Days(  531)).strDate() == "2018-06-16" );
+REQUIRE((d.add_Days(  532)).strDate() == "2018-06-17" );
+REQUIRE((d.add_Days(  533)).strDate() == "2018-06-18" );
+REQUIRE((d.add_Days(  534)).strDate() == "2018-06-19" );
+REQUIRE((d.add_Days(  535)).strDate() == "2018-06-20" );
+REQUIRE((d.add_Days(  536)).strDate() == "2018-06-21" );
+REQUIRE((d.add_Days(  537)).strDate() == "2018-06-22" );
+REQUIRE((d.add_Days(  538)).strDate() == "2018-06-23" );
+REQUIRE((d.add_Days(  539)).strDate() == "2018-06-24" );
+REQUIRE((d.add_Days(  540)).strDate() == "2018-06-25" );
+
+REQUIRE((d.add_Days(  541)).strDate() == "2018-06-26" );
+REQUIRE((d.add_Days(  542)).strDate() == "2018-06-27" );
+REQUIRE((d.add_Days(  543)).strDate() == "2018-06-28" );
+REQUIRE((d.add_Days(  544)).strDate() == "2018-06-29" );
+REQUIRE((d.add_Days(  545)).strDate() == "2018-06-30" );
+REQUIRE((d.add_Days(  546)).strDate() == "2018-07-01" );
+REQUIRE((d.add_Days(  547)).strDate() == "2018-07-02" );
+REQUIRE((d.add_Days(  548)).strDate() == "2018-07-03" );
+REQUIRE((d.add_Days(  549)).strDate() == "2018-07-04" );
+REQUIRE((d.add_Days(  550)).strDate() == "2018-07-05" );
+
+REQUIRE((d.add_Days(  551)).strDate() == "2018-07-06" );
+REQUIRE((d.add_Days(  552)).strDate() == "2018-07-07" );
+REQUIRE((d.add_Days(  553)).strDate() == "2018-07-08" );
+REQUIRE((d.add_Days(  554)).strDate() == "2018-07-09" );
+REQUIRE((d.add_Days(  555)).strDate() == "2018-07-10" );
+REQUIRE((d.add_Days(  556)).strDate() == "2018-07-11" );
+REQUIRE((d.add_Days(  557)).strDate() == "2018-07-12" );
+REQUIRE((d.add_Days(  558)).strDate() == "2018-07-13" );
+REQUIRE((d.add_Days(  559)).strDate() == "2018-07-14" );
+REQUIRE((d.add_Days(  560)).strDate() == "2018-07-15" );
+
+REQUIRE((d.add_Days(  561)).strDate() == "2018-07-16" );
+REQUIRE((d.add_Days(  562)).strDate() == "2018-07-17" );
+REQUIRE((d.add_Days(  563)).strDate() == "2018-07-18" );
+REQUIRE((d.add_Days(  564)).strDate() == "2018-07-19" );
+REQUIRE((d.add_Days(  565)).strDate() == "2018-07-20" );
+REQUIRE((d.add_Days(  566)).strDate() == "2018-07-21" );
+REQUIRE((d.add_Days(  567)).strDate() == "2018-07-22" );
+REQUIRE((d.add_Days(  568)).strDate() == "2018-07-23" );
+REQUIRE((d.add_Days(  569)).strDate() == "2018-07-24" );
+REQUIRE((d.add_Days(  570)).strDate() == "2018-07-25" );
+
+REQUIRE((d.add_Days(  571)).strDate() == "2018-07-26" );
+REQUIRE((d.add_Days(  572)).strDate() == "2018-07-27" );
+REQUIRE((d.add_Days(  573)).strDate() == "2018-07-28" );
+REQUIRE((d.add_Days(  574)).strDate() == "2018-07-29" );
+REQUIRE((d.add_Days(  575)).strDate() == "2018-07-30" );
+REQUIRE((d.add_Days(  576)).strDate() == "2018-07-31" );
+REQUIRE((d.add_Days(  577)).strDate() == "2018-08-01" );
+REQUIRE((d.add_Days(  578)).strDate() == "2018-08-02" );
+REQUIRE((d.add_Days(  579)).strDate() == "2018-08-03" );
+REQUIRE((d.add_Days(  580)).strDate() == "2018-08-04" );
+
+REQUIRE((d.add_Days(  581)).strDate() == "2018-08-05" );
+REQUIRE((d.add_Days(  582)).strDate() == "2018-08-06" );
+REQUIRE((d.add_Days(  583)).strDate() == "2018-08-07" );
+REQUIRE((d.add_Days(  584)).strDate() == "2018-08-08" );
+REQUIRE((d.add_Days(  585)).strDate() == "2018-08-09" );
+REQUIRE((d.add_Days(  586)).strDate() == "2018-08-10" );
+REQUIRE((d.add_Days(  587)).strDate() == "2018-08-11" );
+REQUIRE((d.add_Days(  588)).strDate() == "2018-08-12" );
+REQUIRE((d.add_Days(  589)).strDate() == "2018-08-13" );
+REQUIRE((d.add_Days(  590)).strDate() == "2018-08-14" );
+
+REQUIRE((d.add_Days(  591)).strDate() == "2018-08-15" );
+REQUIRE((d.add_Days(  592)).strDate() == "2018-08-16" );
+REQUIRE((d.add_Days(  593)).strDate() == "2018-08-17" );
+REQUIRE((d.add_Days(  594)).strDate() == "2018-08-18" );
+REQUIRE((d.add_Days(  595)).strDate() == "2018-08-19" );
+REQUIRE((d.add_Days(  596)).strDate() == "2018-08-20" );
+REQUIRE((d.add_Days(  597)).strDate() == "2018-08-21" );
+REQUIRE((d.add_Days(  598)).strDate() == "2018-08-22" );
+REQUIRE((d.add_Days(  599)).strDate() == "2018-08-23" );
+REQUIRE((d.add_Days(  600)).strDate() == "2018-08-24" );
+
+REQUIRE((d.add_Days(  601)).strDate() == "2018-08-25" );
+REQUIRE((d.add_Days(  602)).strDate() == "2018-08-26" );
+REQUIRE((d.add_Days(  603)).strDate() == "2018-08-27" );
+REQUIRE((d.add_Days(  604)).strDate() == "2018-08-28" );
+REQUIRE((d.add_Days(  605)).strDate() == "2018-08-29" );
+REQUIRE((d.add_Days(  606)).strDate() == "2018-08-30" );
+REQUIRE((d.add_Days(  607)).strDate() == "2018-08-31" );
+REQUIRE((d.add_Days(  608)).strDate() == "2018-09-01" );
+REQUIRE((d.add_Days(  609)).strDate() == "2018-09-02" );
+REQUIRE((d.add_Days(  610)).strDate() == "2018-09-03" );
+
+REQUIRE((d.add_Days(  611)).strDate() == "2018-09-04" );
+REQUIRE((d.add_Days(  612)).strDate() == "2018-09-05" );
+REQUIRE((d.add_Days(  613)).strDate() == "2018-09-06" );
+REQUIRE((d.add_Days(  614)).strDate() == "2018-09-07" );
+REQUIRE((d.add_Days(  615)).strDate() == "2018-09-08" );
+REQUIRE((d.add_Days(  616)).strDate() == "2018-09-09" );
+REQUIRE((d.add_Days(  617)).strDate() == "2018-09-10" );
+REQUIRE((d.add_Days(  618)).strDate() == "2018-09-11" );
+REQUIRE((d.add_Days(  619)).strDate() == "2018-09-12" );
+REQUIRE((d.add_Days(  620)).strDate() == "2018-09-13" );
+
+REQUIRE((d.add_Days(  621)).strDate() == "2018-09-14" );
+REQUIRE((d.add_Days(  622)).strDate() == "2018-09-15" );
+REQUIRE((d.add_Days(  623)).strDate() == "2018-09-16" );
+REQUIRE((d.add_Days(  624)).strDate() == "2018-09-17" );
+REQUIRE((d.add_Days(  625)).strDate() == "2018-09-18" );
+REQUIRE((d.add_Days(  626)).strDate() == "2018-09-19" );
+REQUIRE((d.add_Days(  627)).strDate() == "2018-09-20" );
+REQUIRE((d.add_Days(  628)).strDate() == "2018-09-21" );
+REQUIRE((d.add_Days(  629)).strDate() == "2018-09-22" );
+REQUIRE((d.add_Days(  630)).strDate() == "2018-09-23" );
+
+REQUIRE((d.add_Days(  631)).strDate() == "2018-09-24" );
+REQUIRE((d.add_Days(  632)).strDate() == "2018-09-25" );
+REQUIRE((d.add_Days(  633)).strDate() == "2018-09-26" );
+REQUIRE((d.add_Days(  634)).strDate() == "2018-09-27" );
+REQUIRE((d.add_Days(  635)).strDate() == "2018-09-28" );
+REQUIRE((d.add_Days(  636)).strDate() == "2018-09-29" );
+REQUIRE((d.add_Days(  637)).strDate() == "2018-09-30" );
+REQUIRE((d.add_Days(  638)).strDate() == "2018-10-01" );
+REQUIRE((d.add_Days(  639)).strDate() == "2018-10-02" );
+REQUIRE((d.add_Days(  640)).strDate() == "2018-10-03" );
+
+REQUIRE((d.add_Days(  641)).strDate() == "2018-10-04" );
+REQUIRE((d.add_Days(  642)).strDate() == "2018-10-05" );
+REQUIRE((d.add_Days(  643)).strDate() == "2018-10-06" );
+REQUIRE((d.add_Days(  644)).strDate() == "2018-10-07" );
+REQUIRE((d.add_Days(  645)).strDate() == "2018-10-08" );
+REQUIRE((d.add_Days(  646)).strDate() == "2018-10-09" );
+REQUIRE((d.add_Days(  647)).strDate() == "2018-10-10" );
+REQUIRE((d.add_Days(  648)).strDate() == "2018-10-11" );
+REQUIRE((d.add_Days(  649)).strDate() == "2018-10-12" );
+REQUIRE((d.add_Days(  650)).strDate() == "2018-10-13" );
+
+REQUIRE((d.add_Days(  651)).strDate() == "2018-10-14" );
+REQUIRE((d.add_Days(  652)).strDate() == "2018-10-15" );
+REQUIRE((d.add_Days(  653)).strDate() == "2018-10-16" );
+REQUIRE((d.add_Days(  654)).strDate() == "2018-10-17" );
+REQUIRE((d.add_Days(  655)).strDate() == "2018-10-18" );
+REQUIRE((d.add_Days(  656)).strDate() == "2018-10-19" );
+REQUIRE((d.add_Days(  657)).strDate() == "2018-10-20" );
+REQUIRE((d.add_Days(  658)).strDate() == "2018-10-21" );
+REQUIRE((d.add_Days(  659)).strDate() == "2018-10-22" );
+REQUIRE((d.add_Days(  660)).strDate() == "2018-10-23" );
+
+REQUIRE((d.add_Days(  661)).strDate() == "2018-10-24" );
+REQUIRE((d.add_Days(  662)).strDate() == "2018-10-25" );
+REQUIRE((d.add_Days(  663)).strDate() == "2018-10-26" );
+REQUIRE((d.add_Days(  664)).strDate() == "2018-10-27" );
+REQUIRE((d.add_Days(  665)).strDate() == "2018-10-28" );
+REQUIRE((d.add_Days(  666)).strDate() == "2018-10-29" );
+REQUIRE((d.add_Days(  667)).strDate() == "2018-10-30" );
+REQUIRE((d.add_Days(  668)).strDate() == "2018-10-31" );
+REQUIRE((d.add_Days(  669)).strDate() == "2018-11-01" );
+REQUIRE((d.add_Days(  670)).strDate() == "2018-11-02" );
+
+REQUIRE((d.add_Days(  671)).strDate() == "2018-11-03" );
+REQUIRE((d.add_Days(  672)).strDate() == "2018-11-04" );
+REQUIRE((d.add_Days(  673)).strDate() == "2018-11-05" );
+REQUIRE((d.add_Days(  674)).strDate() == "2018-11-06" );
+REQUIRE((d.add_Days(  675)).strDate() == "2018-11-07" );
+REQUIRE((d.add_Days(  676)).strDate() == "2018-11-08" );
+REQUIRE((d.add_Days(  677)).strDate() == "2018-11-09" );
+REQUIRE((d.add_Days(  678)).strDate() == "2018-11-10" );
+REQUIRE((d.add_Days(  679)).strDate() == "2018-11-11" );
+REQUIRE((d.add_Days(  680)).strDate() == "2018-11-12" );
+
+REQUIRE((d.add_Days(  681)).strDate() == "2018-11-13" );
+REQUIRE((d.add_Days(  682)).strDate() == "2018-11-14" );
+REQUIRE((d.add_Days(  683)).strDate() == "2018-11-15" );
+REQUIRE((d.add_Days(  684)).strDate() == "2018-11-16" );
+REQUIRE((d.add_Days(  685)).strDate() == "2018-11-17" );
+REQUIRE((d.add_Days(  686)).strDate() == "2018-11-18" );
+REQUIRE((d.add_Days(  687)).strDate() == "2018-11-19" );
+REQUIRE((d.add_Days(  688)).strDate() == "2018-11-20" );
+REQUIRE((d.add_Days(  689)).strDate() == "2018-11-21" );
+REQUIRE((d.add_Days(  690)).strDate() == "2018-11-22" );
+
+REQUIRE((d.add_Days(  691)).strDate() == "2018-11-23" );
+REQUIRE((d.add_Days(  692)).strDate() == "2018-11-24" );
+REQUIRE((d.add_Days(  693)).strDate() == "2018-11-25" );
+REQUIRE((d.add_Days(  694)).strDate() == "2018-11-26" );
+REQUIRE((d.add_Days(  695)).strDate() == "2018-11-27" );
+REQUIRE((d.add_Days(  696)).strDate() == "2018-11-28" );
+REQUIRE((d.add_Days(  697)).strDate() == "2018-11-29" );
+REQUIRE((d.add_Days(  698)).strDate() == "2018-11-30" );
+REQUIRE((d.add_Days(  699)).strDate() == "2018-12-01" );
+REQUIRE((d.add_Days(  700)).strDate() == "2018-12-02" );
+
+REQUIRE((d.add_Days(  701)).strDate() == "2018-12-03" );
+REQUIRE((d.add_Days(  702)).strDate() == "2018-12-04" );
+REQUIRE((d.add_Days(  703)).strDate() == "2018-12-05" );
+REQUIRE((d.add_Days(  704)).strDate() == "2018-12-06" );
+REQUIRE((d.add_Days(  705)).strDate() == "2018-12-07" );
+REQUIRE((d.add_Days(  706)).strDate() == "2018-12-08" );
+REQUIRE((d.add_Days(  707)).strDate() == "2018-12-09" );
+REQUIRE((d.add_Days(  708)).strDate() == "2018-12-10" );
+REQUIRE((d.add_Days(  709)).strDate() == "2018-12-11" );
+REQUIRE((d.add_Days(  710)).strDate() == "2018-12-12" );
+
+REQUIRE((d.add_Days(  711)).strDate() == "2018-12-13" );
+REQUIRE((d.add_Days(  712)).strDate() == "2018-12-14" );
+REQUIRE((d.add_Days(  713)).strDate() == "2018-12-15" );
+REQUIRE((d.add_Days(  714)).strDate() == "2018-12-16" );
+REQUIRE((d.add_Days(  715)).strDate() == "2018-12-17" );
+REQUIRE((d.add_Days(  716)).strDate() == "2018-12-18" );
+REQUIRE((d.add_Days(  717)).strDate() == "2018-12-19" );
+REQUIRE((d.add_Days(  718)).strDate() == "2018-12-20" );
+REQUIRE((d.add_Days(  719)).strDate() == "2018-12-21" );
+REQUIRE((d.add_Days(  720)).strDate() == "2018-12-22" );
+
+REQUIRE((d.add_Days(  721)).strDate() == "2018-12-23" );
+REQUIRE((d.add_Days(  722)).strDate() == "2018-12-24" );
+REQUIRE((d.add_Days(  723)).strDate() == "2018-12-25" );
+REQUIRE((d.add_Days(  724)).strDate() == "2018-12-26" );
+REQUIRE((d.add_Days(  725)).strDate() == "2018-12-27" );
+REQUIRE((d.add_Days(  726)).strDate() == "2018-12-28" );
+REQUIRE((d.add_Days(  727)).strDate() == "2018-12-29" );
+REQUIRE((d.add_Days(  728)).strDate() == "2018-12-30" );
+REQUIRE((d.add_Days(  729)).strDate() == "2018-12-31" );
+REQUIRE((d.add_Days(  730)).strDate() == "2019-01-01" );
+
+REQUIRE((d.add_Days(  731)).strDate() == "2019-01-02" );
+REQUIRE((d.add_Days(  732)).strDate() == "2019-01-03" );
+REQUIRE((d.add_Days(  733)).strDate() == "2019-01-04" );
+REQUIRE((d.add_Days(  734)).strDate() == "2019-01-05" );
+REQUIRE((d.add_Days(  735)).strDate() == "2019-01-06" );
+REQUIRE((d.add_Days(  736)).strDate() == "2019-01-07" );
+REQUIRE((d.add_Days(  737)).strDate() == "2019-01-08" );
+REQUIRE((d.add_Days(  738)).strDate() == "2019-01-09" );
+REQUIRE((d.add_Days(  739)).strDate() == "2019-01-10" );
+REQUIRE((d.add_Days(  740)).strDate() == "2019-01-11" );
+
+REQUIRE((d.add_Days(  741)).strDate() == "2019-01-12" );
+REQUIRE((d.add_Days(  742)).strDate() == "2019-01-13" );
+REQUIRE((d.add_Days(  743)).strDate() == "2019-01-14" );
+REQUIRE((d.add_Days(  744)).strDate() == "2019-01-15" );
+REQUIRE((d.add_Days(  745)).strDate() == "2019-01-16" );
+REQUIRE((d.add_Days(  746)).strDate() == "2019-01-17" );
+REQUIRE((d.add_Days(  747)).strDate() == "2019-01-18" );
+REQUIRE((d.add_Days(  748)).strDate() == "2019-01-19" );
+REQUIRE((d.add_Days(  749)).strDate() == "2019-01-20" );
+REQUIRE((d.add_Days(  750)).strDate() == "2019-01-21" );
+
+REQUIRE((d.add_Days(  751)).strDate() == "2019-01-22" );
+REQUIRE((d.add_Days(  752)).strDate() == "2019-01-23" );
+REQUIRE((d.add_Days(  753)).strDate() == "2019-01-24" );
+REQUIRE((d.add_Days(  754)).strDate() == "2019-01-25" );
+REQUIRE((d.add_Days(  755)).strDate() == "2019-01-26" );
+REQUIRE((d.add_Days(  756)).strDate() == "2019-01-27" );
+REQUIRE((d.add_Days(  757)).strDate() == "2019-01-28" );
+REQUIRE((d.add_Days(  758)).strDate() == "2019-01-29" );
+REQUIRE((d.add_Days(  759)).strDate() == "2019-01-30" );
+REQUIRE((d.add_Days(  760)).strDate() == "2019-01-31" );
+
+REQUIRE((d.add_Days(  761)).strDate() == "2019-02-01" );
+REQUIRE((d.add_Days(  762)).strDate() == "2019-02-02" );
+REQUIRE((d.add_Days(  763)).strDate() == "2019-02-03" );
+REQUIRE((d.add_Days(  764)).strDate() == "2019-02-04" );
+REQUIRE((d.add_Days(  765)).strDate() == "2019-02-05" );
+REQUIRE((d.add_Days(  766)).strDate() == "2019-02-06" );
+REQUIRE((d.add_Days(  767)).strDate() == "2019-02-07" );
+REQUIRE((d.add_Days(  768)).strDate() == "2019-02-08" );
+REQUIRE((d.add_Days(  769)).strDate() == "2019-02-09" );
+REQUIRE((d.add_Days(  770)).strDate() == "2019-02-10" );
+
+REQUIRE((d.add_Days(  771)).strDate() == "2019-02-11" );
+REQUIRE((d.add_Days(  772)).strDate() == "2019-02-12" );
+REQUIRE((d.add_Days(  773)).strDate() == "2019-02-13" );
+REQUIRE((d.add_Days(  774)).strDate() == "2019-02-14" );
+REQUIRE((d.add_Days(  775)).strDate() == "2019-02-15" );
+REQUIRE((d.add_Days(  776)).strDate() == "2019-02-16" );
+REQUIRE((d.add_Days(  777)).strDate() == "2019-02-17" );
+REQUIRE((d.add_Days(  778)).strDate() == "2019-02-18" );
+REQUIRE((d.add_Days(  779)).strDate() == "2019-02-19" );
+REQUIRE((d.add_Days(  780)).strDate() == "2019-02-20" );
+
+REQUIRE((d.add_Days(  781)).strDate() == "2019-02-21" );
+REQUIRE((d.add_Days(  782)).strDate() == "2019-02-22" );
+REQUIRE((d.add_Days(  783)).strDate() == "2019-02-23" );
+REQUIRE((d.add_Days(  784)).strDate() == "2019-02-24" );
+REQUIRE((d.add_Days(  785)).strDate() == "2019-02-25" );
+REQUIRE((d.add_Days(  786)).strDate() == "2019-02-26" );
+REQUIRE((d.add_Days(  787)).strDate() == "2019-02-27" );
+REQUIRE((d.add_Days(  788)).strDate() == "2019-02-28" );
+REQUIRE((d.add_Days(  789)).strDate() == "2019-03-01" );
+REQUIRE((d.add_Days(  790)).strDate() == "2019-03-02" );
+
+REQUIRE((d.add_Days(  791)).strDate() == "2019-03-03" );
+REQUIRE((d.add_Days(  792)).strDate() == "2019-03-04" );
+REQUIRE((d.add_Days(  793)).strDate() == "2019-03-05" );
+REQUIRE((d.add_Days(  794)).strDate() == "2019-03-06" );
+REQUIRE((d.add_Days(  795)).strDate() == "2019-03-07" );
+REQUIRE((d.add_Days(  796)).strDate() == "2019-03-08" );
+REQUIRE((d.add_Days(  797)).strDate() == "2019-03-09" );
+REQUIRE((d.add_Days(  798)).strDate() == "2019-03-10" );
+REQUIRE((d.add_Days(  799)).strDate() == "2019-03-11" );
+REQUIRE((d.add_Days(  800)).strDate() == "2019-03-12" );
+
+REQUIRE((d.add_Days(  801)).strDate() == "2019-03-13" );
+REQUIRE((d.add_Days(  802)).strDate() == "2019-03-14" );
+REQUIRE((d.add_Days(  803)).strDate() == "2019-03-15" );
+REQUIRE((d.add_Days(  804)).strDate() == "2019-03-16" );
+REQUIRE((d.add_Days(  805)).strDate() == "2019-03-17" );
+REQUIRE((d.add_Days(  806)).strDate() == "2019-03-18" );
+REQUIRE((d.add_Days(  807)).strDate() == "2019-03-19" );
+REQUIRE((d.add_Days(  808)).strDate() == "2019-03-20" );
+REQUIRE((d.add_Days(  809)).strDate() == "2019-03-21" );
+REQUIRE((d.add_Days(  810)).strDate() == "2019-03-22" );
+
+REQUIRE((d.add_Days(  811)).strDate() == "2019-03-23" );
+REQUIRE((d.add_Days(  812)).strDate() == "2019-03-24" );
+REQUIRE((d.add_Days(  813)).strDate() == "2019-03-25" );
+REQUIRE((d.add_Days(  814)).strDate() == "2019-03-26" );
+REQUIRE((d.add_Days(  815)).strDate() == "2019-03-27" );
+REQUIRE((d.add_Days(  816)).strDate() == "2019-03-28" );
+REQUIRE((d.add_Days(  817)).strDate() == "2019-03-29" );
+REQUIRE((d.add_Days(  818)).strDate() == "2019-03-30" );
+REQUIRE((d.add_Days(  819)).strDate() == "2019-03-31" );
+REQUIRE((d.add_Days(  820)).strDate() == "2019-04-01" );
+
+REQUIRE((d.add_Days(  821)).strDate() == "2019-04-02" );
+REQUIRE((d.add_Days(  822)).strDate() == "2019-04-03" );
+REQUIRE((d.add_Days(  823)).strDate() == "2019-04-04" );
+REQUIRE((d.add_Days(  824)).strDate() == "2019-04-05" );
+REQUIRE((d.add_Days(  825)).strDate() == "2019-04-06" );
+REQUIRE((d.add_Days(  826)).strDate() == "2019-04-07" );
+REQUIRE((d.add_Days(  827)).strDate() == "2019-04-08" );
+REQUIRE((d.add_Days(  828)).strDate() == "2019-04-09" );
+REQUIRE((d.add_Days(  829)).strDate() == "2019-04-10" );
+REQUIRE((d.add_Days(  830)).strDate() == "2019-04-11" );
+
+REQUIRE((d.add_Days(  831)).strDate() == "2019-04-12" );
+REQUIRE((d.add_Days(  832)).strDate() == "2019-04-13" );
+REQUIRE((d.add_Days(  833)).strDate() == "2019-04-14" );
+REQUIRE((d.add_Days(  834)).strDate() == "2019-04-15" );
+REQUIRE((d.add_Days(  835)).strDate() == "2019-04-16" );
+REQUIRE((d.add_Days(  836)).strDate() == "2019-04-17" );
+REQUIRE((d.add_Days(  837)).strDate() == "2019-04-18" );
+REQUIRE((d.add_Days(  838)).strDate() == "2019-04-19" );
+REQUIRE((d.add_Days(  839)).strDate() == "2019-04-20" );
+REQUIRE((d.add_Days(  840)).strDate() == "2019-04-21" );
+
+REQUIRE((d.add_Days(  841)).strDate() == "2019-04-22" );
+REQUIRE((d.add_Days(  842)).strDate() == "2019-04-23" );
+REQUIRE((d.add_Days(  843)).strDate() == "2019-04-24" );
+REQUIRE((d.add_Days(  844)).strDate() == "2019-04-25" );
+REQUIRE((d.add_Days(  845)).strDate() == "2019-04-26" );
+REQUIRE((d.add_Days(  846)).strDate() == "2019-04-27" );
+REQUIRE((d.add_Days(  847)).strDate() == "2019-04-28" );
+REQUIRE((d.add_Days(  848)).strDate() == "2019-04-29" );
+REQUIRE((d.add_Days(  849)).strDate() == "2019-04-30" );
+REQUIRE((d.add_Days(  850)).strDate() == "2019-05-01" );
+
+REQUIRE((d.add_Days(  851)).strDate() == "2019-05-02" );
+REQUIRE((d.add_Days(  852)).strDate() == "2019-05-03" );
+REQUIRE((d.add_Days(  853)).strDate() == "2019-05-04" );
+REQUIRE((d.add_Days(  854)).strDate() == "2019-05-05" );
+REQUIRE((d.add_Days(  855)).strDate() == "2019-05-06" );
+REQUIRE((d.add_Days(  856)).strDate() == "2019-05-07" );
+REQUIRE((d.add_Days(  857)).strDate() == "2019-05-08" );
+REQUIRE((d.add_Days(  858)).strDate() == "2019-05-09" );
+REQUIRE((d.add_Days(  859)).strDate() == "2019-05-10" );
+REQUIRE((d.add_Days(  860)).strDate() == "2019-05-11" );
+
+REQUIRE((d.add_Days(  861)).strDate() == "2019-05-12" );
+REQUIRE((d.add_Days(  862)).strDate() == "2019-05-13" );
+REQUIRE((d.add_Days(  863)).strDate() == "2019-05-14" );
+REQUIRE((d.add_Days(  864)).strDate() == "2019-05-15" );
+REQUIRE((d.add_Days(  865)).strDate() == "2019-05-16" );
+REQUIRE((d.add_Days(  866)).strDate() == "2019-05-17" );
+REQUIRE((d.add_Days(  867)).strDate() == "2019-05-18" );
+REQUIRE((d.add_Days(  868)).strDate() == "2019-05-19" );
+REQUIRE((d.add_Days(  869)).strDate() == "2019-05-20" );
+REQUIRE((d.add_Days(  870)).strDate() == "2019-05-21" );
+
+REQUIRE((d.add_Days(  871)).strDate() == "2019-05-22" );
+REQUIRE((d.add_Days(  872)).strDate() == "2019-05-23" );
+REQUIRE((d.add_Days(  873)).strDate() == "2019-05-24" );
+REQUIRE((d.add_Days(  874)).strDate() == "2019-05-25" );
+REQUIRE((d.add_Days(  875)).strDate() == "2019-05-26" );
+REQUIRE((d.add_Days(  876)).strDate() == "2019-05-27" );
+REQUIRE((d.add_Days(  877)).strDate() == "2019-05-28" );
+REQUIRE((d.add_Days(  878)).strDate() == "2019-05-29" );
+REQUIRE((d.add_Days(  879)).strDate() == "2019-05-30" );
+REQUIRE((d.add_Days(  880)).strDate() == "2019-05-31" );
+
+REQUIRE((d.add_Days(  881)).strDate() == "2019-06-01" );
+REQUIRE((d.add_Days(  882)).strDate() == "2019-06-02" );
+REQUIRE((d.add_Days(  883)).strDate() == "2019-06-03" );
+REQUIRE((d.add_Days(  884)).strDate() == "2019-06-04" );
+REQUIRE((d.add_Days(  885)).strDate() == "2019-06-05" );
+REQUIRE((d.add_Days(  886)).strDate() == "2019-06-06" );
+REQUIRE((d.add_Days(  887)).strDate() == "2019-06-07" );
+REQUIRE((d.add_Days(  888)).strDate() == "2019-06-08" );
+REQUIRE((d.add_Days(  889)).strDate() == "2019-06-09" );
+REQUIRE((d.add_Days(  890)).strDate() == "2019-06-10" );
+
+REQUIRE((d.add_Days(  891)).strDate() == "2019-06-11" );
+REQUIRE((d.add_Days(  892)).strDate() == "2019-06-12" );
+REQUIRE((d.add_Days(  893)).strDate() == "2019-06-13" );
+REQUIRE((d.add_Days(  894)).strDate() == "2019-06-14" );
+REQUIRE((d.add_Days(  895)).strDate() == "2019-06-15" );
+REQUIRE((d.add_Days(  896)).strDate() == "2019-06-16" );
+REQUIRE((d.add_Days(  897)).strDate() == "2019-06-17" );
+REQUIRE((d.add_Days(  898)).strDate() == "2019-06-18" );
+REQUIRE((d.add_Days(  899)).strDate() == "2019-06-19" );
+REQUIRE((d.add_Days(  900)).strDate() == "2019-06-20" );
+
+REQUIRE((d.add_Days(  901)).strDate() == "2019-06-21" );
+REQUIRE((d.add_Days(  902)).strDate() == "2019-06-22" );
+REQUIRE((d.add_Days(  903)).strDate() == "2019-06-23" );
+REQUIRE((d.add_Days(  904)).strDate() == "2019-06-24" );
+REQUIRE((d.add_Days(  905)).strDate() == "2019-06-25" );
+REQUIRE((d.add_Days(  906)).strDate() == "2019-06-26" );
+REQUIRE((d.add_Days(  907)).strDate() == "2019-06-27" );
+REQUIRE((d.add_Days(  908)).strDate() == "2019-06-28" );
+REQUIRE((d.add_Days(  909)).strDate() == "2019-06-29" );
+REQUIRE((d.add_Days(  910)).strDate() == "2019-06-30" );
+
+REQUIRE((d.add_Days(  911)).strDate() == "2019-07-01" );
+REQUIRE((d.add_Days(  912)).strDate() == "2019-07-02" );
+REQUIRE((d.add_Days(  913)).strDate() == "2019-07-03" );
+REQUIRE((d.add_Days(  914)).strDate() == "2019-07-04" );
+}
+
