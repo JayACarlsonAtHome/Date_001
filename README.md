@@ -47,6 +47,11 @@ runs and lists every test case with its
 result and time. Pick one to see its details: for a failure, the file:line, the check as written,
 and the values it saw. Filters: a tag, part of a name, and "Skip [slow]" (the two walks over every
 date). "Run selected" re-runs one test case; "Stop" ends a build or run.
+Every build uses `-Wall -Wextra -Wformat=2 -Werror=format` (CMakeLists.txt; DateRunner's own
+package has the format flags as `.upp` options): a printf-style call whose arguments do not
+match its format, such as a 64-bit value given to `%d`, fails the build. DateRunner prints the
+flags at the top of each build's Log.
+
 `DateRunner --compiler clang21 --type debug --clean` presets those choices (names as in build/);
 add `--smoke` to run everything once without clicks and exit 0 when all passed.
 

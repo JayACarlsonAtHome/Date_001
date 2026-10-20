@@ -402,6 +402,8 @@ DateRunner::DateRunner()
 	buildType.Add("debug", "Debug");
 	buildType.Add("release", "Release");
 	buildType <<= "release";   // listed alphabetically; Release is the default (what bootstrap.sh builds)
+	compiler.Tip("Every build, with any compiler or type, uses -Wall -Wextra -Wformat=2 -Werror=format "
+	             "(CMakeLists.txt): a printf-style call whose arguments do not match its format is an error.");
 	compiler << THISBACK(SelectBuild);
 	buildType << THISBACK(SelectBuild);
 
@@ -535,6 +537,8 @@ void DateRunner::StartNext()
 	SetBusy(true);
 	if(s.kind == CONFIGURE || s.kind == BUILD)
 		tabs.Set(1);   // show the Log while building
+	if(s.kind == BUILD)
+		Log("(every build: -Wall -Wextra -Wformat=2 -Werror=format, from CMakeLists.txt)\n");
 	if(s.kind == CONFIGURE)  status.SetText("Configuring build/" + BuildName() + " ...");
 	if(s.kind == BUILD)      status.SetText(String(cleanBuild ? "Clean rebuild of" : "Building") + " build/" + BuildName() + " ...");
 	if(s.kind == RUN)        status.SetText("Running tests ...");
