@@ -26,7 +26,7 @@ So what I am saying is this is free to use (as per license) but I do not guarant
 ```
 cd Date_001
 ./bootstrap.sh          # finds or offers to install a compiler + CMake, builds, runs the tests
-./bootstrap.sh --gui    # the same, plus U++ (into ~/u++, no sudo) and the DateRunner window
+./bootstrap.sh --gui    # the same, plus U++ (upp_basefix, into ~/upp_basefix) and the DateRunner window
 ./gui/out/DateRunner
 ```
 

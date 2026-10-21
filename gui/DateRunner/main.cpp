@@ -1,6 +1,6 @@
 // DateRunner - build Date_001 and run its Catch2 tests in a window.
 //
-// Build:  ./bootstrap.sh --gui   (or umk <root>/gui,<uppsrc> DateRunner CLANG -brsH <root>/gui/out/DateRunner)
+// Build:  ./bootstrap.sh --gui   (or umk <root>/gui,<uppsrc> DateRunner GCC -brsH <root>/gui/out/DateRunner)
 // Start:  <root>/gui/out/DateRunner [PROJECT_DIR] [--compiler gcc15|clang21|...] [--type release|debug]
 //                                    [--clean] [--smoke]
 //         --compiler/--type/--clean preset the choices at the top of the window.
